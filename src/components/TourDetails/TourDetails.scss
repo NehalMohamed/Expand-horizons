@@ -1,0 +1,49 @@
+.tour-details-section {
+  padding: $spacer-xl 0;
+  background-color: $light-bg;
+  font-family: $font-family-base;
+
+  .detail-section {
+    padding: 20px 0;
+
+    .section-title {
+      font-size:1.5rem;
+      color:$primary-color;
+      font-weight: 700;
+      text-align: flex-start;
+    }
+
+    .detail-list {
+      list-style: none;
+      padding-left: 0;
+
+      li {
+        margin-bottom: 2px;
+        font-size:1.15rem;
+        color:$primary-color;
+      }
+    }
+
+    hr {
+      margin-top: 15px;
+      border-top: 3px solid #707070;
+    }
+  }
+
+  .pricing-section {
+    .price-title {
+      font-size: 40px;
+      font-weight: bold;
+      color:$primary-color;
+      margin-bottom: 15px;
+    }
+    button {
+      border-radius: 30px;
+      padding: 10px 30px;
+      font-weight: 600;
+      color:$primary-color;
+      border-color:$secondary-color;
+      background-color:$secondary-color;
+    }
+  }
+}

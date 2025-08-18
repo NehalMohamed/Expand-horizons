@@ -1,0 +1,18 @@
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  color: white;
+  text-align: center;
+  z-index: $zindex-hero;
+  
+  @include media-breakpoint-down(md) {
+    min-height: 70vh;
+    background-attachment: scroll;
+  }
+  
+  @include media-breakpoint-down(sm) {
+    min-height: 60vh;
+  }
+  
+
+}

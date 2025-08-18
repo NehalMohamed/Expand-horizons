@@ -1,0 +1,139 @@
+// Testimonial.scss
+.testimonial-section {
+  padding: $spacer-xxxl 0;
+  background-color: $light-bg;
+  position: relative;
+
+  .title-col {
+    margin-bottom: $spacer-xl + $spacer-md;
+
+    @include media-breakpoint-up(lg) {
+      margin-bottom: 0;
+      padding-right: $spacer-xl + $spacer-md;
+    }
+  }
+
+  .title-content {
+    .main-title {
+      @include responsive-font-size(1.5rem, 3.1rem);
+      font-weight: $font-weight-bold;
+      color: $primary-color;
+      line-height: 1.4em;
+      margin-bottom: $spacer-xl;
+
+      @include media-breakpoint-down(xl) {
+        font-size: 2.5rem;
+      }
+
+      @include media-breakpoint-down(lg) {
+        font-size: 2.2rem;
+        text-align: center;
+      }
+
+      @include media-breakpoint-down(md) {
+        font-size: 1.8rem;
+      }
+
+      @include media-breakpoint-down(sm) {
+        font-size: 1.5rem;
+      }
+    }
+
+    .title-divider {
+      width: 150px;
+      height: 3px;
+      background: linear-gradient(90deg, $secondary-color, $secondary-color);
+      margin-bottom: $spacer-xxxl;
+      margin-top: $spacer-xxxl;
+      border-radius: $border-radius-sm;
+
+      @include media-breakpoint-down(lg) {
+        margin: 0 auto $spacer-xl;
+      }
+    }
+
+    .subtitle {
+      @include responsive-font-size(1rem, 1.8rem);
+      color: $primary-color;
+      font-weight: $font-weight-bold;
+      line-height: 1.3em;
+      margin: 0;
+
+      @include media-breakpoint-down(lg) {
+        text-align: center;
+      }
+
+      @include media-breakpoint-down(md) {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .content-col {
+    @include media-breakpoint-up(lg) {
+      padding-left: $spacer-xl;
+    }
+  }
+
+  .testimonial-content {
+    .content-text {
+      @include responsive-font-size(0.9rem, 1.3rem);
+      color: $primary-color;
+      margin-bottom: $spacer-lg;
+      text-align: justify;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      @include media-breakpoint-down(md) {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        text-align: left;
+      }
+
+      @include media-breakpoint-down(sm) {
+        font-size: 0.9rem;
+        margin-bottom: $spacer-lg;
+      }
+    }
+  }
+}
+
+// Responsive adjustments using mixins
+@include media-breakpoint-down(lg) {
+  .testimonial-section {
+    padding: ($spacer-xxxl - $spacer-md) 0;
+
+    .title-col {
+      text-align: center;
+      margin-bottom: $spacer-xxl + $spacer-sm;
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .testimonial-section {
+    padding: ($spacer-xl + $spacer-md) 0;
+
+    .title-col {
+      margin-bottom: $spacer-xl;
+    }
+  }
+}
+
+// Dark footer at bottom (matching the image)
+.testimonial-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-color: $primary-color;
+  z-index: -1;
+
+  @include media-breakpoint-down(md) {
+    height: 40px;
+  }
+}

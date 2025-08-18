@@ -1,0 +1,90 @@
+.city-card {
+  border: 1px solid #e0e0e0; // Subtle border
+  border-radius: 12px; // Match image's rounded corners
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); // More pronounced shadow
+  transition: none; // Removed hover transition
+  height: 100%;
+}
+
+.image-wrapper {
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 12px 12px 0 0; 
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0% !important;
+}
+
+.card-body {
+  padding: 15px; // Consistent padding
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-title {
+  font-size: 1.1rem; // Slightly smaller, closer to image
+  font-weight: 600; // Semi-bold
+  color: $primary-color; // Dark blue/purple
+  margin-bottom: 8px; // Reduced margin
+}
+
+.card-details-grid {
+  display: flex;
+  flex-direction: column; // Stack the two rows
+  gap: 5px; // Small gap between the two rows
+  margin-top: auto; // Push to bottom
+}
+
+.reviews-row,
+.price-row {
+  display: flex;
+  justify-content: space-between; // Space out items
+  align-items: center; // Vertically align items
+  width: 100%;
+}
+
+.reviews-text {
+  font-size: 0.85rem; // Slightly smaller
+  color: $gray-color; // Lighter gray
+}
+
+.star-rating {
+  display: flex;
+  gap: 2px;
+}
+
+.star-filled {
+  color: #FFD801; // Standard yellow
+}
+
+.star-empty {
+  color: #e0e0e0; // Light gray for empty stars
+}
+
+.old-price {
+  font-size: 0.8rem; // Smaller
+  color: $primary-color; // Lighter gray
+//   text-decoration: line-through;
+}
+.old-price::before {
+  content: "";
+  position: absolute;
+  width: 53px;
+  height: 2px;
+  background-color: $secondary-color;
+  top: 81%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+.new-price {
+  font-size: 1rem; // Slightly smaller, closer to image
+  font-weight: 700; // Bold
+  color: $primary-color; // Green
+}

@@ -1,0 +1,193 @@
+{
+  "id": 1,
+  "title": "Tagesausflug nach luxor (privat)",
+  "rating": 4.0,
+  "reviewCount": 68650,
+  "price": 100,
+  "currency": "€",
+  "priceUnit": "p.P",
+  "defaultImage": "/images/trip/egypt1.png",
+  "inWishlist": false,
+  "facilities": [
+    {
+      "description": "WiFi",
+      "name": "Free WiFi"
+    },
+    {
+      "description": "AirConditioning",
+      "name": "Air Conditioning"
+    },
+    {
+      "description": "Meal",
+      "name": "Meal Included"
+    },
+    {
+      "description": "Guide",
+      "name": "Professional Guide"
+    },
+    {
+      "description": "Transport",
+      "name": "Private Transport"
+    },
+    {
+      "description": "Drinks",
+      "name": "Free Drinks"
+    },
+    {
+      "description": "HotelPickup",
+      "name": "Hotel Pickup"
+    },
+    {
+      "description": "EntranceFees",
+      "name": "Entrance Fees Included"
+    }
+  ],
+  "images": [
+    {
+      "id": 1,
+      "src": "/images/trip/egypt1.png",
+      "alt": "Ancient Egyptian temple interior with guide",
+      "isDefault": true
+    },
+    {
+      "id": 2,
+      "src": "/images/trip/egypt2.png",
+      "alt": "Hatshepsut Temple illuminated at night"
+    },
+    {
+      "id": 3,
+      "src": "/images/trip/egypt3.png",
+      "alt": "Nile River cruise boats"
+    },
+    {
+      "id": 4,
+      "src": "/images/trip/egypt4.png",
+      "alt": "Hot air balloon over Luxor"
+    },
+    {
+      "id": 5,
+      "src": "/images/trip/egypt5.png",
+      "alt": "Temple columns and ancient architecture"
+    }
+  ],
+  "description": "Erleben Sie einen unvergesslichen Tagesausflug nach Luxor – privat und ohne Verkaufsveranstaltungen.",
+  "bookingInfo": {
+    "paymentOptions": "Jetzt reservieren, später zahlen",
+    "duration": "16 Stunden",
+    "paymentMethods": "Die Zahlung erfolgt vor Ort in bar in Euro, US-Dollar, Schweizer Franken oder Ägyptischen Pfund oder PayPal.",
+    "paymentTime": "Die Bezahlung erfolgt bei der Abholung."
+  },
+  "itinerary": [
+    {
+      "id": 1,
+      "title": "Ausgangspunkt",
+      "description": "Früh am Morgen Hotel",
+      "time": "05:00",
+      "icon": "Hotel"
+    },
+    {
+      "id": 2,
+      "title": "Qena",
+      "description": "Für eine Entfernung von etwa 220 Kilometern ins Niltal",
+      "time": "07:30",
+      "icon": "Location"
+    },
+    {
+      "id": 3,
+      "title": "Rastplatz",
+      "description": "Sie können das Badezimmer benutzen oder sich die Beine vertreten.",
+      "time": "08:15",
+      "icon": "Restroom"
+    },
+    {
+      "id": 4,
+      "title": "Vor Luxor (ca.60 km)",
+      "description": "Sie werden durch viele kleine und große Städte fahren, authentischen ägyptischen Alltag erleben.",
+      "time": "09:00",
+      "icon": "ScenicView"
+    },
+    {
+      "id": 5,
+      "title": "Luxor",
+      "description": "Sie besuchen die größte Tempelanlage der Welt mit ihrer riesigen Kolonnenhalle",
+      "time": "10:00",
+      "icon": "Temple"
+    },
+    {
+      "id": 6,
+      "title": "Westliche Güte",
+      "description": "Traditionelles lokales Mittagessen, das weltberühmte Tal der Könige, die prächtigen Königsgräber, der Tempel der Königin Hatschepsut auf der Terrasse",
+      "time": "12:30",
+      "icon": "Meal"
+    },
+    {
+      "id": 7,
+      "title": "Rückweg",
+      "description": "Um sich an die Eindrücke des Tages zu erinnern oder das Teilnehm am Ufer des Nils zu beobachten",
+      "time": "16:00",
+      "icon": "Return"
+    },
+    {
+      "id": 8,
+      "title": "Hotel",
+      "description": "Voraussichtlich um acht Uhr abends im Hotel ankommen",
+      "time": "20:00",
+      "icon": "Hotel"
+    }
+  ],
+  "highlights": [
+    "Wir bieten keine Verkaufsveranstaltungen an.",
+    "Besuchen Sie den Karnak-Tempel.",
+    "Erkunden Sie das Tal der Könige und seine faszinierenden Gräber.",
+    "Tauchen Sie ein in die Geschichte Ägyptens.",
+    "Genießen Sie die atemberaubende Bootsfahrt auf dem Nil.",
+    "Besuchen Sie das beeindruckende Kolosseum von Memnon.",
+    "Genießen Sie das Spektakel eines Nilotischen Wasserfalls bei Abholung und Besichtigungen.",
+    "Deutschsprachige Reiseleitung (Ägyptologe).",
+    "Mittagessen mit ägyptischen Spezialitäten.",
+    "Getränke im Bus."
+  ],
+  "included": [
+    "Alle Transfers mit hochwertigen Markenfahrzeugen und mit professionellen Fahrern.",
+    "Eintrittsgelder für die gesamten Sehenswürdigkeiten: Karnak-Tempel, Tal der Könige, Tempel der Hatschepsut und Memnon-Kolosse.",
+    "Deutschsprachige Reiseleitung (Ägyptologe).",
+    "Mittagessen mit ägyptischen Spezialitäten.",
+    "Getränke im Bus."
+  ],
+  "notIncluded": [
+    "Jegliche Zusätze, die nicht im Ablauf erwähnt werden.",
+    "Getränke im Restaurant.",
+    "Persönliche Ausgaben."
+  ],
+  "importantNotes": [
+    "Bringen Sie einen Wecker mit oder bestellen Sie diesen an der Rezeption.",
+    "Denken Sie an Ihr Frühstückspaket und holen Sie es am Tag der Abfahrt an der Rezeption ab.",
+    "Vergessen Sie Ihre Fotoausrüstung und Ihre Videokamera nicht.",
+    "Bequeme Schuhe und Kopfbedeckung (Kappe, Mütze).",
+    "Vergessen Sie nicht Ihre Sonnenbrille und Sonnenschutzcreme.",
+    "Bringen Sie die Hotel- und Zimmernummer auf WhatsApp oder SMS mit, damit wir Sie kontaktieren können."
+  ],
+  "additionalInfo": [
+    "Tour-Kategorie: Privat geführte Tour",
+    "Abholung: Um 05:00 Uhr",
+    "Ankunft in Luxor: Gegen 09:00 Uhr",
+    "Rückkehr: Gegen 20:00 Uhr",
+    "Treff- und Endpunkt: Ihr Hotel"
+  ],
+  "reviews": [
+    {
+      "id": 1,
+      "name": "Elida - United States",
+      "date": "Jul 24, 2021 - verified booking",
+      "rating": 4.0,
+      "text": "Our tour guide was very knowledgeable and patient with my 7 year old questions"
+    },
+    {
+      "id": 2,
+      "name": "Elida - United States",
+      "date": "Jul 24, 2021 - verified booking", 
+      "rating": 4.0,
+      "text": "Our tour guide was very knowledgeable and patient with my 7 year old questions"
+    }
+  ]
+}

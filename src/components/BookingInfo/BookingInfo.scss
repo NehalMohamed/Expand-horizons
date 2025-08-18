@@ -1,0 +1,155 @@
+// Booking Info Section Styles
+.booking-info-section {
+  padding: $spacer-xl 0;
+  background-color: $light-bg;
+  font-family: $font-family-base;
+
+  .booking-info-content {
+    max-width: 800px;
+
+    @include media-breakpoint-down(lg) {
+      max-width: 100%;
+    }
+  }
+
+  .intro-text {
+    font-size: 1.15rem;
+    color: $text-muted;
+    margin-bottom: $spacer-xl;
+    line-height: 1.6;
+    text-align: left;
+
+    @include media-breakpoint-down(sm) {
+      font-size: 1rem;
+      margin-bottom: $spacer-lg;
+    }
+  }
+
+  .section-title {
+    font-size: 2.3rem;
+    font-weight: $font-weight-bold;
+    color: $primary-color;
+    margin-bottom: $spacer-lg;
+
+    @include media-breakpoint-down(sm) {
+      font-size: 1.5rem;
+      margin-bottom: $spacer-md;
+    }
+  }
+
+  .info-items {
+    display: flex;
+    flex-direction: column;
+    gap: $spacer-lg;
+
+    @include media-breakpoint-down(sm) {
+      gap: $spacer-md;
+    }
+  }
+
+  .info-item {
+    @include flex-center;
+    align-items: flex-start;
+    gap: $spacer-md;
+    padding: $spacer-lg;
+
+    @include media-breakpoint-down(sm) {
+      padding: $spacer-md;
+      gap: $spacer-sm;
+    }
+  }
+
+  .info-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    @include flex-center;
+    background: rgba($primary-color, 0.1);
+    border-radius: $border-radius;
+    color: $primary-color;
+
+    @include media-breakpoint-down(sm) {
+      width: 40px;
+      height: 40px;
+    }
+
+    svg {
+      transition: $transition-base;
+    }
+  }
+
+  .info-content {
+    flex: 1;
+  }
+
+  .info-text {
+    font-size: 1.15rem;
+    color: $primary-color;
+    line-height: 1.6;
+    margin-bottom: 0;
+
+    strong {
+      font-weight: $font-weight-bold;
+    }
+
+    @include media-breakpoint-down(sm) {
+      font-size: 0.95rem;
+    }
+  }
+
+  .info-subtext {
+    font-size: 0.9rem;
+    color: $text-muted;
+    margin-top: $spacer-xs;
+    margin-bottom: 0;
+
+    @include media-breakpoint-down(sm) {
+      font-size: 0.85rem;
+    }
+  }
+
+  // Responsive adjustments
+  @include media-breakpoint-down(sm) {
+    padding: $spacer-lg 0;
+
+    .info-item {
+      @include flex-column;
+      align-items: flex-start;
+      text-align: left;
+
+      .info-icon {
+        align-self: flex-start;
+      }
+    }
+  }
+
+  // Animation on scroll (optional)
+  .info-item {
+    opacity: 1;
+    transform: translateY(0);
+    animation: fadeInUp 0.6s ease-out;
+
+    &:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    &:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    &:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

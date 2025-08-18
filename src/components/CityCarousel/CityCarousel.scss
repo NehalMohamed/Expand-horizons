@@ -1,0 +1,96 @@
+.carousel-section {
+  padding: 80px 0;
+  background-color: $light-bg;
+  
+  @include media-breakpoint-down(lg) {
+    padding: 60px 0;
+  }
+  
+  @include media-breakpoint-down(md) {
+    padding: 40px 0;
+  }
+  
+  .section-header {
+    text-align: left;
+    margin-bottom: 60px;
+    margin-left: 40px;
+    
+    @include media-breakpoint-down(lg) {
+      margin-bottom: 50px;
+    }
+    
+    @include media-breakpoint-down(md) {
+      margin-bottom: 40px;
+    }
+    
+    .section-title {
+      color: $primary-color;
+      font-weight: 700;
+      margin-bottom: 16px;
+      
+      @include responsive-font-size(2rem, 2.3rem);
+    }
+    
+    .section-subtitle {
+      color: $primary-color;
+      max-width: 1000px;
+      // margin: 0 auto;
+      
+      @include responsive-font-size(1rem, 1.15rem);
+    }
+  }
+
+.carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 40px; // More space for buttons
+}
+
+.cards-container {
+  flex-grow: 1;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; // For smooth scrolling on iOS
+  scrollbar-width: none; // Hide scrollbar for Firefox
+  &::-webkit-scrollbar {
+    display: none; // Hide scrollbar for Chrome, Safari, Opera
+  }
+}
+
+.card-col {
+  flex: 0 0 auto; // Prevent columns from shrinking
+  width: 260px; // Fixed width for cards, adjust as needed
+  @media (min-width: 768px) {
+    width: 240px;
+  }
+  @media (min-width: 992px) {
+    width: 260px;
+  }
+}
+
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  border: 1px solid #e0e0e0; // Subtle border
+  border-radius: 50%;
+  width: 44px; // Slightly larger
+  height: 44px; // Slightly larger
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); // More prominent shadow
+  z-index: 10;
+  color: $primary-color; // Dark icon color
+  transition: none; // Removed hover transition
+}
+
+.nav-button-left {
+  left: 20px; // Closer to edge
+}
+
+.nav-button-right {
+  right: 20px; // Closer to edge
+}
+}

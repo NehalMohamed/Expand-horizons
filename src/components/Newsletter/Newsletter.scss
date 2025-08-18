@@ -1,0 +1,192 @@
+// Newsletter.scss
+.newsletter-section {
+  position: relative;
+  min-height: 100vh;
+  background-image: url('/imgs/NewsLetter/pyramid-bg.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  @include media-breakpoint-down(md) {
+    background-attachment: scroll; // Better performance on mobile
+  }
+}
+
+.newsletter-overlay {
+  position: relative;
+  z-index: 3;
+  background: rgba(0, 0, 0, 0.4);
+  min-height: 100vh;
+  @include flex-center;
+  padding: $spacer-xxxl 0;
+}
+
+.content-col {
+  margin-bottom: $spacer-xl + $spacer-md;
+
+  @include media-breakpoint-up(lg) {
+    margin-bottom: 0;
+    padding-right: $spacer-xl + $spacer-md;
+  }
+}
+
+.newsletter-content {
+  .newsletter-label {
+    @include responsive-font-size(1.8rem, 2.5rem);
+    color: $light-bg;
+    font-weight: $font-weight-bold;
+    margin-bottom: $spacer-md;
+    letter-spacing: 1px;
+  }
+
+  .title-divider {
+    width: 150px;
+    height: 3px;
+    background: linear-gradient(90deg, $secondary-color, $secondary-color);
+    margin-bottom: $spacer-lg + $spacer-xs;
+    border-radius: $border-radius-sm;
+  }
+
+  .newsletter-title {
+    @include responsive-font-size(1.8rem, 3.2rem);
+    font-weight: $font-weight-bold;
+    color: $light-bg;
+    line-height: 1.2;
+    margin-bottom: $spacer-xl;
+
+    @include media-breakpoint-down(xl) {
+      font-size: 3rem;
+    }
+
+    @include media-breakpoint-down(lg) {
+      font-size: 2.5rem;
+      text-align: center;
+    }
+
+    @include media-breakpoint-down(md) {
+      font-size: 2rem;
+    }
+
+    @include media-breakpoint-down(sm) {
+      font-size: 1.8rem;
+    }
+  }
+
+  .newsletter-description {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.7;
+    margin: 0;
+
+    @include media-breakpoint-down(lg) {
+      text-align: center;
+      font-size: $font-size-base;
+    }
+
+    @include media-breakpoint-down(md) {
+      font-size: 0.95rem;
+    }
+  }
+}
+
+.form-col {
+  @include flex-center;
+
+  @include media-breakpoint-up(lg) {
+    padding-left: $spacer-xl + $spacer-md;
+  }
+}
+
+.newsletter-form-wrapper {
+  margin-top: 100px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.newsletter-form {
+  .form-input {
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: $spacer-md;
+    padding: .7rem 1.75rem;
+    font-size: $font-size-base;
+    color: $primary-color;
+    margin-bottom: $spacer-lg;
+    transition: $transition-base;
+    box-shadow: $box-shadow;
+
+    &:focus {
+      background: rgba(255, 255, 255, 1);
+      box-shadow: $box-shadow-lg, 0 0 0 3px rgba(40, 167, 69, 0.3);
+      border: none;
+      outline: none;
+    }
+
+    &::placeholder {
+      color: $primary-color;
+      font-weight: $font-weight-normal;
+    }
+  }
+
+  .subscribe-btn {
+    @extend .secondryBtn;
+    width:100%;
+    border-radius: $spacer-md;
+    padding: .7rem 1.75rem;
+    font-size: 1.1rem;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: $transition-base;
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(40, 167, 69, 0.4);
+    }
+
+    &:active {
+      transform: translateY(-1px);
+    }
+  }
+}
+
+// Responsive adjustments using mixins
+@include media-breakpoint-down(lg) {
+  .newsletter-overlay {
+    padding: ($spacer-xxxl - $spacer-md) 0;
+  }
+
+  .newsletter-section {
+    min-height: auto;
+  }
+
+  .content-col {
+    text-align: center;
+    margin-bottom: $spacer-xxl + $spacer-sm;
+  }
+
+  .newsletter-content {
+    .title-divider {
+      margin: 0 auto $spacer-lg + $spacer-xs;
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .newsletter-overlay {
+    padding: ($spacer-xl + $spacer-md) 0;
+  }
+
+  .newsletter-section {
+    &::before {
+      height: 200px;
+    }
+
+    &::after {
+      bottom: $spacer-xl;
+      height: $spacer-lg;
+    }
+  }
+}

@@ -1,0 +1,281 @@
+// Top Destinations Section
+.top-destinations {
+  padding: 80px 0;
+  background-color: $light-bg;
+
+  .section-header {
+    text-align: left;
+    margin-bottom: 60px;
+    margin-left: 40px;
+
+    .section-title {
+      @include responsive-font-size(2rem, 2.3rem);
+      font-weight: $font-weight-bold;
+      color: $primary-color;
+      margin-bottom: $spacer-lg;
+    }
+
+    .section-subtitle {
+      @include responsive-font-size(1rem, 1.15rem);
+      color: $primary-color;
+      max-width: 1000px;
+      // margin: 0 auto;
+    }
+  }
+
+  .loading-container {
+    @include flex-center;
+    height: 300px;
+  }
+
+  .destinations-grid {
+    gap: 0;
+    margin: 0 40px;
+
+    .destination-col {
+      padding: $spacer;
+      
+      &.first-row,
+      &.second-row {
+        @include media-breakpoint-up(lg) {
+          .destination-card {
+            height: 250px;
+          }
+        }
+      }
+
+      @include media-breakpoint-down(xs) {
+        padding: $spacer-sm;
+      }
+    }
+  }
+
+  .destination-card {
+    border: none;
+    border-radius: $border-radius-xl;
+    overflow: hidden;
+    box-shadow: $box-shadow;
+    transition: $transition-base;
+    cursor: pointer;
+    height: 200px;
+    position: relative;
+    background: $light-bg;
+
+    @include media-breakpoint-up(md) {
+      height: 220px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      height: 250px;
+    }
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: $box-shadow-lg;
+
+      .destination-image {
+        transform: scale(1.1);
+      }
+
+      .destination-fallback {
+        transform: scale(1.05);
+      }
+
+      .card-overlay {
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.3),
+          rgba(0, 0, 0, 0.7)
+        );
+      }
+
+      .destination-name {
+        color: $light-bg;
+        transform: translateY(-5px);
+      }
+
+      .destination-icon {
+        transform: scale(1.2);
+      }
+    }
+
+    &:focus {
+      outline: 3px solid $secondary-color;
+      outline-offset: 2px;
+    }
+
+    .card-image-wrapper {
+      position: relative;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .destination-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .destination-fallback {
+      width: 100%;
+      height: 100%;
+      @include flex-center;
+      background: linear-gradient(135deg, $primary-color 0%, lighten($primary-color, 20%) 100%);
+      transition: transform 0.5s ease;
+
+      .destination-icon {
+        font-size: 3rem;
+        transition: $transition-base;
+        filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+      }
+    }
+
+    .card-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.1),
+        rgba(0, 0, 0, 0.5)
+      );
+      @include flex-column;
+      justify-content: flex-end;
+      padding: $spacer-lg;
+      transition: $transition-base;
+    }
+
+    .destination-name {
+      color: $light-bg;
+      font-size: 1.4rem;
+      font-weight: $font-weight-bold;
+      margin: 0;
+      text-shadow: $text-shadow-lg;
+      transition: $transition-base;
+      font-family: $font-family-base;
+
+      @include media-breakpoint-down(md) {
+        font-size: 1.2rem;
+      }
+
+      @include media-breakpoint-down(sm) {
+        font-size: 1.1rem;
+      }
+    }
+  }
+}
+
+// Responsive adjustments using mixins
+@include media-breakpoint-down(xl) {
+  .top-destinations {
+    .destinations-grid {
+      .destination-col {
+        &:nth-child(n+5) {
+          margin-top: $spacer;
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .top-destinations {
+    padding: 60px 0;
+    
+    .destinations-grid {
+      .destination-col {
+        margin-bottom: $spacer;
+        
+        &:nth-child(n+3) {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .top-destinations {
+    padding: 40px 0;
+
+    .section-header {
+      margin-bottom: $spacer-xl;
+    }
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .top-destinations {
+    padding: $spacer-xl 0;
+
+    .destinations-grid {
+      margin: 0 -$spacer-sm;
+    }
+  }
+}
+
+// Animation for cards appearing
+.destination-card {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+@for $i from 1 through 8 {
+  .destination-col:nth-child(#{$i}) .destination-card {
+    animation-delay: #{$i * 0.1}s;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Loading spinner using your project's colors
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+  border-width: 0.3em;
+  color: $primary-color;
+}
+
+// Accessibility improvements
+@media (prefers-reduced-motion: reduce) {
+  .destination-card {
+    animation: none;
+    opacity: 1;
+    
+    &:hover {
+      transform: none;
+      
+      .destination-image,
+      .destination-fallback {
+        transform: none;
+      }
+      
+      .destination-name {
+        transform: none;
+      }
+    }
+  }
+}
+
+// Integration with your main.scss button styles
+.destination-card {
+  // Apply card hover mixin from your mixins
+  @include card-hover;
+  
+  // Make sure it follows your touch target guidelines
+  @include media-breakpoint-down(sm) {
+    min-height: 44px; // Apple recommended minimum touch target
+  }
+}

@@ -1,0 +1,225 @@
+// Contact.scss
+.contact-section {
+  padding: $spacer-xxxl 0;
+  background-color: $light-bg;
+  position: relative;
+
+  .contact-row {
+    @include flex-center;
+    min-height: 70vh;
+    
+    @include media-breakpoint-down(lg) {
+      @include flex-column;
+      min-height: auto;
+    }
+  }
+
+  .contact-content-col {
+    padding-right: $spacer-xxxl;
+
+    @include media-breakpoint-down(lg) {
+      padding-right: 0;
+      margin-bottom: $spacer-xxl;
+      text-align: center;
+    }
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: $spacer-xl;
+    }
+  }
+
+  .contact-form-col {
+    @include media-breakpoint-down(lg) {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  }
+
+  .contact-title {
+    @include responsive-font-size(1.8rem, 2.5rem);
+    font-weight: $font-weight-bold;
+    color: $primary-color;
+    margin-bottom: $spacer-xl;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+
+    @include media-breakpoint-down(lg) {
+      font-size: 2.8rem;
+    }
+
+    @include media-breakpoint-down(md) {
+      font-size: 2.2rem;
+      letter-spacing: 1px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      font-size: 1.8rem;
+      margin-bottom: $spacer-lg;
+    }
+  }
+
+  .title-divider {
+    width: 150px;
+    height: 3px;
+    background: $secondary-color;
+    margin-top: $spacer-xxl;
+    margin-bottom: $spacer-xxl;
+    border-radius: $border-radius-sm;
+
+    @include media-breakpoint-down(lg) {
+      margin: 0 auto $spacer-xl;
+    }
+
+    @include media-breakpoint-down(sm) {
+      width: 100px;
+      height: 3px;
+      margin-bottom: $spacer-lg;
+    }
+  }
+
+  .contact-description {
+    color: $primary-color;
+    font-size: 1.75rem;
+    line-height: 1.3em;
+    margin-bottom: $spacer-xl;
+    font-weight: $font-weight-bold;
+
+    @include media-breakpoint-down(lg) {
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    @include media-breakpoint-down(md) {
+      font-size: 0.95rem;
+      margin-bottom: $spacer-lg;
+    }
+
+    @include media-breakpoint-down(sm) {
+      margin-bottom: $spacer-md;
+    }
+  }
+
+  .contact-sub-text {
+    color: $primary-color;
+    font-size: 1.4rem;
+    margin: 0;
+
+    @include media-breakpoint-down(lg) {
+      text-align: center;
+    }
+
+    @include media-breakpoint-down(md) {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+// Contact Form Styles
+.contact-form {
+  padding: $spacer-xxl;
+
+  @include media-breakpoint-down(md) {
+    padding: $spacer-xl;
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding: $spacer-lg;
+  }
+
+  .form-group {
+    margin-bottom: $spacer-lg;
+
+    &:last-of-type {
+      margin-bottom: $spacer-xl;
+    }
+
+    @include media-breakpoint-down(sm) {
+      margin-bottom: $spacer-md;
+
+      &:last-of-type {
+        margin-bottom: $spacer-lg;
+      }
+    }
+  }
+
+  .form-input {
+    width: 100%;
+    padding: $spacer-md $spacer-lg;
+    border: 1px solid $border-color;
+    border-radius: $border-radius-lg;
+    font-size: 1rem;
+    color: $primary-color;
+    background-color: $light-bg;
+    transition: $transition-base;
+
+    &:focus {
+      outline: none;
+      border-color: $secondary-color;
+      box-shadow: 0 0 0 3px rgba(2, 217, 1, 0.1);
+    }
+
+    &::placeholder {
+      color: $primary-color;
+      font-weight: $font-weight-normal;
+    }
+
+    @include media-breakpoint-down(sm) {
+      padding: $spacer-sm $spacer-md;
+      font-size: 0.95rem;
+    }
+  }
+
+  .form-textarea {
+    min-height: 120px;
+    resize: vertical;
+
+    @include media-breakpoint-down(sm) {
+      min-height: 100px;
+    }
+  }
+
+  .submit-btn {
+    @extend .secondryBtn;
+    padding: $spacer-md $spacer-xxl;
+    border-radius: 25px;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: $transition-base;
+    font-size: 0.9rem;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $box-shadow-lg;
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    @include media-breakpoint-down(sm) {
+      padding: $spacer-sm $spacer-xl;
+      font-size: 0.85rem;
+    }
+  }
+}
+
+// Responsive Grid Adjustments
+@include media-breakpoint-down(lg) {
+  .contact-section {
+    padding: ($spacer-xxxl - $spacer-md) 0;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .contact-section {
+    padding: ($spacer-xl + $spacer-md) 0;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .contact-section {
+    padding: $spacer-xl 0;
+  }
+}

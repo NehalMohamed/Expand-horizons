@@ -1,0 +1,146 @@
+// Flight Itinerary Section Styles - Exact Match to Image
+.flight-itinerary-section {
+  padding: $spacer-xl 0;
+  background-color: $light-bg;
+  font-family: $font-family-base;
+
+  .itinerary-card {
+    border: none;
+    background: none;
+  }
+
+  .section-title {
+    font-size: 2.3rem;
+    font-weight: $font-weight-bold;
+    color: $primary-color;
+    margin-bottom: $spacer-lg !important;
+    padding-left: 0;
+  }
+
+  .timeline-container {
+    position: relative;
+  }
+
+  .timeline-step {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+  }
+
+  .timeline-marker-wrapper {
+    position: relative;
+    margin-right: $spacer-md;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .timeline-marker {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
+    border: 2px solid $secondary-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $primary-color;
+    flex-shrink: 0;
+    z-index: 2;
+    position: relative;
+
+    svg {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  .timeline-connector {
+    width: 10px;
+    height: 60px;
+    background-color: $primary-color;
+    z-index: 1;
+  }
+
+  .timeline-content {
+    flex: 1;
+    padding-top: 2px;
+  }
+
+  .step-title {
+    font-size: 1.15rem;
+    font-weight: $font-weight-bold;
+    color: $primary-color;
+    margin-bottom: 4px !important;
+    line-height: 1.6;
+  }
+
+  .step-description {
+    font-size: 1.15rem;
+    color: $primary-color;
+    line-height: 1.6;
+    margin-bottom: 0 !important;
+  }
+
+  // Mobile responsive
+  @include media-breakpoint-down(sm) {
+    padding: $spacer-lg 0;
+
+    .itinerary-card {
+      .card-body {
+        padding: $spacer-lg !important;
+      }
+    }
+
+    .section-title {
+      font-size: 1.125rem;
+    }
+
+    .timeline-marker-wrapper {
+      margin-right: $spacer-sm;
+    }
+
+    .timeline-marker {
+      width: 28px;
+      height: 28px;
+
+      svg {
+        width: 14px;
+        height: 14px;
+      }
+    }
+
+    .timeline-connector {
+      height: 35px;
+    }
+
+    .step-title {
+      font-size: 0.9rem;
+    }
+
+    .step-description {
+      font-size: 0.8rem;
+    }
+  }
+
+  // Extra small screens
+  @include media-breakpoint-down(xs) {
+    .timeline-step {
+      margin-bottom: $spacer-md;
+    }
+
+    .timeline-marker {
+      width: 24px;
+      height: 24px;
+
+      svg {
+        width: 12px;
+        height: 12px;
+      }
+    }
+
+    .timeline-connector {
+      height: 30px;
+    }
+  }
+}

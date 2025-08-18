@@ -1,0 +1,104 @@
+.contact-navbar {
+  background-color: $primary-color; // Exact dark blue from image
+  color: white;
+  padding: 2px 0 2px 100px;
+  font-size: 13px;
+  
+  
+  .contact-content {
+    display: flex;
+    align-items: center;
+    
+    .contact-left {
+      display: flex;
+      align-items: center;
+      gap: 30px; // Gap between phone, email, and social icons as one group
+      
+      @include media-breakpoint-down(lg) {
+        gap: 25px;
+      }
+      
+      @include media-breakpoint-down(md) {
+        gap: 6px;
+        width: 100%;
+      }
+      
+      @include media-breakpoint-down(sm) {
+        align-items: center;
+        text-align: center;
+      }
+      
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        
+        .contact-icon {
+          font-size: 11px;
+          color: white;
+          opacity: 0.9;
+        }
+        
+        .contact-link {
+          color: white;
+          text-decoration: none;
+          font-weight: 400;
+          transition: all 0.2s ease-in-out;
+          
+          &:hover {
+            opacity: 0.7;
+            text-decoration: none;
+          }
+        }
+      }
+      
+      .social-media {
+        display: flex;
+        align-items: center;
+        gap: 8px; // Small gap between social icons only
+        
+        .social-link {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 28px;
+          height: 28px;
+          color: white;
+          text-decoration: none;
+          transition: all 0.2s ease;
+          font-size: 13px;
+          
+          &:hover {
+            opacity: 0.7;
+            text-decoration: none;
+            transform: translateY(-1px);
+          }
+          
+          @include media-breakpoint-down(sm) {
+            width: 26px;
+            height: 26px;
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .contact-navbar {
+    .contact-content .contact-left {
+      gap: 10px;
+      
+      .contact-item {
+        width: 100%;
+        margin-bottom: 0;
+      }
+      
+      .social-media {
+        margin-top: 0;
+        justify-content: center;
+      }
+    }
+  }
+}

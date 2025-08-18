@@ -1,0 +1,202 @@
+{
+  "general": {
+    "more": "More",
+    "top_offers": "Top Offers",
+    "show_more": "Show More"
+  },
+  "language": {
+    "language": "Language",
+    "english": "English",
+    "german": "German"
+  },
+  "main_navbar": {
+    "travel": "Travel",
+    "home": "Home",
+    "egypt_excursions": "Egypt Excursions",
+    "hurghada": "Hurghada",
+    "makadi_bay": "Makadi Bay",
+    "el_gouna": "El Gouna",
+    "soma_bay": "Soma Bay",
+    "sahl_hashesh": "Sahl Hashesh",
+    "el_quseir": "El-Quseir",
+    "marsa_alam": "Marsa Alam",
+    "egypt_roundtrips": "Egypt Roundtrips",
+    "transfer_services": "Transfer Services",
+    "about_us": "About Us",
+    "contact": "Contact",
+    "search": "Search",
+    "search_placeholder": "Search...",
+    "wishlist": "Wishlist",
+    "shopping_basket": "Shopping Basket",
+    "profile": "Profile",
+    "my_profile": "My Profile",
+    "logout": "Logout"
+  },
+  "tours": {
+    "loading": "Loading tours...",
+    "empty_title": "No tours available",
+    "empty_text": "Please check back later for new offers.",
+    "top_offers": "Top Offers"
+  },
+  "wishlist": {
+    "title": "Your wishlist",
+    "saved": "Saved",
+    "remove": "Remove from wishlist",
+    "topCities": "Top Cities to Visit",
+    "topCitiesDescription": "Experience the thrill of discovering hidden gems and famous landmarks in the best travel destinations worldwide - your wanderlust awaits!"
+  },
+  "footer": {
+    "travel": "Travel",
+    "footer_description": "A travel company for transportation and travel to Egypt distinguished by trust, safety, and punctuality.",
+    "home": "Home",
+    "about_us": "About Us",
+    "contact": "Contact",
+    "company": "Company",
+    "privacy": "Privacy",
+    "support": "Support",
+    "help_center": "Help Center",
+    "our_news": "Our News",
+    "discover_egypt": "Discover_Egypt_with_new_eyes"
+  },
+  "NotFound": {
+    "title": "Something gone wrong!",
+    "backBtn": "GO BACK"
+  },
+  "NoResults": {
+    "title": "Ups!... no results found",
+    "subTitle": "Please try another search"
+  },
+  "Login": {
+    "LoginTitle": "Log in",
+    "SignUpTitle": "Sign Up",
+    "LoginSubTitle": "Check out more easily and access your tickets on any device with your <strong>I Travel Pro </strong> account.",
+    "LoginCheckBoxTitle": "Send me discounts and other offers by email.<br/>Opt out any time in your settings",
+    "LoginCheckBoxSubTitle": "Opt out any time in your settings",
+    "firstname": "First Name",
+    "lastname": "Last Name",
+    "confirmPassword": "Confirm Password",
+    "ConfirmPasswordError": "Password donnot match.",
+    "EmailError": "Please enter a valid email address.",
+    "PasswordError": "Password must be at least 6 characters long.",
+    "email": "Email Address",
+    "signIn": "Sign in",
+    "password": "Password",
+    "LoginWithGoogle": "Login With Google",
+    "RegisterWithGoogle": "Register With Google",
+    "DontHaveAccount": "Don't have an account?",
+    "CreateAccount": "Create an account",
+    "PrivacyText": "By signing in or creating an account, you accept our Terms and Conditions and Privacy Policy.",
+    "Or": "Or Continue With",
+    "HaveAccount": "Already have an account?"
+  },
+  "testimonial": {
+    "title": "We Love To Hear From You",
+    "subtitle": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit laborum.",
+    "content1": "Nunc cursus in tellus quis luctus. Pellentesque sapien lacus, facilisis non purus quis, placerat gravida lorem. Sed feugiat tortor eu enim dapibus dictum. Praesent non dolor efficitur, lacinia dui volutpat, elementum lacus. Praesent sit amet risus semper, iaculis enim in, bibendum nibh.",
+    "content2": "Maecenas quis venenatis ipsum, id hendrerit ligula. Donec a sem ut erat molestie feugiat ac ut elit. Proin consectetur nulla et ex molestie, quis semper nibh dignissim. Aliquam euismod lacus et sem tincidunt, at porta quam molestie. Sed blandit nibh leo, vel congue odio aliquam non. Etiam scelerisque a odio sed euismod. Proin eget elementum ipsum. Nam et viverra tortor. Mauris tempor nibh odio, id blandit arcu blandit et. Nunc vel dolor porttitor, cursus tortor id, accumsan felis.",
+    "content3": "Aenean ornare metus purus, porta pretium felis pretium sed. Proin placerat tortor a mauris volutpat lacinia. Etiam condimentum vehicula vehicula."
+  },
+  "newsletter": {
+    "label": "Our Newsletter",
+    "title": "Keep In Touch",
+    "description": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum.",
+    "namePlaceholder": "Name",
+    "emailPlaceholder": "Email Address",
+    "subscribeButton": "SUBSCRIBE",
+    "successMessage": "Thank you for subscribing to our newsletter!"
+  },
+  "contactInfo": {
+    "visitUs": "VISIT US",
+    "callUs": "Call Us",
+    "emailUs": "EMAIL US",
+    "address1": "1290 Stiven Street",
+    "address2": "Raleigh, New York City",
+    "phone1": "+22 123 587 4444",
+    "phone2": "+22 456 234 1111",
+    "email1": "mailus@gmail.com",
+    "email2": "getsupport@divi.com"
+  },
+  "features": {
+    "punctual": {
+      "title": "Punctual",
+      "feature1": "Punctual. Always",
+      "feature2": "Reliable and always on time",
+      "feature3": "We deliver exactly when"
+    },
+    "safe": {
+      "title": "Safe",
+      "feature1": "Safety guaranteed.",
+      "feature2": "Reliable safety for your needs",
+      "feature3": "Protection and safety on"
+    },
+    "trustworthy": {
+      "title": "Trustworthy",
+      "feature1": "Your partner in trust",
+      "feature2": "Reliable cooperation with trust",
+      "feature3": "We build on trust"
+    },
+    "highQuality": {
+      "title": "High Quality",
+      "feature1": "first-class quality",
+      "feature2": "Excellent quality that convinces",
+      "feature3": "High-quality solutions"
+    }
+  },
+  "about": {
+    "title": "A travel company for transportation and travel to Egypt distinguished by trust, safety, and punctuality. Together, we discover Egypt with new"
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "description": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit laborum.",
+    "subText": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisl ut aliquip. Nemo enim ipsam voluptatem quia voluptas",
+    "namePlaceholder": "Name",
+    "emailPlaceholder": "Email Address",
+    "phonePlaceholder": "Phone",
+    "messagePlaceholder": "Message",
+    "sendButton": "Send Message",
+    "successMessage": "Message sent successfully!",
+    "HaveAccount": "Already have an account?",
+    "CodeVerifyTitle": "Enter The Code sent To",
+    "CodeVerifyTitle2": "To Verify your mail",
+    "SendCode": "Send Code",
+    "fillField": "Please fill this field",
+    "spamAlert": {
+      "title": "Can't find our email?",
+      "check": "Check your",
+      "spam": "spam",
+      "or": "or",
+      "junk": "junk",
+      "folder": "folder",
+      "addToContacts": "Add our email address to your contacts/whitelist",
+      "waitAndRefresh": "Wait a few minutes and refresh your inbox"
+    }
+  },
+  "tripDetails": {
+    "reviews": "reviews",
+    "addToWishlist": "Add to wishlist",
+    "share": "Share",
+    "aboutTrip": "About this trip",
+    "bookNowPayLater": "Book now, pay later: Stay flexible - book now and pay later.",
+    "duration": "Duration \"14 hours\"",
+    "paymentMethods": "Payment on site in cash in Euro, US Dollar, Swiss Francs or Egyptian Pounds or PayPal",
+    "paymentNote": "Payment is made upon pickup.",
+    "linkCopied": "Link copied to clipboard!",
+    "itinerary": "Itinerary",
+    "reviewsFromTravelers": "Highlighted reviews from other travelers",
+    "addReviews": "Add reviews",
+    "seeMoreReviews": "See more reviews",
+    "rateTour": "Rate the tour",
+    "writeReview": "Write Your review",
+    "add": "Add",
+    "cancel": "Cancel",
+    "highlights": "Highlights",
+    "included": "Included",
+    "notIncluded": "Not included",
+    "dontForget": "Please don't forget",
+    "additionalInfo": "Additional Information",
+    "priceFrom": "Price",
+    "bookNow": "Book now",
+    "notRated":"Not Rated Yet",
+    "stars":"Star"
+  }
+}

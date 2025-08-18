@@ -1,0 +1,202 @@
+{
+  "general": {
+    "more": "Mehr",
+    "top_offers": "Top Angebote",
+    "show_more": "Mehr anzeigen"
+  },
+  "language": {
+    "language": "Sprache",
+    "english": "Englisch",
+    "german": "Deutsch"
+  },
+  "main_navbar": {
+    "travel": "Reisen",
+    "home": "Startseite",
+    "egypt_excursions": "Ägypten Ausflüge",
+    "hurghada": "Hurghada",
+    "makadi_bay": "Makadi Bay",
+    "el_gouna": "El Gouna",
+    "soma_bay": "Soma Bay",
+    "sahl_hashesh": "Sahl Hashesh",
+    "el_quseir": "El-Quseir",
+    "marsa_alam": "Marsa Alam",
+    "egypt_roundtrips": "Ägypten Rundreisen",
+    "transfer_services": "Transfer Services",
+    "about_us": "Über uns",
+    "contact": "Kontakt",
+    "search": "Suche",
+    "search_placeholder": "Suchen...",
+    "wishlist": "Wunschliste",
+    "shopping_basket": "Warenkorb",
+    "profile": "Profil",
+    "my_profile": "Mein Profil",
+    "logout": "Abmelden"
+  },
+  "tours": {
+    "loading": "Touren werden geladen...",
+    "empty_title": "Keine Touren verfügbar",
+    "empty_text": "Schauen Sie später wieder vorbei für neue Angebote.",
+    "top_offers": "Top Angebote"
+  },
+  "wishlist": {
+    "title": "Ihre Wunschliste",
+    "saved": "Gespeichert",
+    "remove": "Von Wunschliste entfernen",
+    "topCities": "Top Städte, die man besuchen sollte",
+    "topCitiesDescription": "Erlebe den Nervenkitzel, versteckte Schätze und berühmte Sehenswürdigkeiten in den besten Reisezielen weltweit zu entdecken - dein Fernweh wartet!"
+  },
+  "footer": {
+    "travel": "Reisen",
+    "footer_description": "Ein Reiseunternehmen für Transport und Reisen nach Ägypten, das sich durch Vertrauen, Sicherheit und Pünktlichkeit auszeichnet.",
+    "home": "Startseite",
+    "about_us": "Über uns",
+    "contact": "Kontakt",
+    "company": "Unternehmen",
+    "privacy": "Datenschutz",
+    "support": "Support",
+    "help_center": "Hilfezentrum",
+    "our_news": "Unsere Neuigkeiten",
+    "discover_egypt": "Entdecke_Ägypten_mit_neuen_Augen"
+  },
+  "NotFound": {
+    "title": "Etwas ist schiefgelaufen!",
+    "backBtn": "ZURÜCK"
+  },
+  "NoResults": {
+    "title": "Hoppla!... keine Ergebnisse gefunden",
+    "subTitle": "Bitte versuchen Sie eine andere Suche"
+  },
+  "Login": {
+    "LoginTitle": "Anmelden",
+    "SignUpTitle": "Registrieren",
+    "LoginSubTitle": "Melden Sie sich mit Ihrem <strong>I Travel Pro</strong>-Konto an, um einfacher einzuchecken und auf jedem Gerät auf Ihre Tickets zuzugreifen.",
+    "LoginCheckBoxTitle": "Senden Sie mir Rabatte und andere Angebote per E-Mail.<br/>Sie können sich jederzeit in Ihren Einstellungen abmelden.",
+    "LoginCheckBoxSubTitle": "Sie können sich jederzeit in Ihren Einstellungen abmelden.",
+    "firstname": "Vorname",
+    "lastname": "Nachname",
+    "confirmPassword": "Passwort bestätigen",
+    "ConfirmPasswordError": "Passwörter stimmen nicht überein.",
+    "EmailError": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+    "PasswordError": "Das Passwort muss mindestens 6 Zeichen lang sein.",
+    "email": "E-Mail-Adresse",
+    "signIn": "Anmelden",
+    "password": "Passwort",
+    "LoginWithGoogle": "Mit Google anmelden",
+    "RegisterWithGoogle": "Mit Google registrieren",
+    "DontHaveAccount": "Sie haben noch kein Konto?",
+    "CreateAccount": "Konto erstellen",
+    "PrivacyText": "Mit der Anmeldung oder Kontoerstellung akzeptieren Sie unsere Allgemeinen Geschäftsbedingungen und Datenschutzrichtlinie.",
+    "Or": "Oder weiter mit",
+    "HaveAccount": "Sie haben bereits ein Konto?"
+  },
+  "testimonial": {
+    "title": "Wir Hören Gerne Von Ihnen",
+    "subtitle": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit laborum.",
+    "content1": "Nunc cursus in tellus quis luctus. Pellentesque sapien lacus, facilisis non purus quis, placerat gravida lorem. Sed feugiat tortor eu enim dapibus dictum. Praesent non dolor efficitur, lacinia dui volutpat, elementum lacus. Praesent sit amet risus semper, iaculis enim in, bibendum nibh.",
+    "content2": "Maecenas quis venenatis ipsum, id hendrerit ligula. Donec a sem ut erat molestie feugiat ac ut elit. Proin consectetur nulla et ex molestie, quis semper nibh dignissim. Aliquam euismod lacus et sem tincidunt, at porta quam molestie. Sed blandit nibh leo, vel congue odio aliquam non. Etiam scelerisque a odio sed euismod. Proin eget elementum ipsum. Nam et viverra tortor. Mauris tempor nibh odio, id blandit arcu blandit et. Nunc vel dolor porttitor, cursus tortor id, accumsan felis.",
+    "content3": "Aenean ornare metus purus, porta pretium felis pretium sed. Proin placerat tortor a mauris volutpat lacinia. Etiam condimentum vehicula vehicula."
+  },
+  "newsletter": {
+    "label": "Unser Newsletter",
+    "title": "In Kontakt Bleiben",
+    "description": "Es gibt viele Variationen von Lorem Ipsum Passagen, aber die Mehrheit hat Veränderungen in irgendeiner Form erlitten, durch eingefügten Humor oder zufällige Wörter, die nicht einmal leicht glaubwürdig aussehen. Wenn Sie eine Passage von Lorem Ipsum verwenden möchten.",
+    "namePlaceholder": "Name",
+    "emailPlaceholder": "E-Mail-Adresse",
+    "subscribeButton": "ABONNIEREN",
+    "successMessage": "Vielen Dank für das Abonnieren unseres Newsletters!"
+  },
+  "contactInfo": {
+    "visitUs": "BESUCHEN SIE UNS",
+    "callUs": "Rufen Sie Uns An",
+    "emailUs": "SCHREIBEN SIE UNS",
+    "address1": "1290 Stiven Street",
+    "address2": "Raleigh, New York City",
+    "phone1": "+22 123 587 4444",
+    "phone2": "+22 456 234 1111",
+    "email1": "mailus@gmail.com",
+    "email2": "getsupport@divi.com"
+  },
+  "features": {
+    "punctual": {
+      "title": "Pünktlich",
+      "feature1": "Pünktlich. Immer",
+      "feature2": "Verlässlich und stets pünktlich",
+      "feature3": "Wir liefern genau dann"
+    },
+    "safe": {
+      "title": "Sicher",
+      "feature1": "Sicherheit garantiert.",
+      "feature2": "Verlässliche Sicherheit für Ihre Bedürfnisse",
+      "feature3": "Schutz und Sicherheit an"
+    },
+    "trustworthy": {
+      "title": "Vertrauensvoll",
+      "feature1": "Ihr Partner in Vertrauen",
+      "feature2": "Verlässliche Zusammenarbeit mit Vertrauen",
+      "feature3": "Wir bauen auf Vertrauen"
+    },
+    "highQuality": {
+      "title": "Hochwertig",
+      "feature1": "erstklassiger Qualität",
+      "feature2": "Exzellente Qualität, die überzeugt",
+      "feature3": "Hochwertige Lösungen"
+    }
+  },
+  "about": {
+    "title": "Ein Reiseunternehmen für Transport und Reisen nach Ägypten, das sich durch Vertrauen, Sicherheit und Pünktlichkeit auszeichnet. Gemeinsam entdecken wir Ägypten mit neuen"
+  },
+  "contact": {
+    "title": "Kontakt Aufnehmen",
+    "description": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit laborum.",
+    "subText": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisl ut aliquip. Nemo enim ipsam voluptatem quia voluptas",
+    "namePlaceholder": "Name",
+    "emailPlaceholder": "E-Mail-Adresse",
+    "phonePlaceholder": "Telefon",
+    "messagePlaceholder": "Nachricht",
+    "sendButton": "Nachricht Senden",
+    "successMessage": "Nachricht erfolgreich gesendet!",
+    "HaveAccount": "Sie haben bereits ein Konto?",
+    "CodeVerifyTitle": "Geben Sie den an gesendeten Code ein",
+    "CodeVerifyTitle2": "Um Ihre E-Mail zu bestätigen",
+    "SendCode": "Code senden",
+    "fillField": "Bitte füllen Sie dieses Feld aus",
+    "spamAlert": {
+      "title": "E-Mail nicht gefunden?",
+      "check": "Überprüfen Sie Ihren",
+      "spam": "Spam",
+      "or": "oder",
+      "junk": "Junk",
+      "folder": "Ordner",
+      "addToContacts": "Fügen Sie unsere E-Mail-Adresse zu Ihren Kontakten/Whitelist hinzu",
+      "waitAndRefresh": "Warten Sie einige Minuten und aktualisieren Sie Ihren Posteingang"
+    }
+  },
+  "tripDetails": {
+    "reviews": "Bewertungen",
+    "addToWishlist": "Zur Wunschliste hinzufügen",
+    "share": "Teilen",
+    "aboutTrip": "Über diese Reise",
+    "bookNowPayLater": "Jetzt reservieren, später zahlen: Bleiben Sie flexibel – buchen Sie jetzt und zahlen Sie später.",
+    "duration": "Dauer \"14 Stunden\"",
+    "paymentMethods": "Die Zahlung erfolgt vor Ort in bar in Euro, US-Dollar, Schweizer Franken, Ägyptischen Pfund oder per PayPal.",
+    "paymentNote": "Die Bezahlung erfolgt bei der Abholung.",
+    "linkCopied": "Link in die Zwischenablage kopiert!",
+    "itinerary": "Reiseverlauf",
+    "reviewsFromTravelers": "Hervorgehobene Bewertungen von anderen Reisenden",
+    "addReviews": "Bewertung hinzufügen",
+    "seeMoreReviews": "Weitere Bewertungen ansehen",
+    "rateTour": "Tour bewerten",
+    "writeReview": "Schreibe deine Bewertung",
+    "add": "Hinzufügen",
+    "cancel": "Abbrechen",
+    "highlights": "Highlights",
+    "included": "Inbegriffen",
+    "notIncluded": "Nicht inbegriffen",
+    "dontForget": "Bitte nicht vergessen",
+    "additionalInfo": "Zusätzliche Informationen",
+    "priceFrom": "Preis",
+    "bookNow": "Jetzt buchen",
+    "notRated": "Noch nicht bewertet",
+    "stars": "Stern"
+  }
+}

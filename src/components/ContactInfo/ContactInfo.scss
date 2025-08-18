@@ -1,0 +1,119 @@
+// ContactInfo.scss
+.contact-info-section {
+  padding: $spacer-xxxl 0;
+  background-color: $light-bg;
+
+  .contact-card {
+    border: none;
+    border-radius: $spacer-lg;
+    box-shadow: $box-shadow-lg;
+    transition: $transition-base;
+    background: $light-bg;
+    height: 100%;
+
+    &:hover {
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .card-body {
+      padding: $spacer-xl $spacer-lg + $spacer-xs;
+      @include flex-column;
+      align-items: center;
+      text-align: center;
+    }
+  }
+
+  .contact-icon {
+    margin-bottom: $spacer-lg + $spacer-xs;
+    width: 90px;
+    height: 90px;
+    @include flex-center;
+    margin: 0 auto $spacer-lg + $spacer-xs;
+  }
+
+  .contact-title {
+    @include responsive-font-size(1.1rem, 1.4rem);
+    font-weight: $font-weight-bold;
+    color: $primary-color;
+    margin-bottom: $spacer-lg;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .contact-details {
+    .contact-item {
+      font-size: $font-size-base;
+      color: $primary-color;
+      margin-bottom: 8px;
+      line-height: 1.6;
+      font-weight: $font-weight-bold;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.contact-map-section{
+    margin: 60px 0;
+}
+
+// Responsive adjustments using mixins
+@include media-breakpoint-down(lg) {
+  .contact-info-section {
+    padding: ($spacer-xxxl - $spacer-md) 0;
+
+    .contact-card {
+      margin-bottom: $spacer-xl;
+
+      .card-body {
+        padding: $spacer-lg + $spacer-xs $spacer-lg;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .contact-info-section {
+    padding: ($spacer-xl + $spacer-md) 0;
+
+    .contact-icon {
+      width: 80px;
+      height: 80px;
+      font-size: 2.8rem;
+    }
+
+    .contact-title {
+      font-size: 1.2rem;
+    }
+
+    .contact-item {
+      font-size: 0.95rem;
+    }
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .contact-info-section {
+    .contact-card {
+      .card-body {
+        padding: $spacer-lg $spacer-md;
+      }
+    }
+
+    .contact-icon {
+      width: 70px;
+      height: 70px;
+      font-size: 2.5rem;
+    }
+
+    .contact-title {
+      font-size: 1.1rem;
+    }
+
+    .contact-item {
+      font-size: 0.9rem;
+    }
+  }
+}

@@ -1,0 +1,110 @@
+.VerifySection {
+  text-align: center;
+  padding: 20px;
+
+  .verify_content {
+    border-radius: 6px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    max-width: 800px;
+    max-height: 600px;
+    min-height: 600px !important;
+    height: 600px !important;
+    margin: 20px auto;
+    text-align: center;
+    // display: flex;
+    align-items: center;
+    vertical-align: middle;
+    padding: 0;
+    position: relative;
+    text-align: center;
+    direction: ltr !important;
+
+    div {
+      margin: 15px 0 !important;
+    }
+    // align-content: space-between;
+    // display: table-column;
+    p {
+      font-size: 25px;
+      display: block;
+      //margin: 40px 0;
+      color: #000000;
+    }
+
+    .spam-alert {
+      background-color: #fff;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 4px;
+
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      li {
+        color: #000000;
+        padding: 12px;
+        margin-bottom: 8px;
+        background-color: #f8f9fa;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      li:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 3px;
+        height: 100%;
+        background-color: #5599CB;
+        transition: width 0.3s ease;
+      }
+
+      li:hover {
+        transform: translateX(5px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      li:hover:before {
+        width: 6px;
+      }
+    }
+
+    .highlight {
+      background-color: #fffacd;
+      padding: 2px 5px;
+      border-radius: 3px;
+    }
+
+    .verification-reminder {
+      max-width: 500px;
+      margin: 30px auto;
+      text-align: center;
+    }
+
+    .inputStyle {
+      width: 50px !important;
+      height: 50px;
+      margin: 10px 20px;
+      font-size: 2rem;
+      border-radius: 4px;
+      border: 1px solid #5599CB !important;
+
+      &:focus,
+      :focus-visible {
+        border: 1px solid #5599CB !important;
+      }
+
+      @media only screen and (max-width: 900px) {
+        margin: 10px 10px;
+        width: 30px !important;
+        height: 30px;
+      }
+    }
+  }
+}
