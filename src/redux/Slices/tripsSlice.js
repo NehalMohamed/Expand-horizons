@@ -47,30 +47,12 @@ export const fetchPickupsForTrip = createAsyncThunk(
   }
 );
 
-export const fetchClientsReviews = createAsyncThunk(
-  "trips/fetchClientsReviews",
-  async (params,{ rejectWithValue }
-  ) => {
-    try {
-      const { data } = await axios.post(
-        `${BASE_URL}/GetClientsReviews`, 
-        params,
-       getAuthHeaders()
-    );
-      return data;
-    } catch (e) {
-      return rejectWithValue(e?.message || "Fetch reviews failed");
-    }
-  }
-);
-
 // ---------- Slice ----------
 const tripsSlice = createSlice({
   name: "trips",
   initialState: {
     trips: [],
     pickupsByTrip: [],
-    reviewsByTrip: [],
     loading: false,
     error: null,
   },
@@ -101,20 +83,6 @@ const tripsSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     })
-   
-    .addCase(fetchClientsReviews.pending, (state) => {
-      state.loading = true;
-      state.error = null;
-    })
-    .addCase(fetchClientsReviews.fulfilled, (state, action) => {
-      state.loading = false;
-      state.reviewsByTrip = action.payload;
-    })
-    .addCase(fetchClientsReviews.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    })
-    
   },
 });
 

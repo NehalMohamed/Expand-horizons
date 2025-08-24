@@ -5,6 +5,7 @@ import languageReducer from '../Slices/languageSlice';
 import sliderReducer from '../Slices/sliderSlice';
 import destinationReducer from '../Slices/destinationsSlice';
 import tripsReducer from "../Slices/tripsSlice";
+import reviewReducer from '../Slices/reviewSlice';
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     language: languageReducer,
     slider: sliderReducer,
     destinations:destinationReducer,
-    trips:tripsReducer
+    trips:tripsReducer,
+    reviews: reviewReducer,
   },
 });

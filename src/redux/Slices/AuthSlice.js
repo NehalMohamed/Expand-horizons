@@ -1,23 +1,26 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+
 const BASE_URL_AUTH = process.env.REACT_APP_AUTH_API_URL;
+
 const NonAuthHeaders = () => {
   let lang = localStorage.getItem("lang");
   return {
     "Accept-Language": lang,
   };
 };
+
 const token = localStorage.getItem("token");
 
 const initialState = {
   user: null,
   token: token || null,
-  //status: "idle",
   loading: false,
   error: null,
   success: null,
   message: null,
 };
+
 // Helper to extract error message from different response formats
 const getErrorMessage = (error) => {
   console.log("error.response?.data ", error.response?.data);
@@ -40,34 +43,29 @@ const getErrorMessage = (error) => {
 export const ConfirmOTP = createAsyncThunk(
   "ConfirmOTP",
   async (payload, thunkAPI) => {
-    var response = await axios
-      .post(BASE_URL_AUTH + "/ConfirmOTP", payload)
-      .then((res) => {
-        return res.data;
-      })
-      .catch((error) => {
-        return thunkAPI.rejectWithValue(getErrorMessage(error));
-        //return error.response.data;
-      });
-    return response;
+    try {
+      const response = await axios.post(BASE_URL_AUTH + "/ConfirmOTP", payload);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(getErrorMessage(error));
+    }
   }
 );
+
 ///normal register && gmail Register (different on API path & payload)
 export const RegisterUser = createAsyncThunk(
   "auth/register",
   async (data, thunkAPI) => {
-    var response = await axios
-      .post(BASE_URL_AUTH + data.path, data.payload, {
-        headers: NonAuthHeaders(),
-      })
-      .then((res) => {
-        return res.data;
-      })
-      .catch((error) => {
-        return thunkAPI.rejectWithValue(getErrorMessage(error));
-        // return error.response.data;
-      });
-    return response;
+    try {
+      const response = await axios.post(
+        BASE_URL_AUTH + data.path, 
+        data.payload, 
+        { headers: NonAuthHeaders() }
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(getErrorMessage(error));
+    }
   }
 );
 
@@ -75,20 +73,19 @@ export const RegisterUser = createAsyncThunk(
 export const LoginUser = createAsyncThunk(
   "auth/login",
   async (data, thunkAPI) => {
-    var response = await axios
-      .post(BASE_URL_AUTH + data.path, data.payload, {
-        headers: NonAuthHeaders(),
-      })
-      .then((res) => {
-        return res.data;
-      })
-      .catch((error) => {
-        return thunkAPI.rejectWithValue(getErrorMessage(error));
-        //return error.response.data;
-      });
-    return response;
+    try {
+      const response = await axios.post(
+        BASE_URL_AUTH + data.path, 
+        data.payload, 
+        { headers: NonAuthHeaders() }
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(getErrorMessage(error));
+    }
   }
 );
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -96,88 +93,109 @@ const authSlice = createSlice({
     logout: (state) => {
       state.user = null;
       state.token = null;
+      state.loading = false;
+      state.error = null;
+      state.success = null;
+      state.message = null;
       localStorage.removeItem("token");
+      localStorage.removeItem("user");
+    },
+    clearAuthState: (state) => {
+      state.loading = false;
+      state.error = null;
+      state.success = null;
+      state.message = null;
     },
   },
   extraReducers: (builder) => {
-    //start register
+    // Handle pending state for all async actions
+    builder
+      .addCase(RegisterUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+        state.success = null;
+        state.message = null;
+      })
+      .addCase(LoginUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+        state.success = null;
+        state.message = null;
+      })
+      .addCase(ConfirmOTP.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+        state.success = null;
+        state.message = null;
+      });
+
+    // Handle fulfilled state for each action
     builder
       .addCase(RegisterUser.fulfilled, (state, action) => {
-        // if (action.payload.status != null && action.payload.status != 200) {
-        //   state.user = null;
-        //   // state.status = "failed";
-        //   state.success = false;
-        //   state.loading = false;
-        //   state.error = JSON.stringify(action.payload.error);
-        // } else {
-        //   state.user = action.payload?.user;
-        //   //state.status = "succeeded";
-        //   state.loading = false;
-        //   state.success = action.payload.isSuccessed;
-        //   localStorage.setItem("token", action.payload?.user?.accessToken);
-        //   localStorage.setItem("user", JSON.stringify(action.payload?.user));
-        //   //state.error = action.payload !== null ? action.payload.msg : "";
-        //   state.message = action.payload?.message;
-        // }
-        state.user = action.payload?.user;
         state.loading = false;
         state.success = action.payload.isSuccessed;
-        localStorage.setItem("token", action.payload?.user?.accessToken);
-        localStorage.setItem("user", JSON.stringify(action.payload?.user));
         state.message = action.payload?.message;
+        
+        if (action.payload.isSuccessed) {
+          state.user = action.payload?.user;
+          state.token = action.payload?.user?.accessToken;
+          localStorage.setItem("token", action.payload?.user?.accessToken);
+          localStorage.setItem("user", JSON.stringify(action.payload?.user));
+        } else {
+          state.error = action.payload?.message || "Registration failed";
+        }
       })
-
       .addCase(LoginUser.fulfilled, (state, action) => {
-        // if (action.payload.status != null && action.payload.status != 200) {
-        //   state.user = null;
-        //   // state.status = "failed";
-        //   state.success = false;
-        //   state.loading = false;
-        //   state.error = JSON.stringify(action.payload.error);
-        // } else {
-        //   state.user = action.payload;
-        //   //state.status = "succeeded";
-        //   state.loading = false;
-        //   state.success = action.payload.isSuccessed;
-        //   localStorage.setItem("token", action.payload.accessToken);
-        //   localStorage.setItem("user", JSON.stringify(action.payload));
-        //   state.error = action.payload !== null ? action.payload.msg : "";
-        // }
-        state.user = action.payload?.user;
         state.loading = false;
         state.success = action.payload.isSuccessed;
-        localStorage.setItem("token", action.payload?.user?.accessToken);
-        localStorage.setItem("user", JSON.stringify(action.payload?.user));
         state.message = action.payload?.message;
+        
+        if (action.payload.isSuccessed) {
+          state.user = action.payload?.user;
+          state.token = action.payload?.user?.accessToken;
+          localStorage.setItem("token", action.payload?.user?.accessToken);
+          localStorage.setItem("user", JSON.stringify(action.payload?.user));
+        } else {
+          state.error = action.payload?.message || "Login failed";
+        }
       })
       .addCase(ConfirmOTP.fulfilled, (state, action) => {
-        state.user = action.payload?.user;
         state.loading = false;
         state.success = action.payload.isSuccessed;
-        localStorage.setItem("token", action.payload?.user?.accessToken);
-        localStorage.setItem("user", JSON.stringify(action.payload?.user));
         state.message = action.payload?.message;
+        
+        if (action.payload.isSuccessed) {
+          state.user = action.payload?.user;
+          state.token = action.payload?.user?.accessToken;
+          localStorage.setItem("token", action.payload?.user?.accessToken);
+          localStorage.setItem("user", JSON.stringify(action.payload?.user));
+        } else {
+          state.error = action.payload?.message || "OTP verification failed";
+        }
+      });
+
+    // Handle rejected state for all async actions
+    builder
+      .addCase(RegisterUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+        state.success = false;
+        state.message = action.payload;
       })
-      .addMatcher(
-        (action) => action.type.endsWith("/pending"),
-        (state) => {
-          //state.status = "loading";
-          state.loading = true;
-        }
-      )
-      .addMatcher(
-        (action) => action.type.endsWith("/rejected"),
-        (state, action) => {
-          console.log("reject. ", action.payload);
-          //state.status = "failed";
-          state.error = action.payload;
-          state.message = action.payload;
-          state.success = false;
-          state.loading = false;
-        }
-      );
+      .addCase(LoginUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+        state.success = false;
+        state.message = action.payload;
+      })
+      .addCase(ConfirmOTP.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+        state.success = false;
+        state.message = action.payload;
+      });
   },
 });
 
-//export const { GetQuestions } = registerSlice.actions;
+export const { logout, clearAuthState } = authSlice.actions;
 export default authSlice.reducer;

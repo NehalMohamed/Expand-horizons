@@ -13,14 +13,6 @@
     "travel": "Reisen",
     "home": "Startseite",
     "egypt_excursions": "Ägypten Ausflüge",
-    "hurghada": "Hurghada",
-    "makadi_bay": "Makadi Bay",
-    "el_gouna": "El Gouna",
-    "soma_bay": "Soma Bay",
-    "sahl_hashesh": "Sahl Hashesh",
-    "el_quseir": "El-Quseir",
-    "marsa_alam": "Marsa Alam",
-    "egypt_roundtrips": "Ägypten Rundreisen",
     "transfer_services": "Transfer Services",
     "about_us": "Über uns",
     "contact": "Kontakt",
@@ -29,8 +21,10 @@
     "wishlist": "Wunschliste",
     "shopping_basket": "Warenkorb",
     "profile": "Profil",
+    "login_signup":"Anmelden oder Registrieren",
     "my_profile": "Mein Profil",
-    "logout": "Abmelden"
+    "logout": "Abmelden",
+    "Welcome": "Willkommen"
   },
   "tours": {
     "loading": "Touren werden geladen...",
@@ -87,7 +81,21 @@
     "CreateAccount": "Konto erstellen",
     "PrivacyText": "Mit der Anmeldung oder Kontoerstellung akzeptieren Sie unsere Allgemeinen Geschäftsbedingungen und Datenschutzrichtlinie.",
     "Or": "Oder weiter mit",
-    "HaveAccount": "Sie haben bereits ein Konto?"
+    "HaveAccount": "Sie haben bereits ein Konto?",
+    "CodeVerifyTitle": "Geben Sie den an gesendeten Code ein",
+    "CodeVerifyTitle2": "Um Ihre E-Mail zu bestätigen",
+    "SendCode": "Code senden",
+    "fillField": "Bitte füllen Sie dieses Feld aus",
+    "spamAlert": {
+      "title": "E-Mail nicht gefunden?",
+      "check": "Überprüfen Sie Ihren",
+      "spam": "Spam",
+      "or": "oder",
+      "junk": "Junk",
+      "folder": "Ordner",
+      "addToContacts": "Fügen Sie unsere E-Mail-Adresse zu Ihren Kontakten/Whitelist hinzu",
+      "waitAndRefresh": "Warten Sie einige Minuten und aktualisieren Sie Ihren Posteingang"
+    }
   },
   "testimonial": {
     "title": "Wir Hören Gerne Von Ihnen",
@@ -171,8 +179,21 @@
       "waitAndRefresh": "Warten Sie einige Minuten und aktualisieren Sie Ihren Posteingang"
     }
   },
+  "auth": {
+    "sessionExpired": "Ihre Sitzung ist abgelaufen. Bitte loggen Sie sich erneut ein.",
+    "loginNow": "Jetzt einloggen"
+  },
   "tripDetails": {
     "reviews": "Bewertungen",
+    "allReviews": "Alle Bewertungen",
+    "pleaseLoginToReview": "Bitte loggen Sie sich ein, um eine Bewertung abzugeben",
+    "reviewSubmittedSuccess": "Vielen Dank für Ihre Bewertung!",
+    "reviewSubmissionError": "Fehler beim Senden der Bewertung. Bitte versuchen Sie es erneut.",
+    "reviewsLoadError": "Fehler beim Laden der Bewertungen",
+    "submitting": "Wird gesendet...",
+    "noReviewsYet": "Noch keine Bewertungen. Seien Sie der Erste, der bewertet!",
+    "pleaseSelectRating": "Bitte wählen Sie eine Bewertung aus",
+    "pleaseWriteReview": "Bitte schreiben Sie eine Bewertung",
     "addToWishlist": "Zur Wunschliste hinzufügen",
     "share": "Teilen",
     "aboutTrip": "Über diese Reise",

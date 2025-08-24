@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Spinner } from 'react-bootstrap';
+import { getToken, isTokenExpired } from '../../utils/tokenUtils'; 
+import { Container, Spinner, Modal } from 'react-bootstrap';
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { useTripData } from '../../contexts/TripContext';
-import { fetchClientsReviews } from "../../redux/Slices/tripsSlice";
+import LoadingPage from "../Loader/LoadingPage";
+import PopUp from "../Shared/popup/PopUp";
+import { fetchClientsReviews, submitReview, resetReviewSubmission, clearAuthError } from "../../redux/Slices/reviewSlice";
+import { useAuthModal } from '../AuthComp/AuthModal';
 
 const Reviews = () => {
     const { t } = useTranslation();
@@ -11,70 +15,220 @@ const Reviews = () => {
     const [userRating, setUserRating] = useState(0);
     const [reviewText, setReviewText] = useState('');
     const [hoverRating, setHoverRating] = useState(0);
+    const [showPopup, setShowPopup] = useState(false);
+    const [popupMessage, setPopupMessage] = useState('');
+    const [popupType, setPopupType] = useState('success');
+    const [showLoginPrompt, setShowLoginPrompt] = useState(false);
+    const [showAllReviewsModal, setShowAllReviewsModal] = useState(false);
+    
     const tripData = useTripData();
     const tripId = tripData.trip_id;
     const dispatch = useDispatch();
-    const { reviewsByTrip = [], loading, error } = useSelector((state) => state.trips);
+    const { openAuthModal } = useAuthModal();
+
+    // Get state from the review slice
+    const { reviewsByTrip, loading, error, submission } = useSelector((state) => state.reviews);
     const currentLang = useSelector((state) => state.language.currentLang) || "en";
 
-    console.log(reviewsByTrip)
+    // Get user data from localStorage with token validation
+    const [user, setUser] = useState({});
+    
+    useEffect(() => {
+        // Check token validity on component mount and when user changes
+        const userData = JSON.parse(localStorage.getItem('user') || '{}');
+        const token = getToken(); // This automatically clears expired tokens
+        
+        if (!token && userData.id) {
+            // Token was cleared because it's expired
+            localStorage.removeItem('user');
+            setUser({});
+        } else {
+            setUser(userData);
+        }
+    }, []);
 
     useEffect(() => {
         const params = {
             trip_id: tripId,
             trip_type: 1,
             pageNumber: 1,
-            pageSize: 5
+            pageSize: 10 // Fetch more reviews for the modal
         };
         dispatch(fetchClientsReviews(params));
     }, [dispatch, tripId]);
 
-    // Wait for data to load
-    if (loading) {
-        return (
-            <div className="reviews-section">
-                <Container>
-                    <div className="text-center py-5">
-                        <Spinner animation="border" role="status">
-                            <span className="visually-hidden">Loading...</span>
-                        </Spinner>
-                    </div>
-                </Container>
-            </div>
-        );
-    }
+    // Handle errors from fetching reviews
+    useEffect(() => {
+        if (error) {
+            // Check if it's a 401 unauthorized error
+            if (error.status === 401) {
+                setPopupMessage(t("auth.sessionExpired"));
+                setPopupType('error');
+                setShowPopup(true);
+                setShowLoginPrompt(true);
+            } else {
+                setPopupMessage(error.message || t("tripDetails.reviewsLoadError"));
+                setPopupType('error');
+                setShowPopup(true);
+            }
+        }
+    }, [error, t]);
 
-    const reviews = reviewsByTrip?.reviews || [];
+    // Handle submission results
+    useEffect(() => {
+        console.log(submission)
+        if (submission.success) {
+            setPopupMessage(t("tripDetails.reviewSubmittedSuccess"));
+            setPopupType('success');
+            setShowPopup(true);
+            
+            // Refetch reviews to include the new one
+            const params = {
+                trip_id: tripId,
+                trip_type: 1,
+                pageNumber: 1,
+                pageSize: 10
+            };
+            dispatch(fetchClientsReviews(params));
+
+            // Reset form
+            setShowReviewForm(false);
+            setUserRating(0);
+            setHoverRating(0);
+            setReviewText('');
+
+            // Reset submission state after a delay
+            setTimeout(() => {
+                dispatch(resetReviewSubmission());
+            }, 3000);
+        }
+
+        if (submission.error) {
+            // Check if it's a 401 unauthorized error
+            if (submission.error.status === 401) {
+                setPopupMessage(t("auth.sessionExpired"));
+                setPopupType('error');
+                setShowPopup(true);
+                setShowLoginPrompt(true);
+            } else {
+                setPopupMessage(submission.error.message || t("tripDetails.reviewSubmissionError"));
+                setPopupType('error');
+                setShowPopup(true);
+            }
+        }
+    }, [submission.success, submission.error, dispatch, tripId, t]);
+
+    // Reset review submission state when component unmounts
+    useEffect(() => {
+        return () => {
+            dispatch(resetReviewSubmission());
+            dispatch(clearAuthError());
+        };
+    }, [dispatch]);
+
+    // Add event listener for auth errors from other components
+    useEffect(() => {
+        const handleAuthError = () => {
+            setPopupMessage(t("auth.sessionExpired"));
+            setPopupType('error');
+            setShowPopup(true);
+            setShowLoginPrompt(true);
+        };
+
+        window.addEventListener('authError', handleAuthError);
+        
+        return () => {
+            window.removeEventListener('authError', handleAuthError);
+        };
+    }, [t]);
+
+    // Check authentication status
+    const checkAuth = () => {
+        const token = getToken();
+        if (!token) {
+            setPopupMessage(t("auth.sessionExpired"));
+            setPopupType('error');
+            setShowPopup(true);
+            setShowLoginPrompt(true);
+            return false;
+        }
+        return true;
+    };
+
+    // Handle login prompt action
+    const handleLoginPrompt = () => {
+        // Clear user data from localStorage
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
+        
+        // Clear auth errors from state
+        dispatch(clearAuthError());
+        
+        // Open login modal
+        openAuthModal('login');
+        setShowLoginPrompt(false);
+        setShowPopup(false);
+    };
+
+    // Get reviews for this specific trip
+    const reviews = reviewsByTrip[tripId]?.reviews || [];
+    
+    // Show only first 2 reviews in the main view
+    const displayedReviews = reviews.slice(0, 2);
 
     const handleAddReviewClick = () => {
+        // Check if user is logged in with valid token
+        if (!checkAuth()) return;
+        
+        // Additional check for user data
+        if (!user || !user.id) {
+            setPopupMessage(t("tripDetails.pleaseLoginToReview"));
+            setPopupType('error');
+            setShowPopup(true);
+            openAuthModal('login');
+            return;
+        }
+        
         setShowReviewForm(!showReviewForm);
     };
 
     const handleRatingClick = (rating) => {
-        setUserRating(rating === userRating ? 0 : rating); // Toggle rating if same star clicked
+        setUserRating(rating === userRating ? 0 : rating);
     };
 
     const handleSubmitReview = () => {
-        if (userRating === 0 || reviewText.trim() === '') return;
+        // Check authentication before submitting
+        if (!checkAuth()) return;
+        
+        if (userRating === 0) {
+            setPopupMessage(t("tripDetails.pleaseSelectRating"));
+            setPopupType('error');
+            setShowPopup(true);
+            return;
+        }
 
-        // Prepare review data
-        const newReview = {
-            review_rate: userRating,
+        if (reviewText.trim() === '') {
+            setPopupMessage(t("tripDetails.pleaseWriteReview"));
+            setPopupType('error');
+            setShowPopup(true);
+            return;
+        }
+
+        // Prepare review data according to API specification
+        const reviewData = {
+            id: 0,
+            client_id: user.id,
+            review_title: `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Anonymous',
             review_description: reviewText,
-            review_title: "New Review", // You might want to collect this from user
-            entry_dateStr: new Date().toLocaleDateString()
+            entry_date: null,
+            review_rate: userRating,
+            trip_id: tripId,
+            trip_type: 1
         };
 
-        // Here you would typically dispatch an action to save the review
-        console.log('Submitting review:', newReview);
-
-        // Reset form
-        setShowReviewForm(false);
-        setUserRating(0);
-        setHoverRating(0);
-        setReviewText('');
+        // Dispatch the submitReview action from reviewSlice
+        dispatch(submitReview(reviewData));
     };
-
 
     const renderStars = (rating, interactive = false) => {
         return (
@@ -94,110 +248,199 @@ const Reviews = () => {
         );
     };
 
-
-
-    return (
-        <div className="reviews-section">
-            <Container>
+    const AllReviewsModal = () => (
+        <Modal 
+            show={showAllReviewsModal} 
+            onHide={() => setShowAllReviewsModal(false)}
+            size="lg"
+            centered
+            className="reviews-section"
+        >
+            <Modal.Header closeButton>
+                <Modal.Title className="review-header">{t("tripDetails.allReviews")}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body style={{ maxHeight: '60vh', overflowY: 'auto' }}>
                 <div className="row">
-                    <div className="col-lg-10">
-                        <div className="reviews-container">
-                            <h3 className="section-title">{t("tripDetails.reviewsFromTravelers")}</h3>
-
-                            <div className="row">
-                                {reviews.map((review) => (
-                                    <div className="col-md-6 mb-3" key={review.id}>
-                                        <div className="card review-card h-100">
-                                            <div className="card-body">
-                                                <div className="review-header mb-3">
-                                                    <div className="d-flex align-items-center mb-2">
-                                                        {renderStars(review.review_rate)}
-                                                        <span className="rating-number ms-2">{review.review_rate}</span>
-                                                    </div>
-                                                    <div className="reviewer-info">
-                                                        <div className="reviewer-avatar">
-                                                            <span>{review.review_title.charAt(0)}</span>
-                                                        </div>
-                                                        <div className="reviewer-details">
-                                                            <div className="reviewer-name">{review.review_title}</div>
-                                                            <div className="review-date">{review.entry_dateStr}</div>
-                                                        </div>
-                                                    </div>
+                    {reviews.length > 0 ? (
+                        reviews.map((review) => (
+                            <div className="col-12 mb-3" key={review.id}>
+                                <div className="card review-card h-100">
+                                    <div className="card-body">
+                                        <div className="review-header mb-3">
+                                            <div className="d-flex align-items-center mb-2">
+                                                {renderStars(review.review_rate)}
+                                                <span className="rating-number ms-2">{review.review_rate}</span>
+                                            </div>
+                                            <div className="reviewer-info">
+                                                <div className="reviewer-avatar">
+                                                    <span>{review.review_title.charAt(0)}</span>
                                                 </div>
-                                                <p className="review-text">{review.review_description}</p>
+                                                <div className="reviewer-details">
+                                                    <div className="reviewer-name">{review.review_title}</div>
+                                                    <div className="review-date">{review.entry_dateStr}</div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div className="reviews-actions mt-4">
-                                <div className="row align-items-center">
-                                    <div className="col-md-6">
-                                        <button
-                                            className="btn btn-link add-reviews-btn p-0"
-                                            onClick={handleAddReviewClick}
-                                        >
-                                            {t("tripDetails.addReviews")}
-                                        </button>
-                                    </div>
-                                    <div className="col-md-6 text-md-end">
-                                        <button className="btn btn-link see-more-btn p-0">
-                                            {t("tripDetails.seeMoreReviews")}
-                                        </button>
+                                        <p className="review-text">{review.review_description}</p>
                                     </div>
                                 </div>
                             </div>
+                        ))
+                    ) : (
+                        <div className="col-12">
+                            <p className="text-muted text-center">{t("tripDetails.noReviewsYet")}</p>
+                        </div>
+                    )}
+                </div>
+            </Modal.Body>
+        </Modal>
+    );
 
-                            {/* Review Form - Hidden by default */}
-                            {showReviewForm && (
-                                <div className="review-form mt-4">
-                                    <div className="rating-section mb-3">
-                                        <p className="rating-text">{t("tripDetails.rateTour")}</p>
-                                        <div className="d-flex align-items-center">
-                                            {renderStars(userRating, true)}
-                                            <span className="ms-2 rating-value mb-3">
-                                                {userRating > 0 ? `${userRating} ${t("tripDetails.stars")}` : t("tripDetails.notRated")}
-                                            </span>
+    return (
+        <>
+            <div className="reviews-section">
+                <Container>
+                    <div className="row">
+                        <div className="col-lg-10">
+                            <div className="reviews-container">
+                                <h3 className="section-title">{t("tripDetails.reviewsFromTravelers")}</h3>
+
+                                <div className="row">
+                                    {displayedReviews.length > 0 ? (
+                                        displayedReviews.map((review) => (
+                                            <div className="col-md-6 mb-3" key={review.id}>
+                                                <div className="card review-card h-100">
+                                                    <div className="card-body">
+                                                        <div className="review-header mb-3">
+                                                            <div className="d-flex align-items-center mb-2">
+                                                                {renderStars(review.review_rate)}
+                                                                <span className="rating-number ms-2">{review.review_rate}</span>
+                                                            </div>
+                                                            <div className="reviewer-info">
+                                                                <div className="reviewer-avatar">
+                                                                    <span>{review.review_title.charAt(0)}</span>
+                                                                </div>
+                                                                <div className="reviewer-details">
+                                                                    <div className="reviewer-name">{review.review_title}</div>
+                                                                    <div className="review-date">{review.entry_dateStr}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <p className="review-text">{review.review_description}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <div className="col-12">
+                                            <p className="text-muted text-center">{t("tripDetails.noReviewsYet")}</p>
+                                        </div>
+                                    )}
+                                </div>
+
+                                <div className="reviews-actions mt-4">
+                                    <div className="row align-items-center">
+                                        <div className="col-md-6">
+                                            <button
+                                                className="btn btn-link add-reviews-btn p-0"
+                                                onClick={handleAddReviewClick}
+                                                disabled={submission.loading}
+                                            >
+                                                {t("tripDetails.addReviews")}
+                                            </button>
+                                        </div>
+                                        {reviews.length > 2 && (
+                                            <div className="col-md-6 text-md-end">
+                                                <button 
+                                                    className="btn btn-link see-more-btn p-0"
+                                                    onClick={() => setShowAllReviewsModal(true)}
+                                                >
+                                                    {t("tripDetails.seeMoreReviews")}
+                                                </button>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+
+                                {/* Review Form - Hidden by default */}
+                                {showReviewForm && (
+                                    <div className="review-form mt-4">
+                                        <div className="rating-section mb-3">
+                                            <p className="rating-text">{t("tripDetails.rateTour")}</p>
+                                            <div className="d-flex align-items-center">
+                                                {renderStars(userRating, true)}
+                                                <span className="ms-2 rating-value mb-3">
+                                                    {userRating > 0 ? `${userRating} ${t("tripDetails.stars")}` : t("tripDetails.notRated")}
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div className="mb-3">
+                                            <textarea
+                                                className="form-control"
+                                                rows={4}
+                                                value={reviewText}
+                                                onChange={(e) => setReviewText(e.target.value)}
+                                                placeholder={t("tripDetails.writeReview")}
+                                                disabled={submission.loading}
+                                            />
+                                        </div>
+
+                                        <div className="form-actions">
+                                            <button
+                                                className="btn secondryBtn me-2"
+                                                onClick={handleSubmitReview}
+                                                disabled={submission.loading}
+                                            >
+                                                {t("tripDetails.add")}
+                                            </button>
+                                            <button
+                                                className="btn btn-outline-secondary"
+                                                onClick={() => {
+                                                    setShowReviewForm(false);
+                                                    setUserRating(0);
+                                                    setHoverRating(0);
+                                                    setReviewText('');
+                                                    dispatch(resetReviewSubmission());
+                                                }}
+                                                disabled={submission.loading}
+                                            >
+                                                {t("tripDetails.cancel")}
+                                            </button>
                                         </div>
                                     </div>
-
-                                    <div className="mb-3">
-                                        <textarea
-                                            className="form-control"
-                                            rows={4}
-                                            value={reviewText}
-                                            onChange={(e) => setReviewText(e.target.value)}
-                                            placeholder={t("tripDetails.writeReview")}
-                                        />
-                                    </div>
-
-                                    <div className="form-actions">
-                                        <button
-                                            className="btn secondryBtn me-2"
-                                            onClick={handleSubmitReview}
-                                            disabled={userRating === 0 || reviewText.trim() === ''}
-                                        >
-                                            {t("tripDetails.add")}
-                                        </button>
-                                        <button
-                                            className="btn btn-outline-secondary"
-                                            onClick={() => {
-                                                setShowReviewForm(false);
-                                                setUserRating(0);
-                                                setHoverRating(0);
-                                            }}
-                                        >
-                                            {t("tripDetails.cancel")}
-                                        </button>
-                                    </div>
-                                </div>
-                            )}
+                                )}
+                            </div>
                         </div>
                     </div>
-                </div>
-            </Container>
-        </div>
+                </Container>
+            </div>
+            
+            {/* Show loading page when fetching reviews */}
+            {loading && <LoadingPage />}
+            
+            {/* Show popup for messages */}
+            {showPopup && (
+                <PopUp
+                    show={showPopup}
+                    closeAlert={() => {
+                        setShowPopup(false);
+                        if (showLoginPrompt) {
+                            handleLoginPrompt();
+                        }
+                    }}
+                    msg={popupMessage}
+                    type={popupType}
+                    autoClose={showLoginPrompt ? false : 3000}
+                    showConfirmButton={showLoginPrompt}
+                    confirmButtonText={t("auth.loginNow")}
+                    onConfirm={handleLoginPrompt}
+                />
+            )}
+            
+            {/* All Reviews Modal */}
+            <AllReviewsModal />
+        </>
     );
 };
 

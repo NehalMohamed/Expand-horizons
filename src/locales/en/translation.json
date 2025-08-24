@@ -13,14 +13,6 @@
     "travel": "Travel",
     "home": "Home",
     "egypt_excursions": "Egypt Excursions",
-    "hurghada": "Hurghada",
-    "makadi_bay": "Makadi Bay",
-    "el_gouna": "El Gouna",
-    "soma_bay": "Soma Bay",
-    "sahl_hashesh": "Sahl Hashesh",
-    "el_quseir": "El-Quseir",
-    "marsa_alam": "Marsa Alam",
-    "egypt_roundtrips": "Egypt Roundtrips",
     "transfer_services": "Transfer Services",
     "about_us": "About Us",
     "contact": "Contact",
@@ -29,8 +21,10 @@
     "wishlist": "Wishlist",
     "shopping_basket": "Shopping Basket",
     "profile": "Profile",
+    "login_signup": "Log in or Sign up",
     "my_profile": "My Profile",
-    "logout": "Logout"
+    "logout": "Logout",
+    "Welcome": "Welcome"
   },
   "tours": {
     "loading": "Loading tours...",
@@ -87,7 +81,21 @@
     "CreateAccount": "Create an account",
     "PrivacyText": "By signing in or creating an account, you accept our Terms and Conditions and Privacy Policy.",
     "Or": "Or Continue With",
-    "HaveAccount": "Already have an account?"
+    "HaveAccount": "Already have an account?",
+     "CodeVerifyTitle": "Enter The Code sent To",
+    "CodeVerifyTitle2": "To Verify your mail",
+    "SendCode": "Send Code",
+    "fillField": "Please fill this field",
+    "spamAlert": {
+      "title": "Can't find our email?",
+      "check": "Check your",
+      "spam": "spam",
+      "or": "or",
+      "junk": "junk",
+      "folder": "folder",
+      "addToContacts": "Add our email address to your contacts/whitelist",
+      "waitAndRefresh": "Wait a few minutes and refresh your inbox"
+    }
   },
   "testimonial": {
     "title": "We Love To Hear From You",
@@ -171,8 +179,21 @@
       "waitAndRefresh": "Wait a few minutes and refresh your inbox"
     }
   },
+  "auth": {
+    "sessionExpired": "Your session has expired. Please log in again.",
+    "loginNow": "Log in now"
+  },
   "tripDetails": {
     "reviews": "reviews",
+    "allReviews": "All Reviews",
+   "pleaseLoginToReview": "Please log in to submit a review",
+    "reviewSubmittedSuccess": "Thank you for your review!",
+    "reviewSubmissionError": "Error submitting the review. Please try again.",
+    "reviewsLoadError": "Error loading reviews",
+    "submitting": "Submitting...",
+    "noReviewsYet": "No reviews yet. Be the first to review!",
+    "pleaseSelectRating": "Please select a rating",
+    "pleaseWriteReview": "Please write a review",
     "addToWishlist": "Add to wishlist",
     "share": "Share",
     "aboutTrip": "About this trip",
@@ -196,7 +217,7 @@
     "additionalInfo": "Additional Information",
     "priceFrom": "Price",
     "bookNow": "Book now",
-    "notRated":"Not Rated Yet",
-    "stars":"Star"
+    "notRated": "Not Rated Yet",
+    "stars": "Star"
   }
 }

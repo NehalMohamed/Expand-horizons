@@ -12,10 +12,8 @@ import ComingSoon from "./components/ComingSoon";
 import Excursions from "./pages/ExcursionsPage";
 import DestinationExcursionsPage from "./pages/DestinationExcursionsPage";
 import TripDetailsPage from "./pages/TripDetailsPage";
-import { ToastContainer } from "react-toastify";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/main.scss";
-import AuthComp from "./components/AuthComp/AuthComp";
 import OTPInput from "./components/AuthComp/OTP/OTPInput";
 
 function App() {
@@ -28,7 +26,6 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/Wishlist" element={<Wishlist />} />
             <Route path="/NoResults" element={<NoResults />} />
-            <Route path="/Auth" element={<AuthComp />} />
             <Route path="/Contact" element={<ContactPage />} />
             <Route path="/AboutUs" element={<AboutPage />} />
             <Route path="/VerifyEmail" element={<OTPInput />} />

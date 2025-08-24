@@ -10,7 +10,6 @@ import PopUp from "../Shared/popup/PopUp";
 import axios from "axios";
 
 const GoogleLoginButton = (props) => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const [showPopup, setShowPopup] = useState(false); // State for popup visibility
@@ -43,15 +42,16 @@ const GoogleLoginButton = (props) => {
               //if user login successfully and his email is confirmed navigate to home and whole app , if no sholud verify mail first by OTP
               if (result.payload?.user?.emailConfirmed == true) {
                 if (isAuthRedirect) {
-                  navigate(redirectPath);
+                  window.location.href = redirectPath;
                 } else {
-                  navigate("/");
+                  window.location.href = "/";
                 }
               } else {
-                navigate("/verifyEmail", {
-                  replace: true,
-                  state: { path: "/" },
-                });
+                 window.location.href = "/verifyEmail";
+                // navigate("/verifyEmail", {
+                //   replace: true,
+                //   state: { path: "/" },
+                // });
               }
             } else {
               setShowPopup(true);
@@ -75,10 +75,11 @@ const GoogleLoginButton = (props) => {
             if (result.payload && result.payload.isSuccessed) {
               //if user register successfully navigate to verify mail first by OTP
               setShowPopup(false);
-              navigate("/verifyEmail", {
-                replace: true,
-                state: { path: "/" },
-              });
+              window.location.href = "/verifyEmail";
+              // navigate("/verifyEmail", {
+              //   replace: true,
+              //   state: { path: "/" },
+              // });
             } else {
               setShowPopup(true);
             }
