@@ -1,25 +1,20 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { IoLocationOutline } from 'react-icons/io5';
-import { useTripData } from '../../contexts/TripContext';
 import { useSelector, useDispatch } from "react-redux";
 import {
     fetchPickupsForTrip
 } from "../../redux/Slices/tripsSlice";
 import { useTranslation } from "react-i18next";
 
-const FlightItinerary = () => {
+const FlightItinerary = ({ tripData }) => {
     const { t } = useTranslation();
-    const tripData = useTripData();
-    const tripId = tripData.trip_id;
+    const tripId = tripData?.trip_id;
     const dispatch = useDispatch();
     const { pickupsByTrip, loading, error } = useSelector((state) => state.trips);
     const currentLang = useSelector((state) => state.language.currentLang) || "en";
 
-   console.log(pickupsByTrip)
-
     useEffect(() => {
-        console.log("Dispatching fetchPickupsForTrip");
         const params = {
             trip_id: tripId,
             trip_type: 1,

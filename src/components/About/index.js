@@ -12,7 +12,7 @@ const About = () => {
           <Col lg={6} md={6} sm={12} className="logo-col">
             <div className="logo-container">
               <img 
-                src="/images/black & blue logo.png" 
+                src="/Asset 1.png" 
                 alt="Horizons Company Logo" 
                 className="travel-logo"
               />

@@ -6,6 +6,8 @@ import { FaSearch, FaShoppingBasket, FaHeart } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import LanguageDropdown from "../Dropdowns/LanguageDropdown";
 import ExcursionsDropdown from "../Dropdowns/ExcursionsDropdown";
+import TransfersDropdown from "../Dropdowns/TransfersDropdown";
+import DivingDropdown from "../Dropdowns/DivingDropdown";
 import ProfileDropdown from "../Dropdowns/ProfileDropdown";
 
 const MainNavbar = () => {
@@ -40,13 +42,18 @@ const MainNavbar = () => {
 
            <ExcursionsDropdown />
 
-            <Nav.Link
+            {/* <Nav.Link
               as={NavLink}
               to="/ComingSoon"
               className={({ isActive }) => (isActive ? "nav-item active" : "nav-item")}
             >
               {t('main_navbar.transfer_services')}
-            </Nav.Link>
+            </Nav.Link> */}
+
+            <TransfersDropdown />
+
+
+            <DivingDropdown />
 
                         <Nav.Link
               as={NavLink}
@@ -100,7 +107,11 @@ const MainNavbar = () => {
               </button>
 
               {/* Shopping Basket */}
-              <button className="icon-btn basket-btn" aria-label="shopping_basket">
+              <button 
+              className="icon-btn basket-btn" 
+              aria-label="shopping_basket"
+              onClick ={() => navigate("/ComingSoon")}
+              >
                 <FaShoppingBasket />
                 {/* <span className="badge">2</span> */}
               </button>

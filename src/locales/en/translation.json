@@ -14,7 +14,8 @@
     "home": "Home",
     "egypt_excursions": "Egypt Excursions",
     "transfer_services": "Transfer Services",
-    "about_us": "About Us",
+    "egypt_diving":"Egypt Diving",
+    "about_us": "About",
     "contact": "Contact",
     "search": "Search",
     "search_placeholder": "Search...",
@@ -54,6 +55,10 @@
   },
   "NotFound": {
     "title": "Something gone wrong!",
+    "backBtn": "GO BACK"
+  },
+  "ComingSoon": {
+    "title": "Coming Soon!",
     "backBtn": "GO BACK"
   },
   "NoResults": {
@@ -179,9 +184,15 @@
       "waitAndRefresh": "Wait a few minutes and refresh your inbox"
     }
   },
+  "PopUp": {
+    "Header": "Error Message",
+    "Close": "Close"
+  },
   "auth": {
     "sessionExpired": "Your session has expired. Please log in again.",
-    "loginNow": "Log in now"
+    "loginRequired": "Please log in first.",
+    "loginNow": "Log in now",
+    "ok":"OK"
   },
   "tripDetails": {
     "reviews": "reviews",
@@ -195,6 +206,8 @@
     "pleaseSelectRating": "Please select a rating",
     "pleaseWriteReview": "Please write a review",
     "addToWishlist": "Add to wishlist",
+    "removeFromWishlist":"remove From Wishlist",
+    "addedToWishlist":"Added to wishlist",
     "share": "Share",
     "aboutTrip": "About this trip",
     "bookNowPayLater": "Book now, pay later: Stay flexible - book now and pay later.",

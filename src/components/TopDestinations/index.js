@@ -1,33 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card, Spinner } from 'react-bootstrap';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchDestinations } from '../../redux/Slices/destinationsSlice';
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col, Card, Spinner } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchDestinations } from "../../redux/Slices/destinationsSlice";
 
 const TopDestinations = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [imageErrors, setImageErrors] = useState({});
-  const { items: destinations, loading } = useSelector((state) => state.destinations);
+  const { items: destinations, loading } = useSelector(
+    (state) => state.destinations
+  );
 
-  const currentLang = useSelector((state) => state.language.currentLang) || "en";
+  const currentLang =
+    useSelector((state) => state.language.currentLang) || "en";
 
   useEffect(() => {
     dispatch(fetchDestinations(currentLang));
   }, [dispatch, currentLang]);
 
   const handleDestinationClick = (destination) => {
-    navigate(`/excursions/${destination.route.toLowerCase().replace(/\s+/g, '-')}`, { 
-                      state: { DestinationId: destination.destination_id } 
-                    });
+    navigate(
+      `/excursions/${destination.route.toLowerCase().replace(/\s+/g, "-")}`,
+      {
+        state: { DestinationId: destination.destination_id },
+      }
+    );
   };
 
   const handleImageError = (destinationId) => {
-    setImageErrors(prev => ({
+    setImageErrors((prev) => ({
       ...prev,
-      [destinationId]: true
+      [destinationId]: true,
     }));
   };
 
@@ -38,7 +44,7 @@ const TopDestinations = () => {
       sm={6}
       md={4}
       lg={3}
-      className={`destination-col ${index >= 4 ? 'second-row' : 'first-row'}`}
+      className={`destination-col ${index >= 4 ? "second-row" : "first-row"}`}
     >
       <Card
         className="destination-card"
@@ -46,7 +52,7 @@ const TopDestinations = () => {
         role="button"
         tabIndex={0}
         onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
+          if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
             handleDestinationClick(destination);
           }
@@ -60,7 +66,7 @@ const TopDestinations = () => {
           ) : (
             <Card.Img
               variant="top"
-              src={destination.img_path || '/images/default-destination.jpg'}
+              src={destination.img_path || "/images/default-destination.jpg"}
               alt={destination.dest_description}
               className="destination-image"
               onError={() => handleImageError(destination.destination_id)}
@@ -82,11 +88,9 @@ const TopDestinations = () => {
       <section className="top-destinations">
         <Container>
           <div className="section-header">
-            <h2 className="section-title">
-              {t('wishlist.topCities')}
-            </h2>
+            <h2 className="section-title">{t("wishlist.topCities")}</h2>
             <p className="section-subtitle">
-              {t('wishlist.topCitiesDescription')}
+              {t("wishlist.topCitiesDescription")}
             </p>
           </div>
           <div className="loading-container">
@@ -101,11 +105,9 @@ const TopDestinations = () => {
     <section className="top-destinations">
       <Container>
         <div className="section-header">
-          <h2 className="section-title">
-            {t('wishlist.topCities')}
-          </h2>
+          <h2 className="section-title">{t("wishlist.topCities")}</h2>
           <p className="section-subtitle">
-            {t('wishlist.topCitiesDescription')}
+            {t("wishlist.topCitiesDescription")}
           </p>
         </div>
 

@@ -131,22 +131,26 @@ function AuthModal({ show, onHide, type, setType, navigateTo }) {
           },
           path: "/LoginUser",
         };
-        dispatch(LoginUser(data));
+        dispatch(LoginUser(data)).then((result) => {
+          if (result.payload.isSuccessed) {
+             onHide();
+             setShowPopup(false);
+             navigateTo("/");
+          }else{
+             setShowPopup(true);
+          }
+        });
       } else {
         formData["lang"] = lang;
         let data = { payload: formData, path: "/RegisterUser" };
         dispatch(RegisterUser(data)).then((result) => {
           if (result.payload && result.payload.isSuccessed) {
-            //if user register successfully so navigate to verify email first
             setShowPopup(false);
             navigateTo("/verifyEmail"); 
-            // ("/verifyEmail", {
-            //   replace: true,
-            //   state: { path: "/" },
-            // });
-          } else {
+            
+          }else{
             setShowPopup(true);
-          }
+          } 
         });
       }
     }
@@ -178,14 +182,14 @@ function AuthModal({ show, onHide, type, setType, navigateTo }) {
     }
   }, [show, type]);
 
-  // Handle success after login/register
-  useEffect(() => {
-    if (success && type === "login") {
-      onHide();
-      setShowPopup(false);
-      navigateTo("/");
-    }
-  }, [success, type, navigateTo, onHide]);
+  // // Handle success after login/register
+  // useEffect(() => {
+  //   if (success && type === "login") {
+  //     onHide();
+  //     setShowPopup(false);
+  //     navigateTo("/");
+  //   }
+  // }, [success, type, navigateTo, onHide]);
 
   return (
     <> 

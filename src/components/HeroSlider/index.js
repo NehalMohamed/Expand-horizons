@@ -4,31 +4,31 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { fetchTripsAll } from '../../redux/Slices/tripsSlice';
+import { fetchSliderTrips } from '../../redux/Slices/tripsSlice';
 
 const HeroSlider = () => {
-  const { t } = useTranslation();   
+  const { t } = useTranslation();
   const dispatch = useDispatch();
-   const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const currentLang = useSelector((state) => state.language.currentLang) || "en";
-  const { trips: slides = [], loading, error } = useSelector((state) => state.trips);
 
   useEffect(() => {
-  const params = {
-    lang_code: currentLang,
-    show_in_slider: true,
-    show_in_top: false,
-    destination_id: 0,
-    currency_code: "USD"
-  };
-  dispatch(fetchTripsAll(params));
-}, [dispatch, currentLang]);
-  
+    const params = {
+      lang_code: currentLang,
+      show_in_top: false,
+      currency_code: "USD"
+    };
+    dispatch(fetchSliderTrips(params));
+  }, [dispatch, currentLang]);
+
+  // Use sliderTrips from Redux state
+  const { sliderTrips: slides = [], loading, error } = useSelector((state) => state.trips);
+
   useEffect(() => {
     if (!isAutoPlaying || !slides || slides.length === 0) return;
-    
+
     const interval = setInterval(() => {
       setCurrentSlide(prev => (prev + 1) % slides.length);
     }, 5000);
@@ -54,13 +54,20 @@ const HeroSlider = () => {
     setTimeout(() => setIsAutoPlaying(true), 5000);
   };
 
-   if (loading) return <div>Loading...</div>;
-   if (error) return <div>Error: {error.message || error}</div>;
-   if (!slides || slides.length === 0) return <div>No slides available</div>;
+  const handleCardClick = (slide) => {
+    localStorage.setItem('currentTripData', JSON.stringify(slide));
+    navigate(`/trip/${slide.route}`, {
+      state: { tripId: slide.trip_id}
+    });
+  };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message || error}</div>;
+  if (!slides || slides.length === 0) return <div>No slides available</div>;
 
   return (
     <section className="hero-slider">
-       {/* Progress Bar */}
+      {/* Progress Bar */}
       <div className="slider-progress">
         <div
           className="progress-bar"
@@ -83,11 +90,13 @@ const HeroSlider = () => {
                 <h2 className="slide-subtitle">{slide.trip_description}</h2>
                 <div className="slide-actions">
                   <button className="btn-primary"
-                  onClick={() => navigate(`/trip/${slide.route}`, { 
-                      state: { tripData: slide } 
-                    })}>
-                      {t('general.more')}
-                      </button>
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleCardClick(slide);
+                    }}>
+
+                    {t('general.more')}
+                  </button>
                 </div>
               </div>
             </Container>

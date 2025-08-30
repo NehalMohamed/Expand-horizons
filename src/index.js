@@ -7,6 +7,8 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { AuthModalProvider } from "./components/AuthComp/AuthModal";
 import App from "./App";
 
+var createHistory = require("history").createBrowserHistory;
+export const history = createHistory();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>

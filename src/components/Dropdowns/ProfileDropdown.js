@@ -13,7 +13,6 @@ const ProfileDropdown = () => {
     useEffect(() => {
         // Check if user data exists in localStorage
         const userData = localStorage.getItem('user');
-        console.log(userData)
         if (userData) {
             setUser(JSON.parse(userData));
         }
@@ -25,7 +24,7 @@ const ProfileDropdown = () => {
         localStorage.removeItem('token');
         setUser(null);
         // You might want to redirect or refresh the page here
-        window.location.reload(); // Optional: reload the page to update the UI
+       window.location.href = "/";
     };
 
     return (
@@ -43,7 +42,7 @@ const ProfileDropdown = () => {
                             <strong>{user.firstName+' '+user.lastName}</strong>
                         </div>
                         <Dropdown.Divider />
-                        <Dropdown.Item href="#profile">
+                        <Dropdown.Item href="/ComingSoon">
                             <FaUserCircle className="me-2" />
                             {t('main_navbar.my_profile')}
                         </Dropdown.Item>

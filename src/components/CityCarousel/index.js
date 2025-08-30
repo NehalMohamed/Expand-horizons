@@ -3,7 +3,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchTripsAll } from '../../redux/Slices/tripsSlice';
+import { fetchCarouselTrips } from '../../redux/Slices/tripsSlice';
 import CityCard from "../CityCard";
 
 const CityCarousel = () => {
@@ -11,17 +11,15 @@ const CityCarousel = () => {
   const dispatch = useDispatch();
   const scrollContainerRef = useRef(null)
   const currentLang = useSelector((state) => state.language.currentLang) || "en";
-  const { trips: slides = [], loading, error } = useSelector((state) => state.trips);
+  const { carouselTrips: slides = [], loading, error } = useSelector((state) => state.trips);
 
   useEffect(() => {
   const params = {
     lang_code: currentLang,
-    show_in_slider: true,
     show_in_top: false,
-    destination_id: 0,
     currency_code: "USD"
   };
-  dispatch(fetchTripsAll(params));
+  dispatch(fetchCarouselTrips(params));
 }, [dispatch, currentLang]);
   const scroll = (direction) => {
     if (scrollContainerRef.current) {

@@ -14,14 +14,15 @@
     "home": "Startseite",
     "egypt_excursions": "Ägypten Ausflüge",
     "transfer_services": "Transfer Services",
-    "about_us": "Über uns",
+    "egypt_diving":"Ägypten Tauchen",
+    "about_us": "Über",
     "contact": "Kontakt",
     "search": "Suche",
     "search_placeholder": "Suchen...",
     "wishlist": "Wunschliste",
     "shopping_basket": "Warenkorb",
     "profile": "Profil",
-    "login_signup":"Anmelden oder Registrieren",
+    "login_signup": "Anmelden oder Registrieren",
     "my_profile": "Mein Profil",
     "logout": "Abmelden",
     "Welcome": "Willkommen"
@@ -54,6 +55,10 @@
   },
   "NotFound": {
     "title": "Etwas ist schiefgelaufen!",
+    "backBtn": "ZURÜCK"
+  },
+  "ComingSoon": {
+    "title": "Demnächst verfügbar!",
     "backBtn": "ZURÜCK"
   },
   "NoResults": {
@@ -179,9 +184,15 @@
       "waitAndRefresh": "Warten Sie einige Minuten und aktualisieren Sie Ihren Posteingang"
     }
   },
+  "PopUp": {
+    "Header": "Fehlermeldung",
+    "Close": "Schließen"
+  },
   "auth": {
-    "sessionExpired": "Ihre Sitzung ist abgelaufen. Bitte loggen Sie sich erneut ein.",
-    "loginNow": "Jetzt einloggen"
+    "sessionExpired": "Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.",
+    "loginRequired": "Bitte melden Sie sich zunächst an.",
+    "loginNow": "Jetzt anmelden",
+    "ok":"OK"
   },
   "tripDetails": {
     "reviews": "Bewertungen",
@@ -195,6 +206,8 @@
     "pleaseSelectRating": "Bitte wählen Sie eine Bewertung aus",
     "pleaseWriteReview": "Bitte schreiben Sie eine Bewertung",
     "addToWishlist": "Zur Wunschliste hinzufügen",
+    "removeFromWishlist": "Von Wunschliste entfernen",
+    "addedToWishlist": "Zur Wunschliste hinzugefügt",
     "share": "Teilen",
     "aboutTrip": "Über diese Reise",
     "bookNowPayLater": "Jetzt reservieren, später zahlen: Bleiben Sie flexibel – buchen Sie jetzt und zahlen Sie später.",

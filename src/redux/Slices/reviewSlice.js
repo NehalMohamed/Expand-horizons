@@ -1,54 +1,33 @@
 // src/redux/Slices/reviewSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { getToken, isTokenExpired } from "../../utils/tokenUtils"; // Import utility functions
+import { checkAUTH, isUserNotLoggedIn, isTokenExpiredOnly } from "../../helper/helperFN";
+import { createAuthError } from "../../utils/authError";
 
 const BASE_URL = process.env.REACT_APP_CLIENT_API_URL;
 const BOOKING_URL = process.env.REACT_APP_BOOKING_API_URL;
 
-// Create axios instance with interceptors
-const apiClient = axios.create();
-
-// Request interceptor to add auth token and handle expiration
-apiClient.interceptors.request.use(
-  (config) => {
-    const token = getToken();
-    
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    } else if (config.requiresAuth) {
-      // Token is expired or missing for an auth-required request
-      throw new axios.Cancel('Token expired or missing');
-    }
-    
-    const lang = localStorage.getItem("lang") || "en";
-    config.headers["Accept-Language"] = lang;
-    config.headers["Content-Type"] = "application/json";
-    
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
-// Response interceptor to handle auth errors
-apiClient.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response?.status === 401 || error.message === 'Token expired or missing') {
-      // Clear invalid token
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      // Dispatch event to notify components
-      window.dispatchEvent(new CustomEvent('authError', { detail: 'Token expired' }));
-    }
-    return Promise.reject(error);
-  }
-);
-
 const getAuthHeaders = () => {
-  return { requiresAuth: true }; // Flag to indicate auth is required
+  const user = JSON.parse(localStorage.getItem("user"));
+  const accessToken = user?.accessToken;
+  let lang = localStorage.getItem("lang") || "en";
+  return {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+      "Accept-Language": lang,
+    },
+  };
+};
+
+const getNonAuthHeaders = () => {
+  let lang = localStorage.getItem("lang") || "en";
+  return {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept-Language": lang,
+    },
+  };
 };
 
 // Async thunk for fetching reviews
@@ -56,23 +35,19 @@ export const fetchClientsReviews = createAsyncThunk(
   "reviews/fetchClientsReviews",
   async (params, { rejectWithValue }) => {
     try {
-      const { data } = await apiClient.post(
+      const response = await axios.post(
         `${BASE_URL}/GetClientsReviews`,
         params,
-        getAuthHeaders()
+        getNonAuthHeaders()
       );
-      return data;
-    } catch (e) {
-      if (e.message === 'Token expired or missing' || e.response?.status === 401) {
-        return rejectWithValue({ 
-          message: "Unauthorized - Please login again",
-          status: 401 
-        });
+      
+      if (response.data.success === false) {
+        return rejectWithValue(response.data.errors || "Failed to fetch reviews");
       }
-      return rejectWithValue({ 
-        message: e.response?.data?.message || "Fetch reviews failed",
-        status: e.response?.status 
-      });
+      
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.errors || error.message);
     }
   }
 );
@@ -81,58 +56,53 @@ export const fetchClientsReviews = createAsyncThunk(
 export const submitReview = createAsyncThunk(
   "reviews/submitReview",
   async (reviewData, { rejectWithValue }) => {
+    // Check authentication with proper scenario detection
+    if (isUserNotLoggedIn()) {
+      return rejectWithValue(createAuthError('notLoggedIn'));
+    }
+    
+    if (isTokenExpiredOnly()) {
+      return rejectWithValue(createAuthError('expired'));
+    }
+    
+    if (!checkAUTH()) {
+      return rejectWithValue(createAuthError('expired'));
+    }
+
     try {
-      // Check token before making the request
-      const token = getToken();
-      if (!token) {
-        return rejectWithValue({ 
-          message: "Unauthorized - Please login again",
-          status: 401,
-          errors: ["Authentication required"]
-        });
-      }
-      
-      const { data } = await apiClient.post(
+      const response = await axios.post(
         `${BOOKING_URL}/SaveReviewForTrip`,
         reviewData,
         getAuthHeaders()
       );
       
       // Check if the response indicates a duplicate submission
-      if (data.success === false) {
+      if (response.data.success === false) {
         return rejectWithValue({
-          message: data.msg || data.errors || "Duplicate review submission",
+          message: response.data.msg || response.data.errors || "Duplicate review submission",
           status: 400,
-          errors: [data.errors || "Duplicate data"],
+          errors: [response.data.errors || "Duplicate data"],
           isDuplicate: true
         });
       }
       
-      return data;
-    } catch (e) {
-      if (e.message === 'Token expired or missing' || e.response?.status === 401) {
-        return rejectWithValue({ 
-          message: "Unauthorized - Please login again",
-          status: 401,
-          errors: ["Authentication required"]
-        });
+      return response.data;
+    } catch (error) {
+      if (error.response?.status === 401) {
+        return rejectWithValue(createAuthError('expired'));
       }
       
       // Handle case where server returns error with success: false in response data
-      if (e.response?.data?.success === false) {
+      if (error.response?.data?.success === false) {
         return rejectWithValue({
-          message: e.response.data.msg || e.response.data.errors || "Duplicate review submission",
-          status: e.response.status,
-          errors: [e.response.data.errors || "Duplicate data"],
+          message: error.response.data.msg || error.response.data.errors || "Duplicate review submission",
+          status: error.response.status,
+          errors: [error.response.data.errors || "Duplicate data"],
           isDuplicate: true
         });
       }
       
-      return rejectWithValue({ 
-        message: e.response?.data?.message || "Submit review failed",
-        status: e.response?.status,
-        errors: e.response?.data?.errors || ["Submission failed"]
-      });
+      return rejectWithValue(error.response?.data?.errors || error.message);
     }
   }
 );
@@ -147,7 +117,7 @@ const reviewSlice = createSlice({
       loading: false,
       error: null,
       success: false,
-      isDuplicate: false // New flag to track duplicate submissions
+      isDuplicate: false
     }
   },
   reducers: {
@@ -161,14 +131,6 @@ const reviewSlice = createSlice({
       state.reviewsByTrip = {};
       state.loading = false;
       state.error = null;
-    },
-    clearAuthError: (state) => {
-      if (state.error?.status === 401) {
-        state.error = null;
-      }
-      if (state.submission.error?.status === 401) {
-        state.submission.error = null;
-      }
     }
   },
   extraReducers: (builder) => {
@@ -218,5 +180,5 @@ const reviewSlice = createSlice({
   }
 });
 
-export const { resetReviewSubmission, clearReviews, clearAuthError } = reviewSlice.actions;
+export const { resetReviewSubmission, clearReviews } = reviewSlice.actions;
 export default reviewSlice.reducer;

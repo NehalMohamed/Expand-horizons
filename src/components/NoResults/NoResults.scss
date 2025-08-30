@@ -1,5 +1,5 @@
 
-.pageContainer {
+.noResultspageContainer {
   margin-top:30px;
   display: flex;
   flex-direction: column;
@@ -9,8 +9,8 @@
   background-color: #fff;
   padding: 2rem 1rem; 
   text-align: center;
-}
 
+  
 .contentWrapper {
   display: flex;
   flex-direction: column;
@@ -36,4 +36,6 @@
   font-size: 1.125rem;
   color: $primary-color;
   margin-bottom: 0;
+}
+
 }

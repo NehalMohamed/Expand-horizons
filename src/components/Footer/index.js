@@ -17,16 +17,16 @@ const Footer = () => {
               {t('footer.footer_description')}
             </p>
             <div className="social-icons">
-              <a href="#" className="social-link" aria-label="facebook">
+              <a href="/" className="social-link" aria-label="facebook">
                 <FaFacebookF />
               </a>
-              <a href="#" className="social-link" aria-label="twitter">
+              <a href="/" className="social-link" aria-label="twitter">
                 <FaTwitter />
               </a>
-              <a href="#" className="social-link" aria-label="instagram">
+              <a href="/" className="social-link" aria-label="instagram">
                 <FaInstagram />
               </a>
-              <a href="#" className="social-link" aria-label="linkedin">
+              <a href="/" className="social-link" aria-label="linkedin">
                 <FaLinkedinIn />
               </a>
             </div>
@@ -36,16 +36,16 @@ const Footer = () => {
             <h5 className="footer-heading">{t('footer.company')}</h5>
             <ul className="footer-links">
               <li>
-                <a href="#blog">{t('footer.home')}</a>
+                <a href="/">{t('footer.home')}</a>
               </li>
               <li>
-                <a href="#about">{t('footer.about_us')}</a>
+                <a href="/AboutUs">{t('footer.about_us')}</a>
               </li>
               <li>
-                <a href="#jobs">{t('footer.contact')}</a>
+                <a href="/Contact">{t('footer.contact')}</a>
               </li>
               <li>
-                <a href="#press">{t('footer.privacy')}</a>
+                <a href="/ComingSoon">{t('footer.privacy')}</a>
               </li>
             </ul>
           </Col>
@@ -54,7 +54,7 @@ const Footer = () => {
             <h5 className="footer-heading">{t('footer.support')}</h5>
             <ul className="footer-links">
               <li>
-                <a href="#help">{t('footer.help_center')}</a>
+                <a href="/ComingSoon">{t('footer.help_center')}</a>
               </li>
               <li>
                 <br/>
@@ -65,7 +65,7 @@ const Footer = () => {
              <h5 className="footer-heading">{t('footer.our_news')}</h5>
             <ul className="footer-links">
               <li>
-                <a href="#help">#{t('footer.discover_egypt')}</a>
+                <a href="/">#{t('footer.discover_egypt')}</a>
               </li>
             </ul>
           </Col>

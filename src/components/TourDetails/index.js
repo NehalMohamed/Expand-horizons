@@ -1,12 +1,10 @@
 import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import { useTripData } from '../../contexts/TripContext';
 import { useTranslation } from "react-i18next";
 import parse from 'html-react-parser';
 
-const TourDetails = () => {
+const TourDetails = ({ tripData }) => {
   const { t } = useTranslation();
-  const tripData = useTripData();
 
   const renderHtmlContent = (htmlString) => {
     if (!htmlString) return null;
@@ -60,7 +58,7 @@ const TourDetails = () => {
         {/* Pricing */}
         <div className="pricing-section text-center mt-4">
           <h2 className="price-title">
-            {t("tripDetails.priceFrom")} {tripData.trip_sale_price} {tripData.currency_code} P.p
+            {t("tripDetails.priceFrom")} {tripData?.trip_sale_price} {tripData?.currency_code} P.p
           </h2>
           <Button variant="success" size="lg" className="mt-2">
             {t("tripDetails.bookNow")}

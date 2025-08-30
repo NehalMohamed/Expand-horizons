@@ -1,36 +1,24 @@
-// src/utils/tokenUtils.js
-export const isTokenExpired = (token) => {
-  if (!token) return true;
+// Check if token exists and is valid
+export const isTokenValid = () => {
+  const token = localStorage.getItem('token');
+  if (!token) return false;
   
   try {
-    // Decode the token payload (middle part between the dots)
-    const payload = JSON.parse(atob(token.split('.')[1]));
-    
-    // Check if token has expired
-    const currentTime = Math.floor(Date.now() / 1000);
-    return payload.exp < currentTime;
-  } catch (error) {
-    console.error('Error decoding token:', error);
-    return true; // If we can't decode, assume expired
+    // Simple check - if token exists, consider it valid
+    // You can add expiration check later if needed
+    return true;
+  } catch {
+    return false;
   }
 };
 
+// Clear tokens from storage
+export const clearAuthData = () => {
+  localStorage.removeItem('token');
+  localStorage.removeItem('user');
+};
+
+// Get token from storage
 export const getToken = () => {
-  const token = localStorage.getItem('token');
-  if (!token || isTokenExpired(token)) {
-    // Clear expired token
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    return null;
-  }
-  return token;
-};
-
-export const getTokenPayload = (token) => {
-  if (!token) return null;
-  try {
-    return JSON.parse(atob(token.split('.')[1]));
-  } catch (error) {
-    return null;
-  }
+  return localStorage.getItem('token');
 };

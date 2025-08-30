@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { getToken, isTokenExpired } from '../../utils/tokenUtils'; 
 import { Container, Spinner, Modal } from 'react-bootstrap';
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
-import { useTripData } from '../../contexts/TripContext';
 import LoadingPage from "../Loader/LoadingPage";
 import PopUp from "../Shared/popup/PopUp";
-import { fetchClientsReviews, submitReview, resetReviewSubmission, clearAuthError } from "../../redux/Slices/reviewSlice";
-import { useAuthModal } from '../AuthComp/AuthModal';
+import { fetchClientsReviews, submitReview, resetReviewSubmission } from "../../redux/Slices/reviewSlice";
 
-const Reviews = () => {
+const Reviews = ({ tripData , refreshTripDetails}) => {
     const { t } = useTranslation();
     const [showReviewForm, setShowReviewForm] = useState(false);
     const [userRating, setUserRating] = useState(0);
@@ -17,158 +14,93 @@ const Reviews = () => {
     const [hoverRating, setHoverRating] = useState(0);
     const [showPopup, setShowPopup] = useState(false);
     const [popupMessage, setPopupMessage] = useState('');
-    const [popupType, setPopupType] = useState('success');
-    const [showLoginPrompt, setShowLoginPrompt] = useState(false);
+    const [popupType, setPopupType] = useState('error');
     const [showAllReviewsModal, setShowAllReviewsModal] = useState(false);
-    
-    const tripData = useTripData();
-    const tripId = tripData.trip_id;
+
+    const tripId = tripData?.trip_id;
     const dispatch = useDispatch();
-    const { openAuthModal } = useAuthModal();
 
     // Get state from the review slice
     const { reviewsByTrip, loading, error, submission } = useSelector((state) => state.reviews);
     const currentLang = useSelector((state) => state.language.currentLang) || "en";
 
-    // Get user data from localStorage with token validation
+    // Get user data from localStorage
     const [user, setUser] = useState({});
     
     useEffect(() => {
-        // Check token validity on component mount and when user changes
         const userData = JSON.parse(localStorage.getItem('user') || '{}');
-        const token = getToken(); // This automatically clears expired tokens
-        
-        if (!token && userData.id) {
-            // Token was cleared because it's expired
-            localStorage.removeItem('user');
-            setUser({});
-        } else {
-            setUser(userData);
-        }
+        setUser(userData);
     }, []);
 
     useEffect(() => {
+        if (tripId) {
         const params = {
             trip_id: tripId,
             trip_type: 1,
             pageNumber: 1,
-            pageSize: 10 // Fetch more reviews for the modal
+            pageSize: 10 
         };
         dispatch(fetchClientsReviews(params));
+    }
     }, [dispatch, tripId]);
 
     // Handle errors from fetching reviews
     useEffect(() => {
         if (error) {
-            // Check if it's a 401 unauthorized error
-            if (error.status === 401) {
-                setPopupMessage(t("auth.sessionExpired"));
-                setPopupType('error');
-                setShowPopup(true);
-                setShowLoginPrompt(true);
-            } else {
                 setPopupMessage(error.message || t("tripDetails.reviewsLoadError"));
                 setPopupType('error');
                 setShowPopup(true);
             }
-        }
     }, [error, t]);
 
-    // Handle submission results
+// Handle submission errors only
     useEffect(() => {
-        console.log(submission)
-        if (submission.success) {
-            setPopupMessage(t("tripDetails.reviewSubmittedSuccess"));
-            setPopupType('success');
+        if (submission.error) {
+            setPopupMessage(submission.error.message || t("tripDetails.reviewSubmissionError"));
+            setPopupType('error');
             setShowPopup(true);
             
-            // Refetch reviews to include the new one
-            const params = {
-                trip_id: tripId,
-                trip_type: 1,
-                pageNumber: 1,
-                pageSize: 10
-            };
-            dispatch(fetchClientsReviews(params));
-
-            // Reset form
-            setShowReviewForm(false);
-            setUserRating(0);
-            setHoverRating(0);
-            setReviewText('');
-
-            // Reset submission state after a delay
+            // Reset submission error after showing
             setTimeout(() => {
                 dispatch(resetReviewSubmission());
-            }, 3000);
+            }, 100);
         }
+    }, [submission.error, dispatch, t]);
 
-        if (submission.error) {
-            // Check if it's a 401 unauthorized error
-            if (submission.error.status === 401) {
-                setPopupMessage(t("auth.sessionExpired"));
-                setPopupType('error');
-                setShowPopup(true);
-                setShowLoginPrompt(true);
-            } else {
-                setPopupMessage(submission.error.message || t("tripDetails.reviewSubmissionError"));
-                setPopupType('error');
-                setShowPopup(true);
-            }
-        }
-    }, [submission.success, submission.error, dispatch, tripId, t]);
+    // Handle successful submission silently
+    useEffect(() => {
+        if (submission.success) {
+            // Refetch reviews to include the new one
+           refreshTripDetails();
+      
+      // Reset form and fetch reviews
+      setShowReviewForm(false);
+      setUserRating(0);
+      setHoverRating(0);
+      setReviewText('');
+
+      if (tripId) {
+        const params = {
+          trip_id: tripId,
+          trip_type: 1,
+          pageNumber: 1,
+          pageSize: 10
+        };
+        dispatch(fetchClientsReviews(params));
+      }
+
+      setTimeout(() => {
+        dispatch(resetReviewSubmission());
+      }, 100);
+    }
+  }, [submission.success, dispatch, tripId, refreshTripDetails]);
 
     // Reset review submission state when component unmounts
     useEffect(() => {
         return () => {
             dispatch(resetReviewSubmission());
-            dispatch(clearAuthError());
         };
     }, [dispatch]);
-
-    // Add event listener for auth errors from other components
-    useEffect(() => {
-        const handleAuthError = () => {
-            setPopupMessage(t("auth.sessionExpired"));
-            setPopupType('error');
-            setShowPopup(true);
-            setShowLoginPrompt(true);
-        };
-
-        window.addEventListener('authError', handleAuthError);
-        
-        return () => {
-            window.removeEventListener('authError', handleAuthError);
-        };
-    }, [t]);
-
-    // Check authentication status
-    const checkAuth = () => {
-        const token = getToken();
-        if (!token) {
-            setPopupMessage(t("auth.sessionExpired"));
-            setPopupType('error');
-            setShowPopup(true);
-            setShowLoginPrompt(true);
-            return false;
-        }
-        return true;
-    };
-
-    // Handle login prompt action
-    const handleLoginPrompt = () => {
-        // Clear user data from localStorage
-        localStorage.removeItem('user');
-        localStorage.removeItem('token');
-        
-        // Clear auth errors from state
-        dispatch(clearAuthError());
-        
-        // Open login modal
-        openAuthModal('login');
-        setShowLoginPrompt(false);
-        setShowPopup(false);
-    };
 
     // Get reviews for this specific trip
     const reviews = reviewsByTrip[tripId]?.reviews || [];
@@ -177,18 +109,6 @@ const Reviews = () => {
     const displayedReviews = reviews.slice(0, 2);
 
     const handleAddReviewClick = () => {
-        // Check if user is logged in with valid token
-        if (!checkAuth()) return;
-        
-        // Additional check for user data
-        if (!user || !user.id) {
-            setPopupMessage(t("tripDetails.pleaseLoginToReview"));
-            setPopupType('error');
-            setShowPopup(true);
-            openAuthModal('login');
-            return;
-        }
-        
         setShowReviewForm(!showReviewForm);
     };
 
@@ -197,9 +117,6 @@ const Reviews = () => {
     };
 
     const handleSubmitReview = () => {
-        // Check authentication before submitting
-        if (!checkAuth()) return;
-        
         if (userRating === 0) {
             setPopupMessage(t("tripDetails.pleaseSelectRating"));
             setPopupType('error');
@@ -214,7 +131,7 @@ const Reviews = () => {
             return;
         }
 
-        // Prepare review data according to API specification
+        // Prepare review data
         const reviewData = {
             id: 0,
             client_id: user.id,
@@ -226,7 +143,7 @@ const Reviews = () => {
             trip_type: 1
         };
 
-        // Dispatch the submitReview action from reviewSlice
+        // Dispatch the submitReview action
         dispatch(submitReview(reviewData));
     };
 
@@ -392,6 +309,7 @@ const Reviews = () => {
                                                 onClick={handleSubmitReview}
                                                 disabled={submission.loading}
                                             >
+                                               
                                                 {t("tripDetails.add")}
                                             </button>
                                             <button
@@ -419,22 +337,15 @@ const Reviews = () => {
             {/* Show loading page when fetching reviews */}
             {loading && <LoadingPage />}
             
-            {/* Show popup for messages */}
+            {/* Show popup for errors */}
             {showPopup && (
                 <PopUp
                     show={showPopup}
-                    closeAlert={() => {
-                        setShowPopup(false);
-                        if (showLoginPrompt) {
-                            handleLoginPrompt();
-                        }
-                    }}
+                    closeAlert={() => setShowPopup(false)}
                     msg={popupMessage}
                     type={popupType}
-                    autoClose={showLoginPrompt ? false : 3000}
-                    showConfirmButton={showLoginPrompt}
-                    confirmButtonText={t("auth.loginNow")}
-                    onConfirm={handleLoginPrompt}
+                    autoClose={false}
+                    showConfirmButton={false}
                 />
             )}
             

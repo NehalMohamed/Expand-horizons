@@ -9,10 +9,10 @@ const ComingSoon = () => {
     <>
       <Container className="pageContainer">
         <div className="contentWrapper">
-          {/* <h1 className="mainTitle">{t("NotFound.title")}</h1> */}
-          <img src="/images/comingSoon.png" alt="404 Error Illustration" className="illustration" />
+          <img src="/images/comingSoon.png" alt="coming soon Illustration" className="illustration" />
+          <h1 className="mainTitle">{t("ComingSoon.title")}</h1>
           <Button onClick={() => navigate("/")} variant="primary" className="goBackButton">
-            {t("NotFound.backBtn")}
+            {t("ComingSoon.backBtn")}
           </Button>
         </div>
       </Container>    

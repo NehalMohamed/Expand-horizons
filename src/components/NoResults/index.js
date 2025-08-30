@@ -5,7 +5,7 @@ const NoResults = () => {
   const { t } = useTranslation(); // Hook for multilingual translations
   return (
     <>
-      <Container className="pageContainer">
+      <Container className="noResultspageContainer">
         <div className="contentWrapper">
         <img src="/images/no-results.png" alt={t("NoResults.title")} className="illustration" />
         <h1 className="mainTitle">{t("NoResults.title")}</h1>

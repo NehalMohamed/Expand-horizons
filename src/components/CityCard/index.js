@@ -4,6 +4,10 @@ import { FaStar } from "react-icons/fa";
 
 const CityCard = (slide) => {
   const { t } = useTranslation();
+
+   const shouldShowOriginPrice = slide.trip_origin_price && 
+                               slide.trip_origin_price !== slide.trip_sale_price;
+
   const renderStars = (count) => {
     const stars = []
     for (let i = 0; i < 5; i++) {
@@ -22,11 +26,12 @@ const CityCard = (slide) => {
         <div className="card-details-grid">
           <div className="reviews-row">
             <span className="reviews-text">   </span>
-            <span className="reviews-text">{t("tripDetails.priceFrom")}</span>
+            {shouldShowOriginPrice && <span className="reviews-text">{t("tripDetails.priceFrom")}</span>}
           </div>
           <div className="reviews-row">
             <span className="reviews-text">{slide.total_reviews} {t("tripDetails.reviews")}</span>
-            {slide.trip_origin_price && <span className="old-price">{slide.trip_origin_price} {slide.currency_code}</span>}
+            {shouldShowOriginPrice ? <span className="old-price">{slide.trip_origin_price} {slide.currency_code}</span>:
+            <span className="reviews-text">{t("tripDetails.priceFrom")}</span>}
           </div>
           <div className="price-row">
             <div className="star-rating">{renderStars(slide.review_rate)}</div>
