@@ -35,7 +35,6 @@ const WishlistCard = ({ trip, onWishlistUpdate }) => {
       };
 
   const handleCardClick = () => {
-    localStorage.setItem('currentTripData', JSON.stringify(trip));
     navigate(`/trip/${trip.route}`, {
       state: { 
         tripId: trip.trip_id,

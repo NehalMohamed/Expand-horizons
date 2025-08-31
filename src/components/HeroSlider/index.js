@@ -56,7 +56,6 @@ const HeroSlider = () => {
   };
 
   const handleCardClick = (slide) => {
-    localStorage.setItem('currentTripData', JSON.stringify(slide));
     navigate(`/trip/${slide.route}`, {
       state: { 
         tripId: slide.trip_id,
