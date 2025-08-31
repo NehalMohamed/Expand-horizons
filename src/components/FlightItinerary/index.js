@@ -17,7 +17,7 @@ const FlightItinerary = ({ tripData }) => {
     useEffect(() => {
         const params = {
             trip_id: tripId,
-            trip_type: 1,
+            trip_type: tripData?.trip_type,
             lang_code: currentLang
         };
         dispatch(fetchPickupsForTrip(params));

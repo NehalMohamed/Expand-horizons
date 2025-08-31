@@ -36,7 +36,7 @@ const Reviews = ({ tripData , refreshTripDetails}) => {
         if (tripId) {
         const params = {
             trip_id: tripId,
-            trip_type: 1,
+            trip_type: tripData?.trip_type,
             pageNumber: 1,
             pageSize: 10 
         };
@@ -82,7 +82,7 @@ const Reviews = ({ tripData , refreshTripDetails}) => {
       if (tripId) {
         const params = {
           trip_id: tripId,
-          trip_type: 1,
+          trip_type: tripData?.trip_type,
           pageNumber: 1,
           pageSize: 10
         };
@@ -140,7 +140,7 @@ const Reviews = ({ tripData , refreshTripDetails}) => {
             entry_date: null,
             review_rate: userRating,
             trip_id: tripId,
-            trip_type: 1
+            trip_type: tripData?.trip_type
         };
 
         // Dispatch the submitReview action

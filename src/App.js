@@ -10,6 +10,8 @@ import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import ComingSoon from "./components/ComingSoon";
 import Excursions from "./pages/ExcursionsPage";
+import DivingPage from "./pages/DivingPage";
+import TransfersPage from "./pages/TransfersPage";
 import DestinationExcursionsPage from "./pages/DestinationExcursionsPage";
 import TripDetailsPage from "./pages/TripDetailsPage";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -41,6 +43,10 @@ function App() {
             <Route path="/VerifyEmail" element={<OTPInput />} />
             <Route path="/excursions" element={<Excursions />} />
             <Route path="/excursions/:location" element={<DestinationExcursionsPage />} />
+            <Route path="/diving" element={<DivingPage />} />
+            <Route path="/diving/:location" element={<DestinationExcursionsPage />} />
+            <Route path="/transfers" element={<TransfersPage />} />
+            <Route path="/transfers/:location" element={<DestinationExcursionsPage />} />
             <Route path="/trip/:tripName" element={<TripDetailsPage />} />
         
 

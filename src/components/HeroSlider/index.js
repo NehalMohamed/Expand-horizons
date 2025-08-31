@@ -18,7 +18,8 @@ const HeroSlider = () => {
     const params = {
       lang_code: currentLang,
       show_in_top: false,
-      currency_code: "USD"
+      currency_code: "USD",
+      trip_type: 1
     };
     dispatch(fetchSliderTrips(params));
   }, [dispatch, currentLang]);
@@ -57,7 +58,10 @@ const HeroSlider = () => {
   const handleCardClick = (slide) => {
     localStorage.setItem('currentTripData', JSON.stringify(slide));
     navigate(`/trip/${slide.route}`, {
-      state: { tripId: slide.trip_id}
+      state: { 
+        tripId: slide.trip_id,
+        trip_type: slide.trip_type
+      }
     });
   };
 

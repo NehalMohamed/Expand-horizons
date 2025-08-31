@@ -76,7 +76,7 @@ const Gallery = ({ tripData , refreshTripDetails }) => {
           trip_id: tripData.trip_id,
           client_id: user?.id || 0,
           created_at: null,
-          trip_type: 1,
+          trip_type: tripData?.trip_type,
           delete: tripData.isfavourite // true to remove, false to add
         };
   

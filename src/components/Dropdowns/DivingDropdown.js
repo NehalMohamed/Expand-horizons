@@ -22,15 +22,18 @@ const DivingDropdown = () => {
     }, [dispatch, currentLang]);
 
     const handleLocationClick = (route, id) => {
-        navigate(`/excursions/${route.toLowerCase().replace(/\s+/g, '-')}`, { 
-            state: { DestinationId: id } 
+        navigate(`/diving/${route.toLowerCase().replace(/\s+/g, '-')}`, { 
+            state: { 
+                DestinationId: id,
+                tripType: 3 // Diving trip type
+            } 
         });
         setShow(false);
     };
 
     const handleMainExcursionsClick = (e) => {
         e.preventDefault();
-        navigate('/excursions');
+        navigate('/diving');
     };
 
     const handleMouseEnter = () => {

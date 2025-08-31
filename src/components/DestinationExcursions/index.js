@@ -15,6 +15,7 @@ import PopUp from "../Shared/popup/PopUp";
 const DestinationExcursions = () => {
     const { state } = useLocation(); // Get tripData passed from navigation
     const destinationId = state?.DestinationId;
+    const tripType = state?.tripType || 1;
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const currentLang = useSelector((state) => state.language.currentLang) || "en";
@@ -32,10 +33,11 @@ const DestinationExcursions = () => {
             show_in_top: false,
             destination_id: destinationId,
             currency_code: "USD",
-            client_id: user?.id || ""
+            client_id: user?.id || "",
+            trip_type: tripType
         };
         dispatch(fetchDestinationTrips(params));
-    }, [dispatch, currentLang, destinationId]);
+    }, [dispatch, currentLang, destinationId, tripType]);
 
     const { destinationTrips: trips, loading, error } = useSelector((state) => state.trips);
 

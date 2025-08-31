@@ -17,7 +17,8 @@ const CityCarousel = () => {
   const params = {
     lang_code: currentLang,
     show_in_top: false,
-    currency_code: "USD"
+    currency_code: "USD",
+    trip_type: 1
   };
   dispatch(fetchCarouselTrips(params));
 }, [dispatch, currentLang]);

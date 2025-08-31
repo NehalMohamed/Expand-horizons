@@ -9,8 +9,9 @@ import LoadingPage from "../Loader/LoadingPage";
 import PopUp from "../Shared/popup/PopUp";
 import TourCard from "../TourCard";
 
-const ToursSection = () => {
+const ToursSection = (props) => {
   const dispatch = useDispatch();
+  const tripType = props.tripType || 1;
   const { toursSectionTrips: trips, loading, error } = useSelector((state) => state.trips);
   const { operation } = useSelector((state) => state.wishlist);
   const currentLang = useSelector((state) => state.language.currentLang) || "en";
@@ -31,10 +32,11 @@ const ToursSection = () => {
       lang_code: currentLang,
       show_in_top: false,
       currency_code: "USD",
-      client_id: user?.id || ""
+      client_id: user?.id || "",
+      trip_type: tripType
     };
     dispatch(fetchToursSectionTrips(params));
-  }, [dispatch, currentLang, refreshTrigger]);
+  }, [dispatch, currentLang, refreshTrigger ,tripType]);
 
   useEffect(() => {
     if (operation.success) {

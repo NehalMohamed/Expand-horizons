@@ -52,7 +52,8 @@ const TripDetailsPage = () => {
       trip_id: state?.tripId, // You'll need to implement this function
       lang_code: currentLang,
       currency_code: "USD",
-      client_id: user?.id || ""
+      client_id: user?.id || "",
+      trip_type: state?.trip_type
     };
 
     dispatch(fetchTripDetails(params));

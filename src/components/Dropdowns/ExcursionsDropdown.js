@@ -23,7 +23,10 @@ const ExcursionsDropdown = () => {
 
     const handleLocationClick = (route, id) => {
         navigate(`/excursions/${route.toLowerCase().replace(/\s+/g, '-')}`, { 
-            state: { DestinationId: id } 
+           state: { 
+                DestinationId: id,
+                tripType: 1 // Excursions trip type
+            } 
         });
         setShow(false);
     };

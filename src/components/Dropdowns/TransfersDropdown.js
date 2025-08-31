@@ -22,15 +22,18 @@ const TransfersDropdown = () => {
     }, [dispatch, currentLang]);
 
     const handleLocationClick = (route, id) => {
-        navigate(`/excursions/${route.toLowerCase().replace(/\s+/g, '-')}`, { 
-            state: { DestinationId: id } 
+        navigate(`/transfers/${route.toLowerCase().replace(/\s+/g, '-')}`, { 
+            state: { 
+                DestinationId: id,
+                tripType: 2 // Transfer trip type
+            } 
         });
         setShow(false);
     };
 
     const handleMainExcursionsClick = (e) => {
         e.preventDefault();
-        navigate('/excursions');
+        navigate('/transfers');
     };
 
     const handleMouseEnter = () => {

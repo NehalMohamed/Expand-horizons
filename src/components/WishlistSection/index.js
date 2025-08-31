@@ -22,7 +22,7 @@ const WishlistSection = () => {
     const params = {
       lang_code: currentLang,
       currency_code: "USD",
-      trip_type: 1,
+      trip_type: 0,
       client_id: ""
     };
     dispatch(fetchWishlist(params));

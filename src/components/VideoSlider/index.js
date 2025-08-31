@@ -18,8 +18,12 @@ const VideoSlider = () => {
 
     const handleTimeUpdate = () => {
       setCurrentTime(video.currentTime);
-      const progressPercent = (video.currentTime / video.duration) * 100;
-      progressRef.current.style.width = `${progressPercent}%`;
+      
+      // Add null check for progressRef.current
+      if (progressRef.current) {
+        const progressPercent = (video.currentTime / video.duration) * 100;
+        progressRef.current.style.width = `${progressPercent}%`;
+      }
     };
 
     video.addEventListener('loadeddata', handleLoadedData);
