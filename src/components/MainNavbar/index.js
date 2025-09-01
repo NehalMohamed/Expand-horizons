@@ -17,11 +17,14 @@ const MainNavbar = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const localStorageUser = JSON.parse(localStorage.getItem("user") || "null");
+  const user = localStorageUser;
 
   useEffect(() => {
+    const client_id = user?.id || "";
     // Fetch wishlist count when component mounts
-    dispatch(fetchWishlistCount());
-  }, [dispatch]);
+    dispatch(fetchWishlistCount(client_id));
+  }, [dispatch, user]);
 
   const handleWishlistClick = () => {
     navigate("/Wishlist");

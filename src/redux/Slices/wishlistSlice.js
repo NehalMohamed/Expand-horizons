@@ -5,6 +5,7 @@ import { checkAUTH, isUserNotLoggedIn, isTokenExpiredOnly } from "../../helper/h
 import { createAuthError } from "../../utils/authError";
 
 const BOOKING_URL = process.env.REACT_APP_BOOKING_API_URL;
+const BASE_URL = process.env.REACT_APP_CLIENT_API_URL;
 
 const getAuthHeaders = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -20,37 +21,44 @@ const getAuthHeaders = () => {
   };
 };
 
+const getNoTokenAuthHeaders = () => {
+  let lang = localStorage.getItem("lang") || "en";
+  return {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept-Language": lang
+    },
+  };
+};
+
+// Helper function to get client ID from localStorage
+const getClientId = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  return user?.id || null;
+};
+
 // Async thunk for fetching wishlist count
 export const fetchWishlistCount = createAsyncThunk(
   "wishlist/fetchWishlistCount",
-  async (_, { rejectWithValue }) => {
-    // Check authentication with proper scenario detection
-    if (isUserNotLoggedIn()) {
-      return rejectWithValue(createAuthError('notLoggedIn'));
-    }
-    
-    if (isTokenExpiredOnly()) {
-      return rejectWithValue(createAuthError('expired'));
-    }
-    
-    if (!checkAUTH()) {
-      return rejectWithValue(createAuthError('expired'));
+  async (clientId, { rejectWithValue }) => {
+
+    if (!clientId) {
+      return 0;
     }
 
     try {
       const response = await axios.post(
-        `${BOOKING_URL}/GetWishListCount`,
-        {}, // Empty body as per your API example
-        getAuthHeaders()
+        `${BASE_URL}/GetWishListCount?clientId=` + clientId,
+        {},
+        getNoTokenAuthHeaders()
       );
-      
+       
       // Assuming the API returns a simple number like in your example
       return response.data;
     } catch (error) {
-      if (error.response?.status === 401) {
-        return rejectWithValue(createAuthError('expired'));
-      }
-      return rejectWithValue(error.response?.data?.errors || error.message);
+      console.error("Error fetching wishlist count:", error);
+      // Return 0 on error but don't show error to user for count
+      return 0;
     }
   }
 );
@@ -120,7 +128,10 @@ export const addToWishlist = createAsyncThunk(
       console.log("Add to wishlist response:", response.data);
 
       // Refresh wishlist count after adding
-      dispatch(fetchWishlistCount());
+      const clientId = getClientId();
+            if (clientId) {
+              dispatch(fetchWishlistCount(clientId));
+            }
       
       // Check if the operation was successful
       if (response.data.success === false) {
@@ -174,7 +185,11 @@ const wishlistSlice = createSlice({
 
     updateWishlistCount: (state, action) => {
           state.count = action.payload;
-    }
+     },
+        // Reset count when user logs out
+        resetWishlistCount: (state) => {
+          state.count = 0;
+        }
   },
   extraReducers: (builder) => {
     builder
@@ -232,5 +247,5 @@ const wishlistSlice = createSlice({
   }
 });
 
-export const { resetWishlistOperation, clearWishlist, updateWishlistCount } = wishlistSlice.actions;
+export const { resetWishlistOperation, clearWishlist, updateWishlistCount, resetWishlistCount } = wishlistSlice.actions;
 export default wishlistSlice.reducer;
