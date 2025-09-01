@@ -92,8 +92,9 @@ const WishlistCard = ({ trip, onWishlistUpdate }) => {
             </Button>
             <div className="price-section">
               {/* <span className="price-label">ab</span> */}
-              <span className="price">{trip.trip_origin_price} </span>
-              <span className="price-suffix"> {trip.currency_code} p.P.</span>
+              <span className="price">{trip.currency_code.toUpperCase() === "EUR" ? "€" : ` ${trip.currency_code}`} {trip.trip_origin_price} </span>
+              <span className="price-suffix">
+                p.P.</span>
             </div>
           </div>
         </Card.Body>

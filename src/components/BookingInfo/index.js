@@ -25,7 +25,7 @@ const BookingInfo = ({ tripData }) => {
                 <p className="info-text">
                   {t("tripDetails.bookNowPayLater")}
                 </p>
-                <p className="info-subtext">{t("tripDetails.duration")}</p>
+                <p className="info-subtext">{t("tripDetails.duration")} "{tripData?.trip_duration || 0}"</p>
               </div>
             </div>
             

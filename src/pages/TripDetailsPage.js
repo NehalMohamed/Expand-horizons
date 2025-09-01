@@ -55,7 +55,7 @@ const TripDetailsPage = () => {
     const params = {
       trip_id: state?.tripId, // You'll need to implement this function
       lang_code: currentLang,
-      currency_code: "USD",
+      currency_code: "EUR",
       client_id: user?.id || "",
       trip_type: state?.trip_type
     };

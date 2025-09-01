@@ -21,7 +21,7 @@ const WishlistSection = () => {
   const refreshWishlist = () => {
     const params = {
       lang_code: currentLang,
-      currency_code: "USD",
+      currency_code: "EUR",
       trip_type: 0,
       client_id: ""
     };

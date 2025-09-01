@@ -31,7 +31,7 @@ const ToursSection = (props) => {
     const params = {
       lang_code: currentLang,
       show_in_top: false,
-      currency_code: "USD",
+      currency_code: "EUR",
       client_id: user?.id || "",
       trip_type: tripType
     };

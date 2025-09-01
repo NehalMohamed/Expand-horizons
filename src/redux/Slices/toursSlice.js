@@ -25,7 +25,7 @@ export const fetchSliderTrips = createAsyncThunk(
           lang_code: lang || 'en',
           show_in_top: false,
           show_in_slider: true,
-          currency_code: 'USD'
+          currency_code: 'EUR'
         },
         getAuthHeaders()
       );
@@ -47,7 +47,7 @@ export const fetchTopTrips = createAsyncThunk(
           lang_code: lang || 'en',
           show_in_top: true,
           show_in_slider: false,
-          currency_code: 'USD'
+          currency_code: 'EUR'
         },
         getAuthHeaders()
       );

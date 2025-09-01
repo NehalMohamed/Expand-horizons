@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, NavLink } from "react-router-dom";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import { FaSearch, FaShoppingBasket, FaHeart } from "react-icons/fa";
+import { FaSearch, FaShoppingBasket, FaHeart, FaEuroSign } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import LanguageDropdown from "../Dropdowns/LanguageDropdown";
 import ExcursionsDropdown from "../Dropdowns/ExcursionsDropdown";
@@ -52,7 +52,6 @@ const MainNavbar = () => {
 
             <TransfersDropdown />
 
-
             <DivingDropdown />
 
                         <Nav.Link
@@ -92,6 +91,12 @@ const MainNavbar = () => {
                     />
                   </div>
                 )}
+              </div>
+
+               {/* EUR Currency Indicator */}
+              <div className="currency-indicator" title="Euro Currency">
+                <FaEuroSign className="eur-icon" />
+                <span className="currency-text">EUR</span>
               </div>
 
               <LanguageDropdown />

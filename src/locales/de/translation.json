@@ -37,8 +37,8 @@
     "title": "Ihre Wunschliste",
     "saved": "Gespeichert",
     "remove": "Von Wunschliste entfernen",
-    "topCities": "Top Städte, die man besuchen sollte",
-    "topCitiesDescription": "Erlebe den Nervenkitzel, versteckte Schätze und berühmte Sehenswürdigkeiten in den besten Reisezielen weltweit zu entdecken - dein Fernweh wartet!"
+    "topDestinations": "Die besten zu besuchenden Reiseziele",
+    "topDestinationsDescription": "Erlebe den Nervenkitzel, versteckte Schätze und berühmte Sehenswürdigkeiten in den besten Reisezielen weltweit zu entdecken - dein Fernweh wartet!"
   },
   "footer": {
     "travel": "Reisen",
@@ -211,7 +211,7 @@
     "share": "Teilen",
     "aboutTrip": "Über diese Reise",
     "bookNowPayLater": "Jetzt reservieren, später zahlen: Bleiben Sie flexibel – buchen Sie jetzt und zahlen Sie später.",
-    "duration": "Dauer \"14 Stunden\"",
+    "duration": "Dauer",
     "paymentMethods": "Die Zahlung erfolgt vor Ort in bar in Euro, US-Dollar, Schweizer Franken, Ägyptischen Pfund oder per PayPal.",
     "paymentNote": "Die Bezahlung erfolgt bei der Abholung.",
     "linkCopied": "Link in die Zwischenablage kopiert!",

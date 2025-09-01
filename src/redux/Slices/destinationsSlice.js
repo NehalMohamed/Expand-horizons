@@ -22,7 +22,7 @@ export const fetchDestinations = createAsyncThunk(
         BASE_URL + '/getDestinations',
         {
           lang_code:lang_code,
-          currency_code: "USD",
+          currency_code: "EUR",
           country_code: ""
         },
         getAuthHeaders()

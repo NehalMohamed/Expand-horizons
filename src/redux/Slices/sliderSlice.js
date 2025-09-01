@@ -24,7 +24,7 @@ export const fetchSliderTrips = createAsyncThunk(
                     destination_id: 0,
                     lang_code: lang_code,  
                     show_in_top: false,
-                    currency_code: "USD"
+                    currency_code: "EUR"
                 },
                 getAuthHeaders()
             );

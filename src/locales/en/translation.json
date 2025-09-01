@@ -37,8 +37,8 @@
     "title": "Your wishlist",
     "saved": "Saved",
     "remove": "Remove from wishlist",
-    "topCities": "Top Cities to Visit",
-    "topCitiesDescription": "Experience the thrill of discovering hidden gems and famous landmarks in the best travel destinations worldwide - your wanderlust awaits!"
+    "topDestinations": "Top Destinations to Visit",
+    "topDestinationsDescription": "Experience the thrill of discovering hidden gems and famous landmarks in the best travel destinations worldwide - your wanderlust awaits!"
   },
   "footer": {
     "travel": "Travel",
@@ -211,7 +211,7 @@
     "share": "Share",
     "aboutTrip": "About this trip",
     "bookNowPayLater": "Book now, pay later: Stay flexible - book now and pay later.",
-    "duration": "Duration \"14 hours\"",
+    "duration": "Duration",
     "paymentMethods": "Payment on site in cash in Euro, US Dollar, Swiss Francs or Egyptian Pounds or PayPal",
     "paymentNote": "Payment is made upon pickup.",
     "linkCopied": "Link copied to clipboard!",

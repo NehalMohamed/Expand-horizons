@@ -5,8 +5,8 @@ import { FaStar } from "react-icons/fa";
 const CityCard = (slide) => {
   const { t } = useTranslation();
 
-   const shouldShowOriginPrice = slide.trip_origin_price && 
-                               slide.trip_origin_price !== slide.trip_sale_price;
+  const shouldShowOriginPrice = slide.trip_origin_price &&
+    slide.trip_origin_price !== slide.trip_sale_price;
 
   const renderStars = (count) => {
     const stars = []
@@ -30,12 +30,16 @@ const CityCard = (slide) => {
           </div>
           <div className="reviews-row">
             <span className="reviews-text">{slide.total_reviews} {t("tripDetails.reviews")}</span>
-            {shouldShowOriginPrice ? <span className="old-price">{slide.trip_origin_price} {slide.currency_code}</span>:
-            <span className="reviews-text">{t("tripDetails.priceFrom")}</span>}
+            {shouldShowOriginPrice ? <span className="old-price">
+              {slide.currency_code.toUpperCase() === "EUR" ? "€" : ` ${slide.currency_code}`} {slide.trip_origin_price}
+            </span> :
+              <span className="reviews-text">{t("tripDetails.priceFrom")}</span>}
           </div>
           <div className="price-row">
             <div className="star-rating">{renderStars(slide.review_rate)}</div>
-            <span className="new-price">{slide.trip_sale_price} {slide.currency_code}</span>
+            <span className="new-price">
+              {slide.currency_code.toUpperCase() === "EUR" ? "€" : ` ${slide.currency_code}`} {slide.trip_sale_price}
+            </span>
           </div>
         </div>
       </Card.Body>

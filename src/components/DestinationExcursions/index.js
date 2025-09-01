@@ -32,7 +32,7 @@ const DestinationExcursions = () => {
             lang_code: currentLang,
             show_in_top: false,
             destination_id: destinationId,
-            currency_code: "USD",
+            currency_code: "EUR",
             client_id: user?.id || "",
             trip_type: tripType
         };
