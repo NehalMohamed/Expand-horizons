@@ -20,6 +20,41 @@ const getAuthHeaders = () => {
   };
 };
 
+// Async thunk for fetching wishlist count
+export const fetchWishlistCount = createAsyncThunk(
+  "wishlist/fetchWishlistCount",
+  async (_, { rejectWithValue }) => {
+    // Check authentication with proper scenario detection
+    if (isUserNotLoggedIn()) {
+      return rejectWithValue(createAuthError('notLoggedIn'));
+    }
+    
+    if (isTokenExpiredOnly()) {
+      return rejectWithValue(createAuthError('expired'));
+    }
+    
+    if (!checkAUTH()) {
+      return rejectWithValue(createAuthError('expired'));
+    }
+
+    try {
+      const response = await axios.post(
+        `${BOOKING_URL}/GetWishListCount`,
+        {}, // Empty body as per your API example
+        getAuthHeaders()
+      );
+      
+      // Assuming the API returns a simple number like in your example
+      return response.data;
+    } catch (error) {
+      if (error.response?.status === 401) {
+        return rejectWithValue(createAuthError('expired'));
+      }
+      return rejectWithValue(error.response?.data?.errors || error.message);
+    }
+  }
+);
+
 // Async thunk for fetching wishlist items
 export const fetchWishlist = createAsyncThunk(
   "wishlist/fetchWishlist",
@@ -61,7 +96,7 @@ export const fetchWishlist = createAsyncThunk(
 // Async thunk for adding item to wishlist
 export const addToWishlist = createAsyncThunk(
   "wishlist/addToWishlist",
-  async (wishlistData, { rejectWithValue }) => {
+  async (wishlistData, { rejectWithValue, dispatch }) => {
     // Check authentication with proper scenario detection
     if (isUserNotLoggedIn()) {
       return rejectWithValue(createAuthError('notLoggedIn'));
@@ -83,6 +118,9 @@ export const addToWishlist = createAsyncThunk(
       );
       
       console.log("Add to wishlist response:", response.data);
+
+      // Refresh wishlist count after adding
+      dispatch(fetchWishlistCount());
       
       // Check if the operation was successful
       if (response.data.success === false) {
@@ -112,6 +150,7 @@ const wishlistSlice = createSlice({
   name: "wishlist",
   initialState: {
     items: [],
+    count: 0,
     loading: false,
     error: null,
     operation: {
@@ -128,13 +167,32 @@ const wishlistSlice = createSlice({
     },
     clearWishlist: (state) => {
       state.items = [];
+      state.count = 0; 
       state.loading = false;
       state.error = null;
+    },
+
+    updateWishlistCount: (state, action) => {
+          state.count = action.payload;
     }
   },
   extraReducers: (builder) => {
     builder
-      // Fetch wishlist
+    // Fetch wishlist count
+          .addCase(fetchWishlistCount.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+          })
+          .addCase(fetchWishlistCount.fulfilled, (state, action) => {
+            state.loading = false;
+            state.count = action.payload; // Store the count
+          })
+          .addCase(fetchWishlistCount.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+            state.count = 0; // Reset count on error
+          })
+      // Fetch wishlist items
       .addCase(fetchWishlist.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -174,5 +232,5 @@ const wishlistSlice = createSlice({
   }
 });
 
-export const { resetWishlistOperation, clearWishlist } = wishlistSlice.actions;
+export const { resetWishlistOperation, clearWishlist, updateWishlistCount } = wishlistSlice.actions;
 export default wishlistSlice.reducer;

@@ -21,7 +21,27 @@ export const fetchDestinations = createAsyncThunk(
       const response = await axios.post(
         BASE_URL + '/getDestinations',
         {
-          lang_code:lang_code,
+          lang_code: lang_code,
+          currency_code: "EUR",
+          country_code: ""
+        },
+        getAuthHeaders()
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const fetchDestinationTree = createAsyncThunk(
+  'destinations/fetchDestinationTree',
+  async (lang_code, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        BASE_URL + '/GetDestination_Tree',
+        {
+          lang_code: lang_code,
           currency_code: "EUR",
           country_code: ""
         },
@@ -38,8 +58,11 @@ const destinationsSlice = createSlice({
   name: 'destinations',
   initialState: {
     items: [],
+    treeItems: [],
     loading: false,
-    error: null
+    treeLoading: false,
+    error: null,
+    treeError: null
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -55,6 +78,18 @@ const destinationsSlice = createSlice({
       .addCase(fetchDestinations.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+      .addCase(fetchDestinationTree.pending, (state) => {
+        state.treeLoading = true;
+        state.treeError = null;
+      })
+      .addCase(fetchDestinationTree.fulfilled, (state, action) => {
+        state.treeLoading = false;
+        state.treeItems = action.payload;
+      })
+      .addCase(fetchDestinationTree.rejected, (state, action) => {
+        state.treeLoading = false;
+        state.treeError = action.payload;
       });
   }
 });

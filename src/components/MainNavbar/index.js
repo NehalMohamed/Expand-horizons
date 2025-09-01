@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, NavLink } from "react-router-dom";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { FaSearch, FaShoppingBasket, FaHeart, FaEuroSign } from "react-icons/fa";
@@ -9,12 +9,19 @@ import ExcursionsDropdown from "../Dropdowns/ExcursionsDropdown";
 import TransfersDropdown from "../Dropdowns/TransfersDropdown";
 import DivingDropdown from "../Dropdowns/DivingDropdown";
 import ProfileDropdown from "../Dropdowns/ProfileDropdown";
+import { fetchWishlistCount } from "../../redux/Slices/wishlistSlice";
 
 const MainNavbar = () => {
   const [showSearch, setShowSearch] = useState(false);
-  const wishlistCount = useSelector((state) => state.tours.wishlistCount);
+   const wishlistCount = useSelector((state) => state.wishlist.count); // Get count from state
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Fetch wishlist count when component mounts
+    dispatch(fetchWishlistCount());
+  }, [dispatch]);
 
   const handleWishlistClick = () => {
     navigate("/Wishlist");
