@@ -56,14 +56,14 @@ const TourDetails = ({ tripData }) => {
         {renderSection(t("tripDetails.additionalInfo"), tripData?.trip_details)}
 
         {/* Pricing */}
-        <div className="pricing-section text-center mt-4">
+        {/* <div className="pricing-section text-center mt-4">
           <h2 className="price-title">
             {t("tripDetails.priceFrom")} {tripData?.currency_code.toUpperCase() === "EUR" ? "€" : ` ${tripData?.currency_code}`} {tripData?.trip_sale_price} P.p
           </h2>
           <Button variant="success" size="lg" className="mt-2">
             {t("tripDetails.bookNow")}
           </Button>
-        </div>
+        </div> */}
       </Container>
     </section>
   );

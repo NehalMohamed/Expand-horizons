@@ -21,8 +21,6 @@
       object-fit: cover;
       transition: $transition-base;
     }
-
-   
     
     .image-overlay {
       position: absolute;
@@ -111,24 +109,25 @@
       }
     }
   } 
+
   .card-body {
-    padding: 24px; // Updated from $spacer-lg to 24px
+    padding: 24px; 
     @include flex-column;
     flex-grow: 1;
     
     @include media-breakpoint-down(lg) {
-      padding: 20px; // Added new line
+      padding: 20px;
       
       .card-title {
-        font-size: 18px; // Added new line
+        font-size: 18px;
       }
       
       .card-text {
-        font-size: 13px; // Added new line
+        font-size: 13px;
       }
       
       .tour-duration {
-        font-size: 0.9rem; // Added new line
+        font-size: 0.9rem;
         
         .duration-icon {
           color: $secondary-color;
@@ -136,10 +135,10 @@
       }
       
       .feature-list {
-        font-size: 13px; // Added new line
+        font-size: 13px;
         
         li {
-          font-size: 0.9rem; // Added new line
+          font-size: 0.9rem;
           
           @include media-breakpoint-down(sm) {
             font-size: 0.85rem;
@@ -156,7 +155,7 @@
     }
     
     @include media-breakpoint-down(md) {
-      padding: $spacer; // Updated from $spacer-lg to $spacer
+      padding: $spacer;
       
       .card-title {
         font-weight: $font-weight-bold;
@@ -170,7 +169,7 @@
       
       .card-text {
         color: $text-muted;
-        margin-bottom: $spacer; // Updated from $spacer-lg to $spacer
+        margin-bottom: $spacer;
         line-height: 1.5;
         flex-grow: 1;
       }
@@ -190,7 +189,7 @@
       .feature-list {
         list-style: none;
         padding: 0;
-        margin: $spacer-sm 0 $spacer 0; // Updated from $spacer 0 $spacer-lg 0 to $spacer-sm 0 $spacer 0
+        margin: $spacer-sm 0 $spacer 0;
         flex-grow: 1;
         
         li {
@@ -291,27 +290,69 @@
     }
     
     .price-section {
-      align-items: flex-start;
-       font-weight: $font-weight-bold;
-        color: $primary-color;
-        margin-bottom: $spacer-xs;
+      display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        text-align: right;
       
       @include media-breakpoint-down(sm) {
-        align-items: center;
-      }
+        align-items: center; 
+        text-align: center;
+        }
+        
+        .price-range {
+          display: flex;
+          align-items: baseline;
+          gap: 4px;
+          margin-bottom: 4px;
+          
+          .price-label {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-right: 4px;
+          }
       
       .price {
         font-weight: $font-weight-bold;
         color: $secondary-color;
-        margin-bottom: $spacer-xs;
-        
         @include responsive-font-size(1.1rem, 1.3rem);
       }
       
     
       
      
-    }
+     .price-suffix {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-left: 2px;
+          }
+        }
+        
+        .capacity-info {
+          .capacity-text {
+            font-size: 0.8rem;
+            color: #6c757d;
+          }
+        }
+        
+        // Standard price styling (for trip types 1 and 3)
+        &:not(.price-range-container) {
+          align-items: flex-end;
+          
+          .price {
+            font-weight: $font-weight-bold;
+            color: $secondary-color;
+            margin-bottom: $spacer-xs;
+            @include responsive-font-size(1.1rem, 1.3rem);
+          }
+          
+          .price-suffix {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-left: 2px;
+          }
+        }
+      }
     
     .book-btn {
       @include button-variant($light-bg, $primary-color);
@@ -323,7 +364,7 @@
       letter-spacing: 0.5px;
       transition: $transition-base;
       white-space: nowrap;
-      color:$primary-color;
+      color: $primary-color;
       
       @include media-breakpoint-down(sm) {
         width: 100%;
@@ -333,7 +374,7 @@
       &:hover {
         transform: translateY(-2px);
         box-shadow: $box-shadow;
-        color:$light-bg;
+        color: $light-bg;
       }
       
       &:active {

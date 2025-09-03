@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchTripDetails, clearTripDetails } from '../redux/Slices/tripDetailsSlice';
 import Gallery from "../components/Gallery";
 import BookingInfo from "../components/BookingInfo";
+import BookingSelection from "../components/BookingSelection";
 import FlightItinerary from "../components/FlightItinerary";
 import Reviews from "../components/Reviews";
 import TourDetails from "../components/TourDetails";
@@ -72,6 +73,7 @@ const TripDetailsPage = () => {
     <>
       <Gallery tripData={tripData} refreshTripDetails={refreshTripDetails} />
       <BookingInfo tripData={tripData} />
+      <BookingSelection />
       <FlightItinerary tripData={tripData} />
       <Reviews tripData={tripData} refreshTripDetails={refreshTripDetails} />
       <TourDetails tripData={tripData} />

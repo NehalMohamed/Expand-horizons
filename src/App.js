@@ -16,6 +16,7 @@ import DestinationExcursionsPage from "./pages/DestinationExcursionsPage";
 import TripDetailsPage from "./pages/TripDetailsPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-popup-alert/dist/index.css";
+import "react-datepicker/dist/react-datepicker.css";
 import "./styles/main.scss";
 import OTPInput from "./components/AuthComp/OTP/OTPInput";
 import { useAuthModal } from './components/AuthComp/AuthModal';

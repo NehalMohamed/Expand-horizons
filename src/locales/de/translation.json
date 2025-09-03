@@ -2,7 +2,10 @@
   "general": {
     "more": "Mehr",
     "top_offers": "Top Angebote",
-    "show_more": "Mehr anzeigen"
+    "show_more": "Mehr anzeigen",
+    "from": "Ab",
+    "perGroupUpTo": "pro Gruppe bis zu",
+    "perPerson":"pro person"
   },
   "language": {
     "language": "Sprache",
@@ -14,7 +17,7 @@
     "home": "Startseite",
     "egypt_excursions": "Ägypten Ausflüge",
     "transfer_services": "Transfer Services",
-    "egypt_diving":"Ägypten Tauchen",
+    "egypt_diving": "Ägypten Tauchen",
     "about_us": "Über",
     "contact": "Kontakt",
     "search": "Suche",
@@ -192,7 +195,7 @@
     "sessionExpired": "Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.",
     "loginRequired": "Bitte melden Sie sich zunächst an.",
     "loginNow": "Jetzt anmelden",
-    "ok":"OK"
+    "ok": "OK"
   },
   "tripDetails": {
     "reviews": "Bewertungen",
@@ -232,5 +235,32 @@
     "bookNow": "Jetzt buchen",
     "notRated": "Noch nicht bewertet",
     "stars": "Stern"
+  },
+  "booking": {
+    "title": "Teilnehmer, Datum und Sprache auswählen",
+    "checkAvailability": "Verfügbarkeit prüfen",
+    "date": {
+      "selectDate": "Datum auswählen"
+    },
+    "participants": {
+      "adult": "Erwachsener",
+      "child": "Kind",
+      "infant": "Säugling",
+      "adultSingle": "Erwachsener x 1",
+      "adults": "Erwachsene x {{count}}",
+      "children": "Kinder x {{count}}",
+      "infants": "Säuglinge x {{count}}",
+      "mixed": "Erwachsene x {{adults}}, Kinder x {{children}}, Säuglinge x {{infants}}",
+      "ageRangeAdults": "Alter 12-99",
+      "ageRangeChildren": "Alter 3-11",
+      "ageRangeInfants": "Alter 2 und jünger"
+    },
+    "language": {
+      "english": "Englisch",
+      "spanish": "Spanisch",
+      "french": "Französisch",
+      "german": "Deutsch",
+      "italian": "Italienisch"
+    }
   }
 }

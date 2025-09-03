@@ -2,7 +2,10 @@
   "general": {
     "more": "More",
     "top_offers": "Top Offers",
-    "show_more": "Show More"
+    "show_more": "Show More",
+    "from": "From",
+    "perGroupUpTo" : "per group up to",
+    "perPerson":"per person"
   },
   "language": {
     "language": "Language",
@@ -14,7 +17,7 @@
     "home": "Home",
     "egypt_excursions": "Egypt Excursions",
     "transfer_services": "Transfer Services",
-    "egypt_diving":"Egypt Diving",
+    "egypt_diving": "Egypt Diving",
     "about_us": "About",
     "contact": "Contact",
     "search": "Search",
@@ -87,7 +90,7 @@
     "PrivacyText": "By signing in or creating an account, you accept our Terms and Conditions and Privacy Policy.",
     "Or": "Or Continue With",
     "HaveAccount": "Already have an account?",
-     "CodeVerifyTitle": "Enter The Code sent To",
+    "CodeVerifyTitle": "Enter The Code sent To",
     "CodeVerifyTitle2": "To Verify your mail",
     "SendCode": "Send Code",
     "fillField": "Please fill this field",
@@ -192,12 +195,12 @@
     "sessionExpired": "Your session has expired. Please log in again.",
     "loginRequired": "Please log in first.",
     "loginNow": "Log in now",
-    "ok":"OK"
+    "ok": "OK"
   },
   "tripDetails": {
     "reviews": "reviews",
     "allReviews": "All Reviews",
-   "pleaseLoginToReview": "Please log in to submit a review",
+    "pleaseLoginToReview": "Please log in to submit a review",
     "reviewSubmittedSuccess": "Thank you for your review!",
     "reviewSubmissionError": "Error submitting the review. Please try again.",
     "reviewsLoadError": "Error loading reviews",
@@ -206,8 +209,8 @@
     "pleaseSelectRating": "Please select a rating",
     "pleaseWriteReview": "Please write a review",
     "addToWishlist": "Add to wishlist",
-    "removeFromWishlist":"remove From Wishlist",
-    "addedToWishlist":"Added to wishlist",
+    "removeFromWishlist": "remove From Wishlist",
+    "addedToWishlist": "Added to wishlist",
     "share": "Share",
     "aboutTrip": "About this trip",
     "bookNowPayLater": "Book now, pay later: Stay flexible - book now and pay later.",
@@ -232,5 +235,32 @@
     "bookNow": "Book now",
     "notRated": "Not Rated Yet",
     "stars": "Star"
+  },
+  "booking": {
+    "title": "Select participants, date, and language",
+    "checkAvailability": "Check availability",
+    "date": {
+      "selectDate": "Select date"
+    },
+    "participants": {
+       "adult": "Adult",
+      "child": "Child",
+      "infant": "Infant",
+      "adultSingle": "Adult x 1",
+      "adults": "Adults x {{count}}",
+      "children": "Children x {{count}}",
+      "infants": "Infants x {{count}}",
+      "mixed": "Adults x {{adults}}, Children x {{children}}, Infants x {{infants}}",
+      "ageRangeAdults": "Age 12-99",
+      "ageRangeChildren": "Age 3-11",
+      "ageRangeInfants": "Age 2 and younger"
+    },
+    "language": {
+      "english": "English",
+      "spanish": "Spanish",
+      "french": "French",
+      "german": "German",
+      "italian": "Italian"
+    }
   }
 }
