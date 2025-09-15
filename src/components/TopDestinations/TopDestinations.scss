@@ -91,7 +91,8 @@
 
       .destination-name {
         color: $light-bg;
-        transform: translateY(-5px);
+        // transform: translateY(-5px);
+        // background-color: rgba(0, 0, 0, 0.7);
       }
 
       .destination-icon {
@@ -144,25 +145,32 @@
       );
       @include flex-column;
       justify-content: flex-end;
-      padding: $spacer-lg;
+      // padding: $spacer-lg;
       transition: $transition-base;
     }
 
     .destination-name {
       color: $light-bg;
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       font-weight: $font-weight-bold;
       margin: 0;
       text-shadow: $text-shadow-lg;
       transition: $transition-base;
       font-family: $font-family-base;
+      background-color: rgba(128, 128, 128, 0.7); // Semi-transparent gray
+      padding: 8px 16px;
+      border-radius: $border-radius-lg;
+      display: inline-block;
+      backdrop-filter: blur(4px); // Optional: adds a nice blur effect to the background
 
       @include media-breakpoint-down(md) {
         font-size: 1.2rem;
+        padding: 6px 12px;
       }
 
       @include media-breakpoint-down(sm) {
         font-size: 1.1rem;
+         padding: 4px 10px;
       }
     }
   }

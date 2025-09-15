@@ -103,11 +103,11 @@ const MainNavbar = () => {
                 )}
               </div>
 
-               {/* EUR Currency Indicator */}
+               {/* EUR Currency Indicator
               <div className="currency-indicator" title="Euro Currency">
                 <FaEuroSign className="eur-icon" />
                 <span className="currency-text">EUR</span>
-              </div>
+              </div> */}
 
               <LanguageDropdown />
 

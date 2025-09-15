@@ -5,9 +5,6 @@ import { FaStar } from "react-icons/fa";
 const CityCard = (slide) => {
   const { t } = useTranslation();
 
-  const shouldShowOriginPrice = slide.trip_origin_price &&
-    slide.trip_origin_price !== slide.trip_sale_price;
-
   const renderStars = (count) => {
     const stars = []
     for (let i = 0; i < 5; i++) {
@@ -24,22 +21,22 @@ const CityCard = (slide) => {
       <Card.Body className="card-body">
         <Card.Title className="card-title">{slide.trip_name}</Card.Title>
         <div className="card-details-grid">
-          <div className="reviews-row">
+          {/* <div className="reviews-row">
             <span className="reviews-text">   </span>
-            {shouldShowOriginPrice && <span className="reviews-text">{t("tripDetails.priceFrom")}</span>}
-          </div>
+            <span className="reviews-text">{t("tripDetails.priceFrom")}</span>
+          </div> */}
           <div className="reviews-row">
             <span className="reviews-text">{slide.total_reviews} {t("tripDetails.reviews")}</span>
-            {shouldShowOriginPrice ? <span className="old-price">
-              {slide.currency_code.toUpperCase() === "EUR" ? "€" : ` ${slide.currency_code}`} {slide.trip_origin_price}
-            </span> :
-              <span className="reviews-text">{t("tripDetails.priceFrom")}</span>}
+            <span className="reviews-text">{t("tripDetails.priceFrom")}</span>
           </div>
           <div className="price-row">
             <div className="star-rating">{renderStars(slide.review_rate)}</div>
-            <span className="new-price">
-              {slide.currency_code.toUpperCase() === "EUR" ? "€" : ` ${slide.currency_code}`} {slide.trip_sale_price}
+             <span className="new-price">
+              <span className="reviews-text">{t("general.from")}</span>  {slide.trip_min_price} {slide.currency_code.toUpperCase() === "EUR" ? "€" : ` ${slide.currency_code}`}
             </span>
+            {/* <span className="new-price">
+              <span className="reviews-text">{t("general.to")}</span> {slide.trip_max_price}  {slide.currency_code.toUpperCase() === "EUR" ? "€" : ` ${slide.currency_code}`}
+            </span> */}
           </div>
         </div>
       </Card.Body>

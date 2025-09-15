@@ -11,39 +11,70 @@ const DestinationTreeDropdown = ({
   basePath 
 }) => {
   const [show, setShow] = useState(false);
-  const timeoutRef = useRef(null);
-  const dropdownRef = useRef(null);
   const [openSubmenus, setOpenSubmenus] = useState({});
-  const menuHoverRef = useRef(false);
+  const dropdownRef = useRef(null);
+  const hoverTimeoutRef = useRef(null);
+  const isHoveringRef = useRef(false);
+  const submenuTimeoutRef = useRef(null);
+  const hoveredItemsRef = useRef(new Set());
+
+  // Clear timeouts on unmount
+  useEffect(() => {
+    return () => {
+      if (hoverTimeoutRef.current) {
+        clearTimeout(hoverTimeoutRef.current);
+      }
+      if (submenuTimeoutRef.current) {
+        clearTimeout(submenuTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleMouseEnter = () => {
-    clearTimeout(timeoutRef.current);
+    isHoveringRef.current = true;
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+    }
     setShow(true);
   };
 
   const handleMouseLeave = () => {
-    // Use a shorter delay for better responsiveness
-    timeoutRef.current = setTimeout(() => {
-      if (!menuHoverRef.current && !dropdownRef.current?.contains(document.activeElement)) {
+    isHoveringRef.current = false;
+    
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+    }
+    
+    hoverTimeoutRef.current = setTimeout(() => {
+      if (!isHoveringRef.current) {
         setShow(false);
         setOpenSubmenus({});
+        hoveredItemsRef.current.clear();
       }
-    }, 50); // Reduced from 150ms to 50ms
+    }, 200); // Delay before closing
   };
 
   const handleMenuEnter = () => {
-    menuHoverRef.current = true;
-    clearTimeout(timeoutRef.current);
+    isHoveringRef.current = true;
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+    }
   };
 
   const handleMenuLeave = () => {
-    menuHoverRef.current = false;
-    timeoutRef.current = setTimeout(() => {
-      if (!dropdownRef.current?.contains(document.activeElement)) {
+    isHoveringRef.current = false;
+    
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+    }
+    
+    hoverTimeoutRef.current = setTimeout(() => {
+      if (!isHoveringRef.current) {
         setShow(false);
         setOpenSubmenus({});
+        hoveredItemsRef.current.clear();
       }
-    }, 50);
+    }, 200); // Delay before closing
   };
 
   const handleItemClick = (e, destination) => {
@@ -58,6 +89,7 @@ const DestinationTreeDropdown = ({
       onLocationClick(destination.route, destination.destination_id || destination.id);
       setShow(false);
       setOpenSubmenus({});
+      hoveredItemsRef.current.clear();
     } else {
       // Toggle submenu for parent items
       setOpenSubmenus(prev => ({
@@ -72,21 +104,59 @@ const DestinationTreeDropdown = ({
     onMainClick();
   };
 
+  const handleItemMouseEnter = (destinationId) => {
+    hoveredItemsRef.current.add(destinationId);
+    
+    if (submenuTimeoutRef.current) {
+      clearTimeout(submenuTimeoutRef.current);
+    }
+    
+    submenuTimeoutRef.current = setTimeout(() => {
+      if (hoveredItemsRef.current.has(destinationId)) {
+        setOpenSubmenus(prev => ({
+          ...prev,
+          [destinationId]: true
+        }));
+      }
+    }, 300);
+  };
+
+  const handleItemMouseLeave = (destinationId) => {
+    hoveredItemsRef.current.delete(destinationId);
+    
+    if (submenuTimeoutRef.current) {
+      clearTimeout(submenuTimeoutRef.current);
+    }
+    
+    submenuTimeoutRef.current = setTimeout(() => {
+      if (!hoveredItemsRef.current.has(destinationId)) {
+        setOpenSubmenus(prev => ({
+          ...prev,
+          [destinationId]: false
+        }));
+      }
+    }, 500);
+  };
+
   const renderDestinationItem = (destination, level = 0) => {
     const hasChildren = destination.children && destination.children.length > 0;
     const isOpen = openSubmenus[destination.destination_id || destination.id];
     const isLeaf = destination.leaf || !hasChildren;
+    const destinationId = destination.destination_id || destination.id;
 
     return (
-      <div key={destination.destination_id || destination.id}>
+      <div key={destinationId}>
         <Dropdown.Item
           className={`d-flex justify-content-between align-items-center ${hasChildren ? 'dropdown-parent' : 'dropdown-leaf'}`}
           style={{ 
             paddingLeft: `${15 + (level * 20)}px`,
             backgroundColor: level > 0 ? '#f8f9fa' : 'transparent',
-            cursor: isLeaf ? 'pointer' : 'default'
+            cursor: isLeaf ? 'pointer' : 'default',
+            minWidth: '220px'
           }}
           onClick={(e) => handleItemClick(e, destination)}
+          onMouseEnter={() => hasChildren && handleItemMouseEnter(destinationId)}
+          onMouseLeave={() => hasChildren && handleItemMouseLeave(destinationId)}
         >
           <span>{destination.dest_name}</span>
           {hasChildren && (
@@ -98,19 +168,17 @@ const DestinationTreeDropdown = ({
         </Dropdown.Item>
         
         {hasChildren && isOpen && (
-          <div className="dropdown-submenu">
+          <div 
+            className="dropdown-submenu"
+            onMouseEnter={() => handleItemMouseEnter(destinationId)}
+            onMouseLeave={() => handleItemMouseLeave(destinationId)}
+          >
             {destination.children.map(child => renderDestinationItem(child, level + 1))}
           </div>
         )}
       </div>
     );
   };
-
-  useEffect(() => {
-    return () => {
-      clearTimeout(timeoutRef.current);
-    };
-  }, []);
 
   return (
     <div
@@ -119,7 +187,7 @@ const DestinationTreeDropdown = ({
       onMouseLeave={handleMouseLeave}
       ref={dropdownRef}
     >
-      <Dropdown show={show} onToggle={() => { }} className="nav-dropdown">
+      <Dropdown show={show} onToggle={() => {}} className="nav-dropdown">
         <Dropdown.Toggle
           as="a"
           className="nav-item dropdown-toggle"

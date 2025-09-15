@@ -3,9 +3,11 @@
     "more": "Mehr",
     "top_offers": "Top Angebote",
     "show_more": "Mehr anzeigen",
+    "show_less": "Weniger anzeigen",
     "from": "Ab",
+    "to": "bis zu",
     "perGroupUpTo": "pro Gruppe bis zu",
-    "perPerson":"pro person"
+    "perPerson": "pro person"
   },
   "language": {
     "language": "Sprache",
@@ -15,11 +17,11 @@
   "main_navbar": {
     "travel": "Reisen",
     "home": "Startseite",
-    "egypt_excursions": "Ägypten Ausflüge",
-    "transfer_services": "Transfer Services",
-    "egypt_diving": "Ägypten Tauchen",
-    "about_us": "Über",
-    "contact": "Kontakt",
+    "egypt_excursions": "Ausflüge",
+    "transfer_services": "Transfers",
+    "egypt_diving": "Tauchen",
+    "about_us": "Über Uns",
+    "contact": "Kontakt Uns",
     "search": "Suche",
     "search_placeholder": "Suchen...",
     "wishlist": "Wunschliste",
@@ -237,8 +239,14 @@
     "stars": "Stern"
   },
   "booking": {
-    "title": "Teilnehmer, Datum und Sprache auswählen",
+    "availabilityError": "Verfügbarkeitsprüfung fehlgeschlagen. Bitte versuchen Sie es erneut.",
+    "availabilitySuccess": "Verfügbarkeit erfolgreich geprüft!",
+    "dateRequired": "Bitte wählen Sie ein Datum für Ihre Buchung aus.",
+    "checkingAvailability": "Verfügbarkeit wird geprüft...",
+    "title": "Teilnehmer und Datum auswählen",
     "checkAvailability": "Verfügbarkeit prüfen",
+    "maxCapacityExceeded": "Bitte wählen Sie maximal {{maxCapacity}} Teilnehmer für diese Aktivität.",
+    "invalidDate": "Bitte wählen Sie ein Datum, das mindestens {{releaseDays}} Tage ab heute liegt.",
     "date": {
       "selectDate": "Datum auswählen"
     },
@@ -261,6 +269,89 @@
       "french": "Französisch",
       "german": "Deutsch",
       "italian": "Italienisch"
+    }
+  },
+  "bookings": {
+    "adults": "Erwachsene",
+    "children": "Kinder",
+    "infants": "Säuglinge",
+    "resevePay": "Jetzt reservieren & später bezahlen",
+    "steps": {
+      "pickup": "Abholung",
+      "agreement": "Vereinbarung",
+      "contact": "Kontakt",
+      "payment": "Zahlung",
+      "confirm": "Bestätigung"
+    },
+    "pickup": {
+      "addPickUp": "Wissen Sie, wo Sie abgeholt werden möchten?",
+      "canAddNow": "Ja, ich kann es jetzt hinzufügen",
+      "dontKnow": "Ich weiß es noch nicht",
+      "addExtras": "Möchten Sie Extras hinzufügen?",
+      "adultsOnly": "Nur für Erwachsene",
+      "continue": "Weiter",
+      "nextBtn": "Weiter: Persönliche Daten",
+      "selectLocation": "Abholort auf der Karte auswählen",
+      "searchPlaceholder": "Nach Hotel, Adresse usw. suchen",
+      "confirmLocation": "Ort bestätigen",
+      "locationInstructions": "Bitte geben Sie den Namen oder die Adresse des Ortes ein oder klicken Sie auf einen Punkt innerhalb des markierten Bereichs, um einen Ort auszuwählen."
+    },
+    "agreement": {
+      "title": "Tauchvereinbarung",
+      "confirm": "Ich habe die Tauchvereinbarung gelesen und stimme den Bedingungen zu",
+      "continueButton": "Weiter zu Kontaktdetails"
+    },
+    "contact": {
+      "title": "Geben Sie Ihre persönlichen Daten ein",
+      "requiredFields": "Pflichtfelder*",
+      "fullNamePlaceholder": "Vollständiger Name*",
+      "emailPlaceholder": "E-Mail*",
+      "phonePlaceholder": "Handynummer*",
+      "notesLabel": "Zusätzliche Hinweise",
+      "notesPlaceholder": "Besondere Wünsche oder zusätzliche Informationen...",
+      "confirmButton": "Buchung bestätigen",
+      "disclaimer": "Wir kontaktieren Sie bei wichtigen Updates oder Änderungen Ihrer Buchung",
+      "nextButton": "Weiter: Zur Zahlung",
+      "bookingConfirmed": "Buchung erfolgreich bestätigt!",
+      "bookingConfirmationFailed": "Buchungsbestätigung fehlgeschlagen",
+      "processing": "Wird verarbeitet...",
+      "saveError": "Kontaktinformationen konnten nicht gespeichert werden",
+      "errors": {
+        "required": "Dieses Feld ist erforderlich",
+        "invalidEmail": "Ungültiges E-Mail-Format"
+      }
+    },
+    "payment": {
+      "title": "Wählen Sie Ihre Zahlungsmethode",
+      "countryOfBank": "Bankland",
+      "iban": "IBAN",
+      "swift": "SWIFT/BIC",
+      "beneficiaryName": "Name des Begünstigten",
+      "selectBeneficiary": "Begünstigten auswählen",
+      "disclaimer": "Sie erhalten eine Bestätigungs-E-Mail für die Zahlung",
+      "checkoutWith": "Bezahlen mit",
+      "payNow": "Jetzt bezahlen",
+      "countries": {
+        "egypt": "Ägypten",
+        "unitedStates": "Vereinigte Staaten",
+        "unitedKingdom": "Vereinigtes Königreich",
+        "germany": "Deutschland",
+        "france": "Frankreich"
+      }
+    },
+    "confirmation": {
+      "title": "Ihre Buchung für die Reise wurde bestätigt",
+      "subtitle": "Bitte überprüfen Sie Ihre E-Mail für weitere Details",
+      "bookAnother": "Weitere Reise buchen"
+    },
+    "orderSummary": {
+      "title": "Bestellübersicht",
+      "total": "Gesamt"
+    },
+    "giftCode": {
+      "enterCode": "Gutschein- oder Geschenkcode eingeben",
+      "redeem": "Einlösen",
+      "placeholder": "Code eingeben"
     }
   }
 }

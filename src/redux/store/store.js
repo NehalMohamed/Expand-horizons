@@ -8,6 +8,11 @@ import tripsReducer from "../Slices/tripsSlice";
 import reviewReducer from '../Slices/reviewSlice';
 import wishListReducer from '../Slices/wishlistSlice';
 import tripDetailsReducer from "../Slices/tripDetailsSlice";
+import bookingReducer from "../Slices/bookingSlice";
+import extrasReducer from '../Slices/extrasSlice';
+import bookingSummaryReducer from '../Slices/bookingSummarySlice';
+import confirmBookingReducer from '../Slices/confirmSlice';
+import priceCalculationReducer from '../Slices/priceCalculationSlice';
 import { authMiddleware } from '../../middleware/authMiddleware';
 
 export const store = configureStore({
@@ -20,7 +25,12 @@ export const store = configureStore({
     trips:tripsReducer,
     reviews: reviewReducer,
     wishlist: wishListReducer,
-    tripDetails: tripDetailsReducer
+    tripDetails: tripDetailsReducer,
+    booking: bookingReducer,
+    extras: extrasReducer,
+    bookingSummary: bookingSummaryReducer,
+    confirmBooking:confirmBookingReducer,
+    priceCalculation: priceCalculationReducer
   },
   middleware: (getDefaultMiddleware) =>
   getDefaultMiddleware().concat(authMiddleware),

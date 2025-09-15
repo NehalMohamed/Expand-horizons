@@ -73,7 +73,7 @@ const TripDetailsPage = () => {
     <>
       <Gallery tripData={tripData} refreshTripDetails={refreshTripDetails} />
       <BookingInfo tripData={tripData} />
-      <BookingSelection />
+      <BookingSelection tripData={tripData} />
       <FlightItinerary tripData={tripData} />
       <Reviews tripData={tripData} refreshTripDetails={refreshTripDetails} />
       <TourDetails tripData={tripData} />

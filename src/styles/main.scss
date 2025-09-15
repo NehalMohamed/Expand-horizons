@@ -31,6 +31,14 @@
 @import "../components/FlightItinerary/FlightItinerary.scss";
 @import "../components/Reviews/Reviews.scss";
 @import "../components/BookingSelection/BookingSelection.scss";
+@import "../components/BookingSteps/ContactStep/ContactStep.scss";
+@import "../components/BookingSteps/PaymentStep/PaymentStep.scss";
+@import "../components/BookingSteps/PickupStep/PickupStep.scss";
+@import "../components/OrderSummary/OrderSummary.scss";
+@import "../components/StepIndicator/StepIndicator.scss";
+@import "../components/Shared/BookingModal.scss";
+@import "../components/BookingSteps/AgreementStep/AgreementStep.scss";
+
 
 // Global styles
 body {
@@ -128,4 +136,24 @@ input:-internal-autofill-selected {
   div {
     margin: 20px 0;
   }
+}
+
+// Map
+.geoapify-autocomplete-items{
+  position: relative !important;
+  z-index: 9999999999 !important;
+}
+
+.geoapify-close-button {
+    position: relative !important;
+    margin-left: 8px !important;
+}
+.geoapify-close-button.visible {
+    display: inline-block !important;
+}
+
+.geoapify-autocomplete-input {
+    padding: 25px 31px 25px 7px !important;
+    border: 1px solid #eee !important;
+    border-radius: 8px !important;
 }

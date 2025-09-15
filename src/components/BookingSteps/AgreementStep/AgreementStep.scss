@@ -1,0 +1,103 @@
+.agreement-step {
+  padding: 0.75rem 3rem;
+  background: transparent;
+  max-width: 550px;
+
+  .agreement-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: $primary-color;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  .agreement-content {
+    .agreement-text {
+      background: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      max-height: 300px;
+      overflow-y: auto;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      
+      .diving-agreement {
+        h3 {
+          font-size: 1.1rem;
+          margin-bottom: 1rem;
+          color: #333;
+        }
+        
+        p {
+          margin-bottom: 0.8rem;
+        }
+        
+        ul {
+          padding-left: 1.5rem;
+          margin-bottom: 0.8rem;
+          
+          li {
+            margin-bottom: 0.4rem;
+          }
+        }
+      }
+    }
+
+    .agreement-checkbox {
+      margin-bottom: 1.5rem;
+      
+      .form-check-input {
+        margin-right: 0.5rem;
+      }
+      
+      .form-check-label {
+        font-weight: 500;
+      }
+      
+      .text-danger {
+        color: #dc3545 !important;
+      }
+    }
+
+    .agreement-button {
+      width: 100%;
+      background: $primary-color;
+      color: white;
+      border: none;
+      padding: 0.875rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover:not(:disabled) {
+        background-color: darken($primary-color, 10%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba($primary-color, 0.3);
+      }
+
+      &:disabled {
+        background-color: #6c757d;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    padding: 0.75rem 1.5rem;
+    
+    .agreement-title {
+      font-size: 1.25rem;
+    }
+    
+    .agreement-content {
+      .agreement-text {
+        padding: 1rem;
+        max-height: 250px;
+      }
+    }
+  }
+}

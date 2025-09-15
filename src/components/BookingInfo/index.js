@@ -17,6 +17,7 @@ const BookingInfo = ({ tripData }) => {
           <h2 className="section-title">{t("tripDetails.aboutTrip")}</h2>
           
           <div className="info-items">
+
             <div className="info-item">
               <div className="info-icon">
                 <IoCalendarOutline size={24} />
@@ -28,6 +29,17 @@ const BookingInfo = ({ tripData }) => {
                 <p className="info-subtext">{t("tripDetails.duration")} "{tripData?.trip_duration || 0}"</p>
               </div>
             </div>
+
+            {tripData?.cancelation_policy && <div className="info-item">
+              <div className="info-icon">
+                <IoCalendarOutline size={24} />
+              </div>
+              <div className="info-content">
+                <p className="info-text">
+                 {tripData?.cancelation_policy}
+                </p>
+              </div>
+            </div> }
             
             <div className="info-item">
               <div className="info-icon">

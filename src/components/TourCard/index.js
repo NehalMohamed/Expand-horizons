@@ -11,18 +11,32 @@ const TourCard = ({ trip }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const currentLang = useSelector((state) => state.language.currentLang) || "en";
+  const [showFullDescription, setShowFullDescription] = useState(false);
+  const [needsTruncation, setNeedsTruncation] = useState(false);
+
+  // Check if description needs truncation
+  useEffect(() => {
+    if (trip?.trip_description && trip.trip_description.length > 70) {
+      setNeedsTruncation(true);
+    }
+  }, [trip?.trip_description]);
+
+  // Get truncated text
+  const truncatedText = needsTruncation
+    ? trip?.trip_description?.slice(0, 70) + '...'
+    : trip?.trip_description;
 
   const handleWishlistToggle = (e) => {
     e.stopPropagation();
     const user = JSON.parse(localStorage.getItem("user"));
 
     const wishlistData = {
-      id: trip.wish_id,
-      trip_id: trip.trip_id,
+      id: trip?.wish_id,
+      trip_id: trip?.trip_id,
       client_id: user ? user.id : 0,
       created_at: null,
       trip_type: trip?.trip_type,
-      delete: trip.isfavourite // true to remove, false to add
+      delete: trip?.isfavourite // true to remove, false to add
     };
     dispatch(addToWishlist(wishlistData));
   };
@@ -30,75 +44,62 @@ const TourCard = ({ trip }) => {
   const handleCardClick = () => {
     navigate(`/trip/${trip.route}`, {
       state: {
-        tripId: trip.trip_id,
-        trip_type: trip.trip_type
+        tripId: trip?.trip_id,
+        trip_type: trip?.trip_type
       }
     });
   };
 
   // Function to format price display based on trip type
   const renderPrice = () => {
-    const currencySymbol = trip.currency_code.toUpperCase() === "EUR" ? "€" : trip.currency_code;
+    const currencySymbol = trip?.currency_code.toUpperCase() === "EUR" ? "€" : trip?.currency_code;
 
-    if (trip.trip_type === 2) {
-      // For trip type 2, show price range based on capacity
-      return (
-        <div className="price-section">
-          <div className="price-range">
-            <span className="price-label">{t("general.from")}</span>
-           
-            {/* <span className="price-suffix">p.P.</span> */}
-          </div>
-          <div className="capacity-info">
-             <span className="price">
-              {currencySymbol} {trip.min_price} 
-            </span>
-            {trip.max_capacity ? (
-              <span className="capacity-text">
-                <code>&nbsp;</code>{t("general.perGroupUpTo")} {trip.max_capacity}
-              </span>
-            ) : null}
-          </div>
+    return (
+      <div className="price-section">
+        <div className="price-range">
+          <span className="price-label">{t("general.from")}   <span className="price"> {trip?.trip_min_price} {currencySymbol}</span> </span>
         </div>
-      );
-    } else {
-      // For trip types 1 and 3, show standard pricing
-      return (
-        <div className="price-section">
-          <div className="price-range">
-            <span className="price-label">{t("general.from")}</span>
-          </div>
-          <div>
-            <span className="price">
-              {currencySymbol} {trip.trip_origin_price}
-            </span>
-            <span className="price-suffix">{t("general.perPerson")}</span>
-          </div>
-
-        </div>
-      );
-    }
+        {/* <div className="price-range">
+          <span className="price-label">{t("general.to")}  <span className="price"> {trip?.trip_max_price} {currencySymbol}</span> </span>
+        </div> */}
+      </div>
+    );
   };
 
   return (
     <Card className="tour-card h-100">
       <div className="card-img-container">
-        <Card.Img variant="top" src={trip.default_img} alt={trip.trip_name} />
+        <Card.Img variant="top" src={trip?.default_img} alt={trip?.trip_name} />
         <button
-          className={`wishlist-heart ${trip.isfavourite ? "liked" : ""}`}
+          className={`wishlist-heart ${trip?.isfavourite ? "liked" : ""}`}
           onClick={handleWishlistToggle}
-          aria-label={trip.isfavourite ? t("tripDetails.removeFromWishlist") : t("tripDetails.addToWishlist")}
+          aria-label={trip?.isfavourite ? t("tripDetails.removeFromWishlist") : t("tripDetails.addToWishlist")}
         >
           <FaHeart />
         </button>
       </div>
 
       <Card.Body className="card-content">
-        <Card.Title className="tour-title">{trip.trip_name}</Card.Title>
-        <Card.Text className="tour-description">{trip.trip_description}</Card.Text>
+        <Card.Title className="tour-title">{trip?.trip_name}</Card.Title>
+
+        {/* Description with truncation */}
+        <Card.Text className="tour-description">
+          {showFullDescription ? trip?.trip_description : truncatedText}
+          {needsTruncation && (
+            <button
+              className="show-more-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowFullDescription(!showFullDescription);
+              }}
+            >
+              {showFullDescription ? t("general.show_less") : t("general.show_more")}
+            </button>
+          )}
+        </Card.Text>
 
         <ul className="feature-list flex-grow-1">
-          {trip.facilities?.map((facility, index) => (
+          {trip?.facilities?.map((facility, index) => (
             <li key={index} className="feature-item">
               <FaCheck className="check-icon" />
               <span>{facility.facility_name}</span>

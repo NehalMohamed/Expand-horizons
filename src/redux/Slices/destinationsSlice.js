@@ -23,7 +23,8 @@ export const fetchDestinations = createAsyncThunk(
         {
           lang_code: lang_code,
           currency_code: "EUR",
-          country_code: ""
+          country_code: "",
+          leaf: true
         },
         getAuthHeaders()
       );

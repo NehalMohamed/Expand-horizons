@@ -12,15 +12,20 @@ import ComingSoon from "./components/ComingSoon";
 import Excursions from "./pages/ExcursionsPage";
 import DivingPage from "./pages/DivingPage";
 import TransfersPage from "./pages/TransfersPage";
+import BookingPage from "./pages/BookingPage";
 import DestinationExcursionsPage from "./pages/DestinationExcursionsPage";
 import TripDetailsPage from "./pages/TripDetailsPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-popup-alert/dist/index.css";
 import "react-datepicker/dist/react-datepicker.css";
+import 'leaflet/dist/leaflet.css';
+import '@geoapify/geocoder-autocomplete/styles/minimal.css';
+import 'react-phone-number-input/style.css';
 import "./styles/main.scss";
 import OTPInput from "./components/AuthComp/OTP/OTPInput";
 import { useAuthModal } from './components/AuthComp/AuthModal';
 import { setAuthModalFunction } from './utils/showAlert';
+import './leafletIconsFix';
 
 function App() {
   const { openAuthModal } = useAuthModal();
@@ -49,6 +54,7 @@ function App() {
             <Route path="/transfers" element={<TransfersPage />} />
             <Route path="/transfers/:location" element={<DestinationExcursionsPage />} />
             <Route path="/trip/:tripName" element={<TripDetailsPage />} />
+            <Route path="/checkout" element={<BookingPage />} />
         
 
             <Route path="/ComingSoon" element={<ComingSoon />} />

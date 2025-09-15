@@ -3,7 +3,9 @@
     "more": "More",
     "top_offers": "Top Offers",
     "show_more": "Show More",
+    "show_less": "Show Less",
     "from": "From",
+    "to":"UP To",
     "perGroupUpTo" : "per group up to",
     "perPerson":"per person"
   },
@@ -15,11 +17,11 @@
   "main_navbar": {
     "travel": "Travel",
     "home": "Home",
-    "egypt_excursions": "Egypt Excursions",
-    "transfer_services": "Transfer Services",
-    "egypt_diving": "Egypt Diving",
-    "about_us": "About",
-    "contact": "Contact",
+    "egypt_excursions": "Excursions",
+    "transfer_services": "Transfers",
+    "egypt_diving": "Diving",
+    "about_us": "About Us",
+    "contact": "Contact Us",
     "search": "Search",
     "search_placeholder": "Search...",
     "wishlist": "Wishlist",
@@ -237,8 +239,14 @@
     "stars": "Star"
   },
   "booking": {
-    "title": "Select participants, date, and language",
+    "availabilityError": "Failed to check availability. Please try again.",
+    "availabilitySuccess": "Availability checked successfully!",
+    "dateRequired": "Please select a date for your booking.",
+    "checkingAvailability": "Checking availability...",
+    "title": "Select participants and date",
     "checkAvailability": "Check availability",
+    "maxCapacityExceeded": "Please select {{maxCapacity}} participants or fewer for this activity.",
+    "invalidDate": "Please select a date at least {{releaseDays}} days from today.",
     "date": {
       "selectDate": "Select date"
     },
@@ -261,6 +269,89 @@
       "french": "French",
       "german": "German",
       "italian": "Italian"
+    }
+  },
+  "bookings": {
+    "adults": "adults",
+    "children": "children",
+    "infants": "infants",
+    "resevePay":"Reserve now & pay later",
+    "steps": {
+      "pickup": "Pickup",
+      "contact": "Contact", 
+      "agreement": "Agreement",
+      "payment": "Payment",
+      "confirm": "Confirm"
+    },
+    "pickup": {
+      "addPickUp": "Do You Know where you want to be picked up?",
+      "canAddNow": "Yes, I can add it now",
+      "dontKnow": "I don't know yet",
+      "addExtras": "Do You want to add any extra?",
+      "adultsOnly": "adults only",
+      "continue": "Continue",
+      "nextBtn": "Next : Personal details",
+      "selectLocation": "Select Pickup Location on Map",
+      "searchPlaceholder": "Search for hotel, address, etc.",
+      "confirmLocation": "Confirm Location",
+      "locationInstructions": "Please enter the location's name or address, or click on a spot within the highlighted area to select a location."
+    },
+    "agreement": {
+      "title": "Diving Agreement",
+      "confirm": "I have read and agree to the diving agreement terms",
+      "continueButton": "Continue to Contact Details"
+    },
+    "contact": {
+      "title": "Enter your personal details",
+      "requiredFields": "Required fields*",
+      "fullNamePlaceholder": "Full name*",
+      "emailPlaceholder": "Email*",
+      "phonePlaceholder": "Mobile phone number*",
+      "notesLabel": "Additional Notes",
+      "notesPlaceholder": "Any special requests or additional information...",
+      "confirmButton":"Confirm Booking",
+      "disclaimer": "We'll contact you with essential updates or changes to your booking",
+      "nextButton": "Next : Go to payment",
+      "bookingConfirmed": "Booking confirmed successfully!",
+      "bookingConfirmationFailed": "Booking confirmation failed",
+      "processing": "Processing...",
+      "saveError": "Failed to save contact information",
+      "errors": {
+        "required": "This field is required",
+        "invalidEmail": "Invalid email format"
+      }
+    },
+    "payment": {
+      "title": "Choose your payment method",
+      "countryOfBank": "Country of bank",
+      "iban": "IBAN",
+      "swift": "SWIFT/BIC",
+      "beneficiaryName": "Beneficiary name",
+      "selectBeneficiary": "Select beneficiary",
+      "disclaimer": "You will receive a confirmation email for payment",
+      "checkoutWith": "Check Out with",
+      "payNow": "Pay Now",
+      "countries": {
+        "egypt": "Egypt",
+        "unitedStates": "United States",
+        "unitedKingdom": "United Kingdom",
+        "germany": "Germany",
+        "france": "France"
+      }
+    },
+    "confirmation": {
+      "title": "Your Booking for The trip has been confirmed",
+      "subtitle": "Please Check your E-mail for more details",
+      "bookAnother": "Book Another Trip"
+    },
+    "orderSummary": {
+      "title": "Order Summary",
+      "total": "Total"
+    },
+    "giftCode": {
+      "enterCode": "Enter promo or gift code",
+      "redeem": "Redeem",
+      "placeholder": "Enter code"
     }
   }
 }
