@@ -1,0 +1,230 @@
+.profile-page {
+  background-color: $light-bg;
+  min-height: 100vh;
+  padding: 40px 0;
+
+  @include media-breakpoint-down(md) {
+    padding: 20px 0;
+  }
+
+  .container {
+    @include container-padding;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+// Profile Card Base
+.profile-card {
+  @include card-style;
+  margin-bottom: 20px;
+
+  @include media-breakpoint-down(md) {
+    margin-bottom: 15px;
+  }
+
+  .card-body {
+    padding: 30px;
+
+    @include media-breakpoint-down(md) {
+      padding: 20px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      padding: 15px;
+    }
+
+    @include media-breakpoint-down(xs) {
+      padding: 15px 10px;
+    }
+  }
+}
+
+// Profile Content
+.profile-content {
+  h2 {
+    @include heading-responsive(2);
+  }
+
+  h3 {
+    @include heading-responsive(3);
+    margin-top: 25px;
+    font-weight: 600;
+    border-bottom: 1px solid $gray-light;
+    padding-bottom: 10px;
+
+    @include media-breakpoint-down(sm) {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+    
+    @include media-breakpoint-down(xs) {
+      font-size: 16px;
+    }
+  }
+
+  .form-control {
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    padding: 12px 15px;
+    font-size: 14px;
+    @include transition(border-color 0.3s ease, box-shadow 0.3s ease);
+
+    @include media-breakpoint-down(sm) {
+      padding: 10px 12px;
+      font-size: 16px;
+      height: 44px;
+    }
+
+    &:focus {
+      @include form-control-focus($primary-color);
+    }
+
+    &::placeholder {
+      color: $gray-color;
+    }
+  }
+
+  .form-select {
+    @extend .form-control;
+
+     @include media-breakpoint-down(sm) {
+      font-size: 16px;
+      height: 44px;
+    }
+  }
+
+  .primaryBtn {
+    border-radius: 25px;
+    @include transition(all 0.3s ease);
+    
+    @include media-breakpoint-down(md) {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      height: 44px;
+    }
+
+    @include media-breakpoint-up(md) {
+      min-width: 120px;
+      padding: 10px 20px;
+    }
+  }
+}
+
+// Phone Input Styles
+.phone-input-container {
+  .PhoneInput {
+    .PhoneInputInput {
+      border: 1px solid $border-color;
+      border-radius: $border-radius;
+      padding: 12px 15px;
+      font-size: 14px;
+      width: 100%;
+      @include transition(border-color 0.3s ease, box-shadow 0.3s ease);
+
+      @include media-breakpoint-down(sm) {
+        padding: 10px 12px;
+        font-size: 16px;
+        height: 44px;
+      }
+
+      &:focus {
+        @include form-control-focus($primary-color);
+      }
+    }
+
+    .PhoneInputCountrySelect {
+      border: none;
+      margin-right: 8px;
+
+      @include media-breakpoint-down(sm) {
+        margin-right: 5px;
+        min-width: 60px;
+      }
+    }
+  }
+}
+  
+// Responsive layout adjustments
+.profile-tab {
+  .row {
+    @include media-breakpoint-down(md) {
+      margin-left: -10px;
+      margin-right: -10px;
+    }
+  }
+  
+  .col-md-6, .col-md-4, .col-xs-12 {
+    @include media-breakpoint-down(md) {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+}
+
+// Enhanced responsive inputs
+.responsive-input,
+.responsive-select {
+  @include media-breakpoint-down(sm) {
+    font-size: 16px;
+    height: 44px;
+    padding: 10px 12px;
+  }
+}
+
+// Phone input responsive fixes
+.responsive-phone-input {
+  .PhoneInput {
+    @include media-breakpoint-down(sm) {
+      .PhoneInputInput {
+        font-size: 16px;
+        height: 44px;
+        padding: 10px 12px;
+      }
+      
+      .PhoneInputCountrySelect {
+        min-width: 60px;
+      }
+    }
+  }
+}
+
+// Form group spacing improvements
+.form-group {
+  @include media-breakpoint-down(sm) {
+    margin-bottom: 15px;
+  }
+}
+
+// Date of birth specific responsive styles
+.dob-row {
+  .col-md-4 {
+    @include media-breakpoint-down(sm) {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+// Landscape mobile optimization
+@media (max-height: 600px) and (orientation: landscape) {
+  .profile-tab {
+    .card-body {
+      padding: 15px 10px;
+    }
+    
+    h3 {
+      margin-top: 15px;
+      padding-bottom: 5px;
+    }
+  }
+}
+
+// Very large screens optimization
+@include media-breakpoint-up(xxl) {
+  .profile-card {
+    .card-body {
+      padding: 40px;
+    }
+  }
+}

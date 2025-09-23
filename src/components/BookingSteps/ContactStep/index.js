@@ -143,11 +143,11 @@ const ContactStep = ({ onNext, tripData, availabilityData }) => {
         }
     };
 
-    useEffect(() => {
-        if (confirmed) {
-            setShowBookingModal(true);
-        }
-    }, [confirmed, t]);
+    // useEffect(() => {
+    //     if (confirmed) {
+    //         setShowBookingModal(true);
+    //     }
+    // }, [confirmed, t]);
 
     // Show error popup if there's a confirmation error
     useEffect(() => {

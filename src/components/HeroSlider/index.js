@@ -56,12 +56,21 @@ const HeroSlider = () => {
   };
 
   const handleCardClick = (slide) => {
-    navigate(`/trip/${slide.route}`, {
-      state: { 
-        tripId: slide.trip_id,
-        trip_type: slide.trip_type
-      }
-    });
+    if (!trip.is_comm_soon) {
+      navigate(`/trip/${slide.route}`, {
+        state: {
+          tripId: slide.trip_id,
+          trip_type: slide.trip_type
+        }
+      });
+    } else {
+      navigate('/trip/ComingSoon', {
+        state: {
+          tripId: slide.trip_id,
+          trip_type: slide.trip_type
+        }
+      });
+    }
   };
 
   if (loading) return <div>Loading...</div>;

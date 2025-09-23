@@ -42,7 +42,7 @@ const ProfileDropdown = () => {
                             <strong>{user.firstName+' '+user.lastName}</strong>
                         </div>
                         <Dropdown.Divider />
-                        <Dropdown.Item href="/ComingSoon">
+                        <Dropdown.Item href="/profile">
                             <FaUserCircle className="me-2" />
                             {t('main_navbar.my_profile')}
                         </Dropdown.Item>

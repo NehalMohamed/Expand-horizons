@@ -13,8 +13,11 @@ import Excursions from "./pages/ExcursionsPage";
 import DivingPage from "./pages/DivingPage";
 import TransfersPage from "./pages/TransfersPage";
 import BookingPage from "./pages/BookingPage";
+import BookingsListPage from "./pages/BookingsListPage";
 import DestinationExcursionsPage from "./pages/DestinationExcursionsPage";
 import TripDetailsPage from "./pages/TripDetailsPage";
+import TripSoonPage from "./pages/TripSoonPage";
+import ProfilePage from "./pages/ProfilePage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-popup-alert/dist/index.css";
 import "react-datepicker/dist/react-datepicker.css";
@@ -54,7 +57,10 @@ function App() {
             <Route path="/transfers" element={<TransfersPage />} />
             <Route path="/transfers/:location" element={<DestinationExcursionsPage />} />
             <Route path="/trip/:tripName" element={<TripDetailsPage />} />
+            <Route path="/trip/ComingSoon" element={<TripSoonPage />} />
             <Route path="/checkout" element={<BookingPage />} />
+            <Route path="/cart" element={<BookingsListPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
         
 
             <Route path="/ComingSoon" element={<ComingSoon />} />

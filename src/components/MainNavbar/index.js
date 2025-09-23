@@ -10,10 +10,12 @@ import TransfersDropdown from "../Dropdowns/TransfersDropdown";
 import DivingDropdown from "../Dropdowns/DivingDropdown";
 import ProfileDropdown from "../Dropdowns/ProfileDropdown";
 import { fetchWishlistCount } from "../../redux/Slices/wishlistSlice";
+import { fetchBookingCount } from "../../redux/Slices/bookingListSlice";
 
 const MainNavbar = () => {
   const [showSearch, setShowSearch] = useState(false);
-   const wishlistCount = useSelector((state) => state.wishlist.count); // Get count from state
+   const wishlistCount = useSelector((state) => state.wishlist.count);
+   const bookingCount = useSelector((state) => state.bookingList.count);
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -24,10 +26,16 @@ const MainNavbar = () => {
     const client_id = user?.id || "";
     // Fetch wishlist count when component mounts
     dispatch(fetchWishlistCount(client_id));
+    // Fetch booking count when component mounts
+    dispatch(fetchBookingCount(client_id));
   }, [dispatch, user]);
 
   const handleWishlistClick = () => {
     navigate("/Wishlist");
+  };
+
+  const handleBookingClick = () => {
+    navigate("/cart");
   };
 
   return (
@@ -125,10 +133,10 @@ const MainNavbar = () => {
               <button 
               className="icon-btn basket-btn" 
               aria-label="shopping_basket"
-              onClick ={() => navigate("/ComingSoon")}
+              onClick={handleBookingClick}
               >
                 <FaShoppingBasket />
-                {/* <span className="badge">2</span> */}
+                {bookingCount > 0 && <span className="badge">{bookingCount}</span>}
               </button>
 
               <ProfileDropdown />

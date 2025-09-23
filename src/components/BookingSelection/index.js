@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Button, Dropdown } from 'react-bootstrap';
+import { Container, Row, Col, Button, Dropdown, Form } from 'react-bootstrap';
 import { FaCalendarAlt, FaUsers, FaMinus, FaPlus, FaChevronDown } from 'react-icons/fa';
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +14,8 @@ const BookingSelection = ({ tripData }) => {
     const { t } = useTranslation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const maxAge = tripData?.max_child_age || 0;
+    const hasChildOption = tripData?.max_child_age !== null;
 
     const { loading, error, success, availabilityData } = useSelector((state) => state.booking);
     const { loading: calculationLoading, error: calculationError, success: calculationSuccess } = useSelector((state) => state.priceCalculation);
@@ -24,13 +26,14 @@ const BookingSelection = ({ tripData }) => {
 
     const [participants, setParticipants] = useState({
         adults: 1,
-        children: 0,
-        infants: 0
+        children: 0
     });
+    const [childAges, setChildAges] = useState([]);
     const [selectedDate, setSelectedDate] = useState(null);
     //  const [selectedLanguage, setSelectedLanguage] = useState(t('booking.language.english'));
     const [showParticipants, setShowParticipants] = useState(false);
-    
+    const [ageValidationErrors, setAgeValidationErrors] = useState([]);
+
     // Calculate the minimum selectable date (today + release_days)
     const minDate = new Date();
     if (tripData?.release_days) {
@@ -38,10 +41,30 @@ const BookingSelection = ({ tripData }) => {
     }
 
     // Calculate total participants
-    const totalParticipants = participants.adults + participants.children + participants.infants;
-    
+    const totalParticipants = participants.adults + participants.children;
+
     // Check if participants exceed max capacity
     const exceedsMaxCapacity = tripData?.trip_max_capacity && totalParticipants > parseInt(tripData.trip_max_capacity);
+
+    useEffect(() => {
+        dispatch(resetBookingOperation());
+        dispatch(resetCalculation());
+    }, [dispatch]);
+
+    // Update childAges array when number of children changes
+    useEffect(() => {
+        if (participants.children > childAges.length) {
+            // Add new empty age fields
+            const newAges = [...childAges];
+            while (newAges.length < participants.children) {
+                newAges.push('');
+            }
+            setChildAges(newAges);
+        } else if (participants.children < childAges.length) {
+            // Remove extra age fields
+            setChildAges(childAges.slice(0, participants.children));
+        }
+    }, [participants.children]);
 
     // Handle API errors and success
     useEffect(() => {
@@ -55,25 +78,17 @@ const BookingSelection = ({ tripData }) => {
             setPopupType('error');
             setShowPopup(true);
             dispatch(resetCalculation());
-        } else if (success && availabilityData && calculationSuccess) {
-            // Navigate to checkout after successful price calculation
-            navigate("/checkout", {
-                state: {
-                    availabilityData: availabilityData,
-                    trip: tripData
-                }
-            });
         }
-    }, [error, calculationError, success, availabilityData, calculationSuccess, t, dispatch, navigate]);
+    }, [error, calculationError, t, dispatch]);
 
     const handleParticipantChange = (type, action) => {
         // Calculate what the new total would be
-        const newValue = action === 'increment' 
-            ? participants[type] + 1 
+        const newValue = action === 'increment'
+            ? participants[type] + 1
             : Math.max(type === 'adults' ? 1 : 0, participants[type] - 1);
-            
+
         const newTotal = totalParticipants - participants[type] + newValue;
-        
+
         // Check if this would exceed max capacity
         if (tripData?.trip_max_capacity && newTotal > parseInt(tripData.trip_max_capacity)) {
             setPopupMessage(t('booking.maxCapacityExceeded', { maxCapacity: tripData.trip_max_capacity }));
@@ -88,26 +103,56 @@ const BookingSelection = ({ tripData }) => {
         }));
     };
 
-    const getParticipantText = () => {
-        const { adults, children, infants } = participants;
+    const handleAgeChange = (index, value) => {
+        const newAges = [...childAges];
+        newAges[index] = value;
+        setChildAges(newAges);
 
-        if (adults === 1 && children === 0 && infants === 0) {
+        // Clear validation error for this field
+        const newErrors = [...ageValidationErrors];
+        newErrors[index] = false;
+        setAgeValidationErrors(newErrors);
+    };
+
+    const validateChildAges = () => {
+        // If children are not allowed, always return true
+        if (!hasChildOption) return true;
+
+        const errors = [];
+        let hasError = false;
+
+        childAges.forEach((age, index) => {
+            const ageNum = parseInt(age);
+            const maxChildAge = tripData?.max_child_age ? parseInt(tripData.max_child_age) : 12;
+
+            if (!age || isNaN(ageNum) || ageNum < 0 || ageNum > maxChildAge) {
+                errors[index] = true;
+                hasError = true;
+            } else {
+                errors[index] = false;
+            }
+        });
+
+        setAgeValidationErrors(errors);
+        return !hasError;
+    };
+
+    const getParticipantText = () => {
+        const { adults, children } = participants;
+
+        if (adults === 1 && children === 0) {
             return t('booking.participants.adultSingle');
         }
 
-        if (adults > 1 && children === 0 && infants === 0) {
+        if (adults > 1 && children === 0) {
             return t('booking.participants.adults', { count: adults });
         }
 
-        if (adults === 0 && children > 0 && infants === 0) {
+        if (adults === 0 && children > 0) {
             return t('booking.participants.children', { count: children });
         }
 
-        if (adults === 0 && children === 0 && infants > 0) {
-            return t('booking.participants.infants', { count: infants });
-        }
-
-        return t('booking.participants.mixed', { adults, children, infants });
+        return t('booking.participants.mixed', { adults, children });
     };
 
     const CustomInput = React.forwardRef(({ value, onClick }, ref) => (
@@ -153,6 +198,14 @@ const BookingSelection = ({ tripData }) => {
             return;
         }
 
+        // Validate child ages only if children are allowed
+        if (hasChildOption && participants.children > 0 && !validateChildAges()) {
+            setPopupMessage(t('booking.invalidChildAges', { maxAge: tripData?.max_child_age || 12 }));
+            setPopupType('error');
+            setShowPopup(true);
+            return;
+        }
+
         // Format date as YYYY-MM-DD
         const formattedDate = selectedDate.toISOString().split('T')[0];
 
@@ -171,14 +224,14 @@ const BookingSelection = ({ tripData }) => {
             total_pax: participants.adults,
             booking_code: "",
             booking_date: null,
-            child_num: participants.children,
+            child_num:hasChildOption ? participants.children : 0,
             total_price: 0,
             pickup_time: "",
             booking_status: 1,
             trip_date: null,
             booking_notes: "",
             trip_code: tripData?.trip_code_auto,
-            infant_num: participants.infants,
+            infant_num: 0,
             pickup_address: "",
             client_phone: "",
             booking_code_auto: "",
@@ -194,17 +247,34 @@ const BookingSelection = ({ tripData }) => {
             // First save the booking
             const result = await dispatch(checkAvailability(bookingData)).unwrap();
 
+            // Convert child ages to numbers only if children are allowed
+            const numericChildAges = hasChildOption ? childAges.map(age => parseInt(age)) : [];
+
             // Then calculate initial price without extras
             const calculationData = {
                 booking_id: result.idOut,
                 trip_id: tripData?.trip_id,
                 adult_num: participants.adults,
-                child_num: participants.children,
+                child_num: hasChildOption ? participants.children : 0,
                 currency_code: "EUR",
-                extra_lst: []
+                extra_lst: [],
+                childAges: numericChildAges
             };
 
             await dispatch(calculateBookingPrice(calculationData)).unwrap();
+
+            // If both operations succeeded, navigate to checkout
+            navigate("/checkout", {
+                state: {
+                    availabilityData: result, // Use the result from checkAvailability
+                    trip: tripData,
+                    childAges: numericChildAges
+                }
+            });
+
+            // Reset states
+            dispatch(resetBookingOperation());
+            dispatch(resetCalculation());
 
         } catch (err) {
             // Error is handled in useEffect
@@ -257,17 +327,17 @@ const BookingSelection = ({ tripData }) => {
                                 >
                                     <Dropdown.Toggle as={ParticipantsToggle}>
                                         {getParticipantText()}
-                                        {exceedsMaxCapacity && " ⚠️"}
+                                        {exceedsMaxCapacity ? " ⚠️" : null}
                                     </Dropdown.Toggle>
 
                                     <Dropdown.Menu className="booking-selection__dropdown w-100">
                                         {/* Show warning if max capacity is exceeded */}
-                                        {exceedsMaxCapacity && (
+                                        {exceedsMaxCapacity ? (
                                             <div className="text-danger small p-2">
                                                 {t('booking.maxCapacityExceeded', { maxCapacity: tripData.trip_max_capacity })}
                                             </div>
-                                        )}
-                                        
+                                        ) : null}
+
                                         {/* Adult Counter */}
                                         <div className="booking-selection__counter">
                                             <div className="booking-selection__counter-info">
@@ -299,13 +369,17 @@ const BookingSelection = ({ tripData }) => {
                                             </div>
                                         </div>
 
-                                        <hr className="my-3" />
+                                        {/* Child Counter - Only show if children are allowed */}
+                                        {hasChildOption && (
+                                            <>
+                                            <hr className="my-3" />
 
-                                        {/* Child Counter */}
                                         <div className="booking-selection__counter">
                                             <div className="booking-selection__counter-info">
                                                 <div className="booking-selection__counter-title">{t('booking.participants.child')}</div>
-                                                <div className="booking-selection__counter-subtitle">({t('booking.participants.ageRangeChildren')})</div>
+                                                <div className="booking-selection__counter-subtitle">
+                                                    ({t('booking.participants.ageRangeChildren', { maxAge: maxAge })})
+                                                </div>
                                             </div>
                                             <div className="booking-selection__counter-controls">
                                                 <Button
@@ -332,38 +406,49 @@ const BookingSelection = ({ tripData }) => {
                                             </div>
                                         </div>
 
-                                        <hr className="my-3" />
+                                        {/* Child Age Inputs */}
+                                        {participants.children > 0 && (
+                                            <>
+                                                <hr className="my-3" />
+                                                <div className="booking-selection__age-inputs">
+                                                    <div className="booking-selection__counter-title mb-2">
+                                                        {t('booking.participants.enterChildAges')}
+                                                    </div>
+                                                    {childAges.map((age, index) => (
+                                                        <div key={index} className="booking-selection__age-input-group mb-2">
+                                                            <Form.Label className="small mb-1">
+                                                                {t('booking.participants.childAge', { number: index + 1 })}
+                                                            </Form.Label>
+                                                            <Form.Control
+                                                                type="number"
+                                                                min="0"
+                                                                max={maxAge}
+                                                                value={age}
+                                                                onChange={(e) => handleAgeChange(index, e.target.value)}
+                                                                onInput={(e) => {
+                                                                    let value = e.target.value;
 
-                                        {/* Infant Counter */}
-                                        <div className="booking-selection__counter">
-                                            <div className="booking-selection__counter-info">
-                                                <div className="booking-selection__counter-title">{t('booking.participants.infant')}</div>
-                                                <div className="booking-selection__counter-subtitle">({t('booking.participants.ageRangeInfants')})</div>
-                                            </div>
-                                            <div className="booking-selection__counter-controls">
-                                                <Button
-                                                    variant="outline-primary"
-                                                    size="sm"
-                                                    className="booking-selection__counter-btn"
-                                                    onClick={() => handleParticipantChange('infants', 'decrement')}
-                                                    disabled={participants.infants <= 0}
-                                                >
-                                                    <FaMinus />
-                                                </Button>
-                                                <span className="booking-selection__counter-value">
-                                                    {participants.infants}
-                                                </span>
-                                                <Button
-                                                    variant="primary"
-                                                    size="sm"
-                                                    className="booking-selection__counter-btn"
-                                                    onClick={() => handleParticipantChange('infants', 'increment')}
-                                                    disabled={exceedsMaxCapacity}
-                                                >
-                                                    <FaPlus />
-                                                </Button>
-                                            </div>
-                                        </div>
+                                                                    // If value exceeds max age, set it to max age
+                                                                    if (value && parseInt(value) > maxAge) {
+                                                                        e.target.value = maxAge;
+                                                                        handleAgeChange(index, maxAge.toString());
+                                                                    }
+                                                                }}
+                                                                className={`booking-selection__age-input ${ageValidationErrors[index] ? 'is-invalid' : ''}`}
+                                                                placeholder="0"
+                                                            />
+                                                            {ageValidationErrors[index] && (
+                                                                <div className="invalid-feedback d-block">
+                                                                    {t('booking.participants.invalidAge', { maxAge: tripData?.max_child_age || 12 })}
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    ))}
+                                                </div> 
+                                                </>
+                                                )}
+                                            </>
+                                        )}
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </Col>
@@ -374,7 +459,7 @@ const BookingSelection = ({ tripData }) => {
                                     selected={selectedDate}
                                     onChange={(date) => setSelectedDate(date)}
                                     customInput={<CustomInput />}
-                                     minDate={minDate}
+                                    minDate={minDate}
                                     filterDate={filterDate}
                                     monthsShown={2}
                                     showPopperArrow={false}

@@ -11,7 +11,7 @@ import { triggerRefresh } from '../../../redux/Slices/bookingSummarySlice';
 import PopUp from '../../Shared/popup/PopUp';
 import LoadingPage from '../../Loader/LoadingPage';
 
-const PickupStep = ({ onNext, tripData, availabilityData }) => {
+const PickupStep = ({ onNext, tripData, availabilityData , childAges }) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
 
@@ -114,7 +114,8 @@ const PickupStep = ({ onNext, tripData, availabilityData }) => {
                         adult_num: summaryData.total_pax,
                         child_num: summaryData.child_num,
                         currency_code: "EUR",
-                        extra_lst: extrasList
+                        extra_lst: extrasList,
+                        childAges: childAges
                     };
 
                     // Dispatch price calculation
@@ -240,7 +241,7 @@ const PickupStep = ({ onNext, tripData, availabilityData }) => {
                 {/* Next Button */}
                 <div className="next-button-section">
                     <button className="next-btn" onClick={handleNext} disabled={isProcessingExtras}>
-                        {t('bookings.pickup.nextBtn')}
+                        {tripData?.trip_type == 3?t('bookings.pickup.nextBtnAgree'):t('bookings.pickup.nextBtn')}
                     </button>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -18,26 +18,31 @@ const BookingPage = () => {
 
   const [currentStep, setCurrentStep] = useState(1);
   const [tripData, setTripData] = useState(null);
-  const [availabilityData, setAvailabilityData ]= useState(null);
+  const [availabilityData, setAvailabilityData] = useState(null);
+  const [childAges, setchildAges] = useState(null)
   const [tripType, setTripType] = useState(1);
-  
- useEffect(() => {
-     if (state?.trip) {
-       setTripData(state.trip);
-       setTripType(state.trip.trip_type || 1);
-     }
 
-     if(state?.availabilityData){
-       setAvailabilityData(state?.availabilityData);
-     }
-     
-     window.scrollTo({ top: 0, behavior: 'smooth' });
-     
-     // Clean up when component unmounts
-     return () => {
-       dispatch(clearBookingSummary());
-     };
-   }, [state, dispatch]);
+  useEffect(() => {
+    if (state?.trip) {
+      setTripData(state.trip);
+      setTripType(state.trip.trip_type || 1);
+    }
+
+    if (state?.availabilityData) {
+      setAvailabilityData(state?.availabilityData);
+    }
+
+    if (state?.childAges) {
+      setchildAges(state?.childAges);
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Clean up when component unmounts
+    return () => {
+      dispatch(clearBookingSummary());
+    };
+  }, [state, dispatch]);
 
   const handleNextStep = () => {
     const maxSteps = tripType === 3 ? 4 : 3;
@@ -48,13 +53,13 @@ const BookingPage = () => {
   };
 
   const renderCurrentStep = () => {
-     let adjustedStep = currentStep;
-    
+    let adjustedStep = currentStep;
+
     if (tripType !== 3 && currentStep > 1) {
       // For non-diving trips, skip the agreement step
       adjustedStep = currentStep + 1;
     }
-    
+
     switch (adjustedStep) {
       case 1:
         return (
@@ -62,6 +67,7 @@ const BookingPage = () => {
             onNext={handleNextStep}
             tripData={tripData}
             availabilityData={availabilityData}
+            childAges = {childAges}
           />
         );
       case 2:
@@ -83,29 +89,36 @@ const BookingPage = () => {
           );
         }
       case 3:
-         if (tripType === 3) {
-                  return (
-                    <ContactStep
-                      onNext={handleNextStep}
-                      tripData={tripData}
-                      availabilityData={availabilityData}
-                    />
-                  );
-                } else {
-                  // For non-diving trips, this is payment step
-                  return (
-                    <PaymentStep
-                      onNext={handleNextStep}
-                    />
-                  );
-                }
-        case 4:
+        if (tripType === 3) {
+          return (
+            <ContactStep
+              onNext={handleNextStep}
+              tripData={tripData}
+              availabilityData={availabilityData}
+            />
+          );
+        } else {
+         return (
+            <ContactStep
+              onNext={handleNextStep}
+              tripData={tripData}
+              availabilityData={availabilityData}
+            />
+          );
+          // For non-diving trips, this is payment step
+          // return (
+          //   <PaymentStep
+          //     onNext={handleNextStep}
+          //   />
+          // );
+        }
+      case 4:
         // Only for diving trips
-        return (
-          <PaymentStep
-            onNext={handleNextStep}
-          />
-        );
+        // return (
+        //   <PaymentStep
+        //     onNext={handleNextStep}
+        //   />
+        // );
       default:
         return null;
     }
@@ -115,17 +128,17 @@ const BookingPage = () => {
     <div className="booking-page">
       <Container>
         <StepIndicator currentStep={currentStep} tripType={tripType} />
-        
+
         <Row>
           <Col lg={7}>
             <div className="booking-content">
               {renderCurrentStep()}
             </div>
           </Col>
-          
+
           <Col lg={5}>
-            <OrderSummary 
-            availabilityData={availabilityData}
+            <OrderSummary
+              availabilityData={availabilityData}
             />
           </Col>
         </Row>

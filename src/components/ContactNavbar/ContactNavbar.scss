@@ -1,37 +1,55 @@
 .contact-navbar {
   background-color: $primary-color; // Exact dark blue from image
   color: white;
-  padding: 2px 0 2px 100px;
+  padding: 2px 0;
   font-size: 13px;
-  
+
+  @include media-breakpoint-up(lg) {
+    padding-left: 100px;
+  }
   
   .contact-content {
     display: flex;
     align-items: center;
+    justify-content: center;
     
+    @include media-breakpoint-up(lg) {
+      justify-content: flex-start;
+    }
+
     .contact-left {
       display: flex;
       align-items: center;
-      gap: 30px; // Gap between phone, email, and social icons as one group
+     flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      padding: 5px 15px;
       
-      @include media-breakpoint-down(lg) {
-        gap: 25px;
+      @include media-breakpoint-up(md) {
+        gap: 20px;
+        justify-content: flex-start;
       }
       
-      @include media-breakpoint-down(md) {
-        gap: 6px;
-        width: 100%;
+      @include media-breakpoint-up(lg) {
+        gap: 30px;
+        padding: 0;
       }
       
       @include media-breakpoint-down(sm) {
-        align-items: center;
-        text-align: center;
+        gap: 8px;
+        width: 100%;
       }
       
       .contact-item {
         display: flex;
         align-items: center;
         gap: 6px;
+
+        @include media-breakpoint-down(xs) {
+          &:nth-child(2) {
+            display: none; // Hide email on very small screens
+          }
+        }
         
         .contact-icon {
           font-size: 11px;
@@ -44,10 +62,19 @@
           text-decoration: none;
           font-weight: 400;
           transition: all 0.2s ease-in-out;
+          white-space: nowrap;
           
           &:hover {
             opacity: 0.7;
             text-decoration: none;
+          }
+
+           @include media-breakpoint-down(sm) {
+            font-size: 12px;
+          }
+          
+          @include media-breakpoint-down(xs) {
+            font-size: 11px;
           }
         }
       }
@@ -55,7 +82,11 @@
       .social-media {
         display: flex;
         align-items: center;
-        gap: 8px; // Small gap between social icons only
+        gap: 8px;
+
+         @include media-breakpoint-down(sm) {
+          gap: 6px;
+        }
         
         .social-link {
           display: flex;
@@ -79,19 +110,26 @@
             height: 26px;
             font-size: 12px;
           }
+
+           @include media-breakpoint-down(xs) {
+            width: 24px;
+            height: 24px;
+            font-size: 11px;
+          }
         }
       }
     }
   }
 }
 
-@include media-breakpoint-down(sm) {
+@include media-breakpoint-down(xs) {
   .contact-navbar {
+    font-size: 12px;
+    
     .contact-content .contact-left {
-      gap: 10px;
+      gap: 6px;
       
       .contact-item {
-        width: 100%;
         margin-bottom: 0;
       }
       

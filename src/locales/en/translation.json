@@ -5,9 +5,11 @@
     "show_more": "Show More",
     "show_less": "Show Less",
     "from": "From",
-    "to":"UP To",
-    "perGroupUpTo" : "per group up to",
-    "perPerson":"per person"
+    "to": "UP To",
+    "perGroupUpTo": "per group up to",
+    "perPerson": "per person",
+    "loading": "Loading...",
+    "loadingMore": "Loading more..."
   },
   "language": {
     "language": "Language",
@@ -50,7 +52,7 @@
     "footer_description": "A travel company for transportation and travel to Egypt distinguished by trust, safety, and punctuality.",
     "home": "Home",
     "about_us": "About Us",
-    "contact": "Contact",
+    "contact": "Contact Us",
     "company": "Company",
     "privacy": "Privacy",
     "support": "Support",
@@ -73,7 +75,7 @@
   "Login": {
     "LoginTitle": "Log in",
     "SignUpTitle": "Sign Up",
-    "LoginSubTitle": "Check out more easily and access your tickets on any device with your <strong>I Travel Pro </strong> account.",
+    "LoginSubTitle": "Check out more easily and access your tickets on any device with your <strong>Expand Horizons </strong> account.",
     "LoginCheckBoxTitle": "Send me discounts and other offers by email.<br/>Opt out any time in your settings",
     "LoginCheckBoxSubTitle": "Opt out any time in your settings",
     "firstname": "First Name",
@@ -247,21 +249,22 @@
     "checkAvailability": "Check availability",
     "maxCapacityExceeded": "Please select {{maxCapacity}} participants or fewer for this activity.",
     "invalidDate": "Please select a date at least {{releaseDays}} days from today.",
+    "invalidChildAges": "Please enter valid ages for all children (0-{{maxAge}} years)",
     "date": {
       "selectDate": "Select date"
     },
     "participants": {
-       "adult": "Adult",
+      "adult": "Adult",
       "child": "Child",
-      "infant": "Infant",
       "adultSingle": "Adult x 1",
       "adults": "Adults x {{count}}",
       "children": "Children x {{count}}",
-      "infants": "Infants x {{count}}",
-      "mixed": "Adults x {{adults}}, Children x {{children}}, Infants x {{infants}}",
+      "mixed": "Adults x {{adults}}, Children x {{children}}",
       "ageRangeAdults": "Age 12-99",
-      "ageRangeChildren": "Age 3-11",
-      "ageRangeInfants": "Age 2 and younger"
+      "enterChildAges": "Enter children's ages",
+      "childAge": "Child {{number}} age",
+      "invalidAge": "Age must be between 0 and {{maxAge}}",
+      "ageRangeChildren": "0-{{maxAge}} years"
     },
     "language": {
       "english": "English",
@@ -272,13 +275,23 @@
     }
   },
   "bookings": {
+    "myBookings": "Your Bookings",
+    "noBookings": "No bookings yet",
+    "noBookingsText": "You haven't made any bookings yet. Start exploring our trips and make your first reservation!",
+    "fetchError": "Failed to load your bookings. Please try again later.",
+    "dateToBeConfirmed": "Date to be confirmed",
+    "timeToBeConfirmed": "Time to be confirmed",
+    "bookingCode": "Booking code",
+    "priceToBeConfirmed": "Price to be confirmed",
+    "totalBookings": "Total bookings",
+    "allBookingsLoaded": "All bookings loaded",
     "adults": "adults",
     "children": "children",
     "infants": "infants",
-    "resevePay":"Reserve now & pay later",
+    "resevePay": "Reserve now & pay later",
     "steps": {
       "pickup": "Pickup",
-      "contact": "Contact", 
+      "contact": "Contact",
       "agreement": "Agreement",
       "payment": "Payment",
       "confirm": "Confirm"
@@ -291,6 +304,7 @@
       "adultsOnly": "adults only",
       "continue": "Continue",
       "nextBtn": "Next : Personal details",
+      "nextBtnAgree": "Next : Agreement",
       "selectLocation": "Select Pickup Location on Map",
       "searchPlaceholder": "Search for hotel, address, etc.",
       "confirmLocation": "Confirm Location",
@@ -309,7 +323,7 @@
       "phonePlaceholder": "Mobile phone number*",
       "notesLabel": "Additional Notes",
       "notesPlaceholder": "Any special requests or additional information...",
-      "confirmButton":"Confirm Booking",
+      "confirmButton": "Confirm Booking",
       "disclaimer": "We'll contact you with essential updates or changes to your booking",
       "nextButton": "Next : Go to payment",
       "bookingConfirmed": "Booking confirmed successfully!",
@@ -352,6 +366,70 @@
       "enterCode": "Enter promo or gift code",
       "redeem": "Redeem",
       "placeholder": "Enter code"
+    }
+  },
+  "profile": {
+    "profile": {
+      "title": "Profile Details",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "contactDetails": "Contact Details",
+      "email": "Email",
+      "phone": "+20 100 0000 0000",
+      "address": "Address",
+      "nationality": "Nationality",
+      "gender": "Gender",
+      "genderOptions": {
+        "male": "Male",
+        "female": "Female",
+        "other": "Other"
+      },
+      "dateOfBirth": "Date of birth",
+      "day": "Day",
+      "month": "Month",
+      "year": "Year",
+      "save": "Save"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "email": "Email",
+      "save": "Save",
+      "disclaimer": "By enabling recommendations, travel tips and other offers, you agree to receive promotional messages. You can unsubscribe at any time. For more information about how we use your data, see our Privacy Statement.",
+      "types": {
+        "reviews": {
+          "title": "Reviews",
+          "description": "Get reminders to write a review for activities you have done recently."
+        },
+        "recommendations": {
+          "title": "Recommendations",
+          "description": "Get recommendations inspired by activities and destinations you've looked at."
+        },
+        "deals": {
+          "title": "Deals and rewards",
+          "description": "Exclusive travel deals, latest promotions, and special rewards."
+        },
+        "inspiration": {
+          "title": "Travel tips and inspiration",
+          "description": "Get trip newsletter and other practical inspiration to help you make the most of your destinations."
+        },
+        "guides": {
+          "title": "Travel guides",
+          "description": "Advice from locals, experts, and other travelers - helping you make the most out of your destinations."
+        }
+      }
+    },
+    "password": {
+      "title": "Reset Password",
+      "description": "Enter the email address associated with your account and we'll send you a link to reset your password.",
+      "oldPassword": "Old Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm New Password",
+      "resetPassword": "Reset Now"
+    },
+    "nav": {
+      "profile": "Profile",
+      "notifications": "Notifications",
+      "password": "Password"
     }
   }
 }

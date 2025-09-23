@@ -13,6 +13,7 @@ import extrasReducer from '../Slices/extrasSlice';
 import bookingSummaryReducer from '../Slices/bookingSummarySlice';
 import confirmBookingReducer from '../Slices/confirmSlice';
 import priceCalculationReducer from '../Slices/priceCalculationSlice';
+import bookingListReducer from '../Slices/bookingListSlice';
 import { authMiddleware } from '../../middleware/authMiddleware';
 
 export const store = configureStore({
@@ -30,7 +31,8 @@ export const store = configureStore({
     extras: extrasReducer,
     bookingSummary: bookingSummaryReducer,
     confirmBooking:confirmBookingReducer,
-    priceCalculation: priceCalculationReducer
+    priceCalculation: priceCalculationReducer,
+    bookingList: bookingListReducer
   },
   middleware: (getDefaultMiddleware) =>
   getDefaultMiddleware().concat(authMiddleware),

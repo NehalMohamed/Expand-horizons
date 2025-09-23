@@ -1,0 +1,195 @@
+.notifications-tab {
+    .notification-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 20px 0;
+        border-bottom: 1px solid $border-color;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        @include media-breakpoint-down(sm) {
+            padding: 15px 0;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        @include media-breakpoint-down(xs) {
+            padding: 15px 0;
+        }
+
+        .notification-content {
+            flex: 1;
+            margin-right: 20px;
+
+            @include media-breakpoint-down(sm) {
+                margin-right: 0;
+                width:100%;
+            }
+
+            .notification-title {
+                font-size: 18px;
+                font-weight: 600;
+                color: $primary-color;
+                margin-bottom: 5px;
+
+                @include media-breakpoint-down(sm) {
+                    font-size: 16px;
+                }
+                
+                @include media-breakpoint-down(xs) {
+                    font-size: 16px;
+                }
+            }
+
+            .notification-description {
+                font-size: 14px;
+                color: $gray-color;
+                line-height: 1.4;
+                margin-bottom: 8px;
+
+                @include media-breakpoint-down(sm) {
+                    font-size: 13px;
+                }
+                
+                @include media-breakpoint-down(xs) {
+                    font-size: 14px;
+                }
+            }
+
+            .notification-method {
+                font-size: 13px;
+                color: $primary-color;
+                font-weight: $font-weight-normal;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                @include media-breakpoint-down(sm) {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+
+    .disclaimer-text {
+        font-size: 12px;
+        color: $gray-color;
+        line-height: 1.4;
+        margin-top: 20px;
+        padding: 15px;
+        background-color: rgba($border-color, 0.3);
+        border-radius: $border-radius;
+
+        @include media-breakpoint-down(sm) {
+            font-size: 11px;
+            padding: 12px;
+            margin-top: 15px;
+        }
+    }
+    
+    // Button responsive fixes
+    .primaryBtn {
+        @include media-breakpoint-down(sm) {
+            width: 100%;
+            height: 44px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+    }
+}
+
+// Custom Toggle Switch - Enhanced touch targets
+.custom-toggle {
+    width: 44px;
+    height: 24px;
+    background-color: #e0e0e0;
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    flex-shrink: 0;
+
+    @include media-breakpoint-down(sm) {
+        width: 40px;
+        height: 22px;
+    }
+    
+    // Enhanced touch target
+    &::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+    }
+
+    &.checked {
+        background-color: $secondary-color;
+    }
+
+    .toggle-thumb {
+        width: 20px;
+        height: 20px;
+        background-color: $white;
+        border-radius: 50%;
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        transition: transform 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        
+        @include media-breakpoint-down(sm) {
+            width: 18px;
+            height: 18px;
+        }
+    }
+
+    &.checked .toggle-thumb {
+        transform: translateX(20px);
+        
+        @include media-breakpoint-down(sm) {
+            transform: translateX(18px);
+        }
+    }
+
+    // Accessibility improvements
+    &:focus {
+        outline: 2px solid $secondary-color;
+        outline-offset: 2px;
+    }
+
+    &:hover {
+        &:not(.checked) {
+            background-color: #d0d0d0;
+        }
+
+        &.checked {
+            background-color: darken($secondary-color, 5%);
+        }
+    }
+}
+
+// Landscape mobile optimization
+@media (max-height: 600px) and (orientation: landscape) {
+    .notifications-tab {
+        .notification-item {
+            padding: 10px 0;
+            
+            .notification-content {
+                .notification-title {
+                    font-size: 14px;
+                    margin-bottom: 2px;
+                }
+                
+                .notification-description {
+                    font-size: 12px;
+                    margin-bottom: 4px;
+                }
+            }
+        }
+    }
+}

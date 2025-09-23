@@ -67,6 +67,14 @@
   }
 }
 
+@mixin button-reset {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: inherit;
+}
+
 // Card hover effect
 @mixin card-hover {
   transition: $transition-base;
@@ -87,4 +95,105 @@
 // Responsive font sizes
 @mixin responsive-font-size($min-size, $max-size) {
   font-size: clamp(#{$min-size}, 4vw, #{$max-size});
+}
+
+@mixin visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+// Form element mixins
+@mixin form-control-focus($color: $primary-color) {
+  border-color: $color;
+  box-shadow: 0 0 0 0.2rem rgba($color, 0.15);
+  outline: 0;
+}
+
+@mixin form-validation-state($state, $color) {
+  .form-control {
+    &.is-#{$state} {
+      border-color: $color;
+
+      &:focus {
+        border-color: $color;
+        box-shadow: 0 0 0 0.2rem rgba($color, 0.15);
+      }
+    }
+  }
+}
+
+// Animation mixins
+@mixin transition($properties...) {
+  transition: $properties;
+}
+
+@mixin transform($transforms) {
+  transform: $transforms;
+}
+
+// Layout mixins
+@mixin container-padding {
+  padding-left: 15px;
+  padding-right: 15px;
+
+  @include media-breakpoint-up(sm) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@mixin card-style {
+  background: $white;
+  border-radius: $border-radius-xl;
+  box-shadow: $box-shadow-sm;
+  border: none;
+}
+
+@mixin font-size-responsive($mobile, $tablet: null, $desktop: null) {
+  font-size: $mobile;
+
+  @if $tablet {
+    @include media-breakpoint-up(md) {
+      font-size: $tablet;
+    }
+  }
+
+  @if $desktop {
+    @include media-breakpoint-up(lg) {
+      font-size: $desktop;
+    }
+  }
+}
+
+@mixin heading-responsive($level: 2) {
+  @if $level == 2 {
+    @include font-size-responsive(18px, 20px, 24px);
+    font-weight: $font-weight-bold;
+  } @else if $level == 3 {
+    @include font-size-responsive(16px, 17px, 18px);
+    font-weight: $font-weight-medium;
+  }
+  
+  color: $primary-color;
+  margin-bottom: 15px;
+
+  @include media-breakpoint-up(md) {
+    margin-bottom: 20px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    margin-bottom: 25px;
+  }
 }

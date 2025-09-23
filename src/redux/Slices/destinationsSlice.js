@@ -24,7 +24,8 @@ export const fetchDestinations = createAsyncThunk(
           lang_code: lang_code,
           currency_code: "EUR",
           country_code: "",
-          leaf: true
+          leaf: true,
+          trip_type: 0
         },
         getAuthHeaders()
       );
@@ -37,20 +38,27 @@ export const fetchDestinations = createAsyncThunk(
 
 export const fetchDestinationTree = createAsyncThunk(
   'destinations/fetchDestinationTree',
-  async (lang_code, { rejectWithValue }) => {
+  async (params, { rejectWithValue }) => {
     try {
       const response = await axios.post(
         BASE_URL + '/GetDestination_Tree',
         {
-          lang_code: lang_code,
+          lang_code: params.lang_code,
           currency_code: "EUR",
-          country_code: ""
+          country_code: "",
+          trip_type: params.trip_type
         },
         getAuthHeaders()
       );
-      return response.data;
+       return {
+        data: response.data,
+        trip_type: params.trip_type
+      };
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return rejectWithValue({
+        error: error.response.data,
+        trip_type: params.trip_type
+      });
     }
   }
 );
@@ -59,11 +67,23 @@ const destinationsSlice = createSlice({
   name: 'destinations',
   initialState: {
     items: [],
-    treeItems: [],
+    treeItems: {
+      1: [], // Excursions
+      2: [], // Transfers
+      3: [], // Diving
+    },
     loading: false,
-    treeLoading: false,
+     treeLoading: {
+      1: false, // Excursions
+      2: false, // Transfers
+      3: false, // Diving
+    },
     error: null,
-    treeError: null
+    treeError: {
+      1: null, // Excursions
+      2: null, // Transfers
+      3: null, // Diving
+    }
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -80,17 +100,20 @@ const destinationsSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      .addCase(fetchDestinationTree.pending, (state) => {
-        state.treeLoading = true;
-        state.treeError = null;
+      .addCase(fetchDestinationTree.pending, (state, action) => {
+        const tripType = action.meta.arg.trip_type;
+        state.treeLoading[tripType] = true;
+        state.treeError[tripType] = null;
       })
       .addCase(fetchDestinationTree.fulfilled, (state, action) => {
-        state.treeLoading = false;
-        state.treeItems = action.payload;
+        const tripType = action.payload.trip_type;
+        state.treeLoading[tripType] = false;
+        state.treeItems[tripType] = action.payload.data;
       })
       .addCase(fetchDestinationTree.rejected, (state, action) => {
-        state.treeLoading = false;
-        state.treeError = action.payload;
+         const tripType = action.payload.trip_type;
+        state.treeLoading[tripType] = false;
+        state.treeError[tripType] = action.payload.error;
       });
   }
 });

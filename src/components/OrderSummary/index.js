@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaStar, FaMapMarkerAlt, FaCalendarAlt, FaUsers, FaPencilAlt, FaCreditCard, FaGift, FaShoppingCart, FaRegCalendarCheck, FaPlus } from 'react-icons/fa';
+import { FaStar, FaMapMarkerAlt, FaCalendarAlt, FaUsers, FaIdCard, FaMoneyBillWave, FaGift, FaShoppingCart, FaRegCalendarCheck, FaPlus } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBookingSummary, clearRefresh } from '../../redux/Slices/bookingSummarySlice';
@@ -53,6 +53,8 @@ const OrderSummary = ({ availabilityData }) => {
     }, [error, t]);
 
     const renderStars = (rating) => {
+        if (!rating) return null;
+
         const stars = [];
         const fullStars = Math.floor(rating);
 
@@ -203,7 +205,7 @@ const OrderSummary = ({ availabilityData }) => {
                                 </div> */}
 
                             <div className="detail-item">
-                                <FaCreditCard className="detail-icon" />
+                                <FaIdCard className="detail-icon" />
                                 <p className="detail-text">
                                     {summaryData.booking_status}
                                 </p>
@@ -222,7 +224,7 @@ const OrderSummary = ({ availabilityData }) => {
                               {renderExtras()}
 
                             <div className="detail-item">
-                                <FaCreditCard className="detail-icon" />
+                                <FaMoneyBillWave className="detail-icon" />
                                 <p className="detail-text">{t('bookings.resevePay')}</p>
                             </div>
 

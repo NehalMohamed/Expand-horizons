@@ -42,12 +42,21 @@ const TourCard = ({ trip }) => {
   };
 
   const handleCardClick = () => {
-    navigate(`/trip/${trip.route}`, {
-      state: {
-        tripId: trip?.trip_id,
-        trip_type: trip?.trip_type
-      }
-    });
+    if (!trip.is_comm_soon) {
+      navigate(`/trip/${trip.route}`, {
+        state: {
+          tripId: trip?.trip_id,
+          trip_type: trip?.trip_type
+        }
+      });
+    } else {
+      navigate('/trip/ComingSoon', {
+        state: {
+          tripId: trip.trip_id,
+          trip_type: trip.trip_type
+        }
+      });
+    }
   };
 
   // Function to format price display based on trip type

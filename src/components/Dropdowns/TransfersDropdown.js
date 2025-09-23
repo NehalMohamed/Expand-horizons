@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,19 +10,26 @@ const TransfersDropdown = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const { treeItems: destinations, treeLoading: loading } = useSelector((state) => state.destinations);
+    const tripType = 2; 
+    const { treeItems, treeLoading } = useSelector((state) => state.destinations);
+    const destinations = treeItems[tripType] || [];
+    const loading = treeLoading[tripType] || false;
     const currentLang = useSelector((state) => state.language.currentLang) || "en";
 
-    React.useEffect(() => {
-        dispatch(fetchDestinationTree(currentLang));
+    useEffect(() => {
+        const params = {
+            lang_code: currentLang,
+            trip_type: tripType
+        }
+        dispatch(fetchDestinationTree(params));
     }, [dispatch, currentLang]);
 
     const handleLocationClick = (route, id) => {
-        navigate(`/transfers/${route.toLowerCase().replace(/\s+/g, '-')}`, { 
-            state: { 
+        navigate(`/transfers/${route.toLowerCase().replace(/\s+/g, '-')}`, {
+            state: {
                 DestinationId: id,
-                tripType: 2 // Transfer trip type
-            } 
+                tripType: tripType
+            }
         });
     };
 
