@@ -368,68 +368,69 @@
       "placeholder": "Code eingeben"
     }
   },
-  "profile":{
   "profile": {
-    "title": "Profil Details",
-    "firstName": "Vorname",
-    "lastName": "Nachname",
-    "contactDetails": "Kontakt Details",
-    "email": "E-Mail",
-    "phone": "+49 100 0000 0000",
-    "address": "Adresse",
-    "nationality": "Nationalität",
-    "gender": "Geschlecht",
-    "genderOptions": {
-      "male": "Männlich",
-      "female": "Weiblich",
-      "other": "Andere"
+    "profile": {
+      "title": "Profil Details",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "contactDetails": "Kontakt Details",
+      "email": "E-Mail",
+      "phone": "+49 100 0000 0000",
+      "address": "Adresse",
+      "nationality": "Nationalität",
+      "gender": "Geschlecht",
+      "genderOptions": {
+        "male": "Männlich",
+        "female": "Weiblich",
+        "other": "Andere"
+      },
+      "dateOfBirth": "Geburtsdatum",
+      "day": "Tag",
+      "month": "Monat",
+      "year": "Jahr",
+      "save": "Speichern",
+      "update": "aktualisieren"
     },
-    "dateOfBirth": "Geburtsdatum",
-    "day": "Tag",
-    "month": "Monat",
-    "year": "Jahr",
-    "save": "Speichern"
-  },
-  "notifications": {
-    "title": "Benachrichtigungen",
-    "email": "E-Mail",
-    "save": "Speichern",
-    "disclaimer": "Durch die Aktivierung von Empfehlungen, Reisetipps und anderen Angeboten stimmen Sie dem Erhalt von Werbemitteilungen zu. Sie können sich jederzeit abmelden. Weitere Informationen zur Verwendung Ihrer Daten finden Sie in unserer Datenschutzerklärung.",
-    "types": {
-      "reviews": {
-        "title": "Bewertungen",
-        "description": "Erhalten Sie Erinnerungen, eine Bewertung für kürzlich durchgeführte Aktivitäten zu schreiben."
-      },
-      "recommendations": {
-        "title": "Empfehlungen",
-        "description": "Erhalten Sie Empfehlungen inspiriert von Aktivitäten und Zielen, die Sie sich angesehen haben."
-      },
-      "deals": {
-        "title": "Angebote und Belohnungen",
-        "description": "Exklusive Reiseangebote, neueste Aktionen und spezielle Belohnungen."
-      },
-      "inspiration": {
-        "title": "Reisetipps und Inspiration",
-        "description": "Erhalten Sie Reise-Newsletter und andere praktische Inspiration, um das Beste aus Ihren Zielen zu machen."
-      },
-      "guides": {
-        "title": "Reiseführer",
-        "description": "Ratschläge von Einheimischen, Experten und anderen Reisenden - damit Sie das Beste aus Ihren Zielen herausholen."
+    "notifications": {
+      "title": "Benachrichtigungen",
+      "email": "E-Mail",
+      "save": "Speichern",
+      "disclaimer": "Durch die Aktivierung von Empfehlungen, Reisetipps und anderen Angeboten stimmen Sie dem Erhalt von Werbemitteilungen zu. Sie können sich jederzeit abmelden. Weitere Informationen zur Verwendung Ihrer Daten finden Sie in unserer Datenschutzerklärung.",
+      "types": {
+        "reviews": {
+          "title": "Bewertungen",
+          "description": "Erhalten Sie Erinnerungen, eine Bewertung für kürzlich durchgeführte Aktivitäten zu schreiben."
+        },
+        "recommendations": {
+          "title": "Empfehlungen",
+          "description": "Erhalten Sie Empfehlungen inspiriert von Aktivitäten und Zielen, die Sie sich angesehen haben."
+        },
+        "deals": {
+          "title": "Angebote und Belohnungen",
+          "description": "Exklusive Reiseangebote, neueste Aktionen und spezielle Belohnungen."
+        },
+        "inspiration": {
+          "title": "Reisetipps und Inspiration",
+          "description": "Erhalten Sie Reise-Newsletter und andere praktische Inspiration, um das Beste aus Ihren Zielen zu machen."
+        },
+        "guides": {
+          "title": "Reiseführer",
+          "description": "Ratschläge von Einheimischen, Experten und anderen Reisenden - damit Sie das Beste aus Ihren Zielen herausholen."
+        }
       }
+    },
+    "password": {
+      "title": "Passwort zurücksetzen",
+      "description": "Geben Sie die E-Mail-Adresse ein, die mit Ihrem Konto verknüpft ist, und wir senden Ihnen einen Link zum Zurücksetzen Ihres Passworts.",
+      "oldPassword": "Altes Passwort",
+      "newPassword": "Neues Passwort",
+      "confirmPassword": "Neues Passwort bestätigen",
+      "resetPassword": "Jetzt zurücksetzen"
+    },
+    "nav": {
+      "profile": "Profil",
+      "notifications": "Benachrichtigungen",
+      "password": "Passwort"
     }
-  },
-  "password": {
-    "title": "Passwort zurücksetzen",
-    "description": "Geben Sie die E-Mail-Adresse ein, die mit Ihrem Konto verknüpft ist, und wir senden Ihnen einen Link zum Zurücksetzen Ihres Passworts.",
-    "oldPassword": "Altes Passwort",
-    "newPassword": "Neues Passwort",
-    "confirmPassword": "Neues Passwort bestätigen",
-    "resetPassword": "Jetzt zurücksetzen"
-  },
-  "nav": {
-    "profile": "Profil",
-    "notifications": "Benachrichtigungen",
-    "password": "Passwort"
   }
-}
 }

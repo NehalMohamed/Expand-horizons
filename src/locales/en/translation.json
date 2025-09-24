@@ -388,7 +388,8 @@
       "day": "Day",
       "month": "Month",
       "year": "Year",
-      "save": "Save"
+      "save": "Save",
+      "update": "update"
     },
     "notifications": {
       "title": "Notifications",
