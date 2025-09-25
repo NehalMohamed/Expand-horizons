@@ -116,7 +116,6 @@ const ProfileTab = () => {
       [name]: value,
     }));
   };
-  console.log("user ", user);
   return (
     <div className="profile-tab">
       <Form onSubmit={handleSubmit}>

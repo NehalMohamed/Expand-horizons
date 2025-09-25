@@ -1,6 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-
+import {
+  checkAUTH,
+  isUserNotLoggedIn,
+  isTokenExpiredOnly,
+} from "../../helper/helperFN";
+import { createAuthError } from "../../utils/authError";
 const BASE_URL_AUTH = process.env.REACT_APP_AUTH_API_URL;
 
 const NonAuthHeaders = () => {
@@ -9,7 +14,18 @@ const NonAuthHeaders = () => {
     "Accept-Language": lang,
   };
 };
-
+const getAuthHeaders = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const accessToken = user?.accessToken;
+  let lang = localStorage.getItem("lang") || "en";
+  return {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+      "Accept-Language": lang,
+    },
+  };
+};
 const token = localStorage.getItem("token");
 
 const initialState = {
@@ -23,7 +39,7 @@ const initialState = {
 
 // Helper to extract error message from different response formats
 const getErrorMessage = (error) => {
-  console.log("error.response?.data ", error.response?.data);
+  /// console.log("error.response?.data ", error.response?.data);
   if (error.response?.data?.success === false) {
     return error.response.data.errors || "Operation failed";
   }
@@ -38,6 +54,72 @@ const getErrorMessage = (error) => {
   }
   return "An error occurred";
 };
+export const changePassword = createAsyncThunk(
+  "auth/changePassword",
+  async (
+    { userId, oldPassword, newPassword, confirmNewPassword },
+    { rejectWithValue }
+  ) => {
+    try {
+      const response = await axios.post(
+        BASE_URL_AUTH + "/changePassword",
+        {
+          userId,
+          oldPassword,
+          newPassword,
+          confirmNewPassword,
+        },
+        getAuthHeaders()
+      );
+      return response.data;
+    } catch (err) {
+      if (err.response && err.response.data) {
+        // ✅ controlled reject
+        return rejectWithValue(err.response.data);
+      }
+      // fallback
+      return rejectWithValue(err.message);
+    }
+  }
+);
+// Async thunk for changing password
+// export const changePassword = createAsyncThunk(
+//   "auth/changePassword", // action type prefix
+//   async (
+//     { userId, oldPassword, newPassword, confirmNewPassword },
+//     { rejectWithValue }
+//   ) => {
+//     // Check if user is authenticated
+//     if (isUserNotLoggedIn()) {
+//       return rejectWithValue(createAuthError("notLoggedIn"));
+//     }
+
+//     if (isTokenExpiredOnly()) {
+//       return rejectWithValue(createAuthError("expired"));
+//     }
+
+//     if (!checkAUTH()) {
+//       return rejectWithValue(createAuthError("expired"));
+//     }
+
+//     try {
+//       // Make POST request to change password endpoint
+//       const response = await axios.post(
+//         BASE_URL_AUTH + "/changePassword",
+//         {
+//           userId,
+//           oldPassword,
+//           newPassword,
+//           confirmNewPassword,
+//         },
+//         getAuthHeaders()
+//       );
+//       return response.data; // Return response data on success
+//     } catch (error) {
+//       return rejectWithValue(getErrorMessage(error));
+//     }
+//   }
+// );
 
 //verify email
 export const ConfirmOTP = createAsyncThunk(
@@ -58,8 +140,8 @@ export const RegisterUser = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const response = await axios.post(
-        BASE_URL_AUTH + data.path, 
-        data.payload, 
+        BASE_URL_AUTH + data.path,
+        data.payload,
         { headers: NonAuthHeaders() }
       );
       return response.data;
@@ -75,8 +157,8 @@ export const LoginUser = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const response = await axios.post(
-        BASE_URL_AUTH + data.path, 
-        data.payload, 
+        BASE_URL_AUTH + data.path,
+        data.payload,
         { headers: NonAuthHeaders() }
       );
       return response.data;
@@ -135,7 +217,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.success = action.payload.isSuccessed;
         state.message = action.payload?.message;
-        
+
         if (action.payload.isSuccessed) {
           state.user = action.payload?.user;
           state.token = action.payload?.user?.accessToken;
@@ -149,7 +231,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.success = action.payload.isSuccessed;
         state.message = action.payload?.message;
-        
+
         if (action.payload.isSuccessed) {
           state.user = action.payload?.user;
           state.token = action.payload?.user?.accessToken;
@@ -163,7 +245,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.success = action.payload.isSuccessed;
         state.message = action.payload?.message;
-        
+
         if (action.payload.isSuccessed) {
           state.user = action.payload?.user;
           state.token = action.payload?.user?.accessToken;
@@ -193,6 +275,33 @@ const authSlice = createSlice({
         state.error = action.payload;
         state.success = false;
         state.message = action.payload;
+      })
+      .addCase(changePassword.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+        state.success = null;
+        state.message = null;
+      })
+      // Password change successful
+      .addCase(changePassword.fulfilled, (state, action) => {
+        console.log("fulfilled ", action.payload);
+        state.loading = false;
+        state.success = action.payload?.isSuccessed;
+        state.message = action.payload?.message;
+        if (action.payload.isSuccessed) {
+          state.user = action.payload?.user;
+          state.token = action.payload?.user?.accessToken;
+        } else {
+          state.error = action.payload?.message || "OTP verification failed";
+        }
+      })
+      // Password change failed
+      .addCase(changePassword.rejected, (state, action) => {
+        console.log("rejectttt");
+        state.loading = false;
+        state.success = false;
+        state.error = action?.payload;
+        state.message = action?.payload;
       });
   },
 });

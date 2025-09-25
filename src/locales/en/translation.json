@@ -395,6 +395,7 @@
       "title": "Notifications",
       "email": "Email",
       "save": "Save",
+      "update": "update",
       "disclaimer": "By enabling recommendations, travel tips and other offers, you agree to receive promotional messages. You can unsubscribe at any time. For more information about how we use your data, see our Privacy Statement.",
       "types": {
         "reviews": {
@@ -425,7 +426,19 @@
       "oldPassword": "Old Password",
       "newPassword": "New Password",
       "confirmPassword": "Confirm New Password",
-      "resetPassword": "Reset Now"
+      "resetPassword": "Reset Now",
+      "passwordRules": "Passwords must have at least one non alphanumeric character., Passwords must have at least one uppercase ('A'-'Z').",
+      "errors": {
+        "oldPasswordRequired": "Old password is required",
+        "newPasswordRequired": "New password is required",
+        "passwordLength": "Password must be at least 8 characters",
+        "confirmPasswordRequired": "Please confirm your new password",
+        "passwordsDontMatch": "Passwords don't match",
+        "userIdNotFound": "User ID not found. Please log in again.",
+        "PasswordIsRequired":"Password is required",
+        "passwordUpper":"Password must contain at least one uppercase letter",
+        "passwordSpecial":"Password must contain at least one special character"
+      }
     },
     "nav": {
       "profile": "Profile",

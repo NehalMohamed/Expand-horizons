@@ -296,6 +296,7 @@ const profileSlice = createSlice({
   initialState: {
     profileData: {},
     profileImage: null,
+    Notifications: [],
     loading: false,
     error: null,
     success: null,
@@ -400,9 +401,7 @@ const profileSlice = createSlice({
         state.loading = false;
         state.success = action.payload.success;
         state.message = action.payload.message;
-        if (action.payload.success) {
-          state.Notifications = action.payload;
-        }
+        state.Notifications = action.payload;
       })
       .addCase(GetClient_Notification_Settings.rejected, (state, action) => {
         state.loading = false;

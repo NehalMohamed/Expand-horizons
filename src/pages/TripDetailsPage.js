@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchTripDetails, clearTripDetails } from '../redux/Slices/tripDetailsSlice';
+import React, { useState, useEffect } from "react";
+import { useParams, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchTripDetails,
+  clearTripDetails,
+} from "../redux/Slices/tripDetailsSlice";
 import Gallery from "../components/Gallery";
 import BookingInfo from "../components/BookingInfo";
 import BookingSelection from "../components/BookingSelection";
@@ -17,40 +20,41 @@ const TripDetailsPage = () => {
   const { state } = useLocation();
   const dispatch = useDispatch();
   const [showPopup, setShowPopup] = useState(false);
-  const [popupMessage, setPopupMessage] = useState('');
-  const [popupType, setPopupType] = useState('error');
+  const [popupMessage, setPopupMessage] = useState("");
+  const [popupType, setPopupType] = useState("error");
 
-  const { tripData, loading, error } = useSelector((state) => state.tripDetails);
-  const currentLang = useSelector((state) => state.language.currentLang) || "en";
+  const { tripData, loading, error } = useSelector(
+    (state) => state.tripDetails
+  );
+  const currentLang =
+    useSelector((state) => state.language.currentLang) || "en";
 
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem('user') || '{}');
+    const userData = JSON.parse(localStorage.getItem("user") || "{}");
     setUser(userData);
   }, []);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [state]);
 
   useEffect(() => {
     if (error) {
       setPopupMessage(error);
-      setPopupType('error');
+      setPopupType("error");
       setShowPopup(true);
-
     }
   }, [error]);
 
   useEffect(() => {
-
     fetchTripDetailsData();
 
     return () => {
       dispatch(clearTripDetails());
     };
-  }, [route, currentLang, user.id]);
+  }, [route, currentLang, user.id, state]);
 
   const fetchTripDetailsData = () => {
     const params = {
@@ -58,7 +62,7 @@ const TripDetailsPage = () => {
       lang_code: currentLang,
       currency_code: "EUR",
       client_id: user?.id || "",
-      trip_type: state?.trip_type
+      trip_type: state?.trip_type,
     };
 
     dispatch(fetchTripDetails(params));

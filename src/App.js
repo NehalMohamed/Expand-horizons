@@ -21,14 +21,14 @@ import ProfilePage from "./pages/ProfilePage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-popup-alert/dist/index.css";
 import "react-datepicker/dist/react-datepicker.css";
-import 'leaflet/dist/leaflet.css';
-import '@geoapify/geocoder-autocomplete/styles/minimal.css';
-import 'react-phone-number-input/style.css';
+import "leaflet/dist/leaflet.css";
+import "@geoapify/geocoder-autocomplete/styles/minimal.css";
+import "react-phone-number-input/style.css";
 import "./styles/main.scss";
 import OTPInput from "./components/AuthComp/OTP/OTPInput";
-import { useAuthModal } from './components/AuthComp/AuthModal';
-import { setAuthModalFunction } from './utils/showAlert';
-import './leafletIconsFix';
+import { useAuthModal } from "./components/AuthComp/AuthModal";
+import { setAuthModalFunction } from "./utils/showAlert";
+import "./leafletIconsFix";
 
 function App() {
   const { openAuthModal } = useAuthModal();
@@ -51,17 +51,25 @@ function App() {
             <Route path="/AboutUs" element={<AboutPage />} />
             <Route path="/VerifyEmail" element={<OTPInput />} />
             <Route path="/excursions" element={<Excursions />} />
-            <Route path="/excursions/:location" element={<DestinationExcursionsPage />} />
+            <Route
+              path="/excursions/:location"
+              element={<DestinationExcursionsPage />}
+            />
             <Route path="/diving" element={<DivingPage />} />
-            <Route path="/diving/:location" element={<DestinationExcursionsPage />} />
+            <Route
+              path="/diving/:location"
+              element={<DestinationExcursionsPage />}
+            />
             <Route path="/transfers" element={<TransfersPage />} />
-            <Route path="/transfers/:location" element={<DestinationExcursionsPage />} />
+            <Route
+              path="/transfers/:location"
+              element={<DestinationExcursionsPage />}
+            />
             <Route path="/trip/:tripName" element={<TripDetailsPage />} />
             <Route path="/trip/ComingSoon" element={<TripSoonPage />} />
             <Route path="/checkout" element={<BookingPage />} />
             <Route path="/cart" element={<BookingsListPage />} />
             <Route path="/profile" element={<ProfilePage />} />
-        
 
             <Route path="/ComingSoon" element={<ComingSoon />} />
             <Route path="*" element={<NotFound />} />
