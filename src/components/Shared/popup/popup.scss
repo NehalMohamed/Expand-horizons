@@ -64,6 +64,11 @@
       border-color: #dc3545;
     }
 
+    .btn-primary{
+       background-color: $secondary-color !important;
+      border-color: $secondary-color !important;
+    }
+
     .btn-secondary {
       margin-right: 1rem;
     }
@@ -72,6 +77,8 @@
 
 .popup-modal {
   .modal-header {
+    color: white;
+
     &.bg-success {
       background-color: #28a745 !important;
     }
@@ -81,7 +88,7 @@
     }
 
     &.bg-primary {
-      background-color: $primary-color !important;
+      background-color: $secondary-color !important;
     }
 
     .close {
@@ -101,5 +108,10 @@
     border-top: none;
     padding-top: 0;
     justify-content: center;
+    
+    .btn-primary{
+       background-color: $secondary-color !important;
+      border-color: $secondary-color !important;
+    }
   }
 }

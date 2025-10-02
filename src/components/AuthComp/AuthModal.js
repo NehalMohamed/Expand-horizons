@@ -201,7 +201,7 @@ function AuthModal({ show, onHide, type, setType, navigateTo }) {
         keyboard={false}
         className="auth_modal"
       >
-        <Modal.Header closeButton></Modal.Header>
+        {/* <Modal.Header closeButton></Modal.Header> */}
         <Modal.Body>
           <div className="form_title">
             <div>

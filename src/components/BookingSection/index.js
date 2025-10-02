@@ -16,7 +16,7 @@ const BookingSection = () => {
 
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
-  const [popupType, setPopupType] = useState('error');
+  const [popupType, setPopupType] = useState('alert');
   const [displayedBookings, setDisplayedBookings] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
@@ -46,7 +46,7 @@ const BookingSection = () => {
   useEffect(() => {
     if (error) {
       setPopupMessage(error || t('bookings.fetchError'));
-      setPopupType('error');
+      setPopupType('alert');
       setShowPopup(true);
     }
   }, [error, t]);

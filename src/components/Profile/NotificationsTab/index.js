@@ -42,7 +42,7 @@ const NotificationsTab = () => {
   );
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
-  const [popupType, setPopupType] = useState("error");
+  const [popupType, setPopupType] = useState("alert");
   const [notificationSettings, setNotificationSettings] = useState({
     review_reminder: true,
     recommendation_reminder: true,
@@ -83,7 +83,7 @@ const NotificationsTab = () => {
       (result) => {
         if (result.payload?.success == false) {
           setPopupMessage(error);
-          setPopupType("error");
+          setPopupType("alert");
           setShowPopup(true);
         } else {
           dispatch(GetClient_Notification_Settings());

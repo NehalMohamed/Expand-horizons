@@ -71,7 +71,7 @@ const PasswordTab = () => {
   const userId = user?.id;
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
-  const [popupType, setPopupType] = useState("error");
+  const [popupType, setPopupType] = useState("alert");
   const [formErrors, setFormErrors] = useState({});
   const [popupIcon, setPopupIcon] = useState(null);
   // Form state management
@@ -218,7 +218,7 @@ const PasswordTab = () => {
           window.location.href = "/";
         } else {
           setPopupMessage(result.payload?.message);
-          setPopupType("error");
+          setPopupType("alert");
           setShowPopup(true);
         }
       });

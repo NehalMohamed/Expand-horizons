@@ -18,7 +18,7 @@ const ProfileSidebar = ({ activeTab, setActiveTab }) => {
   const dispatch = useDispatch();
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
-  const [popupType, setPopupType] = useState("error");
+  const [popupType, setPopupType] = useState("alert");
   const [popupIcon, setPopupIcon] = useState(null);
   // Get state from Redux store
   const { profileImage, loading, error, success, message } = useSelector(
@@ -36,7 +36,7 @@ const ProfileSidebar = ({ activeTab, setActiveTab }) => {
     // Validate file type
     if (!file.type.match("image.*")) {
       setPopupMessage(t("profile.select_image_file"));
-      setPopupType("error");
+      setPopupType("alert");
       setPopupIcon(<FaTimesCircle className="error-icon" size={24} />);
       setShowPopup(true);
       return;
@@ -45,7 +45,7 @@ const ProfileSidebar = ({ activeTab, setActiveTab }) => {
     // Validate file size (2MB limit)
     if (file.size > 2 * 1024 * 1024) {
       setPopupMessage(t("profile.image_size_limit"));
-      setPopupType("error");
+      setPopupType("alert");
       setShowPopup(true);
       return;
     }

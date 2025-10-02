@@ -14,7 +14,7 @@ const Reviews = ({ tripData , refreshTripDetails}) => {
     const [hoverRating, setHoverRating] = useState(0);
     const [showPopup, setShowPopup] = useState(false);
     const [popupMessage, setPopupMessage] = useState('');
-    const [popupType, setPopupType] = useState('error');
+    const [popupType, setPopupType] = useState('alert');
     const [showAllReviewsModal, setShowAllReviewsModal] = useState(false);
 
     const tripId = tripData?.trip_id;
@@ -48,7 +48,7 @@ const Reviews = ({ tripData , refreshTripDetails}) => {
     useEffect(() => {
         if (error) {
                 setPopupMessage(error.message || t("tripDetails.reviewsLoadError"));
-                setPopupType('error');
+                setPopupType('alert');
                 setShowPopup(true);
             }
     }, [error, t]);
@@ -57,7 +57,7 @@ const Reviews = ({ tripData , refreshTripDetails}) => {
     useEffect(() => {
         if (submission.error) {
             setPopupMessage(submission.error.message || t("tripDetails.reviewSubmissionError"));
-            setPopupType('error');
+            setPopupType('alert');
             setShowPopup(true);
             
             // Reset submission error after showing
@@ -119,14 +119,14 @@ const Reviews = ({ tripData , refreshTripDetails}) => {
     const handleSubmitReview = () => {
         if (userRating === 0) {
             setPopupMessage(t("tripDetails.pleaseSelectRating"));
-            setPopupType('error');
+            setPopupType('alert');
             setShowPopup(true);
             return;
         }
 
         if (reviewText.trim() === '') {
             setPopupMessage(t("tripDetails.pleaseWriteReview"));
-            setPopupType('error');
+            setPopupType('alert');
             setShowPopup(true);
             return;
         }

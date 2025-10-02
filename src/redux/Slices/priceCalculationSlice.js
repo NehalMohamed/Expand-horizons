@@ -3,7 +3,7 @@ import axios from "axios";
 import { checkAUTH, isUserNotLoggedIn, isTokenExpiredOnly } from "../../helper/helperFN";
 import { createAuthError } from "../../utils/authError";
 
-const BOOKING_URL = process.env.REACT_APP_BOOKING_API_URL;
+const BASE_URL = process.env.REACT_APP_CLIENT_API_URL;
 
 const getAuthHeaders = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -18,28 +18,38 @@ const getAuthHeaders = () => {
   };
 };
 
+const getNonAuthHeaders = () => {
+  let lang = localStorage.getItem("lang") || "en";
+  return {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept-Language": lang,
+    },
+  };
+};
+
 // Async thunk for calculating booking price
 export const calculateBookingPrice = createAsyncThunk(
   "priceCalculation/calculatePrice",
   async (calculationData, { rejectWithValue }) => {
-    // Check authentication
-    if (isUserNotLoggedIn()) {
-      return rejectWithValue(createAuthError('notLoggedIn'));
-    }
+    // // Check authentication
+    // if (isUserNotLoggedIn()) {
+    //   return rejectWithValue(createAuthError('notLoggedIn'));
+    // }
     
-    if (isTokenExpiredOnly()) {
-      return rejectWithValue(createAuthError('expired'));
-    }
+    // if (isTokenExpiredOnly()) {
+    //   return rejectWithValue(createAuthError('expired'));
+    // }
     
-    if (!checkAUTH()) {
-      return rejectWithValue(createAuthError('expired'));
-    }
+    // if (!checkAUTH()) {
+    //   return rejectWithValue(createAuthError('expired'));
+    // }
 
     try {
       const response = await axios.post(
-        `${BOOKING_URL}/CalculateBookingPrice`,
+        `${BASE_URL}/CalculateBookingPrice`,
         calculationData,
-        getAuthHeaders()
+        getNonAuthHeaders()
       );
       
       // Handle API response with success: false
@@ -49,9 +59,9 @@ export const calculateBookingPrice = createAsyncThunk(
       
       return response.data;
     } catch (error) {
-      if (error.response?.status === 401) {
-        return rejectWithValue(createAuthError('expired'));
-      }
+      // if (error.response?.status === 401) {
+      //   return rejectWithValue(createAuthError('expired'));
+      // }
       
       // Handle API error response format
       if (error.response?.data?.success === false) {

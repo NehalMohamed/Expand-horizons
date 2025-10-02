@@ -396,3 +396,48 @@
     margin: $spacer-sm 0;
   }
 }
+
+
+// Price Breakdown Styles
+.booking-selection__price-breakdown {
+  background: rgba(white, 0.1);
+  border-radius: 12px;
+  padding: $spacer-lg;
+  border: 1px solid rgba(white, 0.2);
+}
+
+.booking-selection__final-price {
+  font-size: 32px;
+  font-weight: $font-weight-bold;
+  color: white;
+  line-height: 1;
+
+  @include media-breakpoint-down(sm) {
+    font-size: 28px;
+  }
+}
+
+.booking-selection__price-note {
+  color: rgba(white, 0.8) !important;
+  margin-top: 4px;
+}
+
+.booking-selection__price-details {
+  background: rgba(white, 0.05);
+  border-radius: 8px;
+  padding: $spacer-md;
+}
+
+.booking-selection__price-line {
+  color: white;
+  font-size: 14px;
+  padding: 4px 0;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid rgba(white, 0.1);
+  }
+
+  @include media-breakpoint-down(sm) {
+    font-size: 13px;
+  }
+}

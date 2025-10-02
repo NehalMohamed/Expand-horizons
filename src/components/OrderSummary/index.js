@@ -17,7 +17,7 @@ const OrderSummary = ({ availabilityData }) => {
 
     const [showPopup, setShowPopup] = useState(false);
     const [popupMessage, setPopupMessage] = useState('');
-    const [popupType, setPopupType] = useState('error');
+    const [popupType, setPopupType] = useState('alert');
 
     const fetchBookingSummary = () => {
         var bookingId = availabilityData?.idOut;
@@ -47,7 +47,7 @@ const OrderSummary = ({ availabilityData }) => {
     useEffect(() => {
         if (error) {
             setPopupMessage(error || t('bookings.summaryError'));
-            setPopupType('error');
+            setPopupType('alert');
             setShowPopup(true);
         }
     }, [error, t]);
@@ -117,7 +117,8 @@ const OrderSummary = ({ availabilityData }) => {
         if (!summaryData?.extras || summaryData.extras.length === 0) {
             return null;
         }
-
+        
+        console.log(summaryData)
         return (
             <>
                 {summaryData.extras.map((extra, index) => (

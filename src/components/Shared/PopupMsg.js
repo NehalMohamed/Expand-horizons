@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import Alert from "react-popup-alert";
 
-const PopupMsg = ({ text, show, closeAlert, onConfirm , openAuthModal }) => {
+const PopupMsg = ({ text, show, closeAlert, onConfirm, openAuthModal }) => {
   const { t } = useTranslation();
   const isMounted = useRef(true);
 
@@ -18,6 +18,7 @@ const PopupMsg = ({ text, show, closeAlert, onConfirm , openAuthModal }) => {
       onConfirm?.();
 
        if (openAuthModal) {
+
         setTimeout(() => {
           openAuthModal("login");
         }, 300);
@@ -40,21 +41,21 @@ const PopupMsg = ({ text, show, closeAlert, onConfirm , openAuthModal }) => {
        display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        textAlign: 'center' // Center text horizontally
+        textAlign: 'center'
       }}
       headerStyles={{
-        textAlign: 'center' // Center header text
+        textAlign: 'center'
       }}
       textStyles={{
-        textAlign: 'center', // Center main text
+        textAlign: 'center',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        minHeight: '60px' // Ensure proper vertical centering
+        minHeight: '60px'
       }}
       buttonStyles={{ 
         backgroundColor: "#00bc82",
-        margin: '0 auto' // Center button
+        margin: '0 auto'
       }}
     />
   );

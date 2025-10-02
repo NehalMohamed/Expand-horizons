@@ -22,7 +22,7 @@ const DestinationExcursions = () => {
     const { user: stateUser } = useSelector((state) => state.auth); // Get user from auth state
     const [showPopup, setShowPopup] = useState(false);
     const [popupMessage, setPopupMessage] = useState('');
-    const [popupType, setPopupType] = useState('error');
+    const [popupType, setPopupType] = useState('alert');
     // Get user from localStorage as fallback
     const localStorageUser = JSON.parse(localStorage.getItem("user") || "null");
     const user = stateUser || localStorageUser;
@@ -44,7 +44,7 @@ const DestinationExcursions = () => {
     useEffect(() => {
         if (error) {
           setPopupMessage(error);
-          setPopupType('error');
+          setPopupType('alert');
           setShowPopup(true);    
         }
       }, [error]);

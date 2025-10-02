@@ -29,7 +29,7 @@ const ProfileTab = () => {
   });
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
-  const [popupType, setPopupType] = useState("error");
+  const [popupType, setPopupType] = useState("alert");
   // Get state from Redux store
   const { profileData, profileImage, loading, error, success, message } =
     useSelector((state) => state.profile);
@@ -101,7 +101,7 @@ const ProfileTab = () => {
     dispatch(saveProfile(updatedFormData)).then((result) => {
       if (result.payload?.success == false) {
         setPopupMessage(error);
-        setPopupType("error");
+        setPopupType("alert");
         setShowPopup(true);
       } else {
         dispatch(fetchProfile());

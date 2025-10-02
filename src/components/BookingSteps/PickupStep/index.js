@@ -25,7 +25,7 @@ const PickupStep = ({ onNext, tripData, availabilityData , childAges }) => {
 
     const [showPopup, setShowPopup] = useState(false);
     const [popupMessage, setPopupMessage] = useState('');
-    const [popupType, setPopupType] = useState('success');
+    const [popupType, setPopupType] = useState('alert');
     const [extraCounts, setExtraCounts] = useState({});
     const [isProcessingExtras, setIsProcessingExtras] = useState(false);
     const [pickupLocation, setPickupLocation] = useState({
@@ -50,7 +50,7 @@ const PickupStep = ({ onNext, tripData, availabilityData , childAges }) => {
     useEffect(() => {
         if (extrasError || bookingError || calculationError) {
             setPopupMessage(extrasError || bookingError || calculationError || t("bookings.generalError"));
-            setPopupType('error');
+            setPopupType('alert');
             setShowPopup(true);
         }
     }, [extrasError, bookingError, calculationError, t]);
@@ -124,7 +124,7 @@ const PickupStep = ({ onNext, tripData, availabilityData , childAges }) => {
                 }
             } catch (error) {
                 setPopupMessage(error || t('bookings.extrasAssignmentError'));
-                setPopupType('error');
+                setPopupType('alert');
                 setShowPopup(true);
 
                 // Revert the count change if there was an error
@@ -190,7 +190,7 @@ const PickupStep = ({ onNext, tripData, availabilityData , childAges }) => {
 
         } catch (error) {
             setPopupMessage(error);
-            setPopupType('error');
+            setPopupType('alert');
             setShowPopup(true);
         }
     };

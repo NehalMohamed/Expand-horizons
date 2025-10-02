@@ -123,7 +123,9 @@
     "namePlaceholder": "Name",
     "emailPlaceholder": "Email Address",
     "subscribeButton": "SUBSCRIBE",
-    "successMessage": "Thank you for subscribing to our newsletter!"
+    "successMessage": "Thank you for subscribing to our newsletter!",
+    "subscribing": "Subscribing...",
+    "errorMessage": "Failed to subscribe. Please try again."
   },
   "contactInfo": {
     "visitUs": "VISIT US",
@@ -174,11 +176,14 @@
     "phonePlaceholder": "Phone",
     "messagePlaceholder": "Message",
     "sendButton": "Send Message",
-    "successMessage": "Message sent successfully!",
     "HaveAccount": "Already have an account?",
     "CodeVerifyTitle": "Enter The Code sent To",
     "CodeVerifyTitle2": "To Verify your mail",
     "SendCode": "Send Code",
+    "subjectPlaceholder": "Subject",
+    "sending": "Sending...",
+    "successMessage": "Your message has been sent successfully!",
+    "errorMessage": "Failed to send message. Please try again.",
     "fillField": "Please fill this field",
     "spamAlert": {
       "title": "Can't find our email?",
@@ -250,6 +255,8 @@
     "maxCapacityExceeded": "Please select {{maxCapacity}} participants or fewer for this activity.",
     "invalidDate": "Please select a date at least {{releaseDays}} days from today.",
     "invalidChildAges": "Please enter valid ages for all children (0-{{maxAge}} years)",
+    "continue": "Continue",
+    "allTaxesIncluded": "All taxes and fees included",
     "date": {
       "selectDate": "Select date"
     },

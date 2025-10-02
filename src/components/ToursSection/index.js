@@ -24,7 +24,7 @@ const ToursSection = (props) => {
   const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
-  const [popupType, setPopupType] = useState('error');
+  const [popupType, setPopupType] = useState('alert');
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const ToursSection = (props) => {
     // Handle errors in the parent component only
     if (operation.error) {
       setPopupMessage(operation.error);
-      setPopupType('error');
+      setPopupType('alert');
       setShowPopup(true);
 
       // Reset operation error after showing

@@ -35,7 +35,7 @@ const ContactStep = ({ onNext, tripData, availabilityData }) => {
     const [showBookingModal, setShowBookingModal] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
     const [popupMessage, setPopupMessage] = useState('');
-    const [popupType, setPopupType] = useState('success');
+    const [popupType, setPopupType] = useState('alert');
 
 
     const handleInputChange = (field, value) => {
@@ -87,7 +87,7 @@ const ContactStep = ({ onNext, tripData, availabilityData }) => {
 
             if (!bookingId) {
                 // setPopupMessage(t('bookings.noBookingId'));
-                // setPopupType('error');
+                // setPopupType('alert');
                 // setShowPopup(true);
                 return;
             }
@@ -132,13 +132,13 @@ const ContactStep = ({ onNext, tripData, availabilityData }) => {
             }
             // else {
             //     setPopupMessage(t('bookings.contact.bookingConfirmationFailed'));
-            //     setPopupType('error');
+            //     setPopupType('alert');
             //     setShowPopup(true);
             // }
 
         } catch (error) {
             setPopupMessage(error.message);
-            setPopupType('error');
+            setPopupType('alert');
             setShowPopup(true);
         }
     };
@@ -153,7 +153,7 @@ const ContactStep = ({ onNext, tripData, availabilityData }) => {
     useEffect(() => {
         if (confirmError) {
             setPopupMessage(confirmError || t('bookings.contact.bookingConfirmationFailed'));
-            setPopupType('error');
+            setPopupType('alert');
             setShowPopup(true);
         }
     }, [confirmError, t]);

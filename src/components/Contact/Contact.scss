@@ -178,6 +178,87 @@
       min-height: 100px;
     }
   }
+  
+   // Phone Input Custom Styles
+  .PhoneInput {
+    width: 100%;
+
+    .PhoneInputInput {
+      width: 100%;
+      padding: $spacer-md $spacer-lg;
+      border: 1px solid $border-color;
+      border-radius: $border-radius-lg;
+      font-size: 1rem;
+      color: $primary-color;
+      background-color: $light-bg;
+      transition: $transition-base;
+      font-family: inherit;
+
+      &:focus {
+        outline: none;
+        border-color: $secondary-color;
+        box-shadow: 0 0 0 3px rgba(2, 217, 1, 0.1);
+      }
+
+      &::placeholder {
+        color: $primary-color;
+        font-weight: $font-weight-normal;
+      }
+
+      @include media-breakpoint-down(sm) {
+        padding: $spacer-sm $spacer-md;
+        font-size: 0.95rem;
+      }
+    }
+
+    .PhoneInputCountry {
+      margin-right: $spacer-md;
+      padding: $spacer-md 0;
+      
+      .PhoneInputCountrySelect {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 1;
+        border: 0;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      .PhoneInputCountryIcon {
+        width: 1.5em;
+        height: 1.1em;
+        box-shadow: 0 0 0 1px $border-color;
+        background-color: $light-bg;
+        border-radius: $border-radius-sm;
+      }
+
+      .PhoneInputCountrySelectArrow {
+        display: inline-block;
+        margin-left: $spacer-xs;
+        width: 0;
+        height: 0;
+        border-left: 0.3em solid transparent;
+        border-right: 0.3em solid transparent;
+        border-top: 0.3em solid $primary-color;
+      }
+    }
+
+    // Style when disabled
+    &.PhoneInput--disabled {
+      .PhoneInputInput {
+        background-color: darken($light-bg, 5%);
+        cursor: not-allowed;
+        opacity: 0.7;
+      }
+
+      .PhoneInputCountry {
+        opacity: 0.7;
+      }
+    }
+  }
 
   .submit-btn {
     @extend .secondryBtn;

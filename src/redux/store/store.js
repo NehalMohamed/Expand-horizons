@@ -16,6 +16,8 @@ import priceCalculationReducer from "../Slices/priceCalculationSlice";
 import bookingListReducer from "../Slices/bookingListSlice";
 import { authMiddleware } from "../../middleware/authMiddleware";
 import profileReducer from "../Slices/profileSlice";
+import contactReducer from "../Slices/contactSlice";
+import NewsletterReducer from "../Slices/newsletterSlice";
 export const store = configureStore({
   reducer: {
     tours: toursReducer,
@@ -34,6 +36,8 @@ export const store = configureStore({
     priceCalculation: priceCalculationReducer,
     bookingList: bookingListReducer,
     profile: profileReducer,
+    contact: contactReducer,
+    newsletter: NewsletterReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(authMiddleware),
