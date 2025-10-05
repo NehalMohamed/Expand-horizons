@@ -1,5 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { FaStar, FaMapMarkerAlt, FaCalendarAlt, FaUsers, FaIdCard, FaMoneyBillWave, FaGift, FaShoppingCart, FaRegCalendarCheck, FaPlus } from 'react-icons/fa';
+import {
+    FaStar,
+    FaMapMarkerAlt,
+    FaCalendarAlt,
+    FaUsers,
+    FaIdCard,
+    FaMoneyBillWave,
+    FaGift,
+    FaShoppingCart,
+    FaRegCalendarCheck,
+    FaPlus,
+    FaExchangeAlt
+} from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBookingSummary, clearRefresh } from '../../redux/Slices/bookingSummarySlice';
@@ -117,7 +129,7 @@ const OrderSummary = ({ availabilityData }) => {
         if (!summaryData?.extras || summaryData.extras.length === 0) {
             return null;
         }
-        
+
         console.log(summaryData)
         return (
             <>
@@ -128,12 +140,12 @@ const OrderSummary = ({ availabilityData }) => {
                             {extra.extra_count > 1 ? `${extra.extra_count} × ` : ''} {extra.extra_name}
                         </p>
                     </div>
-
-
                 ))}
             </>
         );
     };
+
+    const isTwoWayTransfer = summaryData?.is_two_way === true && summaryData?.trip_type === 2;
 
     if (loading) {
         return <LoadingPage />;
@@ -199,6 +211,15 @@ const OrderSummary = ({ availabilityData }) => {
                                 <p className="detail-text">{getParticipantsText()}</p>
                             </div>
 
+                            {/* Two-way Transfer Display */}
+                            {isTwoWayTransfer && (
+                                <div className="detail-item">
+                                    <FaExchangeAlt className="detail-icon" />
+                                    <p className="detail-text">
+                                        {t('booking.twoWayTransfer')}
+                                    </p>
+                                </div>
+                            )}
 
                             {/* <div className="detail-item">
                                     <FaPencilAlt className="detail-icon" />
@@ -220,9 +241,8 @@ const OrderSummary = ({ availabilityData }) => {
                                     </p>
                                 </div>
                             )}
-     
 
-                              {renderExtras()}
+                            {renderExtras()}
 
                             <div className="detail-item">
                                 <FaMoneyBillWave className="detail-icon" />

@@ -197,7 +197,7 @@
     }
   },
   "PopUp": {
-    "Header": "Error Message",
+    "Header": "Notification",
     "Close": "Close"
   },
   "auth": {
@@ -257,6 +257,8 @@
     "invalidChildAges": "Please enter valid ages for all children (0-{{maxAge}} years)",
     "continue": "Continue",
     "allTaxesIncluded": "All taxes and fees included",
+    "twoWayTransfer": "Two-way transfer",
+    "included": "Included",
     "date": {
       "selectDate": "Select date"
     },
@@ -328,6 +330,7 @@
       "fullNamePlaceholder": "Full name*",
       "emailPlaceholder": "Email*",
       "phonePlaceholder": "Mobile phone number*",
+      "nationalityPlaceholder": "Nationality*",
       "notesLabel": "Additional Notes",
       "notesPlaceholder": "Any special requests or additional information...",
       "confirmButton": "Confirm Booking",

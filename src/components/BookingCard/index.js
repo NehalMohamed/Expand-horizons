@@ -10,7 +10,8 @@ import {
   FaPlus,
   FaIdCard,
   FaMoneyBillWave,
-  FaQrcode
+  FaQrcode,
+  FaExchangeAlt
 } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -18,6 +19,8 @@ import { useNavigate } from 'react-router-dom';
 const BookingCard = ({ booking }) => {
     const { t } = useTranslation();
     const navigate = useNavigate();
+
+    const isTwoWayTransfer = booking?.is_two_way === true && booking?.trip_type === 2; 
 
     const renderStars = (rating) => {
         if (!rating) return null;
@@ -134,6 +137,16 @@ const BookingCard = ({ booking }) => {
                         <FaUsers className="detail-icon" />
                         <p className="detail-text">{getParticipantsText(booking)}</p>
                     </div>
+
+                    {/* Two-way Transfer Display */}
+                    {isTwoWayTransfer && (
+                        <div className="detail-item">
+                            <FaExchangeAlt className="detail-icon" />
+                            <p className="detail-text">
+                                {t('booking.twoWayTransfer')}
+                            </p>
+                        </div>
+                    )}
 
                     <div className="detail-item">
                         <FaIdCard className="detail-icon" />

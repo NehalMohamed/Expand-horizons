@@ -417,6 +417,37 @@
   }
 }
 
+.booking-selection__checkbox {
+  margin: $spacer-md 0;
+  
+  .form-check-input {
+    width: 20px;
+    height: 20px;
+    margin-right: $spacer-sm;
+    border: 2px solid $secondary-color;
+    
+    &:checked {
+      background-color: $secondary-color;
+      border-color: $secondary-color;
+    }
+    
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba($secondary-color, 0.25);
+    }
+  }
+  
+  .form-check-label {
+    color: white;
+    font-size: 16px;
+    font-weight: $font-weight-medium;
+    cursor: pointer;
+    
+    @include media-breakpoint-down(sm) {
+      font-size: 14px;
+    }
+  }
+}
+
 .booking-selection__price-note {
   color: rgba(white, 0.8) !important;
   margin-top: 4px;

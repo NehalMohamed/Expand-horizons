@@ -30,15 +30,37 @@ const TripDetailsPage = () => {
     useSelector((state) => state.language.currentLang) || "en";
 
   const [user, setUser] = useState({});
+  const [tripState, setTripState] = useState(null);
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("user") || "{}");
     setUser(userData);
   }, []);
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [state]);
+    // Store location state in localStorage when component mounts
+    useEffect(() => {
+      if (state) {
+        localStorage.setItem("tripDetailsState", JSON.stringify(state));
+        setTripState(state);
+      } else {
+        // If no state from location, try to get from localStorage
+        const savedState = localStorage.getItem("tripDetailsState");
+        if (savedState) {
+          setTripState(JSON.parse(savedState));
+        }
+      }
+    }, [state]);
+  
+    // Clean up localStorage when component unmounts
+    useEffect(() => {
+      return () => {
+        localStorage.removeItem("tripDetailsState");
+      };
+    }, []);
+  
+    useEffect(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, [tripState]);
 
   useEffect(() => {
     if (error) {
@@ -54,15 +76,17 @@ const TripDetailsPage = () => {
     return () => {
       dispatch(clearTripDetails());
     };
-  }, [route, currentLang, user.id, state]);
+  }, [route, currentLang, user.id, tripState]);
 
   const fetchTripDetailsData = () => {
+    if (!tripState) return;
+
     const params = {
-      trip_id: state?.tripId, // You'll need to implement this function
+      trip_id: tripState?.tripId, 
       lang_code: currentLang,
       currency_code: "EUR",
       client_id: user?.id || "",
-      trip_type: state?.trip_type,
+      trip_type: tripState?.trip_type,
     };
 
     dispatch(fetchTripDetails(params));

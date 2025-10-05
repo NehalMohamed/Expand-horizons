@@ -197,7 +197,7 @@
     }
   },
   "PopUp": {
-    "Header": "Fehlermeldung",
+    "Header": "Benachrichtigung",
     "Close": "Schließen"
   },
   "auth": {
@@ -257,6 +257,8 @@
     "invalidChildAges": "Bitte geben Sie gültige Alter für alle Kinder ein (0-{{maxAge}} Jahre)",
     "continue": "Weiter",
     "allTaxesIncluded": "Alle Steuern und Gebühren inklusive",
+    "twoWayTransfer": "Hin- und Rücktransfer",
+    "included": "Inklusive",
     "date": {
       "selectDate": "Datum auswählen"
     },
@@ -328,6 +330,7 @@
       "fullNamePlaceholder": "Vollständiger Name*",
       "emailPlaceholder": "E-Mail*",
       "phonePlaceholder": "Handynummer*",
+      "nationalityPlaceholder": "Staatsangehörigkeit*",
       "notesLabel": "Zusätzliche Hinweise",
       "notesPlaceholder": "Besondere Wünsche oder zusätzliche Informationen...",
       "confirmButton": "Buchung bestätigen",

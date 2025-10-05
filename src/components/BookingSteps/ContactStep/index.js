@@ -6,6 +6,7 @@ import PhoneInput from 'react-phone-number-input';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkAvailability } from '../../../redux/Slices/bookingSlice';
 import { confirmBooking } from '../../../redux/Slices/confirmSlice';
+import { fetchProfile } from '../../../redux/Slices/profileSlice';
 import BookingModal from '../../Shared/BookingModal';
 import PopUp from '../../Shared/popup/PopUp';
 import LoadingPage from '../../Loader/LoadingPage';
@@ -15,6 +16,9 @@ const ContactStep = ({ onNext, tripData, availabilityData }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem("user"));
+
+    const { profileData, loading: profileLoading } = useSelector((state) => state.profile);
+
     const currentLang = useSelector((state) => state.language.currentLang) || "en";
     const { summaryData } = useSelector((state) => state.bookingSummary);
     const { loading: bookingLoading, error: bookingError } = useSelector((state) => state.booking);
@@ -24,11 +28,14 @@ const ContactStep = ({ onNext, tripData, availabilityData }) => {
     const fullName = user?.firstName + ' ' + user?.lastName;
     const userEmail = user?.email;
     const userPhone = user?.phoneNumber;
+    // console.log(user)
+    const userNationality = profileData?.nation || '';
 
     const [contactInfo, setContactInfo] = useState({
         fullName: fullName || '',
         email: userEmail || '',
-        phone: userPhone || ''
+        phone: userPhone || '',
+        nationality: userNationality || ''
     });
     const [notes, setNotes] = useState('');
     const [errors, setErrors] = useState({});
@@ -36,7 +43,36 @@ const ContactStep = ({ onNext, tripData, availabilityData }) => {
     const [showPopup, setShowPopup] = useState(false);
     const [popupMessage, setPopupMessage] = useState('');
     const [popupType, setPopupType] = useState('alert');
-
+    const [hasFetchedProfile, setHasFetchedProfile] = useState(false);
+    
+        // Fetch profile data when component mounts
+        useEffect(() => {
+            const fetchUserProfile = async () => {
+                try {
+                    await dispatch(fetchProfile()).unwrap();
+                    setHasFetchedProfile(true);
+                } catch (error) {
+                    console.error('Failed to fetch profile:', error);
+                    setHasFetchedProfile(true);
+                }
+            };
+    
+            if (!profileData?.nation && !profileLoading) {
+                fetchUserProfile();
+            } else {
+                setHasFetchedProfile(true);
+            }
+        }, [dispatch, profileData, profileLoading]);
+    
+        // Update contact info when profile data is loaded
+        useEffect(() => {
+            if (profileData?.nation && hasFetchedProfile) {
+                setContactInfo(prev => ({
+                    ...prev,
+                    nationality: profileData.nation || profileData.nationality || ''
+                }));
+            }
+        }, [profileData, hasFetchedProfile]);
 
     const handleInputChange = (field, value) => {
         setContactInfo(prev => ({
@@ -73,6 +109,10 @@ const ContactStep = ({ onNext, tripData, availabilityData }) => {
             newErrors.phone = t('bookings.contact.errors.required');
         }
 
+        if (!contactInfo.nationality?.trim()) {
+            newErrors.nationality = t('bookings.contact.errors.required');
+        }
+
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
@@ -101,6 +141,7 @@ const ContactStep = ({ onNext, tripData, availabilityData }) => {
                 client_id: summaryData?.client_id,
                 client_email: contactInfo.email,
                 client_phone: contactInfo.phone,
+                client_nationality: contactInfo.nationality,
                 booking_notes: notes,
                 client_name: contactInfo.fullName,
                 total_pax: summaryData?.total_pax || 1,
@@ -113,7 +154,8 @@ const ContactStep = ({ onNext, tripData, availabilityData }) => {
                 currency_code: summaryData?.currency_code,
                 pickup_address: summaryData?.pickup_address || '',
                 booking_status: 1,
-                total_price: summaryData?.total_price
+                total_price: summaryData?.total_price,
+                is_two_way: summaryData?.is_two_way
             };
 
             const availabilityResult = await dispatch(checkAvailability(bookingData)).unwrap();
@@ -158,7 +200,7 @@ const ContactStep = ({ onNext, tripData, availabilityData }) => {
         }
     }, [confirmError, t]);
 
-    const isLoading = bookingLoading || extrasLoading || confirmLoading;
+    const isLoading = bookingLoading || extrasLoading || confirmLoading || profileLoading;
 
     if (isLoading) {
         return <LoadingPage />;
@@ -212,6 +254,19 @@ const ContactStep = ({ onNext, tripData, availabilityData }) => {
                         />
                         {errors.phone && (
                             <div className="error-message">{errors.phone}</div>
+                        )}
+                    </Form.Group>
+
+                    <Form.Group className="form-group">
+                        <Form.Control
+                            type="text"
+                            value={contactInfo.nationality || ''}
+                            onChange={(e) => handleInputChange('nationality', e.target.value)}
+                            placeholder={t('bookings.contact.nationalityPlaceholder')}
+                            className={`form-input ${errors.nationality ? 'is-invalid' : ''}`}
+                        />
+                        {errors.nationality && (
+                            <div className="error-message">{errors.nationality}</div>
                         )}
                     </Form.Group>
 

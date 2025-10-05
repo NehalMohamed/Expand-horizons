@@ -16,6 +16,7 @@ const BookingSelection = ({ tripData }) => {
     const dispatch = useDispatch();
     const maxAge = tripData?.max_child_age || 0;
     const hasChildOption = tripData?.max_child_age !== null;
+    const isTwoWayTransferType = tripData?.trip_type === 2;
 
     const { loading, error, success, availabilityData } = useSelector((state) => state.booking);
     const { loading: calculationLoading, error: calculationError, success: calculationSuccess, calculationData } = useSelector((state) => state.priceCalculation);
@@ -31,6 +32,7 @@ const BookingSelection = ({ tripData }) => {
     });
     const [childAges, setChildAges] = useState([]);
     const [selectedDate, setSelectedDate] = useState(null);
+    const [isTwoWay, setIsTwoWay] = useState(false); // Checkbox state for two-way transfer
     //  const [selectedLanguage, setSelectedLanguage] = useState(t('booking.language.english'));
     const [showParticipants, setShowParticipants] = useState(false);
     const [ageValidationErrors, setAgeValidationErrors] = useState([]);
@@ -73,7 +75,7 @@ const BookingSelection = ({ tripData }) => {
             setShowPriceBreakdown(false);
             dispatch(resetCalculation());
         }
-    }, [participants, selectedDate]);
+    }, [participants, selectedDate, isTwoWay, childAges]);
 
     // Handle API errors and success
     useEffect(() => {
@@ -235,17 +237,19 @@ const BookingSelection = ({ tripData }) => {
                 child_num: hasChildOption ? participants.children : 0,
                 currency_code: "EUR",
                 extra_lst: [],
-                childAges: numericChildAges
+                childAges: numericChildAges,
+                is_two_way: isTwoWayTransferType ? isTwoWay : false
             };
 
             await dispatch(calculateBookingPrice(calculationData)).unwrap();
-    
+
         } catch (err) {
             // Error is handled in useEffect
         }
     };
+
     const handleContinueBooking = async () => {
-       if (!validateInputs()) return;
+        if (!validateInputs()) return;
 
         // Format date as YYYY-MM-DD
         const formattedDate = selectedDate.toISOString().split('T')[0];
@@ -281,7 +285,8 @@ const BookingSelection = ({ tripData }) => {
             trip_type: tripData?.trip_type,
             booking_dateStr: "",
             trip_dateStr: formattedDate,
-            currency_code: "EUR"
+            currency_code: "EUR",
+            is_two_way: isTwoWayTransferType ? isTwoWay : false
         };
 
         try {
@@ -299,7 +304,8 @@ const BookingSelection = ({ tripData }) => {
                 child_num: hasChildOption ? participants.children : 0,
                 currency_code: "EUR",
                 extra_lst: [],
-                childAges: numericChildAges
+                childAges: numericChildAges,
+                is_two_way: isTwoWayTransferType ? isTwoWay : false
             };
 
             await dispatch(calculateBookingPrice(calculationData)).unwrap();
@@ -511,6 +517,20 @@ const BookingSelection = ({ tripData }) => {
                                 />
                             </Col>
 
+                            {/* Two-way Transfer Checkbox - Only show for two-way transfer types */}
+                            {isTwoWayTransferType && (
+                                <Col lg={12} md={12} sm={12}>
+                                    <Form.Check
+                                        type="checkbox"
+                                        id="two-way-transfer"
+                                        label={t('booking.twoWayTransfer')}
+                                        checked={isTwoWay}
+                                        onChange={(e) => setIsTwoWay(e.target.checked)}
+                                        className="booking-selection__checkbox"
+                                    />
+                                </Col>
+                            )}
+
                             {/* Language Selector */}
                             {/* <Col lg={4} md={12} sm={12}>
                             <Dropdown>
@@ -558,7 +578,8 @@ const BookingSelection = ({ tripData }) => {
                                             {participants.adults > 0 && calculationData.total_adult_price > 0 && (
                                                 <div className="booking-selection__price-line d-flex justify-content-between">
                                                     <span>
-                                                        {participants.adults} {t('booking.participants.adult')} × {calculationData.total_adult_price / participants.adults} €
+                                                        {participants.adults} {t('booking.participants.adult')}
+                                                        {/* {participants.adults} {t('booking.participants.adult')} × {calculationData.total_adult_price / participants.adults} € */}
                                                     </span>
                                                     <span>{calculationData.total_adult_price} €</span>
                                                 </div>
@@ -567,9 +588,18 @@ const BookingSelection = ({ tripData }) => {
                                             {participants.children > 0 && calculationData.total_child_price > 0 && (
                                                 <div className="booking-selection__price-line d-flex justify-content-between">
                                                     <span>
-                                                        {participants.children} {t('booking.participants.child')} × {calculationData.total_child_price / participants.children} €
+                                                        {participants.children} {t('booking.participants.child')}
+                                                        {/* {participants.children} {t('booking.participants.child')} × {calculationData.total_child_price / participants.children} € */}
                                                     </span>
                                                     <span>{calculationData.total_child_price} €</span>
+                                                </div>
+                                            )}
+
+                                            {/* Show two-way transfer if selected */}
+                                            {isTwoWayTransferType && isTwoWay && (
+                                                <div className="booking-selection__price-line d-flex justify-content-between">
+                                                    <span>{t('booking.twoWayTransfer')}</span>
+                                                    <span>{t('booking.included')}</span>
                                                 </div>
                                             )}
                                         </div>

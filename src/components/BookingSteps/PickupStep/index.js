@@ -115,7 +115,8 @@ const PickupStep = ({ onNext, tripData, availabilityData , childAges }) => {
                         child_num: summaryData.child_num,
                         currency_code: "EUR",
                         extra_lst: extrasList,
-                        childAges: childAges
+                        childAges: childAges,
+                        is_two_way: summaryData?.is_two_way
                     };
 
                     // Dispatch price calculation
@@ -181,10 +182,12 @@ const PickupStep = ({ onNext, tripData, availabilityData , childAges }) => {
                 trip_type: summaryData?.trip_type,
                 booking_dateStr: summaryData.booking_datestr,
                 trip_dateStr: summaryData.trip_datestr,
-                currency_code: summaryData?.currency_code
+                currency_code: summaryData?.currency_code,
+                is_two_way: summaryData?.is_two_way
             };
 
             await dispatch(checkAvailability(bookingData)).unwrap();
+            dispatch(triggerRefresh());
 
             onNext();
 
