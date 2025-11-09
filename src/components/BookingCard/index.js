@@ -1,26 +1,26 @@
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
-import { 
-  FaStar, 
-  FaMapMarkerAlt, 
-  FaCalendarAlt, 
-  FaUsers, 
-  FaCreditCard, 
-  FaRegCalendarCheck, 
-  FaPlus,
-  FaIdCard,
-  FaMoneyBillWave,
-  FaQrcode,
-  FaExchangeAlt
+import {
+    FaStar,
+    FaMapMarkerAlt,
+    FaCalendarAlt,
+    FaUsers,
+    FaCreditCard,
+    FaRegCalendarCheck,
+    FaPlus,
+    FaIdCard,
+    FaMoneyBillWave,
+    FaQrcode,
+    FaExchangeAlt
 } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-const BookingCard = ({ booking }) => {
+const BookingCard = ({ booking, onCancelBooking }) => {
     const { t } = useTranslation();
     const navigate = useNavigate();
 
-    const isTwoWayTransfer = booking?.is_two_way === true && booking?.trip_type === 2; 
+    const isTwoWayTransfer = booking?.is_two_way === true && booking?.trip_type === 2;
 
     const renderStars = (rating) => {
         if (!rating) return null;
@@ -39,24 +39,24 @@ const BookingCard = ({ booking }) => {
         return stars;
     };
 
-    const formatDate = (dateString) => {
-        if (!dateString) return t('bookings.dateToBeConfirmed');
+    const formatDateTime = (dateTimeString) => {
+        if (!dateTimeString) return t('bookings.dateToBeConfirmed');
         try {
-            const date = new Date(dateString);
-            return date.toLocaleDateString(undefined, {
+            const date = new Date(dateTimeString);
+            const formattedDate = date.toLocaleDateString(undefined, {
                 weekday: 'long',
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric'
             });
+            const formattedTime = date.toLocaleTimeString(undefined, {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            return `${formattedDate} at ${formattedTime}`;
         } catch (error) {
-            return dateString;
+            return dateTimeString;
         }
-    };
-
-    const formatTime = (timeString) => {
-        if (!timeString) return t('bookings.timeToBeConfirmed');
-        return timeString;
     };
 
     const getParticipantsText = (booking) => {
@@ -90,6 +90,32 @@ const BookingCard = ({ booking }) => {
                 ))}
             </>
         );
+    };
+
+    const renderObligatoryExtras = (ObligatoryExtras) => {
+        if (!ObligatoryExtras || ObligatoryExtras.length === 0) {
+            return null;
+        }
+
+        return (
+            <>
+                {ObligatoryExtras.map((extra, index) => (
+                    <div key={extra.id || index} className="detail-item">
+                        <FaPlus className="detail-icon" />
+                        <p className="detail-text">
+                            {extra.extra_name}
+                        </p>
+                    </div>
+                ))}
+            </>
+        );
+    };
+
+    const handleCancelClick = (e) => {
+        e.stopPropagation();
+        if (onCancelBooking) {
+            onCancelBooking(booking);
+        }
     };
 
     return (
@@ -126,12 +152,23 @@ const BookingCard = ({ booking }) => {
                         </div>
                     )}
 
+                    {/* Trip Date */}
                     <div className="detail-item">
                         <FaCalendarAlt className="detail-icon" />
                         <p className="detail-text">
-                            {formatDate(booking.trip_date)} {booking.pickup_time && `at ${formatTime(booking.pickup_time)}`}
+                            <strong>{t('bookings.tripDate')}:</strong> {booking.trip_datestr}
                         </p>
                     </div>
+
+                    {/* Return Date - Only show if it exists */}
+                    {booking.trip_return_datestr && (
+                        <div className="detail-item">
+                            <FaCalendarAlt className="detail-icon" />
+                            <p className="detail-text">
+                                <strong>{t('bookings.returnDate')}:</strong> {booking.trip_return_datestr}
+                            </p>
+                        </div>
+                    )}
 
                     <div className="detail-item">
                         <FaUsers className="detail-icon" />
@@ -166,6 +203,8 @@ const BookingCard = ({ booking }) => {
 
                     {renderExtras(booking.extras)}
 
+                    {renderObligatoryExtras(booking.extras_obligatory)}
+
                     <div className="detail-item">
                         <FaMoneyBillWave className="detail-icon" />
                         <p className="detail-text">{t('bookings.resevePay')}</p>
@@ -181,7 +220,14 @@ const BookingCard = ({ booking }) => {
 
                 <div className="booking-total">
                     <div className="total-row">
-                        <span className="total-label">{t('bookings.orderSummary.total')}</span>
+                        <Button
+                            variant="outline-primary"
+                            className="cancel-btn"
+                            onClick={handleCancelClick}
+                        >
+                            {t("general.cancel")}
+                        </Button>
+                        {/* <span className="total-label">{t('bookings.orderSummary.total')}</span> */}
                         <span className="total-price">
                             {booking.total_price ? `${booking.total_price} €` : `0 €`}
                         </span>

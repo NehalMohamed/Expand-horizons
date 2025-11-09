@@ -14,7 +14,8 @@ const DivingDropdown = () => {
     const { treeItems, treeLoading } = useSelector((state) => state.destinations);
     const destinations = treeItems[tripType] || [];
     const loading = treeLoading[tripType] || false;
-    const currentLang = useSelector((state) => state.language.currentLang) || "en";
+    // const currentLang = useSelector((state) => state.language.currentLang) || "en";
+    const currentLang = localStorage.getItem("lang") || "en";
 
     useEffect(() => {
         const params = {

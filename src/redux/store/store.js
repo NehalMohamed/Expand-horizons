@@ -14,6 +14,7 @@ import bookingSummaryReducer from "../Slices/bookingSummarySlice";
 import confirmBookingReducer from "../Slices/confirmSlice";
 import priceCalculationReducer from "../Slices/priceCalculationSlice";
 import bookingListReducer from "../Slices/bookingListSlice";
+import bookingCancelReducer from "../Slices/bookingCancelSlice";
 import { authMiddleware } from "../../middleware/authMiddleware";
 import profileReducer from "../Slices/profileSlice";
 import contactReducer from "../Slices/contactSlice";
@@ -35,6 +36,7 @@ export const store = configureStore({
     confirmBooking: confirmBookingReducer,
     priceCalculation: priceCalculationReducer,
     bookingList: bookingListReducer,
+    bookingCancel: bookingCancelReducer,
     profile: profileReducer,
     contact: contactReducer,
     newsletter: NewsletterReducer,

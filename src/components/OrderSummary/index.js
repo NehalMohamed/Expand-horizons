@@ -24,7 +24,8 @@ const OrderSummary = ({ availabilityData }) => {
     const { t } = useTranslation();
 
     const dispatch = useDispatch();
-    const currentLang = useSelector((state) => state.language.currentLang) || "en";
+    // const currentLang = useSelector((state) => state.language.currentLang) || "en";
+    const currentLang = localStorage.getItem("lang") || "en";
     const { summaryData, loading, error, shouldRefresh } = useSelector((state) => state.bookingSummary);
 
     const [showPopup, setShowPopup] = useState(false);
@@ -91,24 +92,24 @@ const OrderSummary = ({ availabilityData }) => {
         setShowGiftCode(false);
     };
 
-    const formatDate = (dateString) => {
-        if (!dateString) return t('bookings.dateToBeConfirmed');
+    const formatDateTime = (dateTimeString) => {
+        if (!dateTimeString) return t('bookings.dateToBeConfirmed');
         try {
-            const date = new Date(dateString);
-            return date.toLocaleDateString(undefined, {
+            const date = new Date(dateTimeString);
+            const formattedDate = date.toLocaleDateString(undefined, {
                 weekday: 'long',
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric'
             });
+            const formattedTime = date.toLocaleTimeString(undefined, {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            return `${formattedDate} at ${formattedTime}`;
         } catch (error) {
-            return dateString;
+            return dateTimeString;
         }
-    };
-
-    const formatTime = (timeString) => {
-        if (!timeString) return t('bookings.timeToBeConfirmed');
-        return timeString;
     };
 
     const getParticipantsText = () => {
@@ -130,7 +131,7 @@ const OrderSummary = ({ availabilityData }) => {
             return null;
         }
 
-        console.log(summaryData)
+        
         return (
             <>
                 {summaryData.extras.map((extra, index) => (
@@ -138,6 +139,25 @@ const OrderSummary = ({ availabilityData }) => {
                         <FaPlus className="detail-icon" />
                         <p className="detail-text">
                             {extra.extra_count > 1 ? `${extra.extra_count} × ` : ''} {extra.extra_name}
+                        </p>
+                    </div>
+                ))}
+            </>
+        );
+    };
+
+    const renderObligatoryExtras = () => {
+        if (!summaryData?.extras_obligatory || summaryData.extras_obligatory.length === 0) {
+            return null;
+        }
+
+        return (
+            <>
+                {summaryData.extras_obligatory.map((extra, index) => (
+                    <div key={extra.id || index} className="detail-item">
+                        <FaPlus className="detail-icon" />
+                        <p className="detail-text">
+                         {extra.extra_name}
                         </p>
                     </div>
                 ))}
@@ -199,12 +219,23 @@ const OrderSummary = ({ availabilityData }) => {
                                 </div>
                             )}
 
+                            {/* Trip Date */}
                             <div className="detail-item">
                                 <FaCalendarAlt className="detail-icon" />
                                 <p className="detail-text">
-                                    {formatDate(summaryData.trip_date)} {summaryData.pickup_time && `at ${formatTime(summaryData.pickup_time)}`}
+                                    <strong>{t('bookings.tripDate')}:</strong> {summaryData.trip_datestr}
                                 </p>
                             </div>
+
+                            {/* Return Date - Only show if it exists */}
+                            {summaryData.trip_return_datestr && (
+                                <div className="detail-item">
+                                    <FaCalendarAlt className="detail-icon" />
+                                    <p className="detail-text">
+                                        <strong>{t('bookings.returnDate')}:</strong> {summaryData.trip_return_datestr}
+                                    </p>
+                                </div>
+                            )}
 
                             <div className="detail-item">
                                 <FaUsers className="detail-icon" />
@@ -243,6 +274,8 @@ const OrderSummary = ({ availabilityData }) => {
                             )}
 
                             {renderExtras()}
+
+                            {renderObligatoryExtras()}
 
                             <div className="detail-item">
                                 <FaMoneyBillWave className="detail-icon" />

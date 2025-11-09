@@ -20,7 +20,8 @@ const PickupStep = ({ onNext, tripData, availabilityData , childAges }) => {
     const { loading: bookingLoading, error: bookingError } = useSelector((state) => state.booking);
     const { loading: calculationLoading, error: calculationError, success: calculationSuccess } = useSelector((state) => state.priceCalculation);
 
-    const currentLang = useSelector((state) => state.language.currentLang) || "en";
+    // const currentLang = useSelector((state) => state.language.currentLang) || "en";
+    const currentLang = localStorage.getItem("lang") || "en";
     const { summaryData } = useSelector((state) => state.bookingSummary);
 
     const [showPopup, setShowPopup] = useState(false);
@@ -38,11 +39,14 @@ const PickupStep = ({ onNext, tripData, availabilityData , childAges }) => {
     // Fetch available extras when component mounts
     useEffect(() => {
         if (tripData?.trip_id) {
-            dispatch(getTripExtras({
+            const params = {
                 trip_id: tripData.trip_id,
                 lang_code: currentLang,
-                isExtra: true
-            }));
+                isExtra: true,
+                is_obligatory: false
+            };
+
+            dispatch(getTripExtras(params));
         }
     }, [tripData, currentLang, dispatch]);
 
@@ -66,6 +70,23 @@ const PickupStep = ({ onNext, tripData, availabilityData , childAges }) => {
     }, [tripExtras]);
 
     const handleExtraCountChange = async (extraId, change) => {
+        const extra = tripExtras.find(e => e.facility_id === parseInt(extraId));
+    
+    // Check if pricing_type is 2 and trying to increment beyond 1
+    if (extra?.pricing_type === 2) {
+        const currentCount = extraCounts[extraId] || 0;
+        
+        // If pricing_type is 2, don't allow incrementing beyond 1
+        if (change > 0 && currentCount >= 1) {
+            return; // Exit early if trying to increment beyond 1
+        }
+        
+        // If pricing_type is 2, don't allow decrementing below 0
+        if (change < 0 && currentCount <= 0) {
+            return; // Exit early if trying to decrement below 0
+        }
+    }
+
         const newCount = Math.max(0, (extraCounts[extraId] || 0) + change);
         setExtraCounts(prev => ({
             ...prev,
@@ -101,7 +122,8 @@ const PickupStep = ({ onNext, tripData, availabilityData , childAges }) => {
                             if (ext) {
                                 extrasList.push({
                                     extra_price: ext.extra_price,
-                                    extra_count: count
+                                    extra_count: count,
+                                    pricing_type: ext.pricing_type
                                 });
                             }
                         }
@@ -115,6 +137,7 @@ const PickupStep = ({ onNext, tripData, availabilityData , childAges }) => {
                         child_num: summaryData.child_num,
                         currency_code: "EUR",
                         extra_lst: extrasList,
+                        extra_obligatory: summaryData?.extras_obligatory,
                         childAges: childAges,
                         is_two_way: summaryData?.is_two_way
                     };
@@ -183,7 +206,13 @@ const PickupStep = ({ onNext, tripData, availabilityData , childAges }) => {
                 booking_dateStr: summaryData.booking_datestr,
                 trip_dateStr: summaryData.trip_datestr,
                 currency_code: summaryData?.currency_code,
-                is_two_way: summaryData?.is_two_way
+                is_two_way: summaryData?.is_two_way,
+                trip_return_date: null,
+                trip_return_dateStr: summaryData?.trip_return_datestr,
+                child_ages: summaryData?.child_ages,
+                pricing_type: summaryData?.pricing_type,
+                childAgesArr: childAges
+            
             };
 
             await dispatch(checkAvailability(bookingData)).unwrap();
@@ -230,7 +259,7 @@ const PickupStep = ({ onNext, tripData, availabilityData , childAges }) => {
                                     <button
                                         className="counter-btn add-btn"
                                         onClick={() => handleExtraCountChange(extra.facility_id, 1)}
-                                        disabled={isProcessingExtras}
+                                        disabled={isProcessingExtras || (extra.pricing_type === 2 && extraCounts[extra.facility_id] >= 1)}
                                     >
                                         <FaPlus />
                                     </button>

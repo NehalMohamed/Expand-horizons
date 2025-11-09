@@ -4,6 +4,7 @@ import { BiSolidCard } from 'react-icons/bi';
 import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchBookingList } from '../../redux/Slices/bookingListSlice';
+import { cancelBooking } from '../../redux/Slices/bookingCancelSlice';
 import BookingCard from '../BookingCard';
 import LoadingPage from '../Loader/LoadingPage';
 import PopUp from '../Shared/popup/PopUp';
@@ -12,7 +13,10 @@ const BookingSection = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { items: allBookings, loading, error } = useSelector((state) => state.bookingList);
-  const currentLang = useSelector((state) => state.language.currentLang) || "en";
+  const { loading: cancelLoading, success: cancelSuccess, error: cancelError } = useSelector((state) => state.bookingCancel);
+    
+  // const currentLang = useSelector((state) => state.language.currentLang) || "en";
+  const currentLang = localStorage.getItem("lang") || "en";
 
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
@@ -21,6 +25,9 @@ const BookingSection = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+
+  const [showCancelConfirm, setShowCancelConfirm] = useState(false);
+  const [selectedBooking, setSelectedBooking] = useState(null);
 
   const observer = useRef();
   const BOOKINGS_PER_PAGE = 9;
@@ -50,6 +57,26 @@ const BookingSection = () => {
       setShowPopup(true);
     }
   }, [error, t]);
+  
+  // Handle cancel booking success/error
+   useEffect(() => {
+      if (cancelSuccess) {
+        setPopupMessage(t('bookings.cancel.cancelSuccess'));
+        setPopupType('alert');
+        setShowPopup(true);
+        setShowCancelConfirm(false);
+        setSelectedBooking(null);
+        // Refresh the bookings list
+        refreshBookings();
+      }
+      
+      if (cancelError) {
+        setPopupMessage(cancelError || t('bookings.cancel.cancelError'));
+        setPopupType('alert');
+        setShowPopup(true);
+        setShowCancelConfirm(false);
+      }
+    }, [cancelSuccess, cancelError, t, refreshBookings]);
 
   // Pagination logic
   useEffect(() => {
@@ -81,6 +108,25 @@ const BookingSection = () => {
     
     if (node) observer.current.observe(node);
   }, [isLoadingMore, hasMore]);
+
+   // Handle cancel booking confirmation
+    const handleCancelBooking = (booking) => {
+      setSelectedBooking(booking);
+      setShowCancelConfirm(true);
+    };
+  
+    // Confirm cancel booking
+    const confirmCancelBooking = () => {
+      if (selectedBooking) {
+        dispatch(cancelBooking(selectedBooking.booking_id));
+      }
+    };
+  
+    // Cancel confirmation dialog
+    const handleCancelConfirmation = () => {
+      setShowCancelConfirm(false);
+      setSelectedBooking(null);
+    };
 
   if (loading && currentPage === 1) {
     return <LoadingPage />;
@@ -126,13 +172,19 @@ const BookingSection = () => {
                       className="d-flex mb-4"
                       ref={lastBookingElementRef}
                     >
-                      <BookingCard booking={booking} />
+                      <BookingCard 
+                      booking={booking} 
+                      onCancelBooking={handleCancelBooking}
+                      />
                     </Col>
                   );
                 } else {
                   return (
                     <Col key={booking.booking_id} lg={4} xl={4} className="d-flex mb-4">
-                      <BookingCard booking={booking} />
+                       <BookingCard 
+                        booking={booking} 
+                        onCancelBooking={handleCancelBooking}
+                      />
                     </Col>
                   );
                 }
@@ -165,9 +217,30 @@ const BookingSection = () => {
           msg={popupMessage}
           type={popupType}
           autoClose={false}
-          showConfirmButton={false}
         />
       )}
+
+      {/* Cancel Confirmation Popup */}
+            {showCancelConfirm && (
+              <PopUp
+                show={showCancelConfirm}
+                closeAlert={handleCancelConfirmation}
+                msg={
+                  <div>
+                    <p>{t('bookings.cancel.cancelConfirmation1')}</p>
+                    <p>{t('bookings.cancel.cancelConfirmation2')}</p>
+                    <p><strong>{t('bookings.cancel.cancelConfirmation3')}</strong></p>
+                  </div>
+                }
+                type="confirm"
+                autoClose={false}
+                confirmText={t('general.yes')}
+                cancelText={t('general.no')}
+                onConfirm={confirmCancelBooking}
+                onCancel={handleCancelConfirmation}
+                isLoading={cancelLoading}
+              />
+            )}
     </>
   );
 };

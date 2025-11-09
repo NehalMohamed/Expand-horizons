@@ -22,7 +22,8 @@ const Reviews = ({ tripData , refreshTripDetails}) => {
 
     // Get state from the review slice
     const { reviewsByTrip, loading, error, submission } = useSelector((state) => state.reviews);
-    const currentLang = useSelector((state) => state.language.currentLang) || "en";
+    // const currentLang = useSelector((state) => state.language.currentLang) || "en";
+    const currentLang = localStorage.getItem("lang") || "en";
 
     // Get user data from localStorage
     const [user, setUser] = useState({});

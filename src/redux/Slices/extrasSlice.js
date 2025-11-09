@@ -86,39 +86,7 @@ export const assignExtraToBooking = createAsyncThunk(
     }
 );
 
-// Async thunk to calculate booking price
-export const calculateBookingPrice = createAsyncThunk(
-    "extras/calculateBookingPrice",
-    async (priceData, { rejectWithValue }) => {
-        // Check authentication with proper scenario detection
-        if (isUserNotLoggedIn()) {
-            return rejectWithValue(createAuthError('notLoggedIn'));
-        }
 
-        if (isTokenExpiredOnly()) {
-            return rejectWithValue(createAuthError('expired'));
-        }
-
-        if (!checkAUTH()) {
-            return rejectWithValue(createAuthError('expired'));
-        }
-
-        try {
-            const response = await axios.post(
-                `${BOOKING_URL}/CalculateBookingPrice`,
-                priceData,
-                getAuthHeaders()
-            );
-
-            return response.data;
-        } catch (error) {
-            if (error.response?.status === 401) {
-                return rejectWithValue(createAuthError('expired'));
-            }
-            return rejectWithValue(error.response?.data || error.message);
-        }
-    }
-);
 
 const extrasSlice = createSlice({
     name: "extras",
@@ -127,7 +95,6 @@ const extrasSlice = createSlice({
         error: null,
         tripExtras: [],
         assignedExtras: [],
-        calculatedPrice: null,
         pickupLocation: null
     },
     reducers: {
@@ -139,7 +106,6 @@ const extrasSlice = createSlice({
             state.error = null;
             state.tripExtras = [];
             state.assignedExtras = [];
-            state.calculatedPrice = null;
             state.pickupLocation = null;
         },
         clearError: (state) => {
@@ -176,19 +142,6 @@ const extrasSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload;
             })
-            // Calculate Booking Price
-            .addCase(calculateBookingPrice.pending, (state) => {
-                state.loading = true;
-                state.error = null;
-            })
-            .addCase(calculateBookingPrice.fulfilled, (state, action) => {
-                state.loading = false;
-                state.calculatedPrice = action.payload;
-            })
-            .addCase(calculateBookingPrice.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload;
-            });
     }
 });
 

@@ -25,14 +25,10 @@
 
   .contact-icon {
     margin-bottom: $spacer-lg + $spacer-xs;
-    width: 200px;
-    height: 200px;
+    width: 90px;
+    height: 90px;
     @include flex-center;
     margin: 0 auto $spacer-lg + $spacer-xs;
-    .contact-img{
-      width: 200px;
-      height: 170px;
-    }
   }
 
   .contact-title {

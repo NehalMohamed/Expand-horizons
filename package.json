@@ -1,6 +1,6 @@
 {
-  "name": "itravel-client",
-  "version": "0.1.0",
+  "name": "horizons-client",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@geoapify/geocoder-autocomplete": "^2.2.1",
@@ -42,7 +42,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build:versioned": "GENERATE_SOURCEMAP=false react-scripts build && npm run version-files",
+    "version-files": "node version-files.js"
   },
   "eslintConfig": {
     "extends": [

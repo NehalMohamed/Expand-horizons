@@ -157,6 +157,40 @@
         color: $light-bg;
       }
     }
+
+      .cancel-btn {
+        @include button-variant($light-bg, $primary-color);
+        border: 1px solid $primary-color;
+        padding: $spacer-sm $spacer-lg;
+        border-radius: 5.5rem;
+        font-weight: $font-weight-medium;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: $transition-base;
+        white-space: nowrap;
+        color: $primary-color;
+
+        @include media-breakpoint-down(sm) {
+          width: 100%;
+          padding: $spacer $spacer-lg;
+        }
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: $box-shadow;
+          color: $light-bg;
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+
+        &:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+          transform: none;
+        }
+      }
   }
 }
 

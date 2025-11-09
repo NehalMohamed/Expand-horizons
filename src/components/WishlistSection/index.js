@@ -15,8 +15,8 @@ const WishlistSection = () => {
   const [popupMessage, setPopupMessage] = useState('');
   const [popupType, setPopupType] = useState('alert');
   const { items, loading, error, operation } = useSelector((state) => state.wishlist);
-  const currentLang = useSelector((state) => state.language.currentLang) || "en";
-
+  // const currentLang = useSelector((state) => state.language.currentLang) || "en";
+  const currentLang = localStorage.getItem("lang") || "en";
   // Function to refresh wishlist
   const refreshWishlist = () => {
     const params = {

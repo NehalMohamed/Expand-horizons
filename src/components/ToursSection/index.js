@@ -11,10 +11,11 @@ import TourCard from "../TourCard";
 
 const ToursSection = (props) => {
   const dispatch = useDispatch();
-  const tripType = props.tripType || 1;
+  const tripType = props.tripType || 0;
   const { toursSectionTrips: trips, loading, error } = useSelector((state) => state.trips);
   const { operation } = useSelector((state) => state.wishlist);
-  const currentLang = useSelector((state) => state.language.currentLang) || "en";
+  // const currentLang = useSelector((state) => state.language.currentLang) || "en";
+  const currentLang = localStorage.getItem("lang") || "en";
   const { user: stateUser } = useSelector((state) => state.auth); // Get user from auth state
   
   // Get user from localStorage as fallback
@@ -30,7 +31,7 @@ const ToursSection = (props) => {
   useEffect(() => {
     const params = {
       lang_code: currentLang,
-      show_in_top: false,
+      show_in_top: true,
       currency_code: "EUR",
       client_id: user?.id || "",
       trip_type: tripType

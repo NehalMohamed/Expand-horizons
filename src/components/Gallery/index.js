@@ -20,7 +20,8 @@ const Gallery = ({ tripData , refreshTripDetails }) => {
   const dispatch = useDispatch();
   // const tripData = useTripData();
   const { t } = useTranslation();
-  const currentLang = useSelector((state) => state.language.currentLang) || "en";
+  // const currentLang = useSelector((state) => state.language.currentLang) || "en";
+  const currentLang = localStorage.getItem("lang") || "en";
   const { operation } = useSelector((state) => state.wishlist);
 
   const images = tripData?.imgs || [];

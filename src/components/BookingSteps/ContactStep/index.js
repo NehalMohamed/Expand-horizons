@@ -11,15 +11,15 @@ import BookingModal from '../../Shared/BookingModal';
 import PopUp from '../../Shared/popup/PopUp';
 import LoadingPage from '../../Loader/LoadingPage';
 
-const ContactStep = ({ onNext, tripData, availabilityData }) => {
+const ContactStep = ({ onNext, tripData, availabilityData, childAges}) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem("user"));
 
     const { profileData, loading: profileLoading } = useSelector((state) => state.profile);
-
-    const currentLang = useSelector((state) => state.language.currentLang) || "en";
+    // const currentLang = useSelector((state) => state.language.currentLang) || "en";
+    const currentLang = localStorage.getItem("lang") || "en";
     const { summaryData } = useSelector((state) => state.bookingSummary);
     const { loading: bookingLoading, error: bookingError } = useSelector((state) => state.booking);
     const { loading: extrasLoading, error: extrasError } = useSelector((state) => state.extras);
@@ -28,14 +28,12 @@ const ContactStep = ({ onNext, tripData, availabilityData }) => {
     const fullName = user?.firstName + ' ' + user?.lastName;
     const userEmail = user?.email;
     const userPhone = user?.phoneNumber;
-    // console.log(user)
-    const userNationality = profileData?.nation || '';
 
     const [contactInfo, setContactInfo] = useState({
         fullName: fullName || '',
         email: userEmail || '',
         phone: userPhone || '',
-        nationality: userNationality || ''
+        nationality: ''
     });
     const [notes, setNotes] = useState('');
     const [errors, setErrors] = useState({});
@@ -43,37 +41,22 @@ const ContactStep = ({ onNext, tripData, availabilityData }) => {
     const [showPopup, setShowPopup] = useState(false);
     const [popupMessage, setPopupMessage] = useState('');
     const [popupType, setPopupType] = useState('alert');
-    const [hasFetchedProfile, setHasFetchedProfile] = useState(false);
-    
-        // Fetch profile data when component mounts
+
+    // Fetch profile data on component mount
         useEffect(() => {
-            const fetchUserProfile = async () => {
-                try {
-                    await dispatch(fetchProfile()).unwrap();
-                    setHasFetchedProfile(true);
-                } catch (error) {
-                    console.error('Failed to fetch profile:', error);
-                    setHasFetchedProfile(true);
-                }
-            };
+            dispatch(fetchProfile()).unwrap();
+        }, [dispatch]);
     
-            if (!profileData?.nation && !profileLoading) {
-                fetchUserProfile();
-            } else {
-                setHasFetchedProfile(true);
-            }
-        }, [dispatch, profileData, profileLoading]);
-    
-        // Update contact info when profile data is loaded
+        // Update nationality when profile data is loaded
         useEffect(() => {
-            if (profileData?.nation && hasFetchedProfile) {
+            if (profileData?.nation) {
                 setContactInfo(prev => ({
                     ...prev,
-                    nationality: profileData.nation || profileData.nationality || ''
+                    nationality: profileData.nation
                 }));
             }
-        }, [profileData, hasFetchedProfile]);
-
+        }, [profileData]);
+    
     const handleInputChange = (field, value) => {
         setContactInfo(prev => ({
             ...prev,
@@ -155,7 +138,12 @@ const ContactStep = ({ onNext, tripData, availabilityData }) => {
                 pickup_address: summaryData?.pickup_address || '',
                 booking_status: 1,
                 total_price: summaryData?.total_price,
-                is_two_way: summaryData?.is_two_way
+                is_two_way: summaryData?.is_two_way,
+                trip_return_date: null,
+                trip_return_dateStr: summaryData?.trip_return_dateStr,
+                child_ages: summaryData?.child_ages,
+                pricing_type: summaryData?.pricing_type,
+                childAgesArr: childAges
             };
 
             const availabilityResult = await dispatch(checkAvailability(bookingData)).unwrap();

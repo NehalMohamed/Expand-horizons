@@ -1,0 +1,47 @@
+ .whatsapp-button {
+    position: fixed;
+    bottom: 20px;
+    right: 80px;
+    background-color: #28A219;
+    color: white;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: all 0.3s ease;
+  
+    &:hover {
+      transform: scale(1.1);
+      background-color: #25D366; // WhatsApp brand green
+    }
+
+    // Responsive adjustments
+    @media (max-width: 768px) {
+        width: 50px;
+        height: 50px;
+        right: 20px;
+        bottom: 20px;
+    }
+
+    // RTL support
+    [dir="rtl"] & {
+        right: auto;
+        left: 80px;
+
+        @media (max-width: 768px) {
+            left: 30px;
+        }
+    }
+}
+  
+.whatsapp-icon {
+    font-size: 40px;
+
+    @media (max-width: 768px) {
+        font-size: 32px;
+    }
+}

@@ -22,15 +22,10 @@
   }
 
   .feature-icon {
-    width: 90px;
-    height: 90px;
+    width: 40px;
+    height: 40px;
     @include flex-center;
     margin: 0 auto $spacer-lg;
-
-    .feature-img{
-      width: 90px;
-      height: 90px;
-    }
   }
 
   .feature-title {

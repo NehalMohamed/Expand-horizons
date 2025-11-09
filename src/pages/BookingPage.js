@@ -85,6 +85,7 @@ const BookingPage = () => {
               onNext={handleNextStep}
               tripData={tripData}
               availabilityData={availabilityData}
+              childAges = {childAges}
             />
           );
         }
@@ -95,6 +96,7 @@ const BookingPage = () => {
               onNext={handleNextStep}
               tripData={tripData}
               availabilityData={availabilityData}
+              childAges = {childAges}
             />
           );
         } else {
@@ -103,6 +105,7 @@ const BookingPage = () => {
               onNext={handleNextStep}
               tripData={tripData}
               availabilityData={availabilityData}
+              childAges = {childAges}
             />
           );
           // For non-diving trips, this is payment step

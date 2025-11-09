@@ -364,6 +364,40 @@
       }
     }
 
+    .react-datepicker__time-container {
+      border-left: 1px solid $light-bg;
+      
+      .react-datepicker__time {
+        background: white;
+        
+        .react-datepicker__time-box {
+          width: 100% !important;
+          
+          ul.react-datepicker__time-list {
+            padding: 0;
+            
+            li.react-datepicker__time-list-item {
+              height: 40px;
+              line-height: 40px;
+              padding: 0 10px;
+              font-size: 14px;
+              color: $primary-color;
+              
+              &:hover {
+                background-color: $light-bg;
+              }
+              
+              &.react-datepicker__time-list-item--selected {
+                background-color: $secondary-color;
+                color: white;
+                font-weight: $font-weight-medium;
+              }
+            }
+          }
+        }
+      }
+    }
+
     .react-datepicker__navigation {
       top: 16px;
     }
@@ -373,9 +407,15 @@
       color: $primary-color;
       margin-bottom: 8px;
     }
+
+    .react-datepicker-time__header {
+      font-weight: $font-weight-medium;
+      color: $primary-color;
+      font-size: 14px;
+    }
   }
 
-  // For two-month view
+  // For two-month view with time
   .react-datepicker__month-container:first-child {
     border-right: 1px solid $light-bg;
   }
@@ -415,6 +455,27 @@
   @include media-breakpoint-down(sm) {
     font-size: 28px;
   }
+}
+// Two-way transfer section styles
+.booking-selection__two-way-section {
+  margin-top: $spacer-md;
+  padding: $spacer-md;
+  background: rgba(white, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(white, 0.1);
+}
+
+.booking-selection__return-date-title {
+  color: white;
+  font-size: 16px;
+  font-weight: $font-weight-medium;
+  margin-bottom: $spacer-sm;
+}
+
+.booking-selection__return-date-note {
+  color: rgba(white, 0.7);
+  font-size: 14px;
+  margin-bottom: $spacer-md;
 }
 
 .booking-selection__checkbox {

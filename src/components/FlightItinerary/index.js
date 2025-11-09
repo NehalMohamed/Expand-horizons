@@ -12,7 +12,8 @@ const FlightItinerary = ({ tripData }) => {
     const tripId = tripData?.trip_id;
     const dispatch = useDispatch();
     const { pickupsByTrip, loading, error } = useSelector((state) => state.trips);
-    const currentLang = useSelector((state) => state.language.currentLang) || "en";
+    // const currentLang = useSelector((state) => state.language.currentLang) || "en";
+    const currentLang = localStorage.getItem("lang") || "en";
 
     useEffect(() => {
         const params = {

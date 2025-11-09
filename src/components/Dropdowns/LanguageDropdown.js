@@ -18,6 +18,7 @@ const LanguageDropdown = () => {
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
+    localStorage.setItem("lang", lng);
     dispatch(setLanguages(lng)); // Dispatch to Redux
   };
 

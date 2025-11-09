@@ -16,7 +16,8 @@ const TripSoonPage = () => {
   const [popupType, setPopupType] = useState('error');
 
   const { tripData, loading, error } = useSelector((state) => state.tripDetails);
-  const currentLang = useSelector((state) => state.language.currentLang) || "en";
+  // const currentLang = useSelector((state) => state.language.currentLang) || "en";
+  const currentLang = localStorage.getItem("lang") || "en";
 
   const [user, setUser] = useState({});
 

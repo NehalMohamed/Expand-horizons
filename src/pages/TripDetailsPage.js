@@ -26,8 +26,10 @@ const TripDetailsPage = () => {
   const { tripData, loading, error } = useSelector(
     (state) => state.tripDetails
   );
-  const currentLang =
-    useSelector((state) => state.language.currentLang) || "en";
+  // const currentLang =
+  //   useSelector((state) => state.language.currentLang) || "en";
+
+    const currentLang = localStorage.getItem("lang") || "en";
 
   const [user, setUser] = useState({});
   const [tripState, setTripState] = useState(null);

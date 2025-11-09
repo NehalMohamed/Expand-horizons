@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button, Dropdown, Form } from 'react-bootstrap';
-import { FaCalendarAlt, FaUsers, FaMinus, FaPlus, FaChevronDown } from 'react-icons/fa';
+import { FaCalendarAlt, FaUsers, FaMinus, FaPlus, FaChevronDown, FaExchangeAlt } from 'react-icons/fa';
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import DatePicker from 'react-datepicker';
@@ -31,17 +31,19 @@ const BookingSelection = ({ tripData }) => {
         children: 0
     });
     const [childAges, setChildAges] = useState([]);
-    const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedDateTime, setSelectedDateTime] = useState(null);
+    const [selectedReturnDateTime, setSelectedReturnDateTime] = useState(null);
     const [isTwoWay, setIsTwoWay] = useState(false); // Checkbox state for two-way transfer
     //  const [selectedLanguage, setSelectedLanguage] = useState(t('booking.language.english'));
     const [showParticipants, setShowParticipants] = useState(false);
     const [ageValidationErrors, setAgeValidationErrors] = useState([]);
 
-    // Calculate the minimum selectable date (today + release_days)
+    // Calculate the minimum selectable datetime (today + release_days at 00:00:00)
     const minDate = new Date();
     if (tripData?.release_days) {
         minDate.setDate(minDate.getDate() + parseInt(tripData.release_days));
     }
+    minDate.setHours(0, 0, 0, 0);
 
     // Calculate total participants
     const totalParticipants = participants.adults + participants.children;
@@ -69,13 +71,13 @@ const BookingSelection = ({ tripData }) => {
         }
     }, [participants.children]);
 
-    // Reset price breakdown when participants or date change
+    // Reset price breakdown when participants or datetime change
     useEffect(() => {
         if (showPriceBreakdown) {
             setShowPriceBreakdown(false);
             dispatch(resetCalculation());
         }
-    }, [participants, selectedDate, isTwoWay, childAges]);
+    }, [participants, selectedDateTime, isTwoWay, childAges]);
 
     // Handle API errors and success
     useEffect(() => {
@@ -168,6 +170,20 @@ const BookingSelection = ({ tripData }) => {
         return t('booking.participants.mixed', { adults, children });
     };
 
+    const getDateTimeText = () => {
+        if (!selectedDateTime) {
+            return t('booking.date.selectDateTime');
+        }
+        
+        return selectedDateTime.toLocaleString('en-US', { 
+            weekday: 'short', 
+            month: 'short', 
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    };
+
     const CustomInput = React.forwardRef(({ value, onClick }, ref) => (
         <Button
             variant="light"
@@ -177,7 +193,7 @@ const BookingSelection = ({ tripData }) => {
         >
             <div className="d-flex align-items-center">
                 <FaCalendarAlt className="booking-selection__icon me-2" />
-                {value || t('booking.date.selectDate')}
+                {value || t('booking.date.selectDateTime')}
             </div>
             <FaChevronDown className="booking-selection__chevron" />
         </Button>
@@ -188,21 +204,35 @@ const BookingSelection = ({ tripData }) => {
     // };
 
     const validateInputs = () => {
-        if (!selectedDate) {
-            setPopupMessage(t('booking.dateRequired'));
+        if (!selectedDateTime) {
+            setPopupMessage(t('booking.dateTimeRequired'));
             setPopupType('alert');
             setShowPopup(true);
             return false;
         }
 
-        // Check if selected date is before the minimum allowed date
-        if (selectedDate < minDate) {
-            setPopupMessage(t('booking.invalidDate', { releaseDays: tripData?.release_days || 0 }));
+        // Check if selected datetime is before the minimum allowed datetime
+        if (selectedDateTime < minDate) {
+            setPopupMessage(t('booking.invalidDateTime', { releaseDays: tripData?.release_days || 0 }));
             setPopupType('alert');
             setShowPopup(true);
             return false;
         }
 
+        if (isTwoWayTransferType && isTwoWay && !selectedReturnDateTime) {
+            setPopupMessage(t('booking.returnDateTimeRequired'));
+            setPopupType('alert');
+            setShowPopup(true);
+            return false;
+        }
+
+        // NEW: Validate that return date is after departure date
+        if (isTwoWayTransferType && isTwoWay && selectedReturnDateTime && selectedReturnDateTime <= selectedDateTime) {
+            setPopupMessage(t('booking.returnDateAfterDeparture'));
+            setPopupType('alert');
+            setShowPopup(true);
+            return false;
+        }
         // Check if participants exceed max capacity
         if (exceedsMaxCapacity) {
             setPopupMessage(t('booking.maxCapacityExceeded', { maxCapacity: tripData.trip_max_capacity }));
@@ -222,6 +252,19 @@ const BookingSelection = ({ tripData }) => {
         return true;
     };
 
+    const formatDateTimeForAPI = (dateTime) => {
+        if (!dateTime) return '';
+        
+        const year = dateTime.getFullYear();
+        const month = (dateTime.getMonth() + 1).toString().padStart(2, '0');
+        const day = dateTime.getDate().toString().padStart(2, '0');
+        const hours = dateTime.getHours().toString().padStart(2, '0');
+        const minutes = dateTime.getMinutes().toString().padStart(2, '0');
+        const seconds = dateTime.getSeconds().toString().padStart(2, '0');
+        
+        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    };
+
     const handleCheckAvailability = async () => {
         if (!validateInputs()) return;
 
@@ -237,6 +280,7 @@ const BookingSelection = ({ tripData }) => {
                 child_num: hasChildOption ? participants.children : 0,
                 currency_code: "EUR",
                 extra_lst: [],
+                extra_obligatory:[],
                 childAges: numericChildAges,
                 is_two_way: isTwoWayTransferType ? isTwoWay : false
             };
@@ -251,13 +295,17 @@ const BookingSelection = ({ tripData }) => {
     const handleContinueBooking = async () => {
         if (!validateInputs()) return;
 
-        // Format date as YYYY-MM-DD
-        const formattedDate = selectedDate.toISOString().split('T')[0];
+        // Format datetime as YYYY-MM-DD HH:MM:SS
+       const formattedDateTime = formatDateTimeForAPI(selectedDateTime);
+       const formattedReturnDateTime = isTwoWayTransferType && isTwoWay ? formatDateTimeForAPI(selectedReturnDateTime) : null;
 
         // Get client ID from localStorage or use a fallback
         const user = JSON.parse(localStorage.getItem("user"));
         const clientId = user?.id;
         const clientEmail = user?.email || "";
+       
+        // Convert child ages to numbers only if children are allowed
+        const numericChildAges = hasChildOption ? childAges.map(age => parseInt(age)) : [];
 
         // Prepare booking data according to API specification
         const bookingData = {
@@ -274,6 +322,7 @@ const BookingSelection = ({ tripData }) => {
             pickup_time: "",
             booking_status: 1,
             trip_date: null,
+            trip_return_date: null,
             booking_notes: "",
             trip_code: tripData?.trip_code_auto,
             infant_num: 0,
@@ -284,31 +333,34 @@ const BookingSelection = ({ tripData }) => {
             gift_code: "",
             trip_type: tripData?.trip_type,
             booking_dateStr: "",
-            trip_dateStr: formattedDate,
+            trip_dateStr: formattedDateTime,
+            trip_return_dateStr: formattedReturnDateTime,
             currency_code: "EUR",
-            is_two_way: isTwoWayTransferType ? isTwoWay : false
+            is_two_way: isTwoWayTransferType ? isTwoWay : false,
+            child_ages: tripData?.child_ages? tripData?.child_ages:null,
+            pricing_type: tripData?.pricing_type_id,
+            childAgesArr: numericChildAges
         };
 
         try {
             // First save the booking
             const result = await dispatch(checkAvailability(bookingData)).unwrap();
 
-            // Convert child ages to numbers only if children are allowed
-            const numericChildAges = hasChildOption ? childAges.map(age => parseInt(age)) : [];
+            
 
-            // Then calculate initial price without extras
-            const calculationData = {
-                booking_id: result.idOut,
-                trip_id: tripData?.trip_id,
-                adult_num: participants.adults,
-                child_num: hasChildOption ? participants.children : 0,
-                currency_code: "EUR",
-                extra_lst: [],
-                childAges: numericChildAges,
-                is_two_way: isTwoWayTransferType ? isTwoWay : false
-            };
+            // // Then calculate initial price without extras
+            // const calculationData = {
+            //     booking_id: result.idOut,
+            //     trip_id: tripData?.trip_id,
+            //     adult_num: participants.adults,
+            //     child_num: hasChildOption ? participants.children : 0,
+            //     currency_code: "EUR",
+            //     extra_lst: [],
+            //     childAges: numericChildAges,
+            //     is_two_way: isTwoWayTransferType ? isTwoWay : false
+            // };
 
-            await dispatch(calculateBookingPrice(calculationData)).unwrap();
+            // await dispatch(calculateBookingPrice(calculationData)).unwrap();
 
             // If both operations succeeded, navigate to checkout
             navigate("/checkout", {
@@ -346,6 +398,21 @@ const BookingSelection = ({ tripData }) => {
             <FaChevronDown className={`booking-selection__chevron ${showParticipants ? 'booking-selection__chevron--open' : ''}`} />
         </Button>
     ));
+
+     const ReturnDateCustomInput = React.forwardRef(({ value, onClick }, ref) => (
+            <Button
+                variant="light"
+                className="booking-selection__button w-100"
+                onClick={onClick}
+                ref={ref}
+            >
+                <div className="d-flex align-items-center">
+                    <FaExchangeAlt className="booking-selection__icon me-2" />
+                    {value || t('booking.date.selectReturnDateTime')}
+                </div>
+                <FaChevronDown className="booking-selection__chevron" />
+            </Button>
+        ));
 
     // Filter dates that are before the minimum allowed date
     const filterDate = (date) => {
@@ -500,36 +567,71 @@ const BookingSelection = ({ tripData }) => {
                                 </Dropdown>
                             </Col>
 
-                            {/* Date Selector with react-datepicker */}
+                            {/* DateTime Picker */}
                             <Col lg={6} md={6} sm={12}>
                                 <DatePicker
-                                    selected={selectedDate}
-                                    onChange={(date) => setSelectedDate(date)}
+                                    selected={selectedDateTime}
+                                    onChange={(date) => setSelectedDateTime(date)}
                                     customInput={<CustomInput />}
                                     minDate={minDate}
                                     filterDate={filterDate}
-                                    monthsShown={2}
+                                    showTimeSelect
+                                    timeFormat="HH:mm"
+                                    timeIntervals={30}
+                                    timeCaption={t('booking.date.time')}
+                                    dateFormat="EEE, MMM d, yyyy HH:mm"
+                                    // monthsShown={2}
                                     showPopperArrow={false}
                                     popperClassName="custom-datepicker-popper"
                                     inline={false}
                                     shouldCloseOnSelect={true}
-                                    dateFormat="EEE, MMM d"
                                 />
                             </Col>
 
                             {/* Two-way Transfer Checkbox - Only show for two-way transfer types */}
                             {isTwoWayTransferType && (
-                                <Col lg={12} md={12} sm={12}>
+                                <Col lg={6} md={6} sm={6}>
                                     <Form.Check
                                         type="checkbox"
                                         id="two-way-transfer"
                                         label={t('booking.twoWayTransfer')}
                                         checked={isTwoWay}
-                                        onChange={(e) => setIsTwoWay(e.target.checked)}
+                                         onChange={(e) => {
+                                            setIsTwoWay(e.target.checked);
+                                            if (!e.target.checked) {
+                                                setSelectedReturnDateTime(null); // Reset return date when unchecked
+                                            }
+                                        }}
                                         className="booking-selection__checkbox"
                                     />
                                 </Col>
                             )}
+
+                             {/* Return Date Picker - Only show when two-way is selected */}
+                                                        {isTwoWayTransferType && isTwoWay && (
+                                                            
+                                                                        <Col lg={6} md={12} sm={12}>
+                                                                            <DatePicker
+                                                                                selected={selectedReturnDateTime}
+                                                                                onChange={(date) => setSelectedReturnDateTime(date)}
+                                                                                customInput={<ReturnDateCustomInput />}
+                                                                                minDate={selectedDateTime ? new Date(selectedDateTime.getTime() + 60 * 60 * 1000) : minDate} // At least 1 hour after departure
+                                                                                filterDate={filterDate}
+                                                                                showTimeSelect
+                                                                                timeFormat="HH:mm"
+                                                                                timeIntervals={30}
+                                                                                timeCaption={t('booking.date.time')}
+                                                                                dateFormat="EEE, MMM d, yyyy HH:mm"
+                                                                                showPopperArrow={false}
+                                                                                popperClassName="custom-datepicker-popper"
+                                                                                inline={false}
+                                                                                shouldCloseOnSelect={true}
+                                                                                popperPlacement="top-start"
+                                                                            />
+                                                                        </Col>
+                                                                  
+                                                        )}
+                                                
 
                             {/* Language Selector */}
                             {/* <Col lg={4} md={12} sm={12}>
@@ -614,7 +716,7 @@ const BookingSelection = ({ tripData }) => {
                                 <Button
                                     className="booking-selection__check-btn w-100"
                                     onClick={showPriceBreakdown ? handleContinueBooking : handleCheckAvailability}
-                                    disabled={loading || exceedsMaxCapacity || !selectedDate}
+                                    disabled={loading || exceedsMaxCapacity || !selectedDateTime}
                                 >
                                     {showPriceBreakdown ? t('booking.continue') : t('booking.checkAvailability')}
                                 </Button>

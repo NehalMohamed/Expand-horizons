@@ -10,14 +10,14 @@ const ContactNavbar = () => {
           <div className="contact-left">
             <div className="contact-item">
               <FaPhone className="contact-icon" />
-              <a href="tel:+200000000000" className="contact-link">
-                +2 0000000000
+              <a href="tel:+201034403755" className="contact-link">
+                +2 01034403755
               </a>
             </div>
             <div className="contact-item">
               <FaEnvelope className="contact-icon" />
               <a href="mailto:Info@expandhorizen.com" className="contact-link">
-                Info@expandhorizen.com
+                Info@expand-horizons.de
               </a>
             </div>
             <div className="social-media">

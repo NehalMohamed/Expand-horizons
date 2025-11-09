@@ -1,6 +1,9 @@
 {
   "general": {
     "more": "More",
+    "yes": "Yes",
+    "no": "No",
+    "cancel": "Cancel",
     "top_offers": "Top Offers",
     "show_more": "Show More",
     "show_less": "Show Less",
@@ -246,22 +249,30 @@
     "stars": "Star"
   },
   "booking": {
+    "returnDate": {
+      "title": "Select Return Date & Time",
+      "note": "Please select your preferred return date and time"
+    },
+    "returnDateTimeRequired": "Please select return date and time for two-way transfer",
+    "returnDateAfterDeparture": "Return date must be after departure date",
+    "date": {
+      "selectReturnDateTime": "Select Return Date & Time",
+      "selectDateTime": "Select Date & Time",
+      "time": "Time"
+    },
+    "dateTimeRequired": "Please select both date and time",
+    "invalidDateTime": "Please select a date at least {{releaseDays}} days from now",
     "availabilityError": "Failed to check availability. Please try again.",
     "availabilitySuccess": "Availability checked successfully!",
-    "dateRequired": "Please select a date for your booking.",
     "checkingAvailability": "Checking availability...",
     "title": "Select participants and date",
     "checkAvailability": "Check availability",
     "maxCapacityExceeded": "Please select {{maxCapacity}} participants or fewer for this activity.",
-    "invalidDate": "Please select a date at least {{releaseDays}} days from today.",
     "invalidChildAges": "Please enter valid ages for all children (0-{{maxAge}} years)",
     "continue": "Continue",
     "allTaxesIncluded": "All taxes and fees included",
     "twoWayTransfer": "Two-way transfer",
     "included": "Included",
-    "date": {
-      "selectDate": "Select date"
-    },
     "participants": {
       "adult": "Adult",
       "child": "Child",
@@ -284,6 +295,8 @@
     }
   },
   "bookings": {
+    "tripDate": "Trip Date",
+    "returnDate": "Return Date",
     "myBookings": "Your Bookings",
     "noBookings": "No bookings yet",
     "noBookingsText": "You haven't made any bookings yet. Start exploring our trips and make your first reservation!",
@@ -376,6 +389,13 @@
       "enterCode": "Enter promo or gift code",
       "redeem": "Redeem",
       "placeholder": "Enter code"
+    },
+    "cancel":{
+      "cancelConfirmation1": "You will receive e-mail with cancellation fees",
+      "cancelConfirmation2": "or contact booking@expand-horizons.de",
+      "cancelConfirmation3": "Are you sure to cancel?",
+      "cancelSuccess": "Booking cancelled successfully",
+      "cancelError": "Failed to cancel booking"
     }
   },
   "profile": {
