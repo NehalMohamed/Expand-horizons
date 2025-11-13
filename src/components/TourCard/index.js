@@ -79,7 +79,13 @@ const TourCard = ({ trip }) => {
   return (
     <Card className="tour-card h-100">
       <div className="card-img-container">
-        <Card.Img variant="top" src={trip?.default_img} alt={trip?.trip_name} />
+        <Card.Img 
+        variant="top" 
+        src={trip?.default_img} 
+        alt={trip?.trip_name} 
+        loading="lazy" 
+        decoding="async" 
+        />
         <button
           className={`wishlist-heart ${trip?.isfavourite ? "liked" : ""}`}
           onClick={handleWishlistToggle}

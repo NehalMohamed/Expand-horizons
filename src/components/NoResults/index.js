@@ -7,7 +7,13 @@ const NoResults = () => {
     <>
       <Container className="noResultspageContainer">
         <div className="contentWrapper">
-        <img src="/images/no-results.png" alt={t("NoResults.title")} className="illustration" />
+        <img 
+        src="/images/no-results.png" 
+        alt={t("NoResults.title")} 
+        className="illustration" 
+        loading="lazy" 
+        decoding="async" 
+        />
         <h1 className="mainTitle">{t("NoResults.title")}</h1>
         <p className="subText">{t("NoResults.subTitle")}</p>
         </div>

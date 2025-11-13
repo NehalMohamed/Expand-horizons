@@ -89,7 +89,13 @@ const WishlistCard = ({ trip, onWishlistUpdate }) => {
       <Card className="wish-card h-100">
 
         <div className="card-img-container">
-          <Card.Img variant="top" src={trip.default_img} alt={trip.trip_name} />
+          <Card.Img 
+          variant="top" 
+          src={trip.default_img} 
+          alt={trip.trip_name} 
+          loading="lazy" 
+          decoding="async" 
+                />
           <span
             className="wishlist-date"
             aria-label="Add to wishlist"

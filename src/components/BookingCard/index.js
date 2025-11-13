@@ -126,6 +126,8 @@ const BookingCard = ({ booking, onCancelBooking }) => {
                     src={booking.default_img}
                     alt={booking.trip_name}
                     className="booking-image"
+                    loading="lazy" 
+                    decoding="async" 
                 />
                 <div className="booking-badge">
                     {t('wishlist.saved')} {booking.booking_datestr}

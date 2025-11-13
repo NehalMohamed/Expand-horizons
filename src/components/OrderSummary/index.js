@@ -198,6 +198,8 @@ const OrderSummary = ({ availabilityData }) => {
                         <img
                             src={summaryData.default_img}
                             alt={summaryData.trip_name}
+                            loading="lazy" 
+                            decoding="async" 
                         />
                     </div>
 

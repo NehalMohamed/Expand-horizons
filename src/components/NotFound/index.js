@@ -9,7 +9,13 @@ const NotFound = () => {
     <>
       <Container className="pageContainer">
         <div className="contentWrapper">
-          <img src="/images/404-error.png" alt="404 Error Illustration" className="illustration" />
+          <img 
+          src="/images/404-error.png" 
+          alt="404 Error Illustration" 
+          className="illustration"
+          loading="lazy" 
+          decoding="async" 
+           />
            <h1 className="mainTitle">{t("NotFound.title")}</h1>
           <Button onClick={() => navigate("/")} variant="primary" className="goBackButton">
             {t("NotFound.backBtn")}

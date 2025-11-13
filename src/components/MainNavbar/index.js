@@ -42,7 +42,13 @@ const MainNavbar = () => {
     <Navbar expand="lg" className="main-navbar" sticky="top">
       <Container>
         <Navbar.Brand as={NavLink} to="/" className="brand-logo">
-          <img src="/Asset 1.png" alt={t('main_navbar.travel')} className="logo-img" />
+          <img 
+          src="/Asset 1.png" 
+          alt={t('main_navbar.travel')} 
+          className="logo-img" 
+          loading="lazy" 
+          decoding="async" 
+          />
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="main-navbar-nav" />

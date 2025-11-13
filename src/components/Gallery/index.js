@@ -156,6 +156,8 @@ const Gallery = ({ tripData , refreshTripDetails }) => {
               src={images[0].img_path} 
               alt={images[0].img_name}
               onClick={() => openLightbox(0)}
+              loading="lazy" 
+              decoding="async" 
             />
           </div>
           {images.length > 1 && (
@@ -164,6 +166,8 @@ const Gallery = ({ tripData , refreshTripDetails }) => {
               src={images[1].img_path} 
               alt={images[1].img_name}
               onClick={() => openLightbox(1)}
+              loading="lazy" 
+              decoding="async" 
             />
           </div>
           )}
@@ -175,6 +179,8 @@ const Gallery = ({ tripData , refreshTripDetails }) => {
                   src={image.img_path} 
                   alt={image.img_name}
                   onClick={() => openLightbox(index + 2)}
+                  loading="lazy" 
+                  decoding="async" 
                 />
               </div>
             ))}

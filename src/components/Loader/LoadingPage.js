@@ -12,6 +12,8 @@ const LoadingPage = () => {
           src="/images/loading.gif"
           alt="Loading..."
           className="loading-gif"
+          loading="lazy" 
+          decoding="async" 
         />
         {/* Optional text shown under the loading animation */}
         <p className="loading-text">Loading...</p>

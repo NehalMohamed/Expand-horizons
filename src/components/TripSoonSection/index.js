@@ -30,6 +30,8 @@ const TripSoonSection = ({ tripData }) => {
               alt={t("tripDetails.comingSoonAlt")}
               width={480}
               height={480}
+              loading="lazy" 
+                decoding="async" 
             />
           </div>
         </div>

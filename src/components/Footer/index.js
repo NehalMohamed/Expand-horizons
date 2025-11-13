@@ -11,7 +11,13 @@ const Footer = () => {
         <Row>
           <Col lg={6} md={6} sm={12} className="footer-brand-section">
             <div className="footer-brand">
-              <img src="/Asset 1.png" alt={t('footer.travel')}  className="logo-img" />
+              <img 
+              src="/Asset 1.png" 
+              alt={t('footer.travel')}  
+              className="logo-img"
+              loading="lazy" 
+              decoding="async"  
+              />
             </div>
             <p className="footer-description">
               {t('footer.footer_description')}

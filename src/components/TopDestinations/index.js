@@ -43,8 +43,7 @@ const TopDestinations = () => {
       xs={12}
       sm={6}
       md={4}
-      lg={3}
-      className={`destination-col ${index >= 4 ? "second-row" : "first-row"}`}
+      className={`destination-col ${index >= 3 ? "second-row" : "first-row"}`}
     >
       <Card
         className="destination-card"
@@ -70,7 +69,8 @@ const TopDestinations = () => {
               alt={destination.dest_description}
               className="destination-image"
               onError={() => handleImageError(destination.destination_id)}
-              loading="lazy"
+              loading="lazy" 
+              decoding="async" 
             />
           )}
           <div className="card-overlay">

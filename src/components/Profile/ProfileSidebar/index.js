@@ -82,6 +82,8 @@ const ProfileSidebar = ({ activeTab, setActiveTab }) => {
                   e.target.onerror = null; // Prevent infinite loop if default image fails
                   e.target.src = defaultProfileImg;
                 }}
+                loading="lazy" 
+                decoding="async" 
               />
               {/* Hidden file input for image upload */}
               <input

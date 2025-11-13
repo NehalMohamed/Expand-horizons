@@ -15,6 +15,8 @@ const About = () => {
                 src="/Asset 1.png" 
                 alt="Horizons Company Logo" 
                 className="travel-logo"
+                loading="lazy" 
+                decoding="async" 
               />
             </div>
           </Col>

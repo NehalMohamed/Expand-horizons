@@ -39,7 +39,7 @@
       &.second-row {
         @include media-breakpoint-up(lg) {
           .destination-card {
-            height: 250px;
+            height: 280px;
           }
         }
       }
@@ -57,16 +57,16 @@
     box-shadow: $box-shadow;
     transition: $transition-base;
     cursor: pointer;
-    height: 200px;
+    height: 220px;
     position: relative;
     background: $light-bg;
 
     @include media-breakpoint-up(md) {
-      height: 220px;
+      height: 240px;
     }
 
     @include media-breakpoint-up(lg) {
-      height: 250px;
+      height: 280px;
     }
 
     &:hover {
@@ -91,6 +91,8 @@
 
       .destination-name {
         color: $light-bg;
+        background: rgba(50, 50, 50, 0.8); // Darker glass effect on hover
+        backdrop-filter: blur(10px); // Enhanced blur on hover
         // transform: translateY(-5px);
         // background-color: rgba(0, 0, 0, 0.7);
       }
@@ -151,26 +153,31 @@
 
     .destination-name {
       color: $light-bg;
-      font-size: 1.5rem;
+      font-size: 1.7rem;
       font-weight: $font-weight-bold;
       margin: 0;
       text-shadow: $text-shadow-lg;
       transition: $transition-base;
       font-family: $font-family-base;
-      background-color: rgba(128, 128, 128, 0.7); // Semi-transparent gray
-      padding: 8px 16px;
+      background: rgba(60, 60, 60, 0.7); // Semi-transparent gray
+      padding: 12px 20px;
       border-radius: $border-radius-lg;
       display: inline-block;
-      backdrop-filter: blur(4px); // Optional: adds a nice blur effect to the background
+      backdrop-filter: blur(8px); // Glass effect blur
+      -webkit-backdrop-filter: blur(8px); // Safari support
+      border: 1px solid rgba(255, 255, 255, 0.2); // Subtle border for glass effect
+      text-align: center;
+      width: 100%; // Full width for better appearance
+      box-sizing: border-box;
 
-      @include media-breakpoint-down(md) {
-        font-size: 1.2rem;
-        padding: 6px 12px;
+     @include media-breakpoint-down(md) {
+        font-size: 1.5rem; // Larger on medium screens
+        padding: 10px 16px;
       }
 
       @include media-breakpoint-down(sm) {
-        font-size: 1.1rem;
-         padding: 4px 10px;
+        font-size: 1.3rem; // Larger on small screens
+        padding: 8px 14px;
       }
     }
   }
@@ -181,7 +188,7 @@
   .top-destinations {
     .destinations-grid {
       .destination-col {
-        &:nth-child(n+5) {
+        &:nth-child(n+4) {
           margin-top: $spacer;
         }
       }
@@ -197,7 +204,7 @@
       .destination-col {
         margin-bottom: $spacer;
         
-        &:nth-child(n+3) {
+        &:nth-child(n+2) {
           margin-top: 0;
         }
       }
@@ -212,6 +219,14 @@
     .section-header {
       margin-bottom: $spacer-xl;
     }
+
+    .destinations-grid {
+      .destination-col {
+        // 2 cards per row on medium screens
+        flex: 0 0 50%;
+        max-width: 50%;
+      }
+    }
   }
 }
 
@@ -221,6 +236,12 @@
 
     .destinations-grid {
       margin: 0 -$spacer-sm;
+
+       .destination-col {
+        // 1 card per row on small screens
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
     }
   }
 }

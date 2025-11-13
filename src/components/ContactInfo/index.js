@@ -46,7 +46,10 @@ const ContactInfo = () => {
                   <div className="contact-icon">
                      <img
                         src={contact.icon || "/placeholder.svg"}
-                        alt="logo alt" />
+                        alt="logo alt"
+                        loading="lazy" 
+                        decoding="async" 
+                        />
                   </div>
                   <h4 className="contact-title">{contact.title}</h4>
                   <div className="contact-details">

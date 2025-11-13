@@ -61,6 +61,8 @@ const Features = () => {
                                             src={feature.icon || "/placeholder.svg"}
                                             alt="logo alt"
                                             className="feature-img"
+                                            loading="lazy" 
+                                            decoding="async" 
                                         />
                                     </div>
                                     <h4 className="feature-title">{feature.title}</h4>

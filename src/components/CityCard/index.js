@@ -50,6 +50,8 @@ const CityCard = (slide) => {
             width={180}
             height={150}
             className="card-image"
+            loading="lazy" 
+            decoding="async" 
           />
         </div>
         <Card.Body className="card-body">

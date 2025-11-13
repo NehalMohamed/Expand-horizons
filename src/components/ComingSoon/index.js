@@ -9,7 +9,13 @@ const ComingSoon = () => {
     <>
       <Container className="pageContainer">
         <div className="contentWrapper">
-          <img src="/images/comingSoon.png" alt="coming soon Illustration" className="illustration" />
+          <img 
+          src="/images/comingSoon.png" 
+          alt="coming soon Illustration" 
+          className="illustration"
+          loading="lazy" 
+          decoding="async" 
+           />
           <h1 className="mainTitle">{t("ComingSoon.title")}</h1>
           <Button onClick={() => navigate("/")} variant="primary" className="goBackButton">
             {t("ComingSoon.backBtn")}
