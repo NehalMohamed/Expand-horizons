@@ -41,14 +41,26 @@
     "loading": "Touren werden geladen...",
     "empty_title": "Keine Touren verfügbar",
     "empty_text": "Schauen Sie später wieder vorbei für neue Angebote.",
-    "top_offers": "Top Angebote"
+    "top_offers": "Top Angebote",
+    "LoadMore": "Mehr laden",
+    "ViewAllTours": "Alle Touren anzeigen"
+  },
+  "destinations":{
+    "explore": "Entdecken",
+    "loading": "Ziele werden geladen...",
+    "previousSlide": "Vorherige Folie",
+    "nextSlide": "Nächste Folie",
+    "goToSlide": "Gehe zu Folie"
   },
   "wishlist": {
+    "emptyWishlist": "Ihre Wunschliste ist leer",
+    "saveWishList": "Speichern Sie Aktivitäten auf Ihrer Wunschliste, indem Sie auf das Herz-Symbol klicken.",
+    "BackBtn": "Zurück zur Startseite",
     "title": "Ihre Wunschliste",
     "saved": "Gespeichert",
     "remove": "Von Wunschliste entfernen",
-    "topDestinations": "Die besten zu besuchenden Reiseziele",
-    "topDestinationsDescription": "Erlebe den Nervenkitzel, versteckte Schätze und berühmte Sehenswürdigkeiten in den besten Reisezielen weltweit zu entdecken - dein Fernweh wartet!"
+    "topDestinations": "Reiseziele zum Besuchen",
+    "topDestinationsDescription": "Erlebe den Nervenkitzel, versteckte Schätze und berühmte Sehenswürdigkeiten in den besten Reisezielen weltweit zu entdecken!"
   },
   "footer": {
     "travel": "Reisen",
@@ -207,7 +219,10 @@
     "sessionExpired": "Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.",
     "loginRequired": "Bitte melden Sie sich zunächst an.",
     "loginNow": "Jetzt anmelden",
-    "ok": "OK"
+    "ok": "OK",
+    "loginRequiredTitle": "Anmeldung erforderlich",
+    "loginRequiredMessage": "Sie müssen sich anmelden, um fortzufahren.",
+    "goToLogin": "Zur Anmeldung"
   },
   "tripDetails": {
     "reviews": "Bewertungen",
@@ -249,7 +264,7 @@
     "stars": "Stern"
   },
   "booking": {
-  "returnDate": {
+    "returnDate": {
       "title": "Rückfahrt-Datum & Uhrzeit auswählen",
       "note": "Bitte wählen Sie Ihr gewünschtes Rückfahrt-Datum und Uhrzeit"
     },
@@ -298,8 +313,9 @@
     "tripDate": "Reisedatum",
     "returnDate": "Rückreisedatum",
     "myBookings": "Deine Buchungen",
-    "noBookings": "Noch keine Buchungen",
-    "noBookingsText": "Sie haben noch keine Buchungen getätigt. Entdecken Sie unsere Ausflüge und machen Sie Ihre erste Reservierung!",
+    "noBookings": "Keine Buchungen in Ihrem Warenkorb",
+    "noBookingsText": "Entdecken Sie unsere Reisen und machen Sie Ihre erste Reservierung!",
+    "BackBtn": "Zurück zur Startseite",
     "fetchError": "Fehler beim Laden Ihrer Buchungen. Bitte versuchen Sie es später erneut.",
     "dateToBeConfirmed": "Datum muss noch bestätigt werden",
     "timeToBeConfirmed": "Uhrzeit muss noch bestätigt werden",
@@ -390,7 +406,7 @@
       "redeem": "Einlösen",
       "placeholder": "Code eingeben"
     },
-    "cancel":{
+    "cancel": {
       "cancelConfirmation1": "Sie erhalten eine E-Mail mit den Stornogebühren",
       "cancelConfirmation2": "oder kontaktieren Sie booking@expand-horizons.de",
       "cancelConfirmation3": "Sind Sie sicher, dass Sie stornieren möchten?",

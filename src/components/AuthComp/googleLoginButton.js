@@ -8,9 +8,9 @@ import LoadingPage from "../Loader/LoadingPage";
 import { Button } from "react-bootstrap";
 import PopUp from "../Shared/popup/PopUp";
 import axios from "axios";
-
 const GoogleLoginButton = (props) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const [showPopup, setShowPopup] = useState(false); // State for popup visibility
   const { loading, message, success } = useSelector((state) => state.auth);
@@ -26,6 +26,8 @@ const GoogleLoginButton = (props) => {
       if (userInfo && userInfo.data) {
         let { family_name, given_name, email } = userInfo.data;
         //check if this login or register (different in api path and payload)
+        const redirectUrl = localStorage.getItem("redirect_after_login");
+        console.log("redirectUrl ", redirectUrl);
         if (props.login) {
           let formData = {
             email: email,
@@ -36,22 +38,24 @@ const GoogleLoginButton = (props) => {
           };
           let data = { payload: formData, path: "/LoginGmail" };
           dispatch(LoginUser(data)).then((result) => {
-            let { isAuthRedirect, redirectPath } = props;
+            //let { isAuthRedirect, redirectPath } = props;
             if (result.payload && result.payload.isSuccessed) {
               setShowPopup(false);
               //if user login successfully and his email is confirmed navigate to home and whole app , if no sholud verify mail first by OTP
               if (result.payload?.user?.emailConfirmed == true) {
-                if (isAuthRedirect) {
-                  window.location.href = redirectPath;
-                } else {
-                  window.location.href = "/";
-                }
+                // if (isAuthRedirect) {
+                //   window.location.href = redirectPath;
+                // } else {
+                //   window.location.href = "/";
+                // }
+                // navigate(redirectUrl || "/");
+                navigate("/");
               } else {
-                 window.location.href = "/verifyEmail";
-                // navigate("/verifyEmail", {
-                //   replace: true,
-                //   state: { path: "/" },
-                // });
+                //window.location.href = "/verifyEmail";
+                navigate("/verifyEmail", {
+                  replace: true,
+                  state: { path: "/" },
+                });
               }
             } else {
               setShowPopup(true);
@@ -75,11 +79,11 @@ const GoogleLoginButton = (props) => {
             if (result.payload && result.payload.isSuccessed) {
               //if user register successfully navigate to verify mail first by OTP
               setShowPopup(false);
-              window.location.href = "/verifyEmail";
-              // navigate("/verifyEmail", {
-              //   replace: true,
-              //   state: { path: "/" },
-              // });
+              // window.location.href = "/verifyEmail";
+              navigate("/verifyEmail", {
+                replace: true,
+                state: { path: "/" },
+              });
             } else {
               setShowPopup(true);
             }

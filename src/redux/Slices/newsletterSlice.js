@@ -1,32 +1,36 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { checkAUTH, isUserNotLoggedIn, isTokenExpiredOnly } from "../../helper/helperFN";
+// import axios from "axios";
+import {
+  checkAUTH,
+  isUserNotLoggedIn,
+  isTokenExpiredOnly,
+} from "../../helper/helperFN";
 import { createAuthError } from "../../utils/authError";
-
+import api from "../../api/axios";
 const CONTACT_URL = process.env.REACT_APP_CONTACT_API_URL;
 
-const getAuthHeaders = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  const accessToken = user?.accessToken;
-  let lang = localStorage.getItem("lang") || "en";
-  return {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json",
-      "Accept-Language": lang,
-    },
-  };
-};
+// const getAuthHeaders = () => {
+//   const user = JSON.parse(localStorage.getItem("user"));
+//   const accessToken = user?.accessToken;
+//   let lang = localStorage.getItem("lang") || "en";
+//   return {
+//     headers: {
+//       Authorization: `Bearer ${accessToken}`,
+//       "Content-Type": "application/json",
+//       "Accept-Language": lang,
+//     },
+//   };
+// };
 
-const getNoTokenAuthHeaders = () => {
-  let lang = localStorage.getItem("lang") || "en";
-  return {
-    headers: {
-      "Content-Type": "application/json",
-      "Accept-Language": lang
-    },
-  };
-};
+// const getNoTokenAuthHeaders = () => {
+//   let lang = localStorage.getItem("lang") || "en";
+//   return {
+//     headers: {
+//       "Content-Type": "application/json",
+//       "Accept-Language": lang
+//     },
+//   };
+// };
 
 // Helper function to get client ID from user data
 const getClientId = () => {
@@ -39,17 +43,17 @@ export const subscribeNewsletter = createAsyncThunk(
   "newsletter/subscribeNewsletter",
   async (subscriptionData, { rejectWithValue }) => {
     // Check authentication with proper scenario detection
-    if (isUserNotLoggedIn()) {
-      return rejectWithValue(createAuthError('notLoggedIn'));
-    }
-    
-    if (isTokenExpiredOnly()) {
-      return rejectWithValue(createAuthError('expired'));
-    }
-    
-    if (!checkAUTH()) {
-      return rejectWithValue(createAuthError('expired'));
-    }
+    // if (isUserNotLoggedIn()) {
+    //   return rejectWithValue(createAuthError("notLoggedIn"));
+    // }
+
+    // if (isTokenExpiredOnly()) {
+    //   return rejectWithValue(createAuthError("expired"));
+    // }
+
+    // if (!checkAUTH()) {
+    //   return rejectWithValue(createAuthError("expired"));
+    // }
 
     try {
       const payload = {
@@ -59,20 +63,20 @@ export const subscribeNewsletter = createAsyncThunk(
         subscribed_at: null,
         language_code: subscriptionData.language_code,
         id: 0,
-        client_id: getClientId()
+        client_id: getClientId(),
       };
 
-      const response = await axios.post(
+      const response = await api.post(
         `${CONTACT_URL}/SubscribeNewSletter`,
-        payload,
-        getAuthHeaders() // Using authenticated headers
+        payload
+        // getAuthHeaders() // Using authenticated headers
       );
-      
+
       return response.data;
     } catch (error) {
-      if (error.response?.status === 401) {
-        return rejectWithValue(createAuthError('expired'));
-      }
+      // if (error.response?.status === 401) {
+      //   return rejectWithValue(createAuthError("expired"));
+      // }
       return rejectWithValue(error.response?.data || error.message);
     }
   }
@@ -85,7 +89,7 @@ const newsletterSlice = createSlice({
     success: false,
     error: null,
     subscribed: false,
-    message: null
+    message: null,
   },
   reducers: {
     resetNewsletter: (state) => {
@@ -97,7 +101,7 @@ const newsletterSlice = createSlice({
     },
     clearNewsletterError: (state) => {
       state.error = null;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -123,8 +127,9 @@ const newsletterSlice = createSlice({
         state.error = action.payload;
         state.message = null;
       });
-  }
+  },
 });
 
-export const { resetNewsletter, clearNewsletterError } = newsletterSlice.actions;
+export const { resetNewsletter, clearNewsletterError } =
+  newsletterSlice.actions;
 export default newsletterSlice.reducer;

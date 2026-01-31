@@ -6,11 +6,14 @@ import { useTranslation } from "react-i18next";
 import { fetchWishlist, resetWishlistOperation } from '../../redux/Slices/wishlistSlice';
 import WishlistCard from "../WishlistCard";
 import LoadingPage from "../Loader/LoadingPage";
+import NoWishList from "../NoWishList";
 import PopUp from "../Shared/popup/PopUp";
 
 const WishlistSection = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem("user"));
+  const token = user?.accessToken;
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
   const [popupType, setPopupType] = useState('alert');
@@ -64,21 +67,13 @@ const WishlistSection = () => {
     };
   }, [dispatch]);
 
-  if (loading) {
+  if (loading && token) {
     return <LoadingPage />;
   }
 
   if (items.length === 0 && !loading) {
     return (
-      <section className="tours-section">
-        <Container>
-          <div className="tours-empty">
-            <BiSolidCard className="empty-icon" />
-            <h3 className="empty-title">{t('tours.empty_title')}</h3>
-            {/* <p className="empty-text">{t('tours.empty_text')}</p> */}
-          </div>
-        </Container>
-      </section>
+      <NoWishList />
     );
   }
 

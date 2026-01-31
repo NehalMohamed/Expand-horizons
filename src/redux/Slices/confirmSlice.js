@@ -1,52 +1,56 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { checkAUTH, isUserNotLoggedIn, isTokenExpiredOnly } from "../../helper/helperFN";
+// import axios from "axios";
+import {
+  checkAUTH,
+  isUserNotLoggedIn,
+  isTokenExpiredOnly,
+} from "../../helper/helperFN";
 import { createAuthError } from "../../utils/authError";
-
+import api from "../../api/axios";
 const BOOKING_URL = process.env.REACT_APP_BOOKING_API_URL;
 
-const getAuthHeaders = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  const accessToken = user?.accessToken;
-  let lang = localStorage.getItem("lang") || "en";
-  return {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json",
-      "Accept-Language": lang,
-    },
-  };
-};
+// const getAuthHeaders = () => {
+//   const user = JSON.parse(localStorage.getItem("user"));
+//   const accessToken = user?.accessToken;
+//   let lang = localStorage.getItem("lang") || "en";
+//   return {
+//     headers: {
+//       Authorization: `Bearer ${accessToken}`,
+//       "Content-Type": "application/json",
+//       "Accept-Language": lang,
+//     },
+//   };
+// };
 
 // Async thunk to confirm booking
 export const confirmBooking = createAsyncThunk(
   "confirm/confirmBooking",
   async (confirmData, { rejectWithValue }) => {
     // Check authentication with proper scenario detection
-    if (isUserNotLoggedIn()) {
-      return rejectWithValue(createAuthError('notLoggedIn'));
-    }
+    // if (isUserNotLoggedIn()) {
+    //   return rejectWithValue(createAuthError("notLoggedIn"));
+    // }
 
-    if (isTokenExpiredOnly()) {
-      return rejectWithValue(createAuthError('expired'));
-    }
+    // if (isTokenExpiredOnly()) {
+    //   return rejectWithValue(createAuthError("expired"));
+    // }
 
-    if (!checkAUTH()) {
-      return rejectWithValue(createAuthError('expired'));
-    }
+    // if (!checkAUTH()) {
+    //   return rejectWithValue(createAuthError("expired"));
+    // }
 
     try {
-      const response = await axios.post(
+      const response = await api.post(
         `${BOOKING_URL}/ConfirmBooking`,
-        confirmData,
-        getAuthHeaders()
+        confirmData
+        //getAuthHeaders()
       );
 
       return response.data;
     } catch (error) {
-      if (error.response?.status === 401) {
-        return rejectWithValue(createAuthError('expired'));
-      }
+      // if (error.response?.status === 401) {
+      //   return rejectWithValue(createAuthError("expired"));
+      // }
       return rejectWithValue(error.response?.data || error.message);
     }
   }
@@ -58,7 +62,7 @@ const confirmSlice = createSlice({
     loading: false,
     error: null,
     success: false,
-    confirmed: false
+    confirmed: false,
   },
   reducers: {
     resetConfirmState: (state) => {
@@ -69,7 +73,7 @@ const confirmSlice = createSlice({
     },
     clearConfirmError: (state) => {
       state.error = null;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -90,7 +94,7 @@ const confirmSlice = createSlice({
         state.success = false;
         state.confirmed = false;
       });
-  }
+  },
 });
 
 export const { resetConfirmState, clearConfirmError } = confirmSlice.actions;

@@ -11,6 +11,8 @@ import PopUp from '../Shared/popup/PopUp';
 const Contact = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
+    const user = JSON.parse(localStorage.getItem("user"));
+    const token = user?.accessToken;
     const { loading, success, error, submitted } = useSelector(state => state.contact);
 
     const [formData, setFormData] = useState({
@@ -75,7 +77,7 @@ const Contact = () => {
     }, [success, error, t, dispatch]);
 
     // Show loading page during initial form submission
-    if (loading && !submitted) {
+    if (loading && !submitted && token) {
         return <LoadingPage />;
     }
 

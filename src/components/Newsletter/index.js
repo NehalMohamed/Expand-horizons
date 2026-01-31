@@ -9,6 +9,8 @@ import PopUp from '../Shared/popup/PopUp';
 const Newsletter = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem("user"));
+  const token = user?.accessToken;
   const { loading, success, error, message } = useSelector(state => state.newsletter);
   
   const [formData, setFormData] = useState({
@@ -57,8 +59,8 @@ const Newsletter = () => {
   }, [success, error, message, t, dispatch]);
 
   // Show loading page during initial subscription
-  if (loading && !success && !error) {
-    return <LoadingPage />;
+  if (loading && !success && !error && token) {
+      return <LoadingPage />;
   }
 
   return (

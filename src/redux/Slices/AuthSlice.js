@@ -1,11 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import {
-  checkAUTH,
-  isUserNotLoggedIn,
-  isTokenExpiredOnly,
-} from "../../helper/helperFN";
+// import {
+//   checkAUTH,
+//   isUserNotLoggedIn,
+//   isTokenExpiredOnly,
+// } from "../../helper/helperFN";
 import { createAuthError } from "../../utils/authError";
+import api from "../../api/axios";
 const BASE_URL_AUTH = process.env.REACT_APP_AUTH_API_URL;
 
 const NonAuthHeaders = () => {
@@ -14,18 +15,18 @@ const NonAuthHeaders = () => {
     "Accept-Language": lang,
   };
 };
-const getAuthHeaders = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  const accessToken = user?.accessToken;
-  let lang = localStorage.getItem("lang") || "en";
-  return {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json",
-      "Accept-Language": lang,
-    },
-  };
-};
+// const getAuthHeaders = () => {
+//   const user = JSON.parse(localStorage.getItem("user"));
+//   const accessToken = user?.accessToken;
+//   let lang = localStorage.getItem("lang") || "en";
+//   return {
+//     headers: {
+//       Authorization: `Bearer ${accessToken}`,
+//       "Content-Type": "application/json",
+//       "Accept-Language": lang,
+//     },
+//   };
+// };
 const token = localStorage.getItem("token");
 
 const initialState = {
@@ -61,15 +62,15 @@ export const changePassword = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const response = await axios.post(
+      const response = await api.post(
         BASE_URL_AUTH + "/changePassword",
         {
           userId,
           oldPassword,
           newPassword,
           confirmNewPassword,
-        },
-        getAuthHeaders()
+        }
+        //getAuthHeaders()
       );
       return response.data;
     } catch (err) {
@@ -284,7 +285,6 @@ const authSlice = createSlice({
       })
       // Password change successful
       .addCase(changePassword.fulfilled, (state, action) => {
-        console.log("fulfilled ", action.payload);
         state.loading = false;
         state.success = action.payload?.isSuccessed;
         state.message = action.payload?.message;
@@ -297,7 +297,7 @@ const authSlice = createSlice({
       })
       // Password change failed
       .addCase(changePassword.rejected, (state, action) => {
-        console.log("rejectttt");
+
         state.loading = false;
         state.success = false;
         state.error = action?.payload;

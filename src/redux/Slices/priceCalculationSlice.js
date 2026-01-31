@@ -1,22 +1,26 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { checkAUTH, isUserNotLoggedIn, isTokenExpiredOnly } from "../../helper/helperFN";
+import {
+  checkAUTH,
+  isUserNotLoggedIn,
+  isTokenExpiredOnly,
+} from "../../helper/helperFN";
 import { createAuthError } from "../../utils/authError";
 
 const BASE_URL = process.env.REACT_APP_CLIENT_API_URL;
 
-const getAuthHeaders = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  const accessToken = user?.accessToken;
-  let lang = localStorage.getItem("lang") || "en";
-  return {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json",
-      "Accept-Language": lang,
-    },
-  };
-};
+// const getAuthHeaders = () => {
+//   const user = JSON.parse(localStorage.getItem("user"));
+//   const accessToken = user?.accessToken;
+//   let lang = localStorage.getItem("lang") || "en";
+//   return {
+//     headers: {
+//       Authorization: `Bearer ${accessToken}`,
+//       "Content-Type": "application/json",
+//       "Accept-Language": lang,
+//     },
+//   };
+// };
 
 const getNonAuthHeaders = () => {
   let lang = localStorage.getItem("lang") || "en";
@@ -36,11 +40,11 @@ export const calculateBookingPrice = createAsyncThunk(
     // if (isUserNotLoggedIn()) {
     //   return rejectWithValue(createAuthError('notLoggedIn'));
     // }
-    
+
     // if (isTokenExpiredOnly()) {
     //   return rejectWithValue(createAuthError('expired'));
     // }
-    
+
     // if (!checkAUTH()) {
     //   return rejectWithValue(createAuthError('expired'));
     // }
@@ -51,23 +55,25 @@ export const calculateBookingPrice = createAsyncThunk(
         calculationData,
         getNonAuthHeaders()
       );
-      
+
       // Handle API response with success: false
       if (response.data.success === false) {
-        return rejectWithValue(response.data.errors || "Failed to calculate price");
+        return rejectWithValue(
+          response.data.errors || "Failed to calculate price"
+        );
       }
-      
+
       return response.data;
     } catch (error) {
       // if (error.response?.status === 401) {
       //   return rejectWithValue(createAuthError('expired'));
       // }
-      
+
       // Handle API error response format
       if (error.response?.data?.success === false) {
         return rejectWithValue(error.response.data.errors || error.message);
       }
-      
+
       return rejectWithValue(error.response?.data?.errors || error.message);
     }
   }
@@ -79,7 +85,7 @@ const priceCalculationSlice = createSlice({
     loading: false,
     error: null,
     success: false,
-    calculationData: null
+    calculationData: null,
   },
   reducers: {
     resetCalculation: (state) => {
@@ -93,7 +99,7 @@ const priceCalculationSlice = createSlice({
       state.error = null;
       state.success = false;
       state.calculationData = null;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -112,8 +118,9 @@ const priceCalculationSlice = createSlice({
         state.error = action.payload;
         state.success = false;
       });
-  }
+  },
 });
 
-export const { resetCalculation, clearCalculationData } = priceCalculationSlice.actions;
+export const { resetCalculation, clearCalculationData } =
+  priceCalculationSlice.actions;
 export default priceCalculationSlice.reducer;

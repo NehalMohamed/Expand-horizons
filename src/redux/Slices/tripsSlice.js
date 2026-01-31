@@ -3,12 +3,12 @@ import axios from "axios";
 
 const BASE_URL = process.env.REACT_APP_CLIENT_API_URL;
 
-const getAuthHeaders = () => {
+const getNonAuthHeaders = () => {
   let lang = localStorage.getItem("lang");
   return {
     headers: {
       "Content-Type": "application/json",
-      "Accept-Language": lang
+      "Accept-Language": lang,
     },
   };
 };
@@ -19,14 +19,14 @@ export const fetchSliderTrips = createAsyncThunk(
   async (params, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(
-        `${BASE_URL}/GetTripsAll`, 
+        `${BASE_URL}/GetTripsAll`,
         {
           ...params,
           show_in_slider: true,
           destination_id: 0, // Always 0 for slider
-          client_id: "" // No client ID for slider
+          client_id: "", // No client ID for slider
         },
-        getAuthHeaders()
+        getNonAuthHeaders()
       );
       return data;
     } catch (e) {
@@ -40,14 +40,14 @@ export const fetchCarouselTrips = createAsyncThunk(
   async (params, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(
-        `${BASE_URL}/GetTripsAll`, 
+        `${BASE_URL}/GetTripsAll`,
         {
           ...params,
           show_in_slider: true,
           destination_id: 0, // Always 0 for carousel
-          client_id: "" // No client ID for carousel
+          client_id: "", // No client ID for carousel
         },
-        getAuthHeaders()
+        getNonAuthHeaders()
       );
       return data;
     } catch (e) {
@@ -61,14 +61,14 @@ export const fetchToursSectionTrips = createAsyncThunk(
   async (params, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(
-        `${BASE_URL}/GetTripsAll`, 
+        `${BASE_URL}/GetTripsAll`,
         {
           ...params,
           show_in_slider: true,
           destination_id: 0, // Always 0 for tours section
           // client_id is passed from params for personalized results
         },
-        getAuthHeaders()
+        getNonAuthHeaders()
       );
       return data;
     } catch (e) {
@@ -82,13 +82,13 @@ export const fetchDestinationTrips = createAsyncThunk(
   async (params, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(
-        `${BASE_URL}/GetTripsAll`, 
+        `${BASE_URL}/GetTripsAll`,
         {
           ...params,
           show_in_slider: false, // Always false for destination trips
           // client_id is passed from params for personalized results
         },
-        getAuthHeaders()
+        getNonAuthHeaders()
       );
       return data;
     } catch (e) {
@@ -102,9 +102,9 @@ export const fetchPickupsForTrip = createAsyncThunk(
   async (params, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(
-        `${BASE_URL}/GetPickupsForTrip`, 
+        `${BASE_URL}/GetPickupsForTrip`,
         params,
-        getAuthHeaders()
+        getNonAuthHeaders()
       );
       return data;
     } catch (e) {
@@ -131,7 +131,7 @@ const tripsSlice = createSlice({
     },
     clearError: (state) => {
       state.error = null;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -148,7 +148,7 @@ const tripsSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      
+
       // Carousel Trips
       .addCase(fetchCarouselTrips.pending, (state) => {
         state.loading = true;
@@ -162,7 +162,7 @@ const tripsSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      
+
       // Tours Section Trips
       .addCase(fetchToursSectionTrips.pending, (state) => {
         state.loading = true;
@@ -176,7 +176,7 @@ const tripsSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      
+
       // Destination Trips
       .addCase(fetchDestinationTrips.pending, (state) => {
         state.loading = true;
@@ -190,7 +190,7 @@ const tripsSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      
+
       // Pickups
       .addCase(fetchPickupsForTrip.pending, (state) => {
         state.loading = true;

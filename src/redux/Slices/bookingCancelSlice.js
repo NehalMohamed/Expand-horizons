@@ -1,56 +1,62 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { checkAUTH, isUserNotLoggedIn, isTokenExpiredOnly } from "../../helper/helperFN";
+// import axios from "axios";
+import {
+  checkAUTH,
+  isUserNotLoggedIn,
+  isTokenExpiredOnly,
+} from "../../helper/helperFN";
 import { createAuthError } from "../../utils/authError";
-
+import api from "../../api/axios";
 const BOOKING_URL = process.env.REACT_APP_BOOKING_API_URL;
 
-const getAuthHeaders = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  const accessToken = user?.accessToken;
-  let lang = localStorage.getItem("lang") || "en";
-  return {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json",
-      "Accept-Language": lang,
-    },
-  };
-};
+// const getAuthHeaders = () => {
+//   const user = JSON.parse(localStorage.getItem("user"));
+//   const accessToken = user?.accessToken;
+//   let lang = localStorage.getItem("lang") || "en";
+//   return {
+//     headers: {
+//       Authorization: `Bearer ${accessToken}`,
+//       "Content-Type": "application/json",
+//       "Accept-Language": lang,
+//     },
+//   };
+// };
 
 // Async thunk for canceling booking
 export const cancelBooking = createAsyncThunk(
   "bookingCancel/cancelBooking",
   async (bookingId, { rejectWithValue }) => {
     // Check authentication
-    if (isUserNotLoggedIn()) {
-      return rejectWithValue(createAuthError('notLoggedIn'));
-    }
-    
-    if (isTokenExpiredOnly()) {
-      return rejectWithValue(createAuthError('expired'));
-    }
-    
-    if (!checkAUTH()) {
-      return rejectWithValue(createAuthError('expired'));
-    }
+    // if (isUserNotLoggedIn()) {
+    //   return rejectWithValue(createAuthError("notLoggedIn"));
+    // }
+
+    // if (isTokenExpiredOnly()) {
+    //   return rejectWithValue(createAuthError("expired"));
+    // }
+
+    // if (!checkAUTH()) {
+    //   return rejectWithValue(createAuthError("expired"));
+    // }
 
     try {
-      const response = await axios.post(
-        `${BOOKING_URL}/CancelBooking?booking_id=${bookingId}`,
-        {},
-        getAuthHeaders()
+      const response = await api.post(
+        `${BOOKING_URL}/CancelBooking?booking_id=${bookingId}`
+        // {},
+        // getAuthHeaders()
       );
-      
+
       if (response.data.success === false) {
-        return rejectWithValue(response.data.errors || "Failed to cancel booking");
+        return rejectWithValue(
+          response.data.errors || "Failed to cancel booking"
+        );
       }
-      
+
       return { bookingId, response: response.data };
     } catch (error) {
-      if (error.response?.status === 401) {
-        return rejectWithValue(createAuthError('expired'));
-      }
+      // if (error.response?.status === 401) {
+      //   return rejectWithValue(createAuthError("expired"));
+      // }
       return rejectWithValue(error.response?.data?.errors || error.message);
     }
   }
@@ -74,7 +80,7 @@ const bookingCancelSlice = createSlice({
     resetCancelStatus: (state) => {
       state.success = false;
       state.canceledBookingId = null;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -95,8 +101,9 @@ const bookingCancelSlice = createSlice({
         state.success = false;
         state.canceledBookingId = null;
       });
-  }
+  },
 });
 
-export const { clearCancelState, resetCancelStatus } = bookingCancelSlice.actions;
+export const { clearCancelState, resetCancelStatus } =
+  bookingCancelSlice.actions;
 export default bookingCancelSlice.reducer;

@@ -7,11 +7,14 @@ import { fetchBookingList } from '../../redux/Slices/bookingListSlice';
 import { cancelBooking } from '../../redux/Slices/bookingCancelSlice';
 import BookingCard from '../BookingCard';
 import LoadingPage from '../Loader/LoadingPage';
+import NoBookings from '../NoBookings';
 import PopUp from '../Shared/popup/PopUp';
 
 const BookingSection = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem("user"));
+  const token = user?.accessToken;
   const { items: allBookings, loading, error } = useSelector((state) => state.bookingList);
   const { loading: cancelLoading, success: cancelSuccess, error: cancelError } = useSelector((state) => state.bookingCancel);
     
@@ -128,21 +131,13 @@ const BookingSection = () => {
       setSelectedBooking(null);
     };
 
-  if (loading && currentPage === 1) {
+  if (loading && token && currentPage === 1) {
     return <LoadingPage />;
   }
 
   if (allBookings && allBookings.length === 0 && !loading) {
     return (
-      <section className="bookings-section">
-        <Container>
-          <div className="bookings-empty">
-            <BiSolidCard className="empty-icon" />
-            <h3 className="empty-title">{t('bookings.noBookings')}</h3>
-            <p className="empty-text">{t('bookings.noBookingsText')}</p>
-          </div>
-        </Container>
-      </section>
+      <NoBookings />
     );
   }
 

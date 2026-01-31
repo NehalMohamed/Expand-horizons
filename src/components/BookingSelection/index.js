@@ -14,6 +14,8 @@ const BookingSelection = ({ tripData }) => {
     const { t } = useTranslation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const user = JSON.parse(localStorage.getItem("user"));
+    const token = user?.accessToken;
     const maxAge = tripData?.max_child_age || 0;
     const hasChildOption = tripData?.max_child_age !== null;
     const isTwoWayTransferType = tripData?.trip_type === 2;
@@ -419,10 +421,14 @@ const BookingSelection = ({ tripData }) => {
         return date >= minDate;
     };
 
-    if (loading || calculationLoading) {
-        return <LoadingPage />;
+    if (loading && token) {
+         return <LoadingPage />;
     }
 
+    if (calculationLoading) {
+         return <LoadingPage />;
+    }
+    
     return (
         <>
             <div className="booking-selection">

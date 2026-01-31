@@ -1,30 +1,34 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { checkAUTH, isUserNotLoggedIn, isTokenExpiredOnly } from "../../helper/helperFN";
+import {
+  checkAUTH,
+  isUserNotLoggedIn,
+  isTokenExpiredOnly,
+} from "../../helper/helperFN";
 import { createAuthError } from "../../utils/authError";
-
+import api from "../../api/axios";
 const BOOKING_URL = process.env.REACT_APP_BOOKING_API_URL;
 const BASE_URL = process.env.REACT_APP_CLIENT_API_URL;
 
-const getAuthHeaders = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  const accessToken = user?.accessToken;
-  let lang = localStorage.getItem("lang") || "en";
-  return {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json",
-      "Accept-Language": lang,
-    },
-  };
-};
+// const getAuthHeaders = () => {
+//   const user = JSON.parse(localStorage.getItem("user"));
+//   const accessToken = user?.accessToken;
+//   let lang = localStorage.getItem("lang") || "en";
+//   return {
+//     headers: {
+//       Authorization: `Bearer ${accessToken}`,
+//       "Content-Type": "application/json",
+//       "Accept-Language": lang,
+//     },
+//   };
+// };
 
 const getNoTokenAuthHeaders = () => {
   let lang = localStorage.getItem("lang") || "en";
   return {
     headers: {
       "Content-Type": "application/json",
-      "Accept-Language": lang
+      "Accept-Language": lang,
     },
   };
 };
@@ -49,7 +53,7 @@ export const fetchBookingCount = createAsyncThunk(
         {},
         getNoTokenAuthHeaders()
       );
-      
+
       // Assuming the API returns a simple number like in your example
       return response.data;
     } catch (error) {
@@ -65,34 +69,36 @@ export const fetchBookingList = createAsyncThunk(
   "bookingList/fetchBookingList",
   async (params, { rejectWithValue }) => {
     // Check authentication with proper scenario detection
-    if (isUserNotLoggedIn()) {
-      return rejectWithValue(createAuthError('notLoggedIn'));
-    }
-    
-    if (isTokenExpiredOnly()) {
-      return rejectWithValue(createAuthError('expired'));
-    }
-    
-    if (!checkAUTH()) {
-      return rejectWithValue(createAuthError('expired'));
-    }
+    // if (isUserNotLoggedIn()) {
+    //   return rejectWithValue(createAuthError("notLoggedIn"));
+    // }
+
+    // if (isTokenExpiredOnly()) {
+    //   return rejectWithValue(createAuthError("expired"));
+    // }
+
+    // if (!checkAUTH()) {
+    //   return rejectWithValue(createAuthError("expired"));
+    // }
 
     try {
-      const response = await axios.post(
+      const response = await api.post(
         `${BOOKING_URL}/GetMyBooking`,
-        params,
-        getAuthHeaders()
+        params
+        //getAuthHeaders()
       );
-      
+
       if (response.data.success === false) {
-        return rejectWithValue(response.data.errors || "Failed to fetch bookings");
+        return rejectWithValue(
+          response.data.errors || "Failed to fetch bookings"
+        );
       }
-      
+
       return response.data;
     } catch (error) {
-      if (error.response?.status === 401) {
-        return rejectWithValue(createAuthError('expired'));
-      }
+      // if (error.response?.status === 401) {
+      //   return rejectWithValue(createAuthError("expired"));
+      // }
       return rejectWithValue(error.response?.data?.errors || error.message);
     }
   }
@@ -109,7 +115,7 @@ const bookingListSlice = createSlice({
   reducers: {
     clearBookingList: (state) => {
       state.items = [];
-      state.count = 0; 
+      state.count = 0;
       state.loading = false;
       state.error = null;
     },
@@ -119,7 +125,7 @@ const bookingListSlice = createSlice({
     // Reset count when user logs out
     resetBookingCount: (state) => {
       state.count = 0;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -150,8 +156,9 @@ const bookingListSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       });
-  }
+  },
 });
 
-export const { clearBookingList, updateBookingCount, resetBookingCount } = bookingListSlice.actions;
+export const { clearBookingList, updateBookingCount, resetBookingCount } =
+  bookingListSlice.actions;
 export default bookingListSlice.reducer;

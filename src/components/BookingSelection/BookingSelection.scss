@@ -301,7 +301,15 @@
     padding-right: 0 !important;
   }
 
+
+
   // Custom datepicker styles
+
+  .react-datepicker__wrapper,
+.react-datepicker__input-container,
+.react-datepicker__month-container {
+  contain: layout style;
+}
   .react-datepicker-wrapper {
     display: block !important;
   }

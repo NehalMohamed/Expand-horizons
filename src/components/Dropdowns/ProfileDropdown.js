@@ -18,12 +18,15 @@ const ProfileDropdown = () => {
         }
     }, []);
 
+    const handleLogin = () =>{
+         window.location.href = "/Auth";
+    }
+
     const handleLogout = () => {
         // Remove user and token from localStorage
         localStorage.removeItem('user');
         localStorage.removeItem('token');
         setUser(null);
-        // You might want to redirect or refresh the page here
        window.location.href = "/";
     };
 
@@ -55,7 +58,7 @@ const ProfileDropdown = () => {
                 ) : (
                     // User is not logged in
                     <>
-                        <Dropdown.Item onClick={() => openAuthModal("login")}>
+                        <Dropdown.Item onClick={handleLogin}>
                             <FaSignInAlt className="me-2" />
                             {t('main_navbar.login_signup')}
                         </Dropdown.Item>

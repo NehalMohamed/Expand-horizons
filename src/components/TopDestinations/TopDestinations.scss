@@ -19,7 +19,6 @@
       @include responsive-font-size(1rem, 1.15rem);
       color: $primary-color;
       max-width: 1000px;
-      // margin: 0 auto;
     }
   }
 
@@ -34,6 +33,17 @@
 
     .destination-col {
       padding: $spacer;
+      
+      &.active-parent {
+        .destination-card {
+          border: 2px solid $primary-color;
+          box-shadow: 0 0 20px rgba($primary-color, 0.3);
+          
+          .parent-indicator {
+            transform: rotate(90deg);
+          }
+        }
+      }
       
       &.first-row,
       &.second-row {
@@ -60,13 +70,63 @@
     height: 220px;
     position: relative;
     background: $light-bg;
+    width: 100%;
+
+    &.parent-card {
+      .parent-indicator {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: rgba(255, 255, 255, 0.9);
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        @include flex-center;
+        font-size: 1.2rem;
+        color: $primary-color;
+        transition: $transition-base;
+        z-index: 10;
+      }
+    }
+    
+    &.child-card {
+      height: 220px;
+      width: 100%;
+      
+      .child-indicator {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: rgba($primary-color, 0.9);
+        color: white;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        opacity: 0;
+        transition: $transition-base;
+      }
+      
+      &:hover {
+        .child-indicator {
+          opacity: 1;
+        }
+      }
+    }
 
     @include media-breakpoint-up(md) {
       height: 240px;
+      
+      &.child-card {
+        height: 240px;
+      }
     }
 
     @include media-breakpoint-up(lg) {
       height: 280px;
+      
+      &.child-card {
+        height: 280px;
+      }
     }
 
     &:hover {
@@ -91,10 +151,8 @@
 
       .destination-name {
         color: $light-bg;
-        background: rgba(50, 50, 50, 0.8); // Darker glass effect on hover
-        backdrop-filter: blur(10px); // Enhanced blur on hover
-        // transform: translateY(-5px);
-        // background-color: rgba(0, 0, 0, 0.7);
+        background: rgba(50, 50, 50, 0.8);
+        backdrop-filter: blur(10px);
       }
 
       .destination-icon {
@@ -110,6 +168,7 @@
     .card-image-wrapper {
       position: relative;
       height: 100%;
+      width: 100%;
       overflow: hidden;
     }
 
@@ -147,7 +206,6 @@
       );
       @include flex-column;
       justify-content: flex-end;
-      // padding: $spacer-lg;
       transition: $transition-base;
     }
 
@@ -159,88 +217,337 @@
       text-shadow: $text-shadow-lg;
       transition: $transition-base;
       font-family: $font-family-base;
-      background: rgba(60, 60, 60, 0.7); // Semi-transparent gray
+      background: rgba(60, 60, 60, 0.7);
       padding: 12px 20px;
       border-radius: $border-radius-lg;
       display: inline-block;
-      backdrop-filter: blur(8px); // Glass effect blur
-      -webkit-backdrop-filter: blur(8px); // Safari support
-      border: 1px solid rgba(255, 255, 255, 0.2); // Subtle border for glass effect
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       text-align: center;
-      width: 100%; // Full width for better appearance
+      width: 100%;
       box-sizing: border-box;
+      
+      &.child-name {
+        font-size: 1.5rem;
+        padding: 10px 15px;
+      }
 
      @include media-breakpoint-down(md) {
-        font-size: 1.5rem; // Larger on medium screens
+        font-size: 1.5rem;
         padding: 10px 16px;
+        
+        &.child-name {
+          font-size: 1.3rem;
+        }
       }
 
       @include media-breakpoint-down(sm) {
-        font-size: 1.3rem; // Larger on small screens
+        font-size: 1.3rem;
         padding: 8px 14px;
-      }
-    }
-  }
-}
-
-// Responsive adjustments using mixins
-@include media-breakpoint-down(xl) {
-  .top-destinations {
-    .destinations-grid {
-      .destination-col {
-        &:nth-child(n+4) {
-          margin-top: $spacer;
-        }
-      }
-    }
-  }
-}
-
-@include media-breakpoint-down(lg) {
-  .top-destinations {
-    padding: 60px 0;
-    
-    .destinations-grid {
-      .destination-col {
-        margin-bottom: $spacer;
         
-        &:nth-child(n+2) {
-          margin-top: 0;
+        &.child-name {
+          font-size: 1.1rem;
+        }
+      }
+    }
+  }
+  
+  // Children Carousel Styles
+  .children-carousel-container {
+    margin-top: 40px;
+    padding: 30px;
+
+     // Scroll padding for better UX when auto-scrolling
+  scroll-margin-top: 120px;
+  
+  // If you have a sticky header, you might need this too:
+  @supports (scroll-margin-top: 120px) {
+    scroll-margin-top: 120px;
+  }
+    // background: rgba($light-bg, 0.8);
+    // border-radius: $border-radius-xl;
+    // box-shadow: $box-shadow-sm;
+    
+    .carousel-header {
+      margin-bottom: 30px;
+      
+      .carousel-title {
+        @include responsive-font-size(1.5rem, 1.8rem);
+        color: $primary-color;
+        font-weight: $font-weight-bold;
+        padding-left: 10px;
+        border-left: 4px solid $primary-color;
+      }
+    }
+    
+    .loading-children {
+      @include flex-center;
+      flex-direction: column;
+      gap: 15px;
+      height: 200px;
+      
+      span {
+        color: $primary-color;
+        font-size: 1.1rem;
+      }
+    }
+
+  }
+  
+  .carousel-wrapper {
+    position: relative;
+    width: 100%;
+    
+    .carousel-track {
+      display: flex;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+    
+    .carousel-slide {
+      flex: 0 0 100%;
+      scroll-snap-align: start;
+      min-width: 100%;
+      box-sizing: border-box;
+      padding: 10px 5px;
+      
+      .slide-content {
+        display: grid;
+      // Default for desktop: 3 columns
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        width: 100%;
+        
+        .child-card-wrapper {       
+          .destination-card.child-card {
+            width: 100%;
+            height: 220px;
+          }
+          
+          &.empty-wrapper {
+            .empty-card {
+              height: 220px;
+              visibility: hidden;
+            }
+          }
+        }
+      }
+    }
+    
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      background: $primary-color;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.8rem;
+      line-height: 50px;
+      text-align: center;
+      cursor: pointer;
+      opacity: 0.9;
+      transition: all 0.3s ease;
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      
+      &:hover {
+        opacity: 1;
+        transform: translateY(-50%) scale(1.1);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+      }
+      
+      &:focus {
+        outline: 3px solid $secondary-color;
+        outline-offset: 2px;
+      }
+      
+      &.prev-arrow {
+        left: -25px;
+      }
+      
+      &.next-arrow {
+        right: -25px;
+      }
+    }
+  }
+  
+  .carousel-dots {
+    @include flex-center;
+    gap: 12px;
+    margin-top: 25px;
+    
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: none;
+      background: rgba($primary-color, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 0;
+      
+      &:hover {
+        background: rgba($primary-color, 0.6);
+        transform: scale(1.2);
+      }
+      
+      &.active {
+        background: $primary-color;
+        transform: scale(1.4);
+      }
+      
+      &:focus-visible {
+        outline: 2px solid $secondary-color;
+        outline-offset: 2px;
+     }
+   }
+  }
+}
+
+// RESPONSIVE ADJUSTMENTS
+@include media-breakpoint-down(sm) {
+  .top-destinations {
+    .carousel-wrapper {
+      .carousel-slide {
+        .slide-content {
+           grid-template-columns: repeat(2, 1fr);
+          gap: 15px;
+
+          .child-card-wrapper {
+            &:nth-child(1),
+            &:nth-child(2) {
+              display: block;
+            }
+            
+            &:nth-child(3) {
+              display: none; // Hide third card on mobile
+            }
+            
+            .destination-card.child-card {
+              height: 180px;
+            }
+            
+            &.empty-wrapper {
+              .empty-card {
+                height: 180px;
+              }
+            }
+          }
+        }
+      }
+      
+      .carousel-arrow {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 1.4rem;
+        
+        &.prev-arrow {
+          left: -15px;
+        }
+        
+        &.next-arrow {
+          right: -15px;
         }
       }
     }
   }
 }
 
-@include media-breakpoint-down(md) {
+@include media-breakpoint-down(xs) {
+  .top-destinations {
+    .children-carousel-container {
+      .carousel-wrapper {
+        .carousel-slide {
+          .slide-content {
+            gap: 10px;
+
+            .child-card-wrapper {
+              .destination-card.child-card {
+                height: 160px;
+              }
+              
+              &.empty-wrapper {
+                .empty-card {
+                  height: 160px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-only(md) {
   .top-destinations {
     padding: 40px 0;
 
     .section-header {
       margin-bottom: $spacer-xl;
+      margin-left: 20px;
     }
 
     .destinations-grid {
+      margin: 0 20px;
+      
       .destination-col {
-        // 2 cards per row on medium screens
         flex: 0 0 50%;
         max-width: 50%;
       }
     }
-  }
-}
+    
+    .children-carousel-container {
+      margin: 30px 20px;
+      padding: 20px;
+      
+      .carousel-wrapper {
+        .carousel-slide {
+          .slide-content {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
 
-@include media-breakpoint-down(sm) {
-  .top-destinations {
-    padding: $spacer-xl 0;
-
-    .destinations-grid {
-      margin: 0 -$spacer-sm;
-
-       .destination-col {
-        // 1 card per row on small screens
-        flex: 0 0 100%;
-        max-width: 100%;
+            .child-card-wrapper {
+              .destination-card.child-card {
+                height: 200px;
+              }
+              
+              &.empty-wrapper {
+                .empty-card {
+                  height: 200px;
+                }
+              }
+            }
+          }
+        }
+        
+        .carousel-arrow {
+          width: 40px;
+          height: 40px;
+          line-height: 40px;
+          font-size: 1.4rem;
+          
+          &.prev-arrow {
+            left: -15px;
+          }
+          
+          &.next-arrow {
+            right: -15px;
+          }
+        }
       }
     }
   }
@@ -258,6 +565,11 @@
   }
 }
 
+.child-destination-col .destination-card {
+  opacity: 0;
+  animation: fadeInUp 0.4s ease forwards;
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -269,7 +581,7 @@
   }
 }
 
-// Loading spinner using your project's colors
+// Loading spinner
 .spinner-border {
   width: 3rem;
   height: 3rem;
@@ -298,13 +610,17 @@
   }
 }
 
-// Integration with your main.scss button styles
+// Touch target guidelines
 .destination-card {
-  // Apply card hover mixin from your mixins
   @include card-hover;
   
-  // Make sure it follows your touch target guidelines
   @include media-breakpoint-down(sm) {
-    min-height: 44px; // Apple recommended minimum touch target
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
 }

@@ -7,6 +7,7 @@ import NoResults from "./components/NoResults";
 import ComingSoon from "./components/ComingSoon";
 import LoadingPage from "./components/Loader/LoadingPage";
 import OTPInput from "./components/AuthComp/OTP/OTPInput";
+import AuthComp from "./components/AuthComp/AuthComp";
 import { useAuthModal } from "./components/AuthComp/AuthModal";
 import { setAuthModalFunction } from "./utils/showAlert";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -14,9 +15,11 @@ import "react-popup-alert/dist/index.css";
 import "react-datepicker/dist/react-datepicker.css";
 import "leaflet/dist/leaflet.css";
 import "@geoapify/geocoder-autocomplete/styles/minimal.css";
+import "react-confirm-alert/src/react-confirm-alert.css";
 import "react-phone-number-input/style.css";
 import "./styles/main.scss";
 import "./leafletIconsFix";
+
 
 // Lazy load all page components
 const Home = lazy(() => import("./pages/HomePage"));
@@ -80,6 +83,7 @@ function App() {
 
             {/* Routes without navbar and footer */}
             <Route element={<MinimalLayout />}>
+             <Route path="/Auth" element={<AuthComp />} />
               {/* <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} /> */}
             </Route>

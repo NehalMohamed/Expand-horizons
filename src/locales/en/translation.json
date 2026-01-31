@@ -41,13 +41,25 @@
     "loading": "Loading tours...",
     "empty_title": "No tours available",
     "empty_text": "Please check back later for new offers.",
-    "top_offers": "Top Offers"
+    "top_offers": "Top Offers",
+    "LoadMore": "Load More",
+    "ViewAllTours": "View All Tours"
+  },
+  "destinations":{
+     "explore": "Explore",
+    "loading": "Loading destinations...",
+    "previousSlide": "Previous slide",
+    "nextSlide": "Next slide",
+    "goToSlide": "Go to slide"
   },
   "wishlist": {
+    "emptyWishlist":"Your wishlist is empty",
+    "saveWishList":"Save activities to your wishlist by clicking on the heart icon.",
+    "BackBtn":"Back To Home",
     "title": "Your wishlist",
     "saved": "Saved",
     "remove": "Remove from wishlist",
-    "topDestinations": "Top Destinations to Visit",
+    "topDestinations": "Destinations to Visit",
     "topDestinationsDescription": "Experience the thrill of discovering hidden gems and famous landmarks in the best travel destinations worldwide - your wanderlust awaits!"
   },
   "footer": {
@@ -207,7 +219,10 @@
     "sessionExpired": "Your session has expired. Please log in again.",
     "loginRequired": "Please log in first.",
     "loginNow": "Log in now",
-    "ok": "OK"
+    "ok": "OK",
+    "loginRequiredTitle": "Login Required",
+    "loginRequiredMessage": "You need to log in to continue.",
+    "goToLogin": "Go to Login"
   },
   "tripDetails": {
     "reviews": "reviews",
@@ -298,8 +313,9 @@
     "tripDate": "Trip Date",
     "returnDate": "Return Date",
     "myBookings": "Your Bookings",
-    "noBookings": "No bookings yet",
-    "noBookingsText": "You haven't made any bookings yet. Start exploring our trips and make your first reservation!",
+    "noBookings": "No bookings in your cart",
+    "noBookingsText": "Start exploring our trips and make your first reservation!",
+    "BackBtn":"Back To Home",
     "fetchError": "Failed to load your bookings. Please try again later.",
     "dateToBeConfirmed": "Date to be confirmed",
     "timeToBeConfirmed": "Time to be confirmed",
@@ -465,9 +481,9 @@
         "confirmPasswordRequired": "Please confirm your new password",
         "passwordsDontMatch": "Passwords don't match",
         "userIdNotFound": "User ID not found. Please log in again.",
-        "PasswordIsRequired":"Password is required",
-        "passwordUpper":"Password must contain at least one uppercase letter",
-        "passwordSpecial":"Password must contain at least one special character"
+        "PasswordIsRequired": "Password is required",
+        "passwordUpper": "Password must contain at least one uppercase letter",
+        "passwordSpecial": "Password must contain at least one special character"
       }
     },
     "nav": {

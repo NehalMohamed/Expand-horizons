@@ -11,12 +11,14 @@
 @import "../components/TourCard/TourCard";
 @import "../components/WishlistCard/WishlistCard";
 @import "../components/WishlistSection/WishlistSection";
+@import"../components/NoWishList/NoWishList.scss";
 @import "../components/CityCard/CityCard";
 @import "../components/CityCarousel/CityCarousel";
 @import "../components/Footer/Footer";
 @import "../components/NotFound/NotFound";
 @import "../components/NoResults/NoResults";
-@import "../components/AuthComp/AuthModal.scss";
+// @import "../components/AuthComp/AuthModal.scss";
+@import "../components/AuthComp/AuthComp.scss";
 @import "../components/About/About.scss";
 @import "../components/ContactInfo/ContactInfo.scss";
 @import "../components/Features/Features.scss";
@@ -40,6 +42,7 @@
 @import "../components/BookingSteps/AgreementStep/AgreementStep.scss";
 @import "../components/BookingCard/BookingCard.scss";
 @import "../components/BookingSection/BookingSection.scss";
+@import "../components/NoBookings/NoBookings.scss";
 @import "../components/TripSoonSection/TripSoonSection.scss";
 @import "../components/Profile/NotificationsTab/NotificationsTab.scss";
 @import "../components/Profile/PasswordTab/PasswordTab.scss";
@@ -68,6 +71,7 @@
 // Global styles
 body {
   font-family: 'Myriad Pro','Source Sans Pro', sans-serif !important;
+  background-color: #fafafa !important;
 }
 .App {
   font-family: 'Myriad Pro','Source Sans Pro', sans-serif;
