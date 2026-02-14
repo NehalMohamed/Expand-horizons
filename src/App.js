@@ -83,7 +83,7 @@ function App() {
 
             {/* Routes without navbar and footer */}
             <Route element={<MinimalLayout />}>
-             <Route path="/Auth" element={<AuthComp />} />
+             <Route path="/signUp" element={<AuthComp />} />
               {/* <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} /> */}
             </Route>

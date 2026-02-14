@@ -42,7 +42,7 @@ api.interceptors.request.use(
         }).then(() => {
           localStorage.removeItem("user");
           showingLoginAlert = false;
-          window.location.href = "/Auth";
+          window.location.href = "/signUp";
         });
       }
 
@@ -138,7 +138,7 @@ api.interceptors.response.use(
       } catch (refreshError) {
         processQueue(refreshError, null);
         localStorage.removeItem("user");
-        window.location.href = "/Auth";
+        window.location.href = "/signUp";
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;

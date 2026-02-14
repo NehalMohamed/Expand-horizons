@@ -19,7 +19,7 @@ const ProfileDropdown = () => {
     }, []);
 
     const handleLogin = () =>{
-         window.location.href = "/Auth";
+         window.location.href = "/signUp";
     }
 
     const handleLogout = () => {
