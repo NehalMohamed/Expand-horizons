@@ -122,7 +122,11 @@
       "folder": "folder",
       "addToContacts": "Add our email address to your contacts/whitelist",
       "waitAndRefresh": "Wait a few minutes and refresh your inbox"
-    }
+    },
+    "WelcomeBack": "Welcome Back!",
+    "PleaseLoginWithGoogle": "Please continue with Google to login to",
+    "UseDifferentAccount": "Use different account",
+    "GoogleLoginPrompt": "Please continue with Google to login to <strong>{{email}}</strong>"
   },
   "testimonial": {
     "title": "We Love To Hear From You",

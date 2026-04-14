@@ -23,7 +23,7 @@ const Footer = () => {
               {t('footer.footer_description')}
             </p>
             <div className="social-icons">
-              <a href="/" className="social-link" aria-label="facebook">
+              <a href="https://www.facebook.com/share/1Wqvi9qwjz/?mibextid=wwXIfr" className="social-link" aria-label="facebook">
                 <FaFacebookF />
               </a>
               <a href="/" className="social-link" aria-label="twitter">

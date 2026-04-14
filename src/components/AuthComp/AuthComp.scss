@@ -177,3 +177,40 @@
     color: red !important;
   }
 }
+// Welcome Back Modal Styles
+.welcome_back_modal {
+  .modal-content {
+    text-align: center;
+  }
+  
+  .title {
+    color: $primary-color;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .SubTitle {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5;
+    
+    strong {
+      color: $primary-color;
+      font-weight: 600;
+    }
+  }
+  
+  .form_option_btn {
+    background: none;
+    border: none;
+    color: $primary-color;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 14px;
+    
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

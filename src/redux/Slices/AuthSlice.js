@@ -7,6 +7,7 @@ import axios from "axios";
 // } from "../../helper/helperFN";
 import { createAuthError } from "../../utils/authError";
 import api from "../../api/axios";
+
 const BASE_URL_AUTH = process.env.REACT_APP_AUTH_API_URL;
 
 const NonAuthHeaders = () => {
@@ -36,6 +37,8 @@ const initialState = {
   error: null,
   success: null,
   message: null,
+  isGoogleAcc: false,
+  googleEmail: null,
 };
 
 // Helper to extract error message from different response formats
@@ -55,6 +58,7 @@ const getErrorMessage = (error) => {
   }
   return "An error occurred";
 };
+
 export const changePassword = createAsyncThunk(
   "auth/changePassword",
   async (
@@ -164,6 +168,10 @@ export const LoginUser = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
+      if (error.response?.data?.isGoogleAcc === true) {
+        // Return the error data with the flag so we can handle it
+        return thunkAPI.rejectWithValue(error.response.data);
+      }
       return thunkAPI.rejectWithValue(getErrorMessage(error));
     }
   }
@@ -180,6 +188,8 @@ const authSlice = createSlice({
       state.error = null;
       state.success = null;
       state.message = null;
+      state.isGoogleAcc = false;
+       state.googleEmail = null;
       localStorage.removeItem("token");
       localStorage.removeItem("user");
     },
@@ -188,6 +198,12 @@ const authSlice = createSlice({
       state.error = null;
       state.success = null;
       state.message = null;
+      state.isGoogleAcc = false;
+       state.googleEmail = null;
+    },
+     clearGoogleAccFlag: (state) => {
+      state.isGoogleAcc = false;
+      state.googleEmail = null;
     },
   },
   extraReducers: (builder) => {
@@ -198,18 +214,21 @@ const authSlice = createSlice({
         state.error = null;
         state.success = null;
         state.message = null;
+        state.isGoogleAcc = false;
       })
       .addCase(LoginUser.pending, (state) => {
         state.loading = true;
         state.error = null;
         state.success = null;
         state.message = null;
+        state.isGoogleAcc = false;
       })
       .addCase(ConfirmOTP.pending, (state) => {
         state.loading = true;
         state.error = null;
         state.success = null;
         state.message = null;
+        state.isGoogleAcc = false;
       });
 
     // Handle fulfilled state for each action
@@ -264,18 +283,31 @@ const authSlice = createSlice({
         state.error = action.payload;
         state.success = false;
         state.message = action.payload;
+        state.isGoogleAcc = false;
       })
       .addCase(LoginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
         state.success = false;
-        state.message = action.payload;
+        
+         if (action.payload && action.payload.isGoogleAcc === true) {
+          state.isGoogleAcc = true;
+          state.message = action.payload.message;
+          state.googleEmail = action.payload.email || null;
+          // Don't set error for Google account case
+          state.error = null;
+        } else {
+          state.isGoogleAcc = false;
+          state.error = action.payload;
+          state.message = action.payload;
+        }
+     
       })
       .addCase(ConfirmOTP.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
         state.success = false;
         state.message = action.payload;
+        state.isGoogleAcc = false;
       })
       .addCase(changePassword.pending, (state) => {
         state.loading = true;
@@ -306,5 +338,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { logout, clearAuthState } = authSlice.actions;
+export const { logout, clearAuthState, clearGoogleAccFlag } = authSlice.actions;
 export default authSlice.reducer;

@@ -21,7 +21,7 @@ const ContactNavbar = () => {
               </a>
             </div>
             <div className="social-media">
-              <a href="#" className="social-link facebook" aria-label="Facebook">
+              <a href="https://www.facebook.com/share/1Wqvi9qwjz/?mibextid=wwXIfr" className="social-link facebook" aria-label="Facebook">
                 <FaFacebookF />
               </a>
               <a href="#" className="social-link twitter" aria-label="Twitter">

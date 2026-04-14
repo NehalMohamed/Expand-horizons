@@ -122,7 +122,11 @@
       "folder": "Ordner",
       "addToContacts": "Fügen Sie unsere E-Mail-Adresse zu Ihren Kontakten/Whitelist hinzu",
       "waitAndRefresh": "Warten Sie einige Minuten und aktualisieren Sie Ihren Posteingang"
-    }
+    },
+    "WelcomeBack": "Willkommen zurück!",
+    "PleaseLoginWithGoogle": "Bitte melden Sie sich mit Google an bei",
+    "UseDifferentAccount": "Anderes Konto verwenden",
+    "GoogleLoginPrompt": "Bitte melden Sie sich mit Google an bei <strong>{{email}}</strong>"
   },
   "testimonial": {
     "title": "Wir Hören Gerne Von Ihnen",
