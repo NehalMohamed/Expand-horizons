@@ -24,15 +24,15 @@ const ContactNavbar = () => {
               <a href="https://www.facebook.com/share/1Wqvi9qwjz/?mibextid=wwXIfr" className="social-link facebook" aria-label="Facebook">
                 <FaFacebookF />
               </a>
-              <a href="#" className="social-link twitter" aria-label="Twitter">
+              <a href="https://x.com/expandredsea" className="social-link twitter" aria-label="Twitter">
                 <FaXTwitter />
               </a>
-              <a href="#" className="social-link instagram" aria-label="Instagram">
+              <a href="https://www.instagram.com/expandhorizonredsea" className="social-link instagram" aria-label="Instagram">
                 <FaInstagram />
               </a>
-              <a href="#" className="social-link rss" aria-label="RSS Feed">
+              {/* <a href="#" className="social-link rss" aria-label="RSS Feed">
                 <FaRss />
-              </a>
+              </a> */}
             </div>
           </div>
         </div>

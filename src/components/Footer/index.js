@@ -1,5 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap";
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { FaFacebookF, FaXTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
@@ -26,15 +26,15 @@ const Footer = () => {
               <a href="https://www.facebook.com/share/1Wqvi9qwjz/?mibextid=wwXIfr" className="social-link" aria-label="facebook">
                 <FaFacebookF />
               </a>
-              <a href="/" className="social-link" aria-label="twitter">
-                <FaTwitter />
+              <a href="https://x.com/expandredsea" className="social-link" aria-label="twitter">
+               <FaXTwitter />
               </a>
-              <a href="/" className="social-link" aria-label="instagram">
+              <a href="https://www.instagram.com/expandhorizonredsea" className="social-link" aria-label="instagram">
                 <FaInstagram />
               </a>
-              <a href="/" className="social-link" aria-label="linkedin">
+              {/* <a href="/" className="social-link" aria-label="linkedin">
                 <FaLinkedinIn />
-              </a>
+              </a> */}
             </div>
           </Col>
 
