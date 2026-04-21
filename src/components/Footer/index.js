@@ -1,5 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
-import { FaFacebookF, FaXTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
@@ -23,13 +24,31 @@ const Footer = () => {
               {t('footer.footer_description')}
             </p>
             <div className="social-icons">
-              <a href="https://www.facebook.com/share/1Wqvi9qwjz/?mibextid=wwXIfr" className="social-link" aria-label="facebook">
+              <a 
+                href="https://www.facebook.com/share/1Wqvi9qwjz/?mibextid=wwXIfr" 
+                className="social-link" 
+                aria-label="facebook"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <FaFacebookF />
               </a>
-              <a href="https://x.com/expandredsea" className="social-link" aria-label="twitter">
+              <a 
+                href="https://x.com/expandredsea" 
+                className="social-link" 
+                aria-label="twitter"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                <FaXTwitter />
               </a>
-              <a href="https://www.instagram.com/expandhorizonredsea" className="social-link" aria-label="instagram">
+              <a 
+                href="https://www.instagram.com/expandhorizonredsea" 
+                className="social-link" 
+                aria-label="instagram"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <FaInstagram />
               </a>
               {/* <a href="/" className="social-link" aria-label="linkedin">

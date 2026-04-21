@@ -21,13 +21,31 @@ const ContactNavbar = () => {
               </a>
             </div>
             <div className="social-media">
-              <a href="https://www.facebook.com/share/1Wqvi9qwjz/?mibextid=wwXIfr" className="social-link facebook" aria-label="Facebook">
+              <a 
+                href="https://www.facebook.com/share/1Wqvi9qwjz/?mibextid=wwXIfr" 
+                className="social-link facebook" 
+                aria-label="Facebook"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <FaFacebookF />
               </a>
-              <a href="https://x.com/expandredsea" className="social-link twitter" aria-label="Twitter">
+              <a 
+                href="https://x.com/expandredsea" 
+                className="social-link twitter" 
+                aria-label="Twitter"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <FaXTwitter />
               </a>
-              <a href="https://www.instagram.com/expandhorizonredsea" className="social-link instagram" aria-label="Instagram">
+              <a 
+                href="https://www.instagram.com/expandhorizonredsea" 
+                className="social-link instagram" 
+                aria-label="Instagram"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <FaInstagram />
               </a>
               {/* <a href="#" className="social-link rss" aria-label="RSS Feed">
