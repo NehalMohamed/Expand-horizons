@@ -8,6 +8,7 @@ import WishlistCard from "../WishlistCard";
 import LoadingPage from "../Loader/LoadingPage";
 import NoWishList from "../NoWishList";
 import PopUp from "../Shared/popup/PopUp";
+import { getCompanyCurrencyCode } from "../../utils/companyCurrency";
 
 const WishlistSection = () => {
   const { t } = useTranslation();
@@ -24,7 +25,7 @@ const WishlistSection = () => {
   const refreshWishlist = () => {
     const params = {
       lang_code: currentLang,
-      currency_code: "EUR",
+      currency_code: getCompanyCurrencyCode(),
       trip_type: 0,
       client_id: ""
     };

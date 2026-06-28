@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCarouselTrips } from "../../redux/Slices/tripsSlice";
 import CityCard from "../CityCard";
+import { getCompanyCurrencyCode } from "../../utils/companyCurrency";
 
 const CityCarousel = () => {
   const { t } = useTranslation();
@@ -22,7 +23,7 @@ const CityCarousel = () => {
     const params = {
       lang_code: currentLang,
       show_in_top: false,
-      currency_code: "EUR",
+      currency_code: getCompanyCurrencyCode(),
       trip_type: 1,
     };
     dispatch(fetchCarouselTrips(params));

@@ -2,6 +2,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 // import axios from "axios";
 import api from "../../api/axios";
+import { getCompanyCurrencyCode } from "../../utils/companyCurrency";
 const BASE_URL = process.env.REACT_APP_CLIENT_API_URL;
 
 // const getAuthHeaders = () => {
@@ -24,7 +25,7 @@ export const fetchSliderTrips = createAsyncThunk(
           destination_id: 0,
           lang_code: lang_code,
           show_in_top: false,
-          currency_code: "EUR",
+          currency_code: getCompanyCurrencyCode(),
         }
         // getAuthHeaders()
       );

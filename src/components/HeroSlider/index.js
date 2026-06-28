@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { fetchSliderTrips } from '../../redux/Slices/tripsSlice';
+import { getCompanyCurrencyCode } from '../../utils/companyCurrency';
 
 const HeroSlider = () => {
   const { t } = useTranslation();
@@ -19,7 +20,7 @@ const HeroSlider = () => {
     const params = {
       lang_code: currentLang,
       show_in_top: false,
-      currency_code: "EUR",
+      currency_code: getCompanyCurrencyCode(),
       trip_type: 1
     };
     dispatch(fetchSliderTrips(params));

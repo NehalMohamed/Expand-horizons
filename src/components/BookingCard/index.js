@@ -15,10 +15,12 @@ import {
 } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { getCompanyCurrencyCode, getCurrencySymbol } from '../../utils/companyCurrency';
 
 const BookingCard = ({ booking, onCancelBooking }) => {
     const { t } = useTranslation();
     const navigate = useNavigate();
+    const companyCurrencySymbol = getCurrencySymbol(booking?.currency_code || getCompanyCurrencyCode());
 
     const isTwoWayTransfer = booking?.is_two_way === true && booking?.trip_type === 2;
 
@@ -231,7 +233,7 @@ const BookingCard = ({ booking, onCancelBooking }) => {
                         </Button>
                         {/* <span className="total-label">{t('bookings.orderSummary.total')}</span> */}
                         <span className="total-price">
-                            {booking.total_price ? `${booking.total_price} €` : `0 €`}
+                            {booking.total_price ? `${booking.total_price} ${companyCurrencySymbol}` : `0 ${companyCurrencySymbol}`}
                         </span>
                     </div>
                 </div>

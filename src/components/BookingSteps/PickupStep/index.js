@@ -10,6 +10,7 @@ import { getTripExtras, assignExtraToBooking } from '../../../redux/Slices/extra
 import { triggerRefresh } from '../../../redux/Slices/bookingSummarySlice';
 import PopUp from '../../Shared/popup/PopUp';
 import LoadingPage from '../../Loader/LoadingPage';
+import { getCompanyCurrencyCode, getCurrencySymbol } from '../../../utils/companyCurrency';
 
 const PickupStep = ({ onNext, tripData, availabilityData , childAges }) => {
     const { t } = useTranslation();
@@ -27,6 +28,8 @@ const PickupStep = ({ onNext, tripData, availabilityData , childAges }) => {
     const [showPopup, setShowPopup] = useState(false);
     const [popupMessage, setPopupMessage] = useState('');
     const [popupType, setPopupType] = useState('alert');
+    const companyCurrencyCode = getCompanyCurrencyCode();
+    const companyCurrencySymbol = getCurrencySymbol(companyCurrencyCode);
     const [extraCounts, setExtraCounts] = useState({});
     const [isProcessingExtras, setIsProcessingExtras] = useState(false);
     const [pickupLocation, setPickupLocation] = useState({
@@ -135,7 +138,7 @@ const PickupStep = ({ onNext, tripData, availabilityData , childAges }) => {
                         trip_id: tripData?.trip_id,
                         adult_num: summaryData.total_pax,
                         child_num: summaryData.child_num,
-                        currency_code: "EUR",
+                        currency_code: companyCurrencyCode,
                         extra_lst: extrasList,
                         extra_obligatory: summaryData?.extras_obligatory,
                         childAges: childAges,
@@ -245,7 +248,7 @@ const PickupStep = ({ onNext, tripData, availabilityData , childAges }) => {
                                 <div className="extra-info">
                                     <div className="extra-name">{extra.facility_name}</div>
                                     <div className="extra-subtitle">{extra.facility_desc}</div>
-                                    <div className="extra-price">€{extra.extra_price}</div>
+                                    <div className="extra-price">{companyCurrencySymbol}{extra.extra_price}</div>
                                 </div>
                                 <div className="extra-controls">
                                     <button

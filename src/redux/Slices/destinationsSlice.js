@@ -1,6 +1,7 @@
 // features/destinations/destinationsSlice.js
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { getCompanyCurrencyCode } from "../../utils/companyCurrency";
 // import api from "../../api/axios";
 const BASE_URL = process.env.REACT_APP_CLIENT_API_URL;
 
@@ -22,7 +23,7 @@ export const fetchDestinations = createAsyncThunk(
         BASE_URL + "/getDestinations",
         {
           lang_code: params.lang_code,
-          currency_code: "EUR",
+          currency_code: getCompanyCurrencyCode(),
           country_code: "",
           leaf: params.leaf,
           trip_type: 0,
@@ -45,7 +46,7 @@ export const fetchDestChildren = createAsyncThunk(
         BASE_URL + "/getDestinations",
         {
           lang_code: params.lang_code,
-          currency_code: "EUR",
+          currency_code: getCompanyCurrencyCode(),
           country_code: "",
           leaf: params.leaf,
           trip_type: 0,
@@ -68,7 +69,7 @@ export const fetchDestinationTree = createAsyncThunk(
         BASE_URL + "/GetDestination_Tree",
         {
           lang_code: params.lang_code,
-          currency_code: "EUR",
+          currency_code: getCompanyCurrencyCode(),
           country_code: "",
           trip_type: params.trip_type,
         },

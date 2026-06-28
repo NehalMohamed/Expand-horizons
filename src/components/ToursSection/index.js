@@ -8,6 +8,7 @@ import { resetWishlistOperation } from "../../redux/Slices/wishlistSlice";
 import LoadingPage from "../Loader/LoadingPage";
 import PopUp from "../Shared/popup/PopUp";
 import TourCard from "../TourCard";
+import { getCompanyCurrencyCode } from "../../utils/companyCurrency";
 
 const ToursSection = (props) => {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const ToursSection = (props) => {
     const params = {
       lang_code: currentLang,
       show_in_top: true,
-      currency_code: "EUR",
+      currency_code: getCompanyCurrencyCode(),
       client_id: user?.id || "",
       trip_type: tripType
     };

@@ -9,6 +9,7 @@ import { checkAvailability, resetBookingOperation } from '../../redux/Slices/boo
 import { calculateBookingPrice, resetCalculation } from '../../redux/Slices/priceCalculationSlice';
 import PopUp from '../Shared/popup/PopUp';
 import LoadingPage from '../Loader/LoadingPage';
+import { getCompanyCurrencyCode, getCurrencySymbol } from '../../utils/companyCurrency';
 
 const BookingSelection = ({ tripData }) => {
     const { t } = useTranslation();
@@ -39,6 +40,8 @@ const BookingSelection = ({ tripData }) => {
     //  const [selectedLanguage, setSelectedLanguage] = useState(t('booking.language.english'));
     const [showParticipants, setShowParticipants] = useState(false);
     const [ageValidationErrors, setAgeValidationErrors] = useState([]);
+    const companyCurrencyCode = getCompanyCurrencyCode();
+    const companyCurrencySymbol = getCurrencySymbol(companyCurrencyCode);
 
     // Calculate the minimum selectable datetime (today + release_days at 00:00:00)
     const minDate = new Date();
@@ -280,7 +283,7 @@ const BookingSelection = ({ tripData }) => {
                 trip_id: tripData?.trip_id,
                 adult_num: participants.adults,
                 child_num: hasChildOption ? participants.children : 0,
-                currency_code: "EUR",
+                currency_code: companyCurrencyCode,
                 extra_lst: [],
                 extra_obligatory:[],
                 childAges: numericChildAges,
@@ -337,7 +340,7 @@ const BookingSelection = ({ tripData }) => {
             booking_dateStr: "",
             trip_dateStr: formattedDateTime,
             trip_return_dateStr: formattedReturnDateTime,
-            currency_code: "EUR",
+            currency_code: companyCurrencyCode,
             is_two_way: isTwoWayTransferType ? isTwoWay : false,
             child_ages: tripData?.child_ages? tripData?.child_ages:null,
             pricing_type: tripData?.pricing_type_id,
@@ -675,7 +678,7 @@ const BookingSelection = ({ tripData }) => {
                                     <div className="booking-selection__price-breakdown">
                                         <div className="booking-selection__price-total text-center mb-3">
                                             <div className="booking-selection__final-price">
-                                                {calculationData.final_price} €
+                                                {calculationData.final_price} {companyCurrencySymbol}
                                             </div>
                                             <div className="booking-selection__price-note small text-muted">
                                                 {t('booking.allTaxesIncluded')}
@@ -689,7 +692,7 @@ const BookingSelection = ({ tripData }) => {
                                                         {participants.adults} {t('booking.participants.adult')}
                                                         {/* {participants.adults} {t('booking.participants.adult')} × {calculationData.total_adult_price / participants.adults} € */}
                                                     </span>
-                                                    <span>{calculationData.total_adult_price} €</span>
+                                                    <span>{calculationData.total_adult_price} {companyCurrencySymbol}</span>
                                                 </div>
                                             )}
 
@@ -699,7 +702,7 @@ const BookingSelection = ({ tripData }) => {
                                                         {participants.children} {t('booking.participants.child')}
                                                         {/* {participants.children} {t('booking.participants.child')} × {calculationData.total_child_price / participants.children} € */}
                                                     </span>
-                                                    <span>{calculationData.total_child_price} €</span>
+                                                    <span>{calculationData.total_child_price} {companyCurrencySymbol}</span>
                                                 </div>
                                             )}
 

@@ -9,6 +9,7 @@ import BookingCard from '../BookingCard';
 import LoadingPage from '../Loader/LoadingPage';
 import NoBookings from '../NoBookings';
 import PopUp from '../Shared/popup/PopUp';
+import { getCompanyCurrencyCode } from '../../utils/companyCurrency';
 
 const BookingSection = () => {
   const { t } = useTranslation();
@@ -43,7 +44,7 @@ const BookingSection = () => {
     if (clientId) {
       dispatch(fetchBookingList({
         lang_code: currentLang,
-        currency_code: "EUR"
+        currency_code: getCompanyCurrencyCode()
       }));
     }
   }, [dispatch, currentLang]);

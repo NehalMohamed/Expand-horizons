@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getBookingSummary, clearRefresh } from '../../redux/Slices/bookingSummarySlice';
 import LoadingPage from '../Loader/LoadingPage';
 import PopUp from '../Shared/popup/PopUp';
+import { getCompanyCurrencyCode, getCurrencySymbol } from '../../utils/companyCurrency';
 
 const OrderSummary = ({ availabilityData }) => {
     const [showGiftCode, setShowGiftCode] = useState(false);
@@ -27,6 +28,7 @@ const OrderSummary = ({ availabilityData }) => {
     // const currentLang = useSelector((state) => state.language.currentLang) || "en";
     const currentLang = localStorage.getItem("lang") || "en";
     const { summaryData, loading, error, shouldRefresh } = useSelector((state) => state.bookingSummary);
+    const companyCurrencySymbol = getCurrencySymbol(summaryData?.currency_code || getCompanyCurrencyCode());
 
     const [showPopup, setShowPopup] = useState(false);
     const [popupMessage, setPopupMessage] = useState('');
@@ -315,7 +317,7 @@ const OrderSummary = ({ availabilityData }) => {
                             <div className="total-row">
                                 <span className="total-label">{t('bookings.orderSummary.total')}</span>
                                 <span className="total-price">
-                                    {summaryData.total_price ? `${summaryData.total_price} €` : 0}
+                                    {summaryData.total_price ? `${summaryData.total_price} ${companyCurrencySymbol}` : `0 ${companyCurrencySymbol}`}
                                 </span>
                             </div>
                         </div>

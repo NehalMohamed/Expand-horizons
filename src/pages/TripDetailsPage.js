@@ -14,6 +14,7 @@ import TourDetails from "../components/TourDetails";
 import CityCarousel from "../components/CityCarousel";
 import LoadingPage from "../components/Loader/LoadingPage";
 import PopUp from "../components/Shared/popup/PopUp";
+import { getCompanyCurrencyCode } from "../utils/companyCurrency";
 
 const TripDetailsPage = () => {
   const { route } = useParams();
@@ -86,7 +87,7 @@ const TripDetailsPage = () => {
     const params = {
       trip_id: tripState?.tripId, 
       lang_code: currentLang,
-      currency_code: "EUR",
+      currency_code: getCompanyCurrencyCode(),
       client_id: user?.id || "",
       trip_type: tripState?.trip_type,
     };

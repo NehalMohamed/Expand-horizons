@@ -6,6 +6,7 @@ import TripSoonSection from "../components/TripSoonSection";
 import CityCarousel from "../components/CityCarousel";
 import LoadingPage from "../components/Loader/LoadingPage";
 import PopUp from "../components/Shared/popup/PopUp";
+import { getCompanyCurrencyCode } from "../utils/companyCurrency";
 
 const TripSoonPage = () => {
   const { route } = useParams();
@@ -52,7 +53,7 @@ const TripSoonPage = () => {
     const params = {
       trip_id: state?.tripId, // You'll need to implement this function
       lang_code: currentLang,
-      currency_code: "EUR",
+      currency_code: getCompanyCurrencyCode(),
       client_id: user?.id || "",
       trip_type: state?.trip_type
     };

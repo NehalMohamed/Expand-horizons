@@ -11,6 +11,7 @@ import {
 import TourCard from "../TourCard";
 import LoadingPage from "../Loader/LoadingPage";
 import PopUp from "../Shared/popup/PopUp";
+import { getCompanyCurrencyCode } from "../../utils/companyCurrency";
 
 const DestinationExcursions = () => {
     const { state } = useLocation(); // Get tripData passed from navigation
@@ -33,7 +34,7 @@ const DestinationExcursions = () => {
             lang_code: currentLang,
             show_in_top: false,
             destination_id: destinationId,
-            currency_code: "EUR",
+            currency_code: getCompanyCurrencyCode(),
             client_id: user?.id || "",
             trip_type: tripType
         };
