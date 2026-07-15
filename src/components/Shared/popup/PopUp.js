@@ -1,6 +1,5 @@
 import { Button, Modal } from "react-bootstrap";
 import React, { useEffect } from "react";
-// import Popup from 'react-animated-popup'
 import "./popup.scss";
 
 // popup with success , error, confirm and alert classes
@@ -27,7 +26,6 @@ const PopUp = ({
     }
   }, [show, autoClose, closeAlert]);
 
-  // Handle confirm click - prioritize new onConfirm prop, fall back to confirmAction, then closeAlert
   const handleConfirm = () => {
     if (onConfirm) {
       onConfirm();
@@ -38,7 +36,6 @@ const PopUp = ({
     }
   };
 
-  // Handle cancel click - prioritize new onCancel prop, fall back to closeAlert
   const handleCancel = () => {
     if (onCancel) {
       onCancel();
@@ -77,7 +74,6 @@ const PopUp = ({
       </Modal.Header>
       <Modal.Body>{msg}</Modal.Body>
       <Modal.Footer>
-        {/* Show cancel button for confirm type OR if onCancel prop is provided */}
         {(type === "confirm" || onCancel) && (
           <Button
             variant="secondary"
@@ -88,7 +84,6 @@ const PopUp = ({
           </Button>
         )}
 
-        {/* Show confirm button if showConfirmButton is true (default) */}
         {showConfirmButton && (
           <Button
             variant={getConfirmButtonVariant()}

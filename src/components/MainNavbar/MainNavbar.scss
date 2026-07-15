@@ -339,7 +339,6 @@
         &:focus {
           background-color: rgba($secondary-color, 0.08);
           color: $secondary-color;
-          // transform: translateX(3px);
 
           @include media-breakpoint-down(md) {
             transform: none;
@@ -409,7 +408,6 @@
 
           &:hover {
             background-color: rgba($secondary-color, 0.12);
-            // transform: translateX(2px);
           }
         }
       }
@@ -537,7 +535,6 @@
       &:hover {
         color: $secondary-color;
         transform: translateY(-2px) scale(1.05);
-        // background-color: rgba($secondary-color, 0.05);
       }
 
       &:active {
@@ -546,7 +543,6 @@
 
       &:focus {
         outline: none;
-        // box-shadow: 0 0 0 3px rgba($secondary-color, 0.2);
       }
 
       // Enhanced badge styling
@@ -586,7 +582,6 @@
         }
       }
 
-      // Icon text for language selector
       .icon-text {
         font-size: 12px;
         font-weight: 700;
@@ -607,22 +602,18 @@
       // Specific button hover effects
       &.wishlist-btn:hover {
         color: #ef4444;
-        // background-color: rgba(239, 68, 68, 0.1);
       }
 
       &.basket-btn:hover {
         color: $secondary-color;
-        // background-color: rgba($secondary-color, 0.1);
       }
 
       &.profile-btn:hover {
         color: $secondary-color;
-        // background-color: rgba($secondary-color, 0.1);
       }
 
       &.search-btn:hover {
         color: $secondary-color;
-        // background-color: rgba($secondary-color, 0.1);
       }
     }
 
@@ -840,7 +831,6 @@
   }
 }
 
-// Enhanced animations for mobile menu
 @include media-breakpoint-down(md) {
   .navbar-collapse {
     &.collapsing {
@@ -852,7 +842,6 @@
     }
   }
 
-  // Enhanced dropdown for mobile
   .main-navbar .nav-dropdown {
     width: 100%;
 

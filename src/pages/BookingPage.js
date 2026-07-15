@@ -108,20 +108,8 @@ const BookingPage = () => {
               childAges = {childAges}
             />
           );
-          // For non-diving trips, this is payment step
-          // return (
-          //   <PaymentStep
-          //     onNext={handleNextStep}
-          //   />
-          // );
         }
       case 4:
-        // Only for diving trips
-        // return (
-        //   <PaymentStep
-        //     onNext={handleNextStep}
-        //   />
-        // );
       default:
         return null;
     }

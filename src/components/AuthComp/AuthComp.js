@@ -124,7 +124,6 @@ function AuthComp() {
         };
 
         dispatch(LoginUser(data)).then((result) => {
-          // Check if the response indicates this is a Google account
           if (result.payload && result.payload.isSuccessed) {
             // Successful login
             setShowPopup(false);
@@ -142,7 +141,6 @@ function AuthComp() {
         let data = { payload: formData, path: "/RegisterUser" };
         dispatch(RegisterUser(data)).then((result) => {
           if (result.payload && result.payload.isSuccessed) {
-            //if user register successfully so navigate to verify email first
             setShowPopup(false);
             navigate("/verifyEmail", {
               replace: true,
@@ -177,7 +175,6 @@ function AuthComp() {
           centered
           className="auth_modal"
         >
-          {/* <Modal.Header closeButton></Modal.Header> */}
           <Modal.Body>
             <div className="d-flex justify-content-center align-items-center mb-3">
               <img
@@ -395,8 +392,6 @@ function AuthComp() {
             <GoogleLoginButton
               login={type == "login" ? true : false}
               sendOffers={formData.sendOffers}
-            // isAuthRedirect={props.isAuthRedirect}
-            // redirectPath={props.redirectPath}
             />
           </Modal.Body>
         </Modal>

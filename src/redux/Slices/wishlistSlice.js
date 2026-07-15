@@ -11,19 +11,9 @@ import api from "../../api/axios";
 const BOOKING_URL = process.env.REACT_APP_BOOKING_API_URL;
 const BASE_URL = process.env.REACT_APP_CLIENT_API_URL;
 
-// const getAuthHeaders = () => {
-//   const user = JSON.parse(localStorage.getItem("user"));
 //   // console.log(user)
-//   const accessToken = user?.accessToken;
-//   let lang = localStorage.getItem("lang") || "en";
-//   return {
-//     headers: {
-//       Authorization: `Bearer ${accessToken}`,
 //       "Content-Type": "application/json",
 //       "Accept-Language": lang,
-//     },
-//   };
-// };
 
 const getNoTokenAuthHeaders = () => {
   let lang = localStorage.getItem("lang") || "en";
@@ -35,13 +25,11 @@ const getNoTokenAuthHeaders = () => {
   };
 };
 
-// Helper function to get client ID from localStorage
 const getClientId = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   return user?.id || null;
 };
 
-// Async thunk for fetching wishlist count
 export const fetchWishlistCount = createAsyncThunk(
   "wishlist/fetchWishlistCount",
   async (clientId, { rejectWithValue }) => {
@@ -60,34 +48,22 @@ export const fetchWishlistCount = createAsyncThunk(
       return response.data;
     } catch (error) {
       console.error("Error fetching wishlist count:", error);
-      // Return 0 on error but don't show error to user for count
       return 0;
     }
   }
 );
 
-// Async thunk for fetching wishlist items
 export const fetchWishlist = createAsyncThunk(
   "wishlist/fetchWishlist",
   async (params, { rejectWithValue }) => {
     // Check authentication with proper scenario detection
-    // if (isUserNotLoggedIn()) {
-    //   return rejectWithValue(createAuthError("notLoggedIn"));
-    // }
 
-    // if (isTokenExpiredOnly()) {
-    //   return rejectWithValue(createAuthError("expired"));
-    // }
 
-    // if (!checkAUTH()) {
-    //   return rejectWithValue(createAuthError("expired"));
-    // }
 
     try {
       const response = await api.post(
         `${BOOKING_URL}/GetClientWishList`,
         params
-        //getAuthHeaders()
       );
 
       if (response.data.success === false) {
@@ -108,28 +84,17 @@ export const fetchWishlist = createAsyncThunk(
   }
 );
 
-// Async thunk for adding item to wishlist
 export const addToWishlist = createAsyncThunk(
   "wishlist/addToWishlist",
   async (wishlistData, { rejectWithValue, dispatch }) => {
     // Check authentication with proper scenario detection
-    // if (isUserNotLoggedIn()) {
-    //   return rejectWithValue(createAuthError("notLoggedIn"));
-    // }
 
-    // if (isTokenExpiredOnly()) {
-    //   return rejectWithValue(createAuthError("expired"));
-    // }
 
-    // if (!checkAUTH()) {
-    //   return rejectWithValue(createAuthError("expired"));
-    // }
 
     try {
       const response = await api.post(
         `${BOOKING_URL}/AddTripToWishList`,
         wishlistData
-        //getAuthHeaders()
       );
 
       // Refresh wishlist count after adding
@@ -138,7 +103,6 @@ export const addToWishlist = createAsyncThunk(
         dispatch(fetchWishlistCount(clientId));
       }
 
-      // Check if the operation was successful
       if (response.data.success === false) {
         // Return the error message but don't reject - so we can show the popup
         return {
@@ -154,7 +118,6 @@ export const addToWishlist = createAsyncThunk(
         trip_id: wishlistData.trip_id,
       };
     } catch (err) {
-      // 🟢 If Axios request was canceled: STOP LOADING without error
       if (err.name === "CanceledError" || err.code === "ERR_CANCELED") {
         return null; // => thunk status: fulfilled → loading stops
       }

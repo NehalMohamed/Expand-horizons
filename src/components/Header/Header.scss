@@ -99,7 +99,6 @@
   right: 0;
   z-index: 1030;
   
-  // Ensure smooth scrolling offset for fixed header
   & + * {
     margin-top: 120px; // Adjust based on header height
     

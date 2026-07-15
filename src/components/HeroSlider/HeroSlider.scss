@@ -287,7 +287,6 @@
   }
 }
 
-// Animations - Updated for faster transitions
 @keyframes slideInUp {
   from {
     opacity: 0;
@@ -299,7 +298,6 @@
   }
 }
 
-// Slide transition effects - Faster for 2-second intervals
 .hero-slider .slide {
   &:not(.active) {
     .slide-content {

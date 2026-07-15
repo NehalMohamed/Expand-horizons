@@ -81,7 +81,6 @@ const DestinationTreeDropdown = ({
     e.preventDefault();
     e.stopPropagation();
     
-    // Only handle click for leaf nodes (destinations without children)
     const hasChildren = destination.children && destination.children.length > 0;
     const isLeaf = destination.leaf || !hasChildren;
     
@@ -91,7 +90,6 @@ const DestinationTreeDropdown = ({
       setOpenSubmenus({});
       hoveredItemsRef.current.clear();
     } else {
-      // Toggle submenu for parent items
       setOpenSubmenus(prev => ({
         ...prev,
         [destination.destination_id || destination.id]: !prev[destination.destination_id || destination.id]

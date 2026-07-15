@@ -8,7 +8,6 @@ import { LoginUser, RegisterUser } from "../../redux/Slices/AuthSlice";
 import LoadingPage from "../Loader/LoadingPage";
 import PopUp from "../Shared/popup/PopUp";
 
-// Create a context for the auth modal
 export const AuthModalContext = React.createContext();
 
 // Provider component to wrap your app with
@@ -182,14 +181,6 @@ function AuthModal({ show, onHide, type, setType, navigateTo }) {
     }
   }, [show, type]);
 
-  // // Handle success after login/register
-  // useEffect(() => {
-  //   if (success && type === "login") {
-  //     onHide();
-  //     setShowPopup(false);
-  //     navigateTo("/");
-  //   }
-  // }, [success, type, navigateTo, onHide]);
 
   return (
     <> 
@@ -201,7 +192,6 @@ function AuthModal({ show, onHide, type, setType, navigateTo }) {
         keyboard={false}
         className="auth_modal"
       >
-        {/* <Modal.Header closeButton></Modal.Header> */}
         <Modal.Body>
           <div className="form_title">
             <div>

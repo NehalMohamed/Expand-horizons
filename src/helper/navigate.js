@@ -1,4 +1,3 @@
-// src/utils/navigate.js
 let navigator;
 
 export const setNavigator = (nav) => {

@@ -18,9 +18,7 @@ const Gallery = ({ tripData , refreshTripDetails }) => {
   const [popupType, setPopupType] = useState('alert');
   
   const dispatch = useDispatch();
-  // const tripData = useTripData();
   const { t } = useTranslation();
-  // const currentLang = useSelector((state) => state.language.currentLang) || "en";
   const currentLang = localStorage.getItem("lang") || "en";
   const { operation } = useSelector((state) => state.wishlist);
 
@@ -221,7 +219,6 @@ const Gallery = ({ tripData , refreshTripDetails }) => {
     {/* Show loading page during wishlist operation */}
       {operation.loading && <LoadingPage />}
 
-      {/* Show popup for error messages */}
       {showPopup && (
         <PopUp
           show={showPopup}

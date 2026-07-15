@@ -164,7 +164,6 @@ const BookingCard = ({ booking, onCancelBooking }) => {
                         </p>
                     </div>
 
-                    {/* Return Date - Only show if it exists */}
                     {booking.trip_return_datestr && (
                         <div className="detail-item">
                             <FaCalendarAlt className="detail-icon" />
@@ -231,7 +230,6 @@ const BookingCard = ({ booking, onCancelBooking }) => {
                         >
                             {t("general.cancel")}
                         </Button>
-                        {/* <span className="total-label">{t('bookings.orderSummary.total')}</span> */}
                         <span className="total-price">
                             {booking.total_price ? `${booking.total_price} ${companyCurrencySymbol}` : `0 ${companyCurrencySymbol}`}
                         </span>

@@ -28,7 +28,6 @@ const TopDestinations = () => {
   const currentLang =
     useSelector((state) => state.language.currentLang) || "en";
 
-  // NEW: Detect mobile screen size
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768); // Same as your sm breakpoint
@@ -127,7 +126,6 @@ const TopDestinations = () => {
     setCurrentSlide(slideIndex);
   };
 
-  // UPDATED: Use dynamic items per slide
   const goToPrevSlide = () => {
     const itemsPerSlide = isMobile ? 2 : 3; // Dynamic calculation
     const totalSlides = Math.ceil(childDestinations?.length / itemsPerSlide) || 1;
@@ -135,7 +133,6 @@ const TopDestinations = () => {
     goToSlide(newSlide);
   };
 
-  // UPDATED: Use dynamic items per slide
   const goToNextSlide = () => {
     const itemsPerSlide = isMobile ? 2 : 3; // Dynamic calculation
     const totalSlides = Math.ceil(childDestinations?.length / itemsPerSlide) || 1;
@@ -241,7 +238,6 @@ const TopDestinations = () => {
     </Card>
   );
 
-  // UPDATED: Render slides with dynamic items per slide
   const renderCarouselSlides = () => {
     if (!childDestinations || childDestinations.length === 0) return null;
 
@@ -300,7 +296,6 @@ const TopDestinations = () => {
     );
   }
 
-  // UPDATED: Calculate total slides dynamically
   const itemsPerSlide = isMobile ? 2 : 3;
   const totalSlides = Math.ceil(childDestinations?.length / itemsPerSlide) || 0;
 

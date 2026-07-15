@@ -30,17 +30,6 @@ function OTPInput(props) {
       }
     });
   };
-  // useEffect(() => {
-  //   let path = state?.path || "/";
-  //   if (success == true) {
-  //     setShowPopup(false);
-  //     //navigate("/");
-  //     navigate(path);
-  //   } else {
-  //     setShowPopup(true);
-  //   }
-  //   return () => {};
-  // }, [success]);
 
   useEffect(() => {
     //get user data from local storage

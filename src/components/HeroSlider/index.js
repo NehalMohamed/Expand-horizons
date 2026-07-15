@@ -13,7 +13,6 @@ const HeroSlider = () => {
   const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  // const currentLang = useSelector((state) => state.language.currentLang) || "en";
   const currentLang = localStorage.getItem("lang") || "en";
 
   useEffect(() => {

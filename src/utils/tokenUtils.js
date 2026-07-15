@@ -1,11 +1,8 @@
-// Check if token exists and is valid
 export const isTokenValid = () => {
   const token = localStorage.getItem('token');
   if (!token) return false;
   
   try {
-    // Simple check - if token exists, consider it valid
-    // You can add expiration check later if needed
     return true;
   } catch {
     return false;

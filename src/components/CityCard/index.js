@@ -16,21 +16,6 @@ const CityCard = (slide) => {
     return stars;
   };
   const handleCardClick = () => {
-    // if (!slide.is_comm_soon) {
-    //   navigate(`/trip/${trip.route}`, {
-    // state: {
-    //   tripId: slide?.trip_id,
-    //   trip_type: slide?.trip_type,
-    // },
-    //   });
-    // } else {
-    //   navigate("/trip/ComingSoon", {
-    //     state: {
-    //       tripId: slide.trip_id,
-    //       trip_type: slide.trip_type,
-    //     },
-    //   });
-    // }
   };
   return (
     <Link
@@ -57,10 +42,6 @@ const CityCard = (slide) => {
         <Card.Body className="card-body">
           <Card.Title className="card-title">{slide.trip_name}</Card.Title>
           <div className="card-details-grid">
-            {/* <div className="reviews-row">
-            <span className="reviews-text">   </span>
-            <span className="reviews-text">{t("tripDetails.priceFrom")}</span>
-          </div> */}
             <div className="reviews-row">
               <span className="reviews-text">
                 {slide.total_reviews} {t("tripDetails.reviews")}
@@ -78,9 +59,6 @@ const CityCard = (slide) => {
                   ? "€"
                   : ` ${slide.currency_code}`}
               </span>
-              {/* <span className="new-price">
-              <span className="reviews-text">{t("general.to")}</span> {slide.trip_max_price}  {slide.currency_code.toUpperCase() === "EUR" ? "€" : ` ${slide.currency_code}`}
-            </span> */}
             </div>
           </div>
         </Card.Body>

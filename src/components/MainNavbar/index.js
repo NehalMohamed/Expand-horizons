@@ -66,13 +66,6 @@ const MainNavbar = () => {
 
            <ExcursionsDropdown />
 
-            {/* <Nav.Link
-              as={NavLink}
-              to="/ComingSoon"
-              className={({ isActive }) => (isActive ? "nav-item active" : "nav-item")}
-            >
-              {t('main_navbar.transfer_services')}
-            </Nav.Link> */}
 
             <TransfersDropdown />
 
@@ -117,11 +110,6 @@ const MainNavbar = () => {
                 )}
               </div>
 
-               {/* EUR Currency Indicator
-              <div className="currency-indicator" title="Euro Currency">
-                <FaEuroSign className="eur-icon" />
-                <span className="currency-text">EUR</span>
-              </div> */}
 
               <LanguageDropdown />
 

@@ -21,7 +21,6 @@ const apiInstances = [authApi, clientApi, bookingApi, contactApi];
 const requestInterceptor = (config) => {
   const lang = localStorage.getItem("lang") || "en";
 
-   // Skip token for login and refresh
   if (config.url.includes("/login") || config.url.includes("/refresh")) {
     return config;
   }
@@ -106,16 +105,13 @@ const responseInterceptor = async (error) => {
       
       console.log('New token received, updating storage...');
       
-      // Update localStorage with new tokens
       localStorage.setItem("user", JSON.stringify(newUser));
       localStorage.setItem("token", newToken);
 
-      // Update all axios instances with new token
       apiInstances.forEach((instance) => {
         instance.defaults.headers.common.Authorization = `Bearer ${newToken}`;
       });
 
-      // Process queued requests with new token
       processQueue(null, newToken);
 
       // Update and retry the original request
@@ -168,10 +164,8 @@ apiInstances.forEach((instance) => {
   );
 });
 
-// Helper function to check if token refresh is in progress
 export const isRefreshingToken = () => isRefreshing;
 
-// Helper function to manually trigger token refresh
 export const manualTokenRefresh = async () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const refreshToken = user?.refreshToken;

@@ -47,7 +47,6 @@ const Contact = () => {
         dispatch(submitContactForm(formData));
     };
 
-    // Handle popup for success and error states
     useEffect(() => {
         if (success) {
             setPopupMessage(t('contact.successMessage'));

@@ -26,7 +26,6 @@ const getNonAuthHeaders = () => {
   };
 };
 
-// Async thunk for fetching trip details
 export const fetchTripDetails = createAsyncThunk(
   "tripDetails/fetchTripDetails",
   async (params, { rejectWithValue }) => {

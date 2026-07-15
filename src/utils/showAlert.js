@@ -8,7 +8,6 @@ let root = null;
 let isMounted = false;
 let authModalFunction = null;
 
-// Set this function from your component that has access to useAuthModal
 export const setAuthModalFunction = (func) => {
   authModalFunction = func;
 };
@@ -28,7 +27,6 @@ export const showAuthPopup = (message, callback, scenario = 'expired') => {
     root = null;
   }
 
-  // Create new popup root
   popupRoot = document.createElement('div');
   popupRoot.id = 'auth-popup-root';
   document.body.appendChild(popupRoot);
@@ -45,7 +43,6 @@ export const showAuthPopup = (message, callback, scenario = 'expired') => {
       
       setShow(false);
       
-      // Only call currentCallback if it's a function
        if (typeof currentCallback === 'function') {
         currentCallback();
       }
@@ -86,7 +83,6 @@ export const showAuthPopup = (message, callback, scenario = 'expired') => {
   root.render(<PopupWrapper />);
 };
 
-// Separate cleanup function
 const cleanupPopup = () => {
   if (isMounted) {
     isMounted = false;

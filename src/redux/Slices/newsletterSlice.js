@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-// import axios from "axios";
 import {
   checkAUTH,
   isUserNotLoggedIn,
@@ -9,51 +8,16 @@ import { createAuthError } from "../../utils/authError";
 import api from "../../api/axios";
 const CONTACT_URL = process.env.REACT_APP_CONTACT_API_URL;
 
-// const getAuthHeaders = () => {
-//   const user = JSON.parse(localStorage.getItem("user"));
-//   const accessToken = user?.accessToken;
-//   let lang = localStorage.getItem("lang") || "en";
-//   return {
-//     headers: {
-//       Authorization: `Bearer ${accessToken}`,
-//       "Content-Type": "application/json",
-//       "Accept-Language": lang,
-//     },
-//   };
-// };
-
-// const getNoTokenAuthHeaders = () => {
-//   let lang = localStorage.getItem("lang") || "en";
-//   return {
-//     headers: {
-//       "Content-Type": "application/json",
-//       "Accept-Language": lang
-//     },
-//   };
-// };
-
 // Helper function to get client ID from user data
 const getClientId = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   return user?.id || null;
 };
 
-// Async thunk for newsletter subscription
+// Async thunk for subscribing to the newsletter
 export const subscribeNewsletter = createAsyncThunk(
   "newsletter/subscribeNewsletter",
   async (subscriptionData, { rejectWithValue }) => {
-    // Check authentication with proper scenario detection
-    // if (isUserNotLoggedIn()) {
-    //   return rejectWithValue(createAuthError("notLoggedIn"));
-    // }
-
-    // if (isTokenExpiredOnly()) {
-    //   return rejectWithValue(createAuthError("expired"));
-    // }
-
-    // if (!checkAUTH()) {
-    //   return rejectWithValue(createAuthError("expired"));
-    // }
 
     try {
       const payload = {
@@ -69,14 +33,10 @@ export const subscribeNewsletter = createAsyncThunk(
       const response = await api.post(
         `${CONTACT_URL}/SubscribeNewSletter`,
         payload
-        // getAuthHeaders() // Using authenticated headers
       );
 
       return response.data;
     } catch (error) {
-      // if (error.response?.status === 401) {
-      //   return rejectWithValue(createAuthError("expired"));
-      // }
       return rejectWithValue(error.response?.data || error.message);
     }
   }

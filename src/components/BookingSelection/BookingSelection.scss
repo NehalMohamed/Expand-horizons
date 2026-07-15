@@ -143,7 +143,6 @@
     gap: $spacer-sm;
   }
 
-  // Override Bootstrap button styles for counter buttons
   &__counter-btn {
     width: 32px !important;
     height: 32px !important;
@@ -257,7 +256,6 @@
     }
   }
 
-  // Add this to make the dropdown menu scrollable if there are many children
   &__dropdown {
     max-height: 400px;
     overflow-y: auto;
@@ -273,7 +271,6 @@
     font-weight: $font-weight-medium !important;
     color: white !important;
     transition: $transition-base !important;
-    // box-shadow: 0 4px 16px rgba($secondary-color, 0.3) !important;
 
     &:hover,
     &:focus,
@@ -281,13 +278,9 @@
       background-color: darken($secondary-color, 10%) !important;
       border: none !important;
       transform: translateY(-2px);
-      // box-shadow: 0 6px 20px rgba($secondary-color, 0.4) !important;
       color: white !important;
     }
 
-    // &:focus-visible {
-    //   box-shadow: 0 6px 20px rgba($secondary-color, 0.4), 0 0 0 0.25rem rgba($secondary-color, 0.25) !important;
-    // }
 
     @include media-breakpoint-down(sm) {
       height: 48px !important;
@@ -295,7 +288,6 @@
     }
   }
 
-  // Bootstrap Grid overrides for better responsive behavior
   .container {
     padding-left: 0 !important;
     padding-right: 0 !important;

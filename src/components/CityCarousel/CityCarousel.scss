@@ -34,7 +34,6 @@
     .section-subtitle {
       color: $primary-color;
       max-width: 1000px;
-      // margin: 0 auto;
       
       @include responsive-font-size(1rem, 1.15rem);
     }

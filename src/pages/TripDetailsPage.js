@@ -27,8 +27,6 @@ const TripDetailsPage = () => {
   const { tripData, loading, error } = useSelector(
     (state) => state.tripDetails
   );
-  // const currentLang =
-  //   useSelector((state) => state.language.currentLang) || "en";
 
     const currentLang = localStorage.getItem("lang") || "en";
 
@@ -46,7 +44,6 @@ const TripDetailsPage = () => {
         localStorage.setItem("tripDetailsState", JSON.stringify(state));
         setTripState(state);
       } else {
-        // If no state from location, try to get from localStorage
         const savedState = localStorage.getItem("tripDetailsState");
         if (savedState) {
           setTripState(JSON.parse(savedState));
@@ -113,7 +110,6 @@ const TripDetailsPage = () => {
       {/* Show loading page during wishlist operation */}
       {loading && <LoadingPage />}
 
-      {/* Show popup for error messages */}
       {showPopup && (
         <PopUp
           show={showPopup}

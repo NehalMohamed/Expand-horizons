@@ -19,7 +19,6 @@ const WishlistSection = () => {
   const [popupMessage, setPopupMessage] = useState('');
   const [popupType, setPopupType] = useState('alert');
   const { items, loading, error, operation } = useSelector((state) => state.wishlist);
-  // const currentLang = useSelector((state) => state.language.currentLang) || "en";
   const currentLang = localStorage.getItem("lang") || "en";
   // Function to refresh wishlist
   const refreshWishlist = () => {
@@ -54,10 +53,6 @@ const WishlistSection = () => {
       setShowPopup(true);
       dispatch(resetWishlistOperation());
     } else if (operation.success) {
-      // Success message if needed
-      // setPopupMessage(t("wishlist.operationSuccess"));
-      // setPopupType('success');
-      // setShowPopup(true);
       dispatch(resetWishlistOperation());
     }
   }, [operation, t, dispatch]);
@@ -102,7 +97,6 @@ const WishlistSection = () => {
         </Container>
       </section>
 
-      {/* Show popup for messages */}
       {showPopup && (
         <PopUp
           show={showPopup}

@@ -25,7 +25,6 @@ const GoogleLoginButton = (props) => {
       );
       if (userInfo && userInfo.data) {
         let { family_name, given_name, email } = userInfo.data;
-        //check if this login or register (different in api path and payload)
         const redirectUrl = localStorage.getItem("redirect_after_login");
         console.log("redirectUrl ", redirectUrl);
         if (props.login) {
@@ -38,20 +37,11 @@ const GoogleLoginButton = (props) => {
           };
           let data = { payload: formData, path: "/LoginGmail" };
           dispatch(LoginUser(data)).then((result) => {
-            //let { isAuthRedirect, redirectPath } = props;
             if (result.payload && result.payload.isSuccessed) {
               setShowPopup(false);
-              //if user login successfully and his email is confirmed navigate to home and whole app , if no sholud verify mail first by OTP
               if (result.payload?.user?.emailConfirmed == true) {
-                // if (isAuthRedirect) {
-                //   window.location.href = redirectPath;
-                // } else {
-                //   window.location.href = "/";
-                // }
-                // navigate(redirectUrl || "/");
                 navigate("/");
               } else {
-                //window.location.href = "/verifyEmail";
                 navigate("/verifyEmail", {
                   replace: true,
                   state: { path: "/" },
@@ -77,9 +67,7 @@ const GoogleLoginButton = (props) => {
           };
           dispatch(RegisterUser(data)).then((result) => {
             if (result.payload && result.payload.isSuccessed) {
-              //if user register successfully navigate to verify mail first by OTP
               setShowPopup(false);
-              // window.location.href = "/verifyEmail";
               navigate("/verifyEmail", {
                 replace: true,
                 state: { path: "/" },
@@ -93,25 +81,6 @@ const GoogleLoginButton = (props) => {
     },
     onError: (errorResponse) => console.log(errorResponse),
   });
-  // useEffect(() => {
-  //   if (success == true) {
-  //     setShowPopup(false);
-  //     if (props.login) {
-  //       navigate("/verifyEmail", {
-  //         replace: true,
-  //         state: { path: "/" },
-  //       });
-  //     } else {
-  //       navigate("/verifyEmail", {
-  //         replace: true,
-  //         state: { path: "/" },
-  //       });
-  //     }
-  //   } else {
-  //     setShowPopup(true);
-  //   }
-  //   return () => {};
-  // }, [success]);
   return (
     <>
       <Button

@@ -13,7 +13,6 @@ const WishlistCard = ({ trip, onWishlistUpdate }) => {
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [needsTruncation, setNeedsTruncation] = useState(false);
 
-  // Check if description needs truncation
   useEffect(() => {
     if (trip?.trip_description && trip.trip_description.length > 70) {
       setNeedsTruncation(true);
@@ -76,9 +75,6 @@ const WishlistCard = ({ trip, onWishlistUpdate }) => {
         <div className="price-range">
           <span className="price-label">{t("general.from")}   <span className="price"> {trip?.trip_min_price} {currencySymbol}</span> </span>
         </div>
-        {/* <div className="price-range">
-            <span className="price-label">{t("general.to")}  <span className="price"> {trip?.trip_max_price} {currencySymbol}</span> </span>
-          </div> */}
       </div>
     );
   };
@@ -114,7 +110,6 @@ const WishlistCard = ({ trip, onWishlistUpdate }) => {
 
         <Card.Body className="card-content">
           <Card.Title className="tour-title">{trip.trip_name}</Card.Title>
-          {/* <Card.Text className="tour-description">{trip.trip_description}</Card.Text> */}
 
           {/* Description with truncation */}
           <Card.Text className="tour-description">
@@ -152,12 +147,6 @@ const WishlistCard = ({ trip, onWishlistUpdate }) => {
               {t("general.show_more")}
             </Button>
             {renderPrice()}
-            {/* <div className="price-section">
-              {/* <span className="price-label">ab</span> 
-              <span className="price">{trip.currency_code.toUpperCase() === "EUR" ? "€" : ` ${trip.currency_code}`} {trip.trip_origin_price} </span>
-              <span className="price-suffix">
-                p.P.</span>
-            </div>*/}
           </div>
         </Card.Body>
       </Card>

@@ -17,7 +17,6 @@
 @import "../components/Footer/Footer";
 @import "../components/NotFound/NotFound";
 @import "../components/NoResults/NoResults";
-// @import "../components/AuthComp/AuthModal.scss";
 @import "../components/AuthComp/AuthComp.scss";
 @import "../components/About/About.scss";
 @import "../components/ContactInfo/ContactInfo.scss";
@@ -56,7 +55,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: $gray-light; /* $primary-color */
+  background: $gray-light; 
   border-radius: 10px;
 }
 
@@ -112,7 +111,6 @@ html {
   box-sizing: border-box;
 }
 
-// Adjust hero section for fixed header
 .hero-section {
   margin-top: 100px !important;
 }
@@ -144,8 +142,6 @@ html {
 .FullWidthBtn {
   width: 100% !important;
   height: 40px !important;
-  // border-radius: 5px !important;
-  // margin: 20px 0 !important;
   border-width: 1px !important;
   font-size: 14px !important;
 }
@@ -197,7 +193,6 @@ input:-internal-autofill-selected {
   }
 }
 
-// Enhanced button styles for profile
 .primaryBtn {
   @include media-breakpoint-down(sm) {
     min-height: 44px !important;
@@ -210,7 +205,6 @@ input:-internal-autofill-selected {
   }
 }
 
-// Form control enhancements for mobile
 .form-control, .form-select {
   @include media-breakpoint-down(sm) {
     font-size: 16px !important; // Prevents zoom on iOS
@@ -221,7 +215,6 @@ input:-internal-autofill-selected {
   }
 }
 
-// Row gutters for mobile
 .row {
   @include media-breakpoint-down(sm) {
     margin-left: -5px;

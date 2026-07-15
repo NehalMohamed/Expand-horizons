@@ -64,7 +64,6 @@ export const toggleWishlist = createAsyncThunk(
   async (tripId, { rejectWithValue }) => {
     try {
       // Here you would normally make an API call to update the wishlist
-      // For now, we'll just return the tripId to toggle locally
       return tripId;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -109,7 +108,6 @@ const toursSlice = createSlice({
       })
       .addCase(toggleWishlist.fulfilled, (state, action) => {
         const tripId = action.payload;
-        // Toggle wishlist status for slider trips
         state.sliderTrips = state.sliderTrips.map((trip) =>
           trip.trip_id === tripId
             ? {
@@ -118,7 +116,6 @@ const toursSlice = createSlice({
               }
             : trip
         );
-        // Toggle wishlist status for top trips
         state.topTrips = state.topTrips.map((trip) =>
           trip.trip_id === tripId
             ? {

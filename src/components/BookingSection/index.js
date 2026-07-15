@@ -19,7 +19,6 @@ const BookingSection = () => {
   const { items: allBookings, loading, error } = useSelector((state) => state.bookingList);
   const { loading: cancelLoading, success: cancelSuccess, error: cancelError } = useSelector((state) => state.bookingCancel);
     
-  // const currentLang = useSelector((state) => state.language.currentLang) || "en";
   const currentLang = localStorage.getItem("lang") || "en";
 
   const [showPopup, setShowPopup] = useState(false);
@@ -149,11 +148,6 @@ const BookingSection = () => {
           <div className="section-header">
             <h2 className="section-title">{t('bookings.myBookings')}</h2>
             <div className="section-divider"></div>
-            {/* {allBookings && allBookings.length > 0 && (
-              <p className="bookings-count">
-                {t('bookings.totalBookings')}: {allBookings.length}
-              </p>
-            )} */}
           </div>
 
           <div className="bookings-grid">
@@ -197,11 +191,6 @@ const BookingSection = () => {
             </div>
           )}
 
-          {/* {!hasMore && displayedBookings.length > 0 && (
-            <div className="text-center mt-4">
-              <p className="text-muted">{t('bookings.allBookingsLoaded')}</p>
-            </div>
-          )} */}
         </Container>
       </section>
 

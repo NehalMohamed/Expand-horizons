@@ -40,7 +40,6 @@ function App() {
   const { openAuthModal } = useAuthModal();
 
   useEffect(() => {
-    // "Inject" the openAuthModal function into the utility file
     setAuthModalFunction(openAuthModal);
   }, [openAuthModal]);
 
@@ -84,8 +83,6 @@ function App() {
             {/* Routes without navbar and footer */}
             <Route element={<MinimalLayout />}>
              <Route path="/signUp" element={<AuthComp />} />
-              {/* <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} /> */}
             </Route>
           </Routes>
         </Suspense>

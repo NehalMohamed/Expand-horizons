@@ -30,7 +30,6 @@ const PaymentStep = ({ onNext, paymentData, setPaymentData }) => {
       method: paymentMethod,
       cardDetails: paymentMethod === 'card' ? cardDetails : null
     }));
-    // onNext();
     navigate("/");
   };
 

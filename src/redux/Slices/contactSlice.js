@@ -9,58 +9,18 @@ import { createAuthError } from "../../utils/authError";
 import api from "../../api/axios";
 const CONTACT_URL = process.env.REACT_APP_CONTACT_API_URL;
 
-// const getAuthHeaders = () => {
-//   const user = JSON.parse(localStorage.getItem("user"));
-//   const accessToken = user?.accessToken;
-//   let lang = localStorage.getItem("lang") || "en";
-//   return {
-//     headers: {
-//       Authorization: `Bearer ${accessToken}`,
-//       "Content-Type": "application/json",
-//       "Accept-Language": lang,
-//     },
-//   };
-// };
-
-// const getNoTokenAuthHeaders = () => {
-//   let lang = localStorage.getItem("lang") || "en";
-//   return {
-//     headers: {
-//       "Content-Type": "application/json",
-//       "Accept-Language": lang,
-//     },
-//   };
-// };
-
-// Async thunk for submitting contact form
 export const submitContactForm = createAsyncThunk(
   "contact/submitContactForm",
   async (contactData, { rejectWithValue }) => {
-    // Check authentication with proper scenario detection
-    // if (isUserNotLoggedIn()) {
-    //   return rejectWithValue(createAuthError("notLoggedIn"));
-    // }
-
-    // if (isTokenExpiredOnly()) {
-    //   return rejectWithValue(createAuthError("expired"));
-    // }
-
-    // if (!checkAUTH()) {
-    //   return rejectWithValue(createAuthError("expired"));
-    // }
 
     try {
       const response = await api.post(
         `${CONTACT_URL}/SendContactMail`,
         contactData
-        //getAuthHeaders() // Using authenticated headers
       );
 
       return response.data;
     } catch (error) {
-      // if (error.response?.status === 401) {
-      //   return rejectWithValue(createAuthError("expired"));
-      // }
       return rejectWithValue(error.response?.data || error.message);
     }
   }

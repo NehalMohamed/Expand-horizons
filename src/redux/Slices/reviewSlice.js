@@ -1,4 +1,3 @@
-// src/redux/Slices/reviewSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import {
@@ -11,18 +10,6 @@ import api from "../../api/axios";
 const BASE_URL = process.env.REACT_APP_CLIENT_API_URL;
 const BOOKING_URL = process.env.REACT_APP_BOOKING_API_URL;
 
-// const getAuthHeaders = () => {
-//   const user = JSON.parse(localStorage.getItem("user"));
-//   const accessToken = user?.accessToken;
-//   let lang = localStorage.getItem("lang") || "en";
-//   return {
-//     headers: {
-//       Authorization: `Bearer ${accessToken}`,
-//       "Content-Type": "application/json",
-//       "Accept-Language": lang,
-//     },
-//   };
-// };
 
 const getNonAuthHeaders = () => {
   let lang = localStorage.getItem("lang") || "en";
@@ -62,27 +49,15 @@ export const fetchClientsReviews = createAsyncThunk(
 export const submitReview = createAsyncThunk(
   "reviews/submitReview",
   async (reviewData, { rejectWithValue }) => {
-    // Check authentication with proper scenario detection
-    // if (isUserNotLoggedIn()) {
-    //   return rejectWithValue(createAuthError("notLoggedIn"));
-    // }
 
-    // if (isTokenExpiredOnly()) {
-    //   return rejectWithValue(createAuthError("expired"));
-    // }
 
-    // if (!checkAUTH()) {
-    //   return rejectWithValue(createAuthError("expired"));
-    // }
 
     try {
       const response = await api.post(
         `${BOOKING_URL}/SaveReviewForTrip`,
         reviewData
-        //getAuthHeaders()
       );
 
-      // Check if the response indicates a duplicate submission
       if (response.data.success === false) {
         return rejectWithValue({
           message:
@@ -97,9 +72,6 @@ export const submitReview = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      // if (error.response?.status === 401) {
-      //   return rejectWithValue(createAuthError("expired"));
-      // }
 
       // Handle case where server returns error with success: false in response data
       if (error.response?.data?.success === false) {

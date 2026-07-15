@@ -11,7 +11,6 @@ const ProfileDropdown = () => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        // Check if user data exists in localStorage
         const userData = localStorage.getItem('user');
         if (userData) {
             setUser(JSON.parse(userData));

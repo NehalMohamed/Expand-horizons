@@ -19,7 +19,6 @@ const DestinationExcursions = () => {
     const tripType = state?.tripType || 1;
     const { t } = useTranslation();
     const dispatch = useDispatch();
-    // const currentLang = useSelector((state) => state.language.currentLang) || "en";
     const currentLang = localStorage.getItem("lang") || "en";
     const { user: stateUser } = useSelector((state) => state.auth); // Get user from auth state
     const [showPopup, setShowPopup] = useState(false);
@@ -63,7 +62,6 @@ const DestinationExcursions = () => {
                         <div className="tours-empty">
                             <BiSolidCard className="empty-icon" />
                             <h3 className="empty-title">{t('tours.empty_title')}</h3>
-                            {/* <p className="empty-text">{t('tours.empty_text')}</p> */}
                         </div>
                     </Container>
                 </section>
@@ -86,7 +84,6 @@ const DestinationExcursions = () => {
                 </section>
             )}
 
-            {/* Show popup for error messages */}
             {showPopup && (
                 <PopUp
                     show={showPopup}

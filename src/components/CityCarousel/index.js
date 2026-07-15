@@ -50,9 +50,6 @@ const CityCarousel = () => {
       <Container>
         <div className="section-header">
           <h2 className="section-title">{t("tours.top_offers")}</h2>
-          {/* <p className="section-subtitle">
-               {t('wishlist.topCitiesDescription')}
-            </p> */}
         </div>
 
         <div className="carousel-wrapper">

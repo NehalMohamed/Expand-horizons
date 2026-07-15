@@ -39,25 +39,10 @@ const PasswordInput = ({
       {error?.join(" | ")}
     </Form.Control.Feedback>
   </InputGroup>
-  // <div className="password-input-wrapper">
-  //   <Form.Control
-  //     type={showPassword ? "text" : "password"}
-  //     placeholder={placeholder}
-  //     value={value}
-  //     onChange={(e) => onChange(e.target.value)}
-  //     className="password-input"
-  //     isInvalid={!!error}
   //   />
 
-  //   <Button
-  //     variant="link"
-  //     className="password-toggle-btn"
-  //     onClick={onToggleVisibility}
   //   >
-  //     {showPassword ? <FaEyeSlash size={16} /> : <FaEye size={16} />}
-  //   </Button>
 
-  // </div>
 );
 
 const PasswordTab = () => {
@@ -89,7 +74,6 @@ const PasswordTab = () => {
 
   const handlePasswordInputChange = (field, value) => {
     setPasswordData((prev) => ({ ...prev, [field]: value }));
-    // validate live while typing
     if (field === "newPassword") {
       setFormErrors((prev) => ({
         ...prev,
@@ -119,7 +103,6 @@ const PasswordTab = () => {
     setShowPasswords((prev) => ({ ...prev, [field]: !prev[field] }));
   };
 
-  // Form validation function
   const validateForm = () => {
     const errors = {};
 
@@ -128,7 +111,6 @@ const PasswordTab = () => {
       errors.oldPassword = t("profile.password.errors.oldPasswordRequired");
     }
 
-    // Validate new password
     if (!passwordData?.newPassword) {
       errors.newPassword = t("profile.password.errors.newPasswordRequired");
     } else if (passwordData?.newPassword.length < 8) {
@@ -169,13 +151,9 @@ const PasswordTab = () => {
   // Form submission handler
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // setFormErrors({});
     dispatch(clearAuthState());
 
     // Validate before submission
-    // if (!validateForm()) {
-    //   return;
-    // }
     const newErrors = {
       oldPassword: validatePassword(passwordData.oldPassword),
       newPassword: validatePassword(passwordData.newPassword),
@@ -191,7 +169,6 @@ const PasswordTab = () => {
       (fieldErrors) => fieldErrors.length > 0
     );
 
-    // Check if user ID exists
     if (!userId) {
       setPopupMessage(t("profile.password.errors.userIdNotFound"));
       setPopupIcon(<FaTimesCircle className="error-icon" size={24} />);
@@ -211,7 +188,6 @@ const PasswordTab = () => {
       ).then((result) => {
         if (result.payload !== null && result.payload?.isSuccessed == true) {
           setShowPopup(false);
-          //dispatch(logout());
           localStorage.removeItem("user");
           localStorage.removeItem("token");
           // You might want to redirect or refresh the page here
@@ -227,9 +203,6 @@ const PasswordTab = () => {
   return (
     <div className="password-tab">
       <h3>{t("profile.password.title")}</h3>
-      {/* <p className="notification-description mb-4">
-        {t('profile.password.description')}
-      </p> */}
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col md={8}>
@@ -271,10 +244,6 @@ const PasswordTab = () => {
                 error={formErrors.confirmPassword}
               />
             </Form.Group>
-            {/* <p className="form_info">
-              <FaInfoCircle />
-              {t("profile.password.passwordRules")}
-            </p> */}
             <Button className="primaryBtn" type="submit">
               {t("profile.password.resetPassword")}
             </Button>

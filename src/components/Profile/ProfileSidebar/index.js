@@ -51,7 +51,6 @@ const ProfileSidebar = ({ activeTab, setActiveTab }) => {
     }
 
     try {
-      // Dispatch upload action and wait for completion
       await dispatch(uploadProfileImage(file)).unwrap();
       // Refresh the image from server after successful upload
       dispatch(fetchProfileImage());
@@ -67,7 +66,6 @@ const ProfileSidebar = ({ activeTab, setActiveTab }) => {
     <>
       <Card className="profile-card profile-sidebar">
         <Card.Body>
-          {/* <div className="profile-avatar"> */}
           <div className="profile-picture">
             <div className="avatar-container">
               <img
@@ -85,7 +83,6 @@ const ProfileSidebar = ({ activeTab, setActiveTab }) => {
                 loading="lazy" 
                 decoding="async" 
               />
-              {/* Hidden file input for image upload */}
               <input
                 type="file"
                 ref={fileInputRef}
@@ -101,9 +98,6 @@ const ProfileSidebar = ({ activeTab, setActiveTab }) => {
                 />
               </div>
             </div>
-            {/* <div className="avatar-circle">
-              <FaImage />
-            </div> */}
           </div>
 
           <Nav className="flex-column profile-nav">

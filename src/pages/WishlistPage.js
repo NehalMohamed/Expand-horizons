@@ -9,7 +9,6 @@ const WishlistPage = () => {
 
   return (
     <>
-      {/* <SliderSection /> */}
       <WishlistSection />
       <CityCarousel />
 

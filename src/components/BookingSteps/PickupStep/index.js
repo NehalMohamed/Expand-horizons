@@ -16,12 +16,10 @@ const PickupStep = ({ onNext, tripData, availabilityData , childAges }) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
 
-    // const { availabilityData } = useSelector((state) => state.booking);
     const { loading: extrasLoading, error: extrasError, tripExtras } = useSelector((state) => state.extras);
     const { loading: bookingLoading, error: bookingError } = useSelector((state) => state.booking);
     const { loading: calculationLoading, error: calculationError, success: calculationSuccess } = useSelector((state) => state.priceCalculation);
 
-    // const currentLang = useSelector((state) => state.language.currentLang) || "en";
     const currentLang = localStorage.getItem("lang") || "en";
     const { summaryData } = useSelector((state) => state.bookingSummary);
 
@@ -75,7 +73,6 @@ const PickupStep = ({ onNext, tripData, availabilityData , childAges }) => {
     const handleExtraCountChange = async (extraId, change) => {
         const extra = tripExtras.find(e => e.facility_id === parseInt(extraId));
     
-    // Check if pricing_type is 2 and trying to increment beyond 1
     if (extra?.pricing_type === 2) {
         const currentCount = extraCounts[extraId] || 0;
         
@@ -117,7 +114,6 @@ const PickupStep = ({ onNext, tripData, availabilityData , childAges }) => {
                     // Assign/update the extra to the booking
                     await dispatch(assignExtraToBooking([extraAssignment])).unwrap();
 
-                    // Prepare extras list for calculation
                     const extrasList = [];
                     for (const [id, count] of Object.entries({...extraCounts, [extraId]: newCount })) {
                         if (count > 0) {
@@ -154,7 +150,6 @@ const PickupStep = ({ onNext, tripData, availabilityData , childAges }) => {
                 setPopupType('alert');
                 setShowPopup(true);
 
-                // Revert the count change if there was an error
                 setExtraCounts(prev => ({
                     ...prev,
                     [extraId]: prev[extraId] - change
@@ -174,9 +169,6 @@ const PickupStep = ({ onNext, tripData, availabilityData , childAges }) => {
             const bookingId = availabilityData?.idOut;
 
             if (!bookingId) {
-                // setPopupMessage(t('bookings.noBookingIdError'));
-                // setPopupType('error');
-                // setShowPopup(true);
                 return;
             }
 
@@ -281,7 +273,6 @@ const PickupStep = ({ onNext, tripData, availabilityData , childAges }) => {
                 </div>
             </div>
 
-            {/* Popup for errors */}
             {showPopup && (
                 <PopUp
                     show={showPopup}

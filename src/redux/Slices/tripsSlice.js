@@ -66,7 +66,6 @@ export const fetchToursSectionTrips = createAsyncThunk(
           ...params,
           show_in_slider: true,
           destination_id: 0, // Always 0 for tours section
-          // client_id is passed from params for personalized results
         },
         getNonAuthHeaders()
       );
@@ -86,7 +85,6 @@ export const fetchDestinationTrips = createAsyncThunk(
         {
           ...params,
           show_in_slider: false, // Always false for destination trips
-          // client_id is passed from params for personalized results
         },
         getNonAuthHeaders()
       );

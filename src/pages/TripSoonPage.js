@@ -17,7 +17,6 @@ const TripSoonPage = () => {
   const [popupType, setPopupType] = useState('error');
 
   const { tripData, loading, error } = useSelector((state) => state.tripDetails);
-  // const currentLang = useSelector((state) => state.language.currentLang) || "en";
   const currentLang = localStorage.getItem("lang") || "en";
 
   const [user, setUser] = useState({});
@@ -74,7 +73,6 @@ const TripSoonPage = () => {
       {/* Show loading page during wishlist operation */}
       {loading && <LoadingPage />}
 
-      {/* Show popup for error messages */}
       {showPopup && (
         <PopUp
           show={showPopup}

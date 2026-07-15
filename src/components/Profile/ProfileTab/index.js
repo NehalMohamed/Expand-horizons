@@ -37,7 +37,6 @@ const ProfileTab = () => {
   const handleProfileInputChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
-  // Birthday components stored separately for easier select handling
   const [birthdayComponents, setBirthdayComponents] = useState({
     year: "",
     month: "",
@@ -46,7 +45,6 @@ const ProfileTab = () => {
   // Initialize form data when profileData is loaded from Redux
   useEffect(() => {
     if (profileData && Object.keys(profileData).length > 0) {
-      // Only update if data is different to prevent infinite loops
       if (JSON.stringify(profileData) !== JSON.stringify(formData)) {
         setFormData((prev) => ({
           ...prev,
@@ -61,7 +59,6 @@ const ProfileTab = () => {
             `${user?.firstName || ""} ${user?.lastName || ""}`.trim(),
         }));
 
-        // Parse birthday string if it exists and is different from current
         if (
           profileData.client_birthdayStr &&
           profileData.client_birthdayStr !==

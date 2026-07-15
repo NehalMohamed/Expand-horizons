@@ -18,7 +18,6 @@ const ContactStep = ({ onNext, tripData, availabilityData, childAges}) => {
     const user = JSON.parse(localStorage.getItem("user"));
 
     const { profileData, loading: profileLoading } = useSelector((state) => state.profile);
-    // const currentLang = useSelector((state) => state.language.currentLang) || "en";
     const currentLang = localStorage.getItem("lang") || "en";
     const { summaryData } = useSelector((state) => state.bookingSummary);
     const { loading: bookingLoading, error: bookingError } = useSelector((state) => state.booking);
@@ -109,9 +108,6 @@ const ContactStep = ({ onNext, tripData, availabilityData, childAges}) => {
             const bookingId = availabilityData?.idOut;
 
             if (!bookingId) {
-                // setPopupMessage(t('bookings.noBookingId'));
-                // setPopupType('alert');
-                // setShowPopup(true);
                 return;
             }
 
@@ -160,11 +156,6 @@ const ContactStep = ({ onNext, tripData, availabilityData, childAges}) => {
             if (result === true) {
                 setShowBookingModal(true);
             }
-            // else {
-            //     setPopupMessage(t('bookings.contact.bookingConfirmationFailed'));
-            //     setPopupType('alert');
-            //     setShowPopup(true);
-            // }
 
         } catch (error) {
             setPopupMessage(error.message);
@@ -173,13 +164,7 @@ const ContactStep = ({ onNext, tripData, availabilityData, childAges}) => {
         }
     };
 
-    // useEffect(() => {
-    //     if (confirmed) {
-    //         setShowBookingModal(true);
-    //     }
-    // }, [confirmed, t]);
 
-    // Show error popup if there's a confirmation error
     useEffect(() => {
         if (confirmError) {
             setPopupMessage(confirmError || t('bookings.contact.bookingConfirmationFailed'));
@@ -280,12 +265,10 @@ const ContactStep = ({ onNext, tripData, availabilityData, childAges}) => {
                         disabled={isLoading}
                     >
                         {t('bookings.contact.confirmButton')}
-                        {/* {t('bookings.contact.nextButton')} */}
                     </button>
                 </Form>
             </div>
 
-            {/* Popup for errors */}
             {showPopup && (
                 <PopUp
                     show={showPopup}

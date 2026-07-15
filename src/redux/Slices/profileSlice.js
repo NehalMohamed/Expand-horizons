@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-// import axios from "axios";
 import {
   checkAUTH,
   isUserNotLoggedIn,
@@ -9,48 +8,21 @@ import { createAuthError } from "../../utils/authError";
 import api from "../../api/axios";
 const BOOKING_URL = process.env.REACT_APP_BOOKING_API_URL;
 
-// const getAuthHeaders = () => {
-//   const user = JSON.parse(localStorage.getItem("user"));
-//   const accessToken = user?.accessToken;
-//   let lang = localStorage.getItem("lang") || "en";
-//   return {
-//     headers: {
-//       Authorization: `Bearer ${accessToken}`,
-//       "Content-Type": "application/json",
-//       "Accept-Language": lang,
-//     },
-//   };
-// };
 
 // Async thunk to fetch user profile data
 export const fetchProfile = createAsyncThunk(
   "profile/fetchProfile",
   async (_, { rejectWithValue }) => {
-    // if (isUserNotLoggedIn()) {
-    //   return rejectWithValue(createAuthError("notLoggedIn"));
-    // }
 
-    // if (isTokenExpiredOnly()) {
-    //   return rejectWithValue(createAuthError("expired"));
-    // }
 
-    // if (!checkAUTH()) {
-    //   return rejectWithValue(createAuthError("expired"));
-    // }
 
     try {
-      // Make API call to get client profiles
       const response = await api.post(
         BOOKING_URL + "/GetClientProfiles"
-        // {},
-        // getAuthHeaders()
       );
 
       return response.data?.[0] || {};
     } catch (error) {
-      // if (error.response?.status === 401) {
-      //   return rejectWithValue(createAuthError("expired"));
-      // }
 
       // Handle API error response format
       if (error.response?.data?.success === false) {
@@ -66,23 +38,13 @@ export const fetchProfile = createAsyncThunk(
 export const saveProfile = createAsyncThunk(
   "profile/saveProfile",
   async (formData, { rejectWithValue }) => {
-    // if (isUserNotLoggedIn()) {
-    //   return rejectWithValue(createAuthError("notLoggedIn"));
-    // }
 
-    // if (isTokenExpiredOnly()) {
-    //   return rejectWithValue(createAuthError("expired"));
-    // }
 
-    // if (!checkAUTH()) {
-    //   return rejectWithValue(createAuthError("expired"));
-    // }
     try {
       // Make API call to save profile
       const response = await api.post(
         BOOKING_URL + "/SaveMainProfile",
         formData
-        //getAuthHeaders()
       );
 
       if (response.data.success == false) {
@@ -96,9 +58,6 @@ export const saveProfile = createAsyncThunk(
         message: response.data.errors,
       };
     } catch (error) {
-      // if (error.response?.status === 401) {
-      //   return rejectWithValue(createAuthError("expired"));
-      // }
 
       // Handle API error response format
       if (error.response?.data?.success === false) {
@@ -114,30 +73,16 @@ export const saveProfile = createAsyncThunk(
 export const fetchProfileImage = createAsyncThunk(
   "profile/fetchProfileImage",
   async (_, { rejectWithValue }) => {
-    // if (isUserNotLoggedIn()) {
-    //   return rejectWithValue(createAuthError("notLoggedIn"));
-    // }
 
-    // if (isTokenExpiredOnly()) {
-    //   return rejectWithValue(createAuthError("expired"));
-    // }
 
-    // if (!checkAUTH()) {
-    //   return rejectWithValue(createAuthError("expired"));
-    // }
     try {
       // Make API call to get profile image
       const response = await api.post(
         BOOKING_URL + "/GetProfileImage"
-        // {},
-        // getAuthHeaders()
       );
 
       return response.data?.[0]?.img_path || null;
     } catch (error) {
-      // if (error.response?.status === 401) {
-      //   return rejectWithValue(createAuthError("expired"));
-      // }
 
       // Handle API error response format
       if (error.response?.data?.success === false) {
@@ -153,17 +98,8 @@ export const fetchProfileImage = createAsyncThunk(
 export const uploadProfileImage = createAsyncThunk(
   "profile/uploadProfileImage",
   async (imageFile, { rejectWithValue }) => {
-    // if (isUserNotLoggedIn()) {
-    //   return rejectWithValue(createAuthError("notLoggedIn"));
-    // }
 
-    // if (isTokenExpiredOnly()) {
-    //   return rejectWithValue(createAuthError("expired"));
-    // }
 
-    // if (!checkAUTH()) {
-    //   return rejectWithValue(createAuthError("expired"));
-    // }
     try {
       const user = JSON.parse(localStorage.getItem("user"));
       const accessToken = user?.accessToken;
@@ -174,24 +110,15 @@ export const uploadProfileImage = createAsyncThunk(
         BOOKING_URL + "/saveProfileImage",
         requestBody,
         { isFormData: true }
-        // {
-        //   headers: {
-        //     Authorization: `Bearer ${accessToken}`,
         //     "Content-Type": "multipart/form-data",
-        //   },
-        // }
       );
 
-      // Return both object URL for immediate display and API response
       return {
         success: response.data.success,
         url: URL.createObjectURL(imageFile),
         message: response.data.errors,
       };
     } catch (error) {
-      // if (error.response?.status === 401) {
-      //   return rejectWithValue(createAuthError("expired"));
-      // }
 
       // Handle API error response format
       if (error.response?.data?.success === false) {
@@ -207,26 +134,15 @@ export const GetClient_Notification_Settings = createAsyncThunk(
   "profile/GetClient_Notification_Settings",
   async (formData, { rejectWithValue }) => {
     // Check authentication with proper scenario detection
-    // if (isUserNotLoggedIn()) {
-    //   return rejectWithValue(createAuthError("notLoggedIn"));
-    // }
 
-    // if (isTokenExpiredOnly()) {
-    //   return rejectWithValue(createAuthError("expired"));
-    // }
 
-    // if (!checkAUTH()) {
-    //   return rejectWithValue(createAuthError("expired"));
-    // }
 
     try {
       const response = await api.post(
         `${BOOKING_URL}/GetClient_Notification_Settings`,
         formData
-        //getAuthHeaders()
       );
 
-      // Handle API response with success: false
       if (response.data.success === false) {
         return rejectWithValue(
           response.data.errors || "Failed to get notification setting"
@@ -235,9 +151,6 @@ export const GetClient_Notification_Settings = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      // if (error.response?.status === 401) {
-      //   return rejectWithValue(createAuthError("expired"));
-      // }
 
       // Handle API error response format
       if (error.response?.data?.success === false) {
@@ -253,35 +166,21 @@ export const SaveClientNotificationSetting = createAsyncThunk(
   "profile/SaveClientNotificationSetting",
   async (formData, { rejectWithValue }) => {
     // Check authentication with proper scenario detection
-    // if (isUserNotLoggedIn()) {
-    //   return rejectWithValue(createAuthError("notLoggedIn"));
-    // }
 
-    // if (isTokenExpiredOnly()) {
-    //   return rejectWithValue(createAuthError("expired"));
-    // }
 
-    // if (!checkAUTH()) {
-    //   return rejectWithValue(createAuthError("expired"));
-    // }
 
     try {
       const response = await api.post(
         `${BOOKING_URL}/SaveClientNotificationSetting`,
         formData
-        //getAuthHeaders()
       );
 
-      // Handle API response with success: false
       if (response.data.success === false) {
         return rejectWithValue(response.data.errors || "Failed to get Data");
       }
 
       return response.data;
     } catch (error) {
-      // if (error.response?.status === 401) {
-      //   return rejectWithValue(createAuthError("expired"));
-      // }
 
       // Handle API error response format
       if (error.response?.data?.success === false) {
@@ -292,7 +191,6 @@ export const SaveClientNotificationSetting = createAsyncThunk(
     }
   }
 );
-// Create profile slice with reducers and extra reducers for async actions
 const profileSlice = createSlice({
   name: "profile",
   initialState: {

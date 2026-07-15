@@ -1,10 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-// import {
 //   checkAUTH,
 //   isUserNotLoggedIn,
 //   isTokenExpiredOnly,
-// } from "../../helper/helperFN";
 import { createAuthError } from "../../utils/authError";
 import api from "../../api/axios";
 
@@ -16,18 +14,6 @@ const NonAuthHeaders = () => {
     "Accept-Language": lang,
   };
 };
-// const getAuthHeaders = () => {
-//   const user = JSON.parse(localStorage.getItem("user"));
-//   const accessToken = user?.accessToken;
-//   let lang = localStorage.getItem("lang") || "en";
-//   return {
-//     headers: {
-//       Authorization: `Bearer ${accessToken}`,
-//       "Content-Type": "application/json",
-//       "Accept-Language": lang,
-//     },
-//   };
-// };
 const token = localStorage.getItem("token");
 
 const initialState = {
@@ -43,7 +29,6 @@ const initialState = {
 
 // Helper to extract error message from different response formats
 const getErrorMessage = (error) => {
-  /// console.log("error.response?.data ", error.response?.data);
   if (error.response?.data?.success === false) {
     return error.response.data.errors || "Operation failed";
   }
@@ -74,7 +59,6 @@ export const changePassword = createAsyncThunk(
           newPassword,
           confirmNewPassword,
         }
-        //getAuthHeaders()
       );
       return response.data;
     } catch (err) {
@@ -87,44 +71,6 @@ export const changePassword = createAsyncThunk(
     }
   }
 );
-// Async thunk for changing password
-// export const changePassword = createAsyncThunk(
-//   "auth/changePassword", // action type prefix
-//   async (
-//     { userId, oldPassword, newPassword, confirmNewPassword },
-//     { rejectWithValue }
-//   ) => {
-//     // Check if user is authenticated
-//     if (isUserNotLoggedIn()) {
-//       return rejectWithValue(createAuthError("notLoggedIn"));
-//     }
-
-//     if (isTokenExpiredOnly()) {
-//       return rejectWithValue(createAuthError("expired"));
-//     }
-
-//     if (!checkAUTH()) {
-//       return rejectWithValue(createAuthError("expired"));
-//     }
-
-//     try {
-//       // Make POST request to change password endpoint
-//       const response = await axios.post(
-//         BASE_URL_AUTH + "/changePassword",
-//         {
-//           userId,
-//           oldPassword,
-//           newPassword,
-//           confirmNewPassword,
-//         },
-//         getAuthHeaders()
-//       );
-//       return response.data; // Return response data on success
-//     } catch (error) {
-//       return rejectWithValue(getErrorMessage(error));
-//     }
-//   }
-// );
 
 //verify email
 export const ConfirmOTP = createAsyncThunk(
@@ -207,7 +153,6 @@ const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // Handle pending state for all async actions
     builder
       .addCase(RegisterUser.pending, (state) => {
         state.loading = true;
@@ -231,7 +176,6 @@ const authSlice = createSlice({
         state.isGoogleAcc = false;
       });
 
-    // Handle fulfilled state for each action
     builder
       .addCase(RegisterUser.fulfilled, (state, action) => {
         state.loading = false;
@@ -276,7 +220,6 @@ const authSlice = createSlice({
         }
       });
 
-    // Handle rejected state for all async actions
     builder
       .addCase(RegisterUser.rejected, (state, action) => {
         state.loading = false;
@@ -293,7 +236,6 @@ const authSlice = createSlice({
           state.isGoogleAcc = true;
           state.message = action.payload.message;
           state.googleEmail = action.payload.email || null;
-          // Don't set error for Google account case
           state.error = null;
         } else {
           state.isGoogleAcc = false;

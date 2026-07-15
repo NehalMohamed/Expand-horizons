@@ -48,9 +48,6 @@ const ContactNavbar = () => {
               >
                 <FaInstagram />
               </a>
-              {/* <a href="#" className="social-link rss" aria-label="RSS Feed">
-                <FaRss />
-              </a> */}
             </div>
           </div>
         </div>

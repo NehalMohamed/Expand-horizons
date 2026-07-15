@@ -2,7 +2,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { getCompanyCurrencyCode } from "../../utils/companyCurrency";
-// import api from "../../api/axios";
 const BASE_URL = process.env.REACT_APP_CLIENT_API_URL;
 
 const getNonAuthHeaders = () => {

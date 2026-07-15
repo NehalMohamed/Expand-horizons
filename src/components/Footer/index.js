@@ -51,9 +51,6 @@ const Footer = () => {
               >
                 <FaInstagram />
               </a>
-              {/* <a href="/" className="social-link" aria-label="linkedin">
-                <FaLinkedinIn />
-              </a> */}
             </div>
           </Col>
 
@@ -100,4 +97,4 @@ const Footer = () => {
   )
 }
 
-export default Footer
+export default Footer;

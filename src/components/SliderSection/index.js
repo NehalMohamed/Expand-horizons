@@ -1,4 +1,3 @@
-// import HeroSlider from "../HeroSlider"
 import VideoSlider from "../VideoSlider";
 
 const HeroSection = () => {
@@ -9,4 +8,4 @@ const HeroSection = () => {
   )
 }
 
-export default HeroSection
+export default HeroSection;

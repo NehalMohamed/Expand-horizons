@@ -48,7 +48,6 @@ const StepIndicator = ({ currentStep, totalSteps = 4, tripType = 1 }) => {
               <div className="step-wrapper">
                 <div className={`step-item ${stepClass}`}>
                   {step < currentStep ? <FaCheck /> : step}
-                  {/* { step } */}
                 </div>
                 <div className={`step-label ${stepClass}`}>
                   {stepLabels[index]}

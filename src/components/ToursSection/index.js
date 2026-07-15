@@ -15,7 +15,6 @@ const ToursSection = (props) => {
   const tripType = props.tripType || 0;
   const { toursSectionTrips: trips, loading, error } = useSelector((state) => state.trips);
   const { operation } = useSelector((state) => state.wishlist);
-  // const currentLang = useSelector((state) => state.language.currentLang) || "en";
   const currentLang = localStorage.getItem("lang") || "en";
   const { user: stateUser } = useSelector((state) => state.auth); // Get user from auth state
   
@@ -73,7 +72,6 @@ const ToursSection = (props) => {
           <div className="tours-empty">
             <BiSolidCard className="empty-icon" />
             <h3 className="empty-title">{t('tours.empty_title')}</h3>
-            {/* <p className="empty-text">{t('tours.empty_text')}</p> */}
           </div>
         </Container>
       </section>

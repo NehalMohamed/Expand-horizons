@@ -25,7 +25,6 @@ const OrderSummary = ({ availabilityData }) => {
     const { t } = useTranslation();
 
     const dispatch = useDispatch();
-    // const currentLang = useSelector((state) => state.language.currentLang) || "en";
     const currentLang = localStorage.getItem("lang") || "en";
     const { summaryData, loading, error, shouldRefresh } = useSelector((state) => state.bookingSummary);
     const companyCurrencySymbol = getCurrencySymbol(summaryData?.currency_code || getCompanyCurrencyCode());
@@ -231,7 +230,6 @@ const OrderSummary = ({ availabilityData }) => {
                                 </p>
                             </div>
 
-                            {/* Return Date - Only show if it exists */}
                             {summaryData.trip_return_datestr && (
                                 <div className="detail-item">
                                     <FaCalendarAlt className="detail-icon" />
@@ -256,10 +254,6 @@ const OrderSummary = ({ availabilityData }) => {
                                 </div>
                             )}
 
-                            {/* <div className="detail-item">
-                                    <FaPencilAlt className="detail-icon" />
-                                    <p className="detail-text link-text">{bookingData.changeDetails}</p>
-                                </div> */}
 
                             <div className="detail-item">
                                 <FaIdCard className="detail-icon" />
@@ -286,32 +280,8 @@ const OrderSummary = ({ availabilityData }) => {
                                 <p className="detail-text">{t('bookings.resevePay')}</p>
                             </div>
 
-                            {/* <div className="detail-item">
-                                <FaGift className="detail-icon" />
-                                <p className="detail-text link-text" onClick={handleGiftCodeClick}>
-                                    {t('bookings.giftCode.enterCode')}
-                                </p>
-                            </div> */}
                         </div>
 
-                        {/* {showGiftCode && (
-                            <div className="gift-code-section">
-                                <div className="gift-code-input-container">
-                                    <div className="gift-code-input-wrapper">
-                                        <input
-                                            type="text"
-                                            className="gift-code-input"
-                                            value={giftCode}
-                                            onChange={(e) => setGiftCode(e.target.value)}
-                                            placeholder={t('bookings.giftCode.placeholder')}
-                                        />
-                                        <button className="redeem-button" onClick={handleRedeem}>
-                                            {t('bookings.giftCode.redeem')}
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        )} */}
 
                         <div className="total-section">
                             <div className="total-row">

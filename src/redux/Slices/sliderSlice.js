@@ -1,19 +1,7 @@
-// features/slider/sliderSlice.js
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-// import axios from "axios";
 import api from "../../api/axios";
 import { getCompanyCurrencyCode } from "../../utils/companyCurrency";
 const BASE_URL = process.env.REACT_APP_CLIENT_API_URL;
-
-// const getAuthHeaders = () => {
-//      let lang = localStorage.getItem("lang");
-//     return {
-//         headers: {
-//             "Content-Type": "application/json",
-//             "Accept-Language": lang
-//         },
-//     };
-// };
 
 export const fetchSliderTrips = createAsyncThunk(
   "slider/fetchSliderTrips",
@@ -27,7 +15,6 @@ export const fetchSliderTrips = createAsyncThunk(
           show_in_top: false,
           currency_code: getCompanyCurrencyCode(),
         }
-        // getAuthHeaders()
       );
       return response.data;
     } catch (error) {

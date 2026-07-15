@@ -5,7 +5,6 @@ const isTokenExpired = (token) => {
     const decoded = jwtDecode(token);
     return decoded.exp < Date.now() / 1000; //decode.exp ->This is the expiration timestamp from the JWT payload (stored in seconds since Unix epoch)
   } catch (err) {
-    //Date.now() / 1000 convert from milliseconds to seconds
     return true;
   }
 };
@@ -14,7 +13,6 @@ export const checkAUTH = () => {
   const authToken = localStorage.getItem("token");
   const user = localStorage.getItem("user");
 
-  // Check if user exists and has a valid token
   if (authToken && user && !isTokenExpired(authToken)) {
     return true;
   } else {

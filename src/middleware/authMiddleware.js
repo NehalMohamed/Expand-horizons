@@ -7,15 +7,9 @@ export const authMiddleware = (store) => (next) => (action) => {
     const error = action.payload;
     
     if (error?.isAuthError) {
-      // Show popup and only redirect when user clicks OK
       showAuthPopup(
        error.message,
-       error.scenario || 'expired'
-        // () => {
-        //   // This callback only executes when user confirms
-        //   // history.push('/');
-        // }
-      );
+       error.scenario || 'expired'      );
 
       // Clear the error state
       return next({

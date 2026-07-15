@@ -22,7 +22,6 @@ const Reviews = ({ tripData , refreshTripDetails}) => {
 
     // Get state from the review slice
     const { reviewsByTrip, loading, error, submission } = useSelector((state) => state.reviews);
-    // const currentLang = useSelector((state) => state.language.currentLang) || "en";
     const currentLang = localStorage.getItem("lang") || "en";
 
     // Get user data from localStorage
@@ -71,7 +70,6 @@ const Reviews = ({ tripData , refreshTripDetails}) => {
     // Handle successful submission silently
     useEffect(() => {
         if (submission.success) {
-            // Refetch reviews to include the new one
            refreshTripDetails();
       
       // Reset form and fetch reviews
@@ -103,7 +101,6 @@ const Reviews = ({ tripData , refreshTripDetails}) => {
         };
     }, [dispatch]);
 
-    // Get reviews for this specific trip
     const reviews = reviewsByTrip[tripId]?.reviews || [];
     
     // Show only first 2 reviews in the main view
@@ -338,7 +335,6 @@ const Reviews = ({ tripData , refreshTripDetails}) => {
             {/* Show loading page when fetching reviews */}
             {loading && <LoadingPage />}
             
-            {/* Show popup for errors */}
             {showPopup && (
                 <PopUp
                     show={showPopup}

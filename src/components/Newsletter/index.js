@@ -35,7 +35,6 @@ const Newsletter = () => {
     dispatch(subscribeNewsletter(formData));
   };
 
-  // Handle popup for success and error states
   useEffect(() => {
     if (success && message) {
       setPopupMessage(message);

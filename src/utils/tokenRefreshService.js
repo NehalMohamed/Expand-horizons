@@ -40,7 +40,6 @@ class TokenRefreshService {
         timeUntilExpiry: Math.round(timeUntilExpiry / 1000) + ' seconds'
       });
 
-      // Refresh token 1 minute before expiry (for 1-minute tokens)
       const refreshBuffer = 30 * 1000; // 30 seconds before expiry
       const refreshTime = timeUntilExpiry - refreshBuffer;
 
@@ -73,7 +72,6 @@ class TokenRefreshService {
       this.scheduleTokenRefresh(); // Schedule next refresh
     } catch (error) {
       console.error('❌ Automatic token refresh failed:', error);
-      // Try again in 10 seconds if failed
       setTimeout(() => this.scheduleTokenRefresh(), 10000);
     }
   }

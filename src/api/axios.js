@@ -31,9 +31,6 @@ api.interceptors.request.use(
         localStorage.setItem("redirect_after_login", window.location.pathname);
         Swal.fire({
           icon: "warning",
-          //   title: "Login Required",
-          //   text: "Please login to continue.",
-          //   confirmButtonText: "Go to Login",
           title: i18n.t("auth.loginRequiredTitle"),
           text: i18n.t("auth.loginRequiredMessage"),
           confirmButtonText: i18n.t("auth.goToLogin"),
