@@ -1,3 +1,4 @@
+// Module overview: LanguageDropdown component and its UI interaction logic.
 import { useTranslation } from 'react-i18next';
 import { Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -5,6 +6,7 @@ import { FaGlobe } from 'react-icons/fa';
 import { setLanguages } from '../../redux/Slices/languageSlice'; 
 import i18n  from "../../i18n";
 
+// Component: renders language dropdown UI and related interactions.
 const LanguageDropdown = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -16,6 +18,7 @@ const LanguageDropdown = () => {
     de: 'DE'
   };
 
+  // Applies language updates to state or UI.
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
     localStorage.setItem("lang", lng);

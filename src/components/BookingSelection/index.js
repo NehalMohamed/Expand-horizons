@@ -1,3 +1,4 @@
+// Module overview: Handles participant/date selection before checkout creation.
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button, Dropdown, Form } from 'react-bootstrap';
 import { FaCalendarAlt, FaUsers, FaMinus, FaPlus, FaChevronDown, FaExchangeAlt } from 'react-icons/fa';
@@ -11,6 +12,7 @@ import PopUp from '../Shared/popup/PopUp';
 import LoadingPage from '../Loader/LoadingPage';
 import { getCompanyCurrencyCode, getCurrencySymbol } from '../../utils/companyCurrency';
 
+// Component: collects booking inputs, validates constraints, and starts checkout.
 const BookingSelection = ({ tripData }) => {
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -48,7 +50,7 @@ const BookingSelection = ({ tripData }) => {
     }
     minDate.setHours(0, 0, 0, 0);
 
-    // Calculate total participants
+    // Derived participant totals and capacity guardrails.
     const totalParticipants = participants.adults + participants.children;
 
     const exceedsMaxCapacity = tripData?.trip_max_capacity && totalParticipants > parseInt(tripData.trip_max_capacity);
@@ -58,7 +60,7 @@ const BookingSelection = ({ tripData }) => {
         dispatch(resetCalculation());
     }, [dispatch]);
 
-    // Update childAges array when number of children changes
+    // Keep child age inputs in sync with selected number of children.
     useEffect(() => {
         if (participants.children > childAges.length) {
             const newAges = [...childAges];
@@ -67,12 +69,12 @@ const BookingSelection = ({ tripData }) => {
             }
             setChildAges(newAges);
         } else if (participants.children < childAges.length) {
-            // Remove extra age fields
+            // Remove extra age fields.
             setChildAges(childAges.slice(0, participants.children));
         }
     }, [participants.children]);
 
-    // Reset price breakdown when participants or datetime change
+    // Any input change invalidates previously calculated pricing preview.
     useEffect(() => {
         if (showPriceBreakdown) {
             setShowPriceBreakdown(false);
@@ -80,7 +82,7 @@ const BookingSelection = ({ tripData }) => {
         }
     }, [participants, selectedDateTime, isTwoWay, childAges]);
 
-    // Handle API errors and success
+    // Centralized handling for booking/price async outcomes.
     useEffect(() => {
         if (error) {
             setPopupMessage(error || t("booking.availabilityError"));
@@ -97,6 +99,7 @@ const BookingSelection = ({ tripData }) => {
         }
     }, [error, calculationError, calculationSuccess, calculationData, t, dispatch]);
 
+    // Adjust participant counters while enforcing min/max constraints.
     const handleParticipantChange = (type, action) => {
         const newValue = action === 'increment'
             ? participants[type] + 1
@@ -117,6 +120,7 @@ const BookingSelection = ({ tripData }) => {
         }));
     };
 
+    // Updates a single child age input and clears its validation error.
     const handleAgeChange = (index, value) => {
         const newAges = [...childAges];
         newAges[index] = value;
@@ -127,6 +131,7 @@ const BookingSelection = ({ tripData }) => {
         setAgeValidationErrors(newErrors);
     };
 
+    // Ensures every child age is present and within configured range.
     const validateChildAges = () => {
         if (!hasChildOption) return true;
 
@@ -149,6 +154,7 @@ const BookingSelection = ({ tripData }) => {
         return !hasError;
     };
 
+    // Builds the participants summary label shown in the dropdown toggle.
     const getParticipantText = () => {
         const { adults, children } = participants;
 
@@ -167,6 +173,7 @@ const BookingSelection = ({ tripData }) => {
         return t('booking.participants.mixed', { adults, children });
     };
 
+    // Formats selected departure date/time for the button label.
     const getDateTimeText = () => {
         if (!selectedDateTime) {
             return t('booking.date.selectDateTime');
@@ -197,6 +204,7 @@ const BookingSelection = ({ tripData }) => {
     ));
 
 
+    // Validates date/time, capacity, and child constraints before API calls.
     const validateInputs = () => {
         if (!selectedDateTime) {
             setPopupMessage(t('booking.dateTimeRequired'));
@@ -242,6 +250,7 @@ const BookingSelection = ({ tripData }) => {
         return true;
     };
 
+    // Converts Date object into backend-required datetime format.
     const formatDateTimeForAPI = (dateTime) => {
         if (!dateTime) return '';
         
@@ -255,13 +264,14 @@ const BookingSelection = ({ tripData }) => {
         return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     };
 
+    // Runs price calculation first to preview totals before checkout.
     const handleCheckAvailability = async () => {
         if (!validateInputs()) return;
 
         try {
             const numericChildAges = hasChildOption ? childAges.map(age => parseInt(age)) : [];
 
-            // Calculate price without creating a booking
+            // Preview price without creating a booking record yet.
             const calculationData = {
                 booking_id: 0,
                 trip_id: tripData?.trip_id,
@@ -281,20 +291,21 @@ const BookingSelection = ({ tripData }) => {
         }
     };
 
+    // Creates booking draft and navigates to checkout with API response.
     const handleContinueBooking = async () => {
         if (!validateInputs()) return;
 
        const formattedDateTime = formatDateTimeForAPI(selectedDateTime);
        const formattedReturnDateTime = isTwoWayTransferType && isTwoWay ? formatDateTimeForAPI(selectedReturnDateTime) : null;
 
-        // Get client ID from localStorage or use a fallback
+        // Populate client fields from session when available.
         const user = JSON.parse(localStorage.getItem("user"));
         const clientId = user?.id;
         const clientEmail = user?.email || "";
        
         const numericChildAges = hasChildOption ? childAges.map(age => parseInt(age)) : [];
 
-        // Prepare booking data according to API specification
+        // Booking payload expected by SaveClientBooking endpoint.
         const bookingData = {
             id: 0,
             trip_id: tripData?.trip_id,
@@ -330,13 +341,10 @@ const BookingSelection = ({ tripData }) => {
         };
 
         try {
-            // First save the booking
+            // Create booking record, then continue checkout flow.
             const result = await dispatch(checkAvailability(bookingData)).unwrap();
 
             
-
-            // // Then calculate initial price without extras
-
 
             navigate("/checkout", {
                 state: {
@@ -346,7 +354,7 @@ const BookingSelection = ({ tripData }) => {
                 }
             });
 
-            // Reset states
+            // Reset local async states to avoid stale UI after navigation.
             dispatch(resetBookingOperation());
             dispatch(resetCalculation());
 
@@ -388,7 +396,7 @@ const BookingSelection = ({ tripData }) => {
             </Button>
         ));
 
-    // Filter dates that are before the minimum allowed date
+    // Blocks dates earlier than release-days constraint.
     const filterDate = (date) => {
         return date >= minDate;
     };

@@ -1,3 +1,4 @@
+// Module overview: ExcursionsDropdown component and its UI interaction logic.
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from "react-router-dom";
@@ -5,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchDestinationTree } from '../../redux/Slices/destinationsSlice';
 import DestinationTreeDropdown from './DestinationTreeDropdown';
 
+// Component: renders excursions dropdown UI and related interactions.
 const ExcursionsDropdown = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -25,6 +27,7 @@ const ExcursionsDropdown = () => {
         dispatch(fetchDestinationTree(params));
     }, [dispatch, currentLang]);
 
+    // Event handler for location click.
     const handleLocationClick = (route, id) => {
         navigate(`/excursions/${route.toLowerCase().replace(/\s+/g, '-')}`, {
             state: {
@@ -34,6 +37,7 @@ const ExcursionsDropdown = () => {
         });
     };
 
+    // Event handler for main click.
     const handleMainClick = () => {
         navigate('/excursions');
     };

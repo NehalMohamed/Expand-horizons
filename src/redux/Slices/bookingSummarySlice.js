@@ -1,3 +1,4 @@
+// Redux slice for bookingSummary: state, reducers, and async thunk lifecycle handling.
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   checkAUTH,
@@ -27,6 +28,7 @@ export const getBookingSummary = createAsyncThunk(
   }
 );
 
+// Slice definition: contains local reducers and async thunk state transitions.
 const bookingSummarySlice = createSlice({
   name: "bookingSummary",
   initialState: {
@@ -35,6 +37,7 @@ const bookingSummarySlice = createSlice({
     summaryData: null,
     shouldRefresh: false,
   },
+    // Synchronous reducers for direct state updates from UI actions.
   reducers: {
     clearBookingSummary: (state) => {
       state.loading = false;
@@ -51,6 +54,7 @@ const bookingSummarySlice = createSlice({
       state.shouldRefresh = false;
     },
   },
+  // Async lifecycle reducers for pending/fulfilled/rejected thunk states.
   extraReducers: (builder) => {
     builder
       // Get Booking Summary

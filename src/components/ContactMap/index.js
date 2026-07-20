@@ -1,3 +1,4 @@
+// Module overview: ContactMap component and its UI interaction logic.
 import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -10,6 +11,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
 });
 
+// Component: renders contact map UI and related interactions.
 const ContactMap = () => {
     const hurghadaPosition = [27.2579, 33.8116]; // Hurghada coordinates [lat, lng]
     

@@ -1,3 +1,4 @@
+// Redux slice for tripDetails: state, reducers, and async thunk lifecycle handling.
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -26,6 +27,7 @@ const getNonAuthHeaders = () => {
   };
 };
 
+// Async thunk: fetchTripDetails performs the API request for this slice.
 export const fetchTripDetails = createAsyncThunk(
   "tripDetails/fetchTripDetails",
   async (params, { rejectWithValue }) => {
@@ -47,6 +49,7 @@ export const fetchTripDetails = createAsyncThunk(
   }
 );
 
+// Slice definition: contains local reducers and async thunk state transitions.
 const tripDetailsSlice = createSlice({
   name: "tripDetails",
   initialState: {
@@ -55,6 +58,7 @@ const tripDetailsSlice = createSlice({
     error: null,
     lastUpdated: null,
   },
+    // Synchronous reducers for direct state updates from UI actions.
   reducers: {
     clearTripDetails: (state) => {
       state.tripData = null;
@@ -68,6 +72,7 @@ const tripDetailsSlice = createSlice({
       }
     },
   },
+  // Async lifecycle reducers for pending/fulfilled/rejected thunk states.
   extraReducers: (builder) => {
     builder
       .addCase(fetchTripDetails.pending, (state) => {

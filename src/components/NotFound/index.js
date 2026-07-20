@@ -1,7 +1,9 @@
+// Module overview: NotFound component and its UI interaction logic.
 import React from "react";
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from "react-router-dom";
 import { Container, Button } from "react-bootstrap";
+// Component: renders not found UI and related interactions.
 const NotFound = () => {
   const navigate = useNavigate(); // React Router hook to navigate between pages
   const { t } = useTranslation(); // Hook for multilingual translations

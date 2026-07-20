@@ -1,3 +1,4 @@
+// Module overview: authError feature logic and route-level wiring.
 import i18n from '../i18n';
 
 export const createAuthError = (scenario = 'expired') => {

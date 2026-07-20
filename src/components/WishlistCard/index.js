@@ -1,3 +1,4 @@
+// Module overview: WishlistCard component and its UI interaction logic.
 import { useState, useEffect } from "react";
 import { Card, Button } from "react-bootstrap";
 import { FaCheck, FaHeart } from "react-icons/fa";
@@ -6,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from 'react-router-dom';
 import { addToWishlist } from "../../redux/Slices/wishlistSlice";
 
+// Component: renders wishlist card UI and related interactions.
 const WishlistCard = ({ trip, onWishlistUpdate }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,6 +26,7 @@ const WishlistCard = ({ trip, onWishlistUpdate }) => {
     ? trip?.trip_description?.slice(0, 70) + '...'
     : trip?.trip_description;
 
+  // Event handler for wishlist toggle.
   const handleWishlistToggle = (e) => {
     e.stopPropagation();
     const user = JSON.parse(localStorage.getItem("user"));
@@ -48,6 +51,7 @@ const WishlistCard = ({ trip, onWishlistUpdate }) => {
       });
   };
 
+  // Event handler for card click.
   const handleCardClick = () => {
     if (!trip.is_comm_soon) {
       navigate(`/trip/${trip.route}`, {

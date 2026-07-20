@@ -1,7 +1,9 @@
+// Module overview: PopupMsg component and its UI interaction logic.
 import React, { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import Alert from "react-popup-alert";
 
+// Component: renders popup msg UI and related interactions.
 const PopupMsg = ({ text, show, closeAlert, onConfirm, openAuthModal }) => {
   const { t } = useTranslation();
   const isMounted = useRef(true);
@@ -12,6 +14,7 @@ const PopupMsg = ({ text, show, closeAlert, onConfirm, openAuthModal }) => {
     };
   }, []);
 
+  // Event handler for close.
   const handleClose = () => {
     if (isMounted.current) {
       closeAlert?.();

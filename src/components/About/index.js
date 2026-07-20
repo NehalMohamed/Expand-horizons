@@ -1,7 +1,9 @@
+// Module overview: About component and its UI interaction logic.
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
+// Component: renders about UI and related interactions.
 const About = () => {
   const { t } = useTranslation();
 

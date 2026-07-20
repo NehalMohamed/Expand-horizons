@@ -1,7 +1,9 @@
+// Module overview: Features component and its UI interaction logic.
 import React from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
+// Component: renders features UI and related interactions.
 const Features = () => {
     const { t } = useTranslation();
 

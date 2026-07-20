@@ -1,3 +1,4 @@
+// Module overview: TopDestinations component and its UI interaction logic.
 import React, { useState, useEffect, useRef } from "react";
 import { Container, Row, Col, Card, Spinner } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
@@ -5,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDestinations, fetchDestChildren } from "../../redux/Slices/destinationsSlice";
 
+// Component: renders top destinations UI and related interactions.
 const TopDestinations = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -29,6 +31,7 @@ const TopDestinations = () => {
     useSelector((state) => state.language.currentLang) || "en";
 
   useEffect(() => {
+    // Checks mobile conditions for control flow.
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768); // Same as your sm breakpoint
     };
@@ -63,6 +66,7 @@ const TopDestinations = () => {
       childDestinations.length > 0 &&
       !loadingChildren) {
 
+      // Controls timer lifecycle for this module.
       const timer = setTimeout(() => {
         carouselContainerRef.current.scrollIntoView({
           behavior: 'smooth',
@@ -75,6 +79,7 @@ const TopDestinations = () => {
     }
   }, [selectedParent, childDestinations, loadingChildren]);
 
+  // Event handler for parent click.
   const handleParentClick = async (parentDestination) => {
     if (selectedParent?.destination_id === parentDestination.destination_id) {
       setSelectedParent(null);
@@ -99,6 +104,7 @@ const TopDestinations = () => {
     }
   };
 
+  // Event handler for destination click.
   const handleDestinationClick = (destination) => {
     navigate(
       `/excursions/${destination.route.toLowerCase().replace(/\s+/g, "-")}`,
@@ -108,6 +114,7 @@ const TopDestinations = () => {
     );
   };
 
+  // Event handler for image error.
   const handleImageError = (destinationId) => {
     setImageErrors((prev) => ({
       ...prev,
@@ -115,6 +122,7 @@ const TopDestinations = () => {
     }));
   };
 
+  // Helper for go to slide.
   const goToSlide = (slideIndex) => {
     if (carouselRef.current && slideRefs.current[slideIndex]) {
       slideRefs.current[slideIndex].scrollIntoView({
@@ -126,6 +134,7 @@ const TopDestinations = () => {
     setCurrentSlide(slideIndex);
   };
 
+  // Helper for go to prev slide.
   const goToPrevSlide = () => {
     const itemsPerSlide = isMobile ? 2 : 3; // Dynamic calculation
     const totalSlides = Math.ceil(childDestinations?.length / itemsPerSlide) || 1;
@@ -133,6 +142,7 @@ const TopDestinations = () => {
     goToSlide(newSlide);
   };
 
+  // Helper for go to next slide.
   const goToNextSlide = () => {
     const itemsPerSlide = isMobile ? 2 : 3; // Dynamic calculation
     const totalSlides = Math.ceil(childDestinations?.length / itemsPerSlide) || 1;
@@ -140,6 +150,7 @@ const TopDestinations = () => {
     goToSlide(newSlide);
   };
 
+  // Event handler for scroll.
   const handleScroll = () => {
     if (!carouselRef.current || !slideRefs.current.length) return;
 
@@ -238,6 +249,7 @@ const TopDestinations = () => {
     </Card>
   );
 
+  // Renders carousel slides output.
   const renderCarouselSlides = () => {
     if (!childDestinations || childDestinations.length === 0) return null;
 

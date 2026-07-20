@@ -1,3 +1,4 @@
+// Module overview: StatusPoPUp component and its UI interaction logic.
 import React, { Component } from 'react';
 import {Form,Button} from "react-bootstrap";
 import {connect} from "react-redux";
@@ -59,6 +60,7 @@ import "./popup.scss";
     }
 }
 
+// Helper for map state to props.
 function mapStateToProps(state) {
     return {
         SPStatus: state.SPStatus,

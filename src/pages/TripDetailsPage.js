@@ -1,3 +1,4 @@
+// Module overview: TripDetailsPage feature logic and route-level wiring.
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +17,7 @@ import LoadingPage from "../components/Loader/LoadingPage";
 import PopUp from "../components/Shared/popup/PopUp";
 import { getCompanyCurrencyCode } from "../utils/companyCurrency";
 
+// Component entry point for TripDetailsPage.
 const TripDetailsPage = () => {
   const { route } = useParams();
   const { state } = useLocation();
@@ -78,6 +80,7 @@ const TripDetailsPage = () => {
     };
   }, [route, currentLang, user.id, tripState]);
 
+  // Fetches trip details data and syncs local state.
   const fetchTripDetailsData = () => {
     if (!tripState) return;
 

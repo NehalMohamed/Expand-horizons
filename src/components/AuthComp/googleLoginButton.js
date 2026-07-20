@@ -1,3 +1,4 @@
+// Module overview: googleLoginButton component and its UI interaction logic.
 import React, { useState, useEffect } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useTranslation } from "react-i18next";
@@ -8,6 +9,7 @@ import LoadingPage from "../Loader/LoadingPage";
 import { Button } from "react-bootstrap";
 import PopUp from "../Shared/popup/PopUp";
 import axios from "axios";
+// Component: renders google login button UI and related interactions.
 const GoogleLoginButton = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();

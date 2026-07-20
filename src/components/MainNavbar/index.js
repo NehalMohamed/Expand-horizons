@@ -1,3 +1,4 @@
+// Module overview: MainNavbar component and its UI interaction logic.
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, NavLink } from "react-router-dom";
@@ -12,6 +13,7 @@ import ProfileDropdown from "../Dropdowns/ProfileDropdown";
 import { fetchWishlistCount } from "../../redux/Slices/wishlistSlice";
 import { fetchBookingCount } from "../../redux/Slices/bookingListSlice";
 
+// Component: renders main navbar UI and related interactions.
 const MainNavbar = () => {
   const [showSearch, setShowSearch] = useState(false);
    const wishlistCount = useSelector((state) => state.wishlist.count);
@@ -30,10 +32,12 @@ const MainNavbar = () => {
     dispatch(fetchBookingCount(client_id));
   }, [dispatch, user]);
 
+  // Event handler for wishlist click.
   const handleWishlistClick = () => {
     navigate("/Wishlist");
   };
 
+  // Event handler for booking click.
   const handleBookingClick = () => {
     navigate("/cart");
   };

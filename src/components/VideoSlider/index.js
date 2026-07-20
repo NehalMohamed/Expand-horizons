@@ -1,6 +1,8 @@
+// Module overview: VideoSlider component and its UI interaction logic.
 import { useRef, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom"; // If using React Router
 
+// Component: renders video slider UI and related interactions.
 const VideoSlider = () => {
   const videoRef = useRef(null);
   const progressRef = useRef(null);
@@ -13,12 +15,14 @@ const VideoSlider = () => {
     const video = videoRef.current;
     if (!video) return;
 
+    // Event handler for loaded data.
     const handleLoadedData = () => {
       setIsLoading(false);
       setDuration(video.duration);
       video.play().catch(error => console.log("Autoplay prevented:", error));
     };
 
+    // Event handler for time update.
     const handleTimeUpdate = () => {
       setCurrentTime(video.currentTime);
       
@@ -28,11 +32,13 @@ const VideoSlider = () => {
       }
     };
 
+    // Event handler for error.
     const handleError = () => {
       console.error("Video loading error");
       setIsLoading(false);
     };
 
+    // Event handler for can play through.
     const handleCanPlayThrough = () => {
       setIsLoading(false);
     };

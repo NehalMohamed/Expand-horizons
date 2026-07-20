@@ -1,3 +1,4 @@
+// Module overview: WishlistSection component and its UI interaction logic.
 import { useState, useEffect } from "react";
 import { Container, Row, Col, Spinner } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,6 +11,7 @@ import NoWishList from "../NoWishList";
 import PopUp from "../Shared/popup/PopUp";
 import { getCompanyCurrencyCode } from "../../utils/companyCurrency";
 
+// Component: renders wishlist section UI and related interactions.
 const WishlistSection = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();

@@ -1,3 +1,4 @@
+// Module overview: Newsletter component and its UI interaction logic.
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -6,6 +7,7 @@ import { subscribeNewsletter, resetNewsletter } from '../../redux/Slices/newslet
 import LoadingPage from '../Loader/LoadingPage';
 import PopUp from '../Shared/popup/PopUp';
 
+// Component: renders newsletter UI and related interactions.
 const Newsletter = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -22,6 +24,7 @@ const Newsletter = () => {
   const [popupMessage, setPopupMessage] = useState('');
   const [popupType, setPopupType] = useState('alert');
 
+  // Event handler for input change.
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -30,6 +33,7 @@ const Newsletter = () => {
     }));
   };
 
+  // Event handler for submit.
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(subscribeNewsletter(formData));

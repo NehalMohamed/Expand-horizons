@@ -1,3 +1,4 @@
+// Redux slice for profile: state, reducers, and async thunk lifecycle handling.
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   checkAUTH,
@@ -130,6 +131,7 @@ export const uploadProfileImage = createAsyncThunk(
   }
 );
 
+// Async thunk: GetClient_Notification_Settings performs the API request for this slice.
 export const GetClient_Notification_Settings = createAsyncThunk(
   "profile/GetClient_Notification_Settings",
   async (formData, { rejectWithValue }) => {
@@ -162,6 +164,7 @@ export const GetClient_Notification_Settings = createAsyncThunk(
   }
 );
 
+// Async thunk: SaveClientNotificationSetting performs the API request for this slice.
 export const SaveClientNotificationSetting = createAsyncThunk(
   "profile/SaveClientNotificationSetting",
   async (formData, { rejectWithValue }) => {
@@ -191,6 +194,7 @@ export const SaveClientNotificationSetting = createAsyncThunk(
     }
   }
 );
+// Slice definition: contains local reducers and async thunk state transitions.
 const profileSlice = createSlice({
   name: "profile",
   initialState: {
@@ -202,6 +206,7 @@ const profileSlice = createSlice({
     success: null,
     message: null, // For API response messages
   },
+    // Synchronous reducers for direct state updates from UI actions.
   reducers: {
     // Action to reset success/error states
     resetProfileStatus: (state) => {
@@ -210,6 +215,7 @@ const profileSlice = createSlice({
       state.message = null;
     },
   },
+  // Async lifecycle reducers for pending/fulfilled/rejected thunk states.
   extraReducers: (builder) => {
     builder
       // Fetch Profile cases

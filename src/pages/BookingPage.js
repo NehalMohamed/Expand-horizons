@@ -1,3 +1,4 @@
+// Module overview: Coordinates the step-based booking checkout experience.
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -11,6 +12,7 @@ import ContactStep from '../components/BookingSteps/ContactStep';
 import PaymentStep from '../components/BookingSteps/PaymentStep';
 import { clearBookingSummary } from '../redux/Slices/bookingSummarySlice';
 
+// Component entry point for checkout steps and shared booking state handoff.
 const BookingPage = () => {
   const { t } = useTranslation();
   const { state } = useLocation();
@@ -38,12 +40,13 @@ const BookingPage = () => {
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    // Clean up when component unmounts
+    // Clear stale summary data when leaving checkout.
     return () => {
       dispatch(clearBookingSummary());
     };
   }, [state, dispatch]);
 
+  // Advances the local step index while respecting trip-type step count.
   const handleNextStep = () => {
     const maxSteps = tripType === 3 ? 4 : 3;
 
@@ -52,6 +55,8 @@ const BookingPage = () => {
     }
   };
 
+  // Maps the current step to the correct component; non-diving trips skip
+  // agreement and jump directly to contact/payment flow.
   const renderCurrentStep = () => {
     let adjustedStep = currentStep;
 

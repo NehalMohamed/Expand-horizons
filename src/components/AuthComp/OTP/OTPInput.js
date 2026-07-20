@@ -1,3 +1,4 @@
+// Module overview: OTPInput component and its UI interaction logic.
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import OtpInput from "react-otp-input";
@@ -8,6 +9,7 @@ import { ConfirmOTP } from "../../../redux/Slices/AuthSlice";
 import LoadingPage from "../../Loader/LoadingPage";
 import PopUp from "../../Shared/popup/PopUp";
 import "./Otp.scss";
+// Component: renders otpinput UI and related interactions.
 function OTPInput(props) {
   const { t } = useTranslation();
   const { state } = useLocation();
@@ -18,6 +20,7 @@ function OTPInput(props) {
   const [myEmail, setMyEmail] = useState("");
   const { loading, success, message } = useSelector((state) => state.auth);
 
+  // Helper for send otp code.
   const sendOtpCode = () => {
     const data = { Email: myEmail, otp: otp };
     let path = state?.path || "/";

@@ -1,3 +1,4 @@
+// Module overview: OrderSummary component and its UI interaction logic.
 import React, { useState, useEffect } from 'react';
 import {
     FaStar,
@@ -19,6 +20,7 @@ import LoadingPage from '../Loader/LoadingPage';
 import PopUp from '../Shared/popup/PopUp';
 import { getCompanyCurrencyCode, getCurrencySymbol } from '../../utils/companyCurrency';
 
+// Component: renders order summary UI and related interactions.
 const OrderSummary = ({ availabilityData }) => {
     const [showGiftCode, setShowGiftCode] = useState(false);
     const [giftCode, setGiftCode] = useState('');
@@ -33,6 +35,7 @@ const OrderSummary = ({ availabilityData }) => {
     const [popupMessage, setPopupMessage] = useState('');
     const [popupType, setPopupType] = useState('alert');
 
+    // Fetches booking summary and syncs local state.
     const fetchBookingSummary = () => {
         var bookingId = availabilityData?.idOut;
         if (bookingId) {
@@ -66,6 +69,7 @@ const OrderSummary = ({ availabilityData }) => {
         }
     }, [error, t]);
 
+    // Renders stars output.
     const renderStars = (rating) => {
         if (!rating) return null;
 
@@ -83,16 +87,19 @@ const OrderSummary = ({ availabilityData }) => {
         return stars;
     };
 
+    // Event handler for gift code click.
     const handleGiftCodeClick = () => {
         setShowGiftCode(true);
     };
 
+    // Event handler for redeem.
     const handleRedeem = () => {
         // Handle redeem logic here
         console.log('Redeeming gift code:', giftCode);
         setShowGiftCode(false);
     };
 
+    // Formats date time for display or API payloads.
     const formatDateTime = (dateTimeString) => {
         if (!dateTimeString) return t('bookings.dateToBeConfirmed');
         try {
@@ -113,6 +120,7 @@ const OrderSummary = ({ availabilityData }) => {
         }
     };
 
+    // Returns participants text.
     const getParticipantsText = () => {
         if (!summaryData) return '';
 
@@ -127,6 +135,7 @@ const OrderSummary = ({ availabilityData }) => {
         return text;
     };
 
+    // Renders extras output.
     const renderExtras = () => {
         if (!summaryData?.extras || summaryData.extras.length === 0) {
             return null;
@@ -147,6 +156,7 @@ const OrderSummary = ({ availabilityData }) => {
         );
     };
 
+    // Renders obligatory extras output.
     const renderObligatoryExtras = () => {
         if (!summaryData?.extras_obligatory || summaryData.extras_obligatory.length === 0) {
             return null;

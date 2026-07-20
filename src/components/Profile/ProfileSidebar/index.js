@@ -1,3 +1,4 @@
+// Module overview: ProfileSidebar component and its UI interaction logic.
 import React, { useEffect, useState, useRef } from "react";
 import { Card, Nav } from "react-bootstrap";
 import { FaUser, FaBell, FaLock, FaImage } from "react-icons/fa";
@@ -12,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import PopUp from "../../Shared/popup/PopUp";
 import LoadingPage from "../../Loader/LoadingPage";
 import { FaTimesCircle } from "react-icons/fa";
+// Component: renders profile sidebar UI and related interactions.
 const ProfileSidebar = ({ activeTab, setActiveTab }) => {
   const { t } = useTranslation();
   const fileInputRef = useRef(null); // Reference for hidden file input

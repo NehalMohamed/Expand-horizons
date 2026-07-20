@@ -1,11 +1,14 @@
+// Module overview: CityCard component and its UI interaction logic.
 import { Card } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
+// Component: renders city card UI and related interactions.
 const CityCard = (slide) => {
   const { t } = useTranslation();
 
+  // Renders stars output.
   const renderStars = (count) => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
@@ -15,8 +18,7 @@ const CityCard = (slide) => {
     }
     return stars;
   };
-  const handleCardClick = () => {
-  };
+
   return (
     <Link
       to={!slide.is_comm_soon ? `/trip/${slide.route}` : "/trip/ComingSoon"}

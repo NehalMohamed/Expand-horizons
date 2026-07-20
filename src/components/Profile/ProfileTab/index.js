@@ -1,3 +1,4 @@
+// Module overview: ProfileTab component and its UI interaction logic.
 import React, { useState, useEffect } from "react";
 import { Row, Col, Form, Button } from "react-bootstrap";
 import PhoneInput from "react-phone-number-input";
@@ -6,6 +7,7 @@ import { saveProfile, fetchProfile } from "../../../redux/Slices/profileSlice";
 import { useDispatch, useSelector } from "react-redux";
 import PopUp from "../../Shared/popup/PopUp";
 import LoadingPage from "../../Loader/LoadingPage";
+// Component: renders profile tab UI and related interactions.
 const ProfileTab = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -34,6 +36,7 @@ const ProfileTab = () => {
   const { profileData, profileImage, loading, error, success, message } =
     useSelector((state) => state.profile);
 
+  // Event handler for profile input change.
   const handleProfileInputChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };

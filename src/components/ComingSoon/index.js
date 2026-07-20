@@ -1,7 +1,9 @@
+// Module overview: ComingSoon component and its UI interaction logic.
 import React from "react";
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from "react-router-dom";
 import { Container, Button } from "react-bootstrap";
+// Component: renders coming soon UI and related interactions.
 const ComingSoon = () => {
   const navigate = useNavigate(); // React Router hook to navigate between pages
   const { t } = useTranslation(); // Hook for multilingual translations

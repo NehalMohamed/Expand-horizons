@@ -1,3 +1,4 @@
+// Module overview: FlightItinerary component and its UI interaction logic.
 import { useState, useEffect } from "react";
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { IoLocationOutline } from 'react-icons/io5';
@@ -7,6 +8,7 @@ import {
 } from "../../redux/Slices/tripsSlice";
 import { useTranslation } from "react-i18next";
 
+// Component: renders flight itinerary UI and related interactions.
 const FlightItinerary = ({ tripData }) => {
     const { t } = useTranslation();
     const tripId = tripData?.trip_id;

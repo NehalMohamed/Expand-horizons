@@ -1,3 +1,4 @@
+// Module overview: PickupLocation component and its UI interaction logic.
 import React, { useEffect, useRef, useState } from "react";
 import { MapContainer, TileLayer, Marker, useMap, useMapEvents } from "react-leaflet";
 import { GeocoderAutocomplete } from "@geoapify/geocoder-autocomplete";
@@ -28,6 +29,7 @@ function ClickToSet({ onPick }) {
   return null;
 }
 
+// Component: renders pickup location UI and related interactions.
 const PickupLocation = ({ onChange, value }) => {
    const { t } = useTranslation();
   const [pickupOption, setPickupOption] = useState(value?.enabled ? "yes" : "no");
@@ -80,6 +82,7 @@ const PickupLocation = ({ onChange, value }) => {
     };
   }, [pickupOption]);
 
+  // Helper for fire change.
   const fireChange = (coords, formatted) => {
     onChange?.({
       enabled: pickupOption === "yes",
@@ -107,6 +110,7 @@ const PickupLocation = ({ onChange, value }) => {
     }
   };
 
+  // Event handler for option change.
   const handleOptionChange = (option) => {
     setPickupOption(option);
     if (option === "no") {

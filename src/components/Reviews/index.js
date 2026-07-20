@@ -1,3 +1,4 @@
+// Module overview: Reviews component and its UI interaction logic.
 import React, { useEffect, useState } from 'react';
 import { Container, Spinner, Modal } from 'react-bootstrap';
 import { useTranslation } from "react-i18next";
@@ -6,6 +7,7 @@ import LoadingPage from "../Loader/LoadingPage";
 import PopUp from "../Shared/popup/PopUp";
 import { fetchClientsReviews, submitReview, resetReviewSubmission } from "../../redux/Slices/reviewSlice";
 
+// Component: renders reviews UI and related interactions.
 const Reviews = ({ tripData , refreshTripDetails}) => {
     const { t } = useTranslation();
     const [showReviewForm, setShowReviewForm] = useState(false);
@@ -106,14 +108,17 @@ const Reviews = ({ tripData , refreshTripDetails}) => {
     // Show only first 2 reviews in the main view
     const displayedReviews = reviews.slice(0, 2);
 
+    // Event handler for add review click.
     const handleAddReviewClick = () => {
         setShowReviewForm(!showReviewForm);
     };
 
+    // Event handler for rating click.
     const handleRatingClick = (rating) => {
         setUserRating(rating === userRating ? 0 : rating);
     };
 
+    // Event handler for submit review.
     const handleSubmitReview = () => {
         if (userRating === 0) {
             setPopupMessage(t("tripDetails.pleaseSelectRating"));

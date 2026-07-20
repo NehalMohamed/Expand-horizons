@@ -14,6 +14,7 @@ const getNonAuthHeaders = () => {
   };
 };
 
+// Async thunk: fetchDestinations performs the API request for this slice.
 export const fetchDestinations = createAsyncThunk(
   "destinations/fetchDestinations",
   async (params, { rejectWithValue }) => {
@@ -37,6 +38,7 @@ export const fetchDestinations = createAsyncThunk(
   }
 );
 
+// Async thunk: fetchDestChildren performs the API request for this slice.
 export const fetchDestChildren = createAsyncThunk(
   "destinations/fetchDestChildren",
   async (params, { rejectWithValue }) => {
@@ -60,6 +62,7 @@ export const fetchDestChildren = createAsyncThunk(
   }
 );
 
+// Async thunk: fetchDestinationTree performs the API request for this slice.
 export const fetchDestinationTree = createAsyncThunk(
   "destinations/fetchDestinationTree",
   async (params, { rejectWithValue }) => {
@@ -87,6 +90,7 @@ export const fetchDestinationTree = createAsyncThunk(
   }
 );
 
+// Slice definition: contains local reducers and async thunk state transitions.
 const destinationsSlice = createSlice({
   name: "destinations",
   initialState: {
@@ -111,6 +115,7 @@ const destinationsSlice = createSlice({
     },
   },
   reducers: {},
+  // Async lifecycle reducers for pending/fulfilled/rejected thunk states.
   extraReducers: (builder) => {
     builder
       .addCase(fetchDestinations.pending, (state) => {

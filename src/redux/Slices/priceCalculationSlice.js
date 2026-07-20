@@ -1,3 +1,4 @@
+// Redux slice for priceCalculation: state, reducers, and async thunk lifecycle handling.
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import {
@@ -51,6 +52,7 @@ export const calculateBookingPrice = createAsyncThunk(
   }
 );
 
+// Slice definition: contains local reducers and async thunk state transitions.
 const priceCalculationSlice = createSlice({
   name: "priceCalculation",
   initialState: {
@@ -59,6 +61,7 @@ const priceCalculationSlice = createSlice({
     success: false,
     calculationData: null,
   },
+    // Synchronous reducers for direct state updates from UI actions.
   reducers: {
     resetCalculation: (state) => {
       state.loading = false;
@@ -73,6 +76,7 @@ const priceCalculationSlice = createSlice({
       state.calculationData = null;
     },
   },
+  // Async lifecycle reducers for pending/fulfilled/rejected thunk states.
   extraReducers: (builder) => {
     builder
       .addCase(calculateBookingPrice.pending, (state) => {

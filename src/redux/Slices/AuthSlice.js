@@ -1,21 +1,23 @@
+// Redux slice for Auth: state, reducers, and async thunk lifecycle handling.
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-//   checkAUTH,
-//   isUserNotLoggedIn,
-//   isTokenExpiredOnly,
 import { createAuthError } from "../../utils/authError";
 import api from "../../api/axios";
 
 const BASE_URL_AUTH = process.env.REACT_APP_AUTH_API_URL;
 
+// Builds language-aware headers for endpoints that do not require auth token.
 const NonAuthHeaders = () => {
   let lang = localStorage.getItem("lang");
   return {
     "Accept-Language": lang,
   };
 };
+
+// Seed token from storage so auth state survives browser refresh.
 const token = localStorage.getItem("token");
 
+// Central auth state for register/login/otp/password flows.
 const initialState = {
   user: null,
   token: token || null,
@@ -44,6 +46,7 @@ const getErrorMessage = (error) => {
   return "An error occurred";
 };
 
+// Async thunk: changePassword performs the API request for this slice.
 export const changePassword = createAsyncThunk(
   "auth/changePassword",
   async (
@@ -72,7 +75,7 @@ export const changePassword = createAsyncThunk(
   }
 );
 
-//verify email
+// Confirms OTP code during verification flow.
 export const ConfirmOTP = createAsyncThunk(
   "ConfirmOTP",
   async (payload, thunkAPI) => {
@@ -85,7 +88,7 @@ export const ConfirmOTP = createAsyncThunk(
   }
 );
 
-///normal register && gmail Register (different on API path & payload)
+// Registers standard and social accounts using dynamic API path/payload.
 export const RegisterUser = createAsyncThunk(
   "auth/register",
   async (data, thunkAPI) => {
@@ -102,7 +105,7 @@ export const RegisterUser = createAsyncThunk(
   }
 );
 
-//normal login & gmail Login (different on API path & payload)
+// Logs in standard and social accounts using dynamic API path/payload.
 export const LoginUser = createAsyncThunk(
   "auth/login",
   async (data, thunkAPI) => {
@@ -123,10 +126,13 @@ export const LoginUser = createAsyncThunk(
   }
 );
 
+// Slice definition: contains local reducers and async thunk state transitions.
 const authSlice = createSlice({
   name: "auth",
   initialState,
+  // Synchronous reducers for local auth state changes.
   reducers: {
+    // Clears user session and removes persisted auth data.
     logout: (state) => {
       state.user = null;
       state.token = null;
@@ -139,6 +145,7 @@ const authSlice = createSlice({
       localStorage.removeItem("token");
       localStorage.removeItem("user");
     },
+    // Resets transient status flags/messages while keeping session data.
     clearAuthState: (state) => {
       state.loading = false;
       state.error = null;
@@ -147,11 +154,13 @@ const authSlice = createSlice({
       state.isGoogleAcc = false;
        state.googleEmail = null;
     },
-     clearGoogleAccFlag: (state) => {
+    // Clears the Google-account warning state after it has been handled.
+    clearGoogleAccFlag: (state) => {
       state.isGoogleAcc = false;
       state.googleEmail = null;
     },
   },
+  // Async lifecycle reducers for pending/fulfilled/rejected thunk states.
   extraReducers: (builder) => {
     builder
       .addCase(RegisterUser.pending, (state) => {

@@ -1,3 +1,4 @@
+// Module overview: AuthModal component and its UI interaction logic.
 import React, { useState, useEffect } from "react";
 import { Modal, Button, Form, Col, Row, FloatingLabel } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
@@ -20,10 +21,12 @@ export const AuthModalProvider = ({ children }) => {
     setShowAuthModal(true);
   };
   
+  // Helper for close auth modal.
   const closeAuthModal = () => {
     setShowAuthModal(false);
   };
 
+  // Helper for navigate to.
   const navigateTo = (path) => {
     window.location.href = path;
   };
@@ -116,6 +119,7 @@ function AuthModal({ show, onHide, type, setType, navigateTo }) {
     return true;
   };
 
+  // Helper for signin.
   const signin = (event) => {
     event.preventDefault();
     // validation
@@ -155,6 +159,7 @@ function AuthModal({ show, onHide, type, setType, navigateTo }) {
     }
   };
 
+  // Helper for fill form data.
   const fillFormData = (e) => {
     setvalidated(false);
     seterrorsLst({});

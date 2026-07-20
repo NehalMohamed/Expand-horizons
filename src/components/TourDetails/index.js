@@ -1,11 +1,14 @@
+// Module overview: TourDetails component and its UI interaction logic.
 import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import parse from 'html-react-parser';
 
+// Component: renders tour details UI and related interactions.
 const TourDetails = ({ tripData }) => {
   const { t } = useTranslation();
 
+  // Renders html content output.
   const renderHtmlContent = (htmlString) => {
     if (!htmlString) return null;
     return (
@@ -15,6 +18,7 @@ const TourDetails = ({ tripData }) => {
     );
   };
 
+  // Renders section output.
   const renderSection = (title, content) => {
     if (!content) return null;
 

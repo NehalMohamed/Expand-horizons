@@ -1,5 +1,7 @@
+// Module overview: DivingAgreementDE component and its UI interaction logic.
 import React from 'react';
 
+// Component: renders diving agreement de UI and related interactions.
 const DivingAgreementDE = () => {
   return (
     <div className="diving-agreement">

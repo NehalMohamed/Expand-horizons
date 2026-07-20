@@ -1,3 +1,4 @@
+// Redux slice for bookingList: state, reducers, and async thunk lifecycle handling.
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import {
@@ -25,6 +26,7 @@ const getClientId = () => {
   return user?.id || null;
 };
 
+// Async thunk: fetchBookingCount performs the API request for this slice.
 export const fetchBookingCount = createAsyncThunk(
   "bookingList/fetchBookingCount",
   async (clientId, { rejectWithValue }) => {
@@ -48,6 +50,7 @@ export const fetchBookingCount = createAsyncThunk(
   }
 );
 
+// Async thunk: fetchBookingList performs the API request for this slice.
 export const fetchBookingList = createAsyncThunk(
   "bookingList/fetchBookingList",
   async (params, { rejectWithValue }) => {
@@ -71,6 +74,7 @@ export const fetchBookingList = createAsyncThunk(
   }
 );
 
+// Slice definition: contains local reducers and async thunk state transitions.
 const bookingListSlice = createSlice({
   name: "bookingList",
   initialState: {
@@ -79,6 +83,7 @@ const bookingListSlice = createSlice({
     loading: false,
     error: null,
   },
+    // Synchronous reducers for direct state updates from UI actions.
   reducers: {
     clearBookingList: (state) => {
       state.items = [];
@@ -94,6 +99,7 @@ const bookingListSlice = createSlice({
       state.count = 0;
     },
   },
+  // Async lifecycle reducers for pending/fulfilled/rejected thunk states.
   extraReducers: (builder) => {
     builder
       // Fetch booking count

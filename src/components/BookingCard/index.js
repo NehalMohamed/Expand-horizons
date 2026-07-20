@@ -1,3 +1,4 @@
+// Module overview: BookingCard component and its UI interaction logic.
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import {
@@ -17,6 +18,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { getCompanyCurrencyCode, getCurrencySymbol } from '../../utils/companyCurrency';
 
+// Component: renders booking card UI and related interactions.
 const BookingCard = ({ booking, onCancelBooking }) => {
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -24,6 +26,7 @@ const BookingCard = ({ booking, onCancelBooking }) => {
 
     const isTwoWayTransfer = booking?.is_two_way === true && booking?.trip_type === 2;
 
+    // Renders stars output.
     const renderStars = (rating) => {
         if (!rating) return null;
 
@@ -41,6 +44,7 @@ const BookingCard = ({ booking, onCancelBooking }) => {
         return stars;
     };
 
+    // Formats date time for display or API payloads.
     const formatDateTime = (dateTimeString) => {
         if (!dateTimeString) return t('bookings.dateToBeConfirmed');
         try {
@@ -61,6 +65,7 @@ const BookingCard = ({ booking, onCancelBooking }) => {
         }
     };
 
+    // Returns participants text.
     const getParticipantsText = (booking) => {
         if (!booking) return '';
 
@@ -75,6 +80,7 @@ const BookingCard = ({ booking, onCancelBooking }) => {
         return text;
     };
 
+    // Renders extras output.
     const renderExtras = (extras) => {
         if (!extras || extras.length === 0) {
             return null;
@@ -94,6 +100,7 @@ const BookingCard = ({ booking, onCancelBooking }) => {
         );
     };
 
+    // Renders obligatory extras output.
     const renderObligatoryExtras = (ObligatoryExtras) => {
         if (!ObligatoryExtras || ObligatoryExtras.length === 0) {
             return null;
@@ -113,6 +120,7 @@ const BookingCard = ({ booking, onCancelBooking }) => {
         );
     };
 
+    // Event handler for cancel click.
     const handleCancelClick = (e) => {
         e.stopPropagation();
         if (onCancelBooking) {

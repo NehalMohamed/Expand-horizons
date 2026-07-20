@@ -1,3 +1,4 @@
+// Module overview: ProfileDropdown component and its UI interaction logic.
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Dropdown } from 'react-bootstrap';
@@ -5,6 +6,7 @@ import { FaUser, FaSignOutAlt, FaUserCircle, FaSignInAlt } from 'react-icons/fa'
 import { useAuthModal } from '../AuthComp/AuthModal';
 
 
+// Component: renders profile dropdown UI and related interactions.
 const ProfileDropdown = () => {
     const { t } = useTranslation();
     const { openAuthModal } = useAuthModal();
@@ -17,10 +19,12 @@ const ProfileDropdown = () => {
         }
     }, []);
 
+    // Event handler for login.
     const handleLogin = () =>{
          window.location.href = "/signUp";
     }
 
+    // Event handler for logout.
     const handleLogout = () => {
         // Remove user and token from localStorage
         localStorage.removeItem('user');

@@ -1,3 +1,4 @@
+// Module overview: ContactStep component and its UI interaction logic.
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Form } from 'react-bootstrap';
@@ -11,6 +12,7 @@ import BookingModal from '../../Shared/BookingModal';
 import PopUp from '../../Shared/popup/PopUp';
 import LoadingPage from '../../Loader/LoadingPage';
 
+// Component: renders contact step UI and related interactions.
 const ContactStep = ({ onNext, tripData, availabilityData, childAges}) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
@@ -56,6 +58,7 @@ const ContactStep = ({ onNext, tripData, availabilityData, childAges}) => {
             }
         }, [profileData]);
     
+    // Event handler for input change.
     const handleInputChange = (field, value) => {
         setContactInfo(prev => ({
             ...prev,
@@ -63,10 +66,12 @@ const ContactStep = ({ onNext, tripData, availabilityData, childAges}) => {
         }));
     };
 
+    // Event handler for notes change.
     const handleNotesChange = (value) => {
         setNotes(value);
     };
 
+    // Event handler for phone change.
     const handlePhoneChange = (value) => {
         setContactInfo(prev => ({
             ...prev,
@@ -74,6 +79,7 @@ const ContactStep = ({ onNext, tripData, availabilityData, childAges}) => {
         }));
     };
 
+    // Validates form before continuing the flow.
     const validateForm = () => {
         const newErrors = {};
 
@@ -99,6 +105,7 @@ const ContactStep = ({ onNext, tripData, availabilityData, childAges}) => {
         return Object.keys(newErrors).length === 0;
     };
 
+    // Event handler for next.
     const handleNext = async () => {
         if (!validateForm()) {
             return;

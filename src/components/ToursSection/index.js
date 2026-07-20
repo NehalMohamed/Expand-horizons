@@ -1,3 +1,4 @@
+// Module overview: ToursSection component and its UI interaction logic.
 import { useState, useEffect } from "react";
 import { Container, Row, Col, Spinner } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,6 +11,7 @@ import PopUp from "../Shared/popup/PopUp";
 import TourCard from "../TourCard";
 import { getCompanyCurrencyCode } from "../../utils/companyCurrency";
 
+// Component: renders tours section UI and related interactions.
 const ToursSection = (props) => {
   const dispatch = useDispatch();
   const tripType = props.tripType || 0;

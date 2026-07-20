@@ -1,5 +1,7 @@
+// Module overview: helperFN feature logic and route-level wiring.
 import { jwtDecode } from "jwt-decode";
 
+// Helper for is token expired.
 const isTokenExpired = (token) => {
   try {
     const decoded = jwtDecode(token);
@@ -9,6 +11,7 @@ const isTokenExpired = (token) => {
   }
 };
 
+// Checks auth conditions for control flow.
 export const checkAUTH = () => {
   const authToken = localStorage.getItem("token");
   const user = localStorage.getItem("user");
@@ -21,6 +24,7 @@ export const checkAUTH = () => {
   }
 };
 
+// Helper for is token expired only.
 export const isTokenExpiredOnly = () => {
   const authToken = localStorage.getItem("token");
   const user = localStorage.getItem("user");
@@ -32,6 +36,7 @@ export const isTokenExpiredOnly = () => {
   return false;
 };
 
+// Helper for is user not logged in.
 export const isUserNotLoggedIn = () => {
   const authToken = localStorage.getItem("token");
   const user = localStorage.getItem("user");
@@ -40,6 +45,7 @@ export const isUserNotLoggedIn = () => {
   return !authToken && !user;
 };
 
+// Checks is login conditions for control flow.
 export const checkIsLogin = () => {
   const authToken = localStorage.getItem("token");
   const userLocal = localStorage.getItem("user");

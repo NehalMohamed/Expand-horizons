@@ -1,3 +1,4 @@
+// Module overview: HeroSlider component and its UI interaction logic.
 import { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { useTranslation } from 'react-i18next';
@@ -7,6 +8,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { fetchSliderTrips } from '../../redux/Slices/tripsSlice';
 import { getCompanyCurrencyCode } from '../../utils/companyCurrency';
 
+// Component: renders hero slider UI and related interactions.
 const HeroSlider = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -31,6 +33,7 @@ const HeroSlider = () => {
   useEffect(() => {
     if (!isAutoPlaying || !slides || slides.length === 0) return;
 
+    // Helper for interval.
     const interval = setInterval(() => {
       setCurrentSlide(prev => (prev + 1) % slides.length);
     }, 5000);
@@ -38,24 +41,28 @@ const HeroSlider = () => {
     return () => clearInterval(interval);
   }, [isAutoPlaying, slides]);
 
+  // Helper for go to slide.
   const goToSlide = (index) => {
     setCurrentSlide(index);
     setIsAutoPlaying(false);
     setTimeout(() => setIsAutoPlaying(true), 5000); // Resume auto-play after 5 seconds
   };
 
+  // Helper for go to previous.
   const goToPrevious = () => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
     setIsAutoPlaying(false);
     setTimeout(() => setIsAutoPlaying(true), 5000);
   };
 
+  // Helper for go to next.
   const goToNext = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
     setIsAutoPlaying(false);
     setTimeout(() => setIsAutoPlaying(true), 5000);
   };
 
+  // Event handler for card click.
   const handleCardClick = (slide) => {
     if (!trip.is_comm_soon) {
       navigate(`/trip/${slide.route}`, {

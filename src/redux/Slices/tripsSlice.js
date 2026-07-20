@@ -1,3 +1,4 @@
+// Redux slice for trips: state, reducers, and async thunk lifecycle handling.
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -35,6 +36,7 @@ export const fetchSliderTrips = createAsyncThunk(
   }
 );
 
+// Async thunk: fetchCarouselTrips performs the API request for this slice.
 export const fetchCarouselTrips = createAsyncThunk(
   "trips/fetchCarouselTrips",
   async (params, { rejectWithValue }) => {
@@ -56,6 +58,7 @@ export const fetchCarouselTrips = createAsyncThunk(
   }
 );
 
+// Async thunk: fetchToursSectionTrips performs the API request for this slice.
 export const fetchToursSectionTrips = createAsyncThunk(
   "trips/fetchToursSectionTrips",
   async (params, { rejectWithValue }) => {
@@ -76,6 +79,7 @@ export const fetchToursSectionTrips = createAsyncThunk(
   }
 );
 
+// Async thunk: fetchDestinationTrips performs the API request for this slice.
 export const fetchDestinationTrips = createAsyncThunk(
   "trips/fetchDestinationTrips",
   async (params, { rejectWithValue }) => {
@@ -95,6 +99,7 @@ export const fetchDestinationTrips = createAsyncThunk(
   }
 );
 
+// Async thunk: fetchPickupsForTrip performs the API request for this slice.
 export const fetchPickupsForTrip = createAsyncThunk(
   "trips/fetchPickupsForTrip",
   async (params, { rejectWithValue }) => {
@@ -123,6 +128,7 @@ const tripsSlice = createSlice({
     loading: false,
     error: null,
   },
+    // Synchronous reducers for direct state updates from UI actions.
   reducers: {
     clearDestinationTrips: (state) => {
       state.destinationTrips = [];
@@ -131,6 +137,7 @@ const tripsSlice = createSlice({
       state.error = null;
     },
   },
+  // Async lifecycle reducers for pending/fulfilled/rejected thunk states.
   extraReducers: (builder) => {
     builder
       // Slider Trips

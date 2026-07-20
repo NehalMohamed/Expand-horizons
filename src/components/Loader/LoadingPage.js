@@ -1,6 +1,8 @@
+// Module overview: LoadingPage component and its UI interaction logic.
 import React from "react";
 import "./LoadingPage.scss";
 
+// Component: renders loading page UI and related interactions.
 const LoadingPage = () => {
   return (
     <div className="loading-page">

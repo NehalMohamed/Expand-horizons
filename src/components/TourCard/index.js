@@ -1,3 +1,4 @@
+// Module overview: TourCard component and its UI interaction logic.
 import { useState, useEffect } from "react";
 import { Card, Button } from "react-bootstrap";
 import { FaCheck, FaHeart } from "react-icons/fa";
@@ -6,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from 'react-router-dom';
 import { addToWishlist } from "../../redux/Slices/wishlistSlice";
 
+// Component: renders tour card UI and related interactions.
 const TourCard = ({ trip }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,6 +27,7 @@ const TourCard = ({ trip }) => {
     ? trip?.trip_description?.slice(0, 70) + '...'
     : trip?.trip_description;
 
+  // Event handler for wishlist toggle.
   const handleWishlistToggle = (e) => {
     e.stopPropagation();
     const user = JSON.parse(localStorage.getItem("user"));
@@ -40,6 +43,7 @@ const TourCard = ({ trip }) => {
     dispatch(addToWishlist(wishlistData));
   };
 
+  // Event handler for card click.
   const handleCardClick = () => {
     if (!trip.is_comm_soon) {
       navigate(`/trip/${trip.route}`, {

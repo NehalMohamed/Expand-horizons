@@ -1,7 +1,9 @@
+// Module overview: DestinationExcursionsPage feature logic and route-level wiring.
 import React, { useState, useEffect } from 'react';
 import SliderSection from "../components/SliderSection";
 import DestinationExcursions from "../components/DestinationExcursions";
 
+// Component entry point for DestinationExcursionsPage.
 const DestinationExcursionsPage = () => {
 
    useEffect(() => {

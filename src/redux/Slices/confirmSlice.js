@@ -1,3 +1,4 @@
+// Redux slice for confirm: state, reducers, and async thunk lifecycle handling.
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   checkAUTH,
@@ -27,6 +28,7 @@ export const confirmBooking = createAsyncThunk(
   }
 );
 
+// Slice definition: contains local reducers and async thunk state transitions.
 const confirmSlice = createSlice({
   name: "confirm",
   initialState: {
@@ -35,6 +37,7 @@ const confirmSlice = createSlice({
     success: false,
     confirmed: false,
   },
+    // Synchronous reducers for direct state updates from UI actions.
   reducers: {
     resetConfirmState: (state) => {
       state.loading = false;
@@ -46,6 +49,7 @@ const confirmSlice = createSlice({
       state.error = null;
     },
   },
+  // Async lifecycle reducers for pending/fulfilled/rejected thunk states.
   extraReducers: (builder) => {
     builder
       // Confirm Booking

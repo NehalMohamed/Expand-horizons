@@ -26,12 +26,14 @@ const StepIndicator = ({ currentStep, totalSteps = 4, tripType = 1 }) => {
 
   const stepLabels = getStepLabels();
 
+  // Returns step class.
   const getStepClass = (step) => {
     if (step < currentStep) return 'completed';
     if (step === currentStep) return 'active';
     return 'inactive';
   };
 
+  // Returns divider class.
   const getDividerClass = (step) => {
     return step < currentStep ? 'completed' : '';
   };

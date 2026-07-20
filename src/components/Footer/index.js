@@ -1,8 +1,10 @@
+// Module overview: Footer component and its UI interaction logic.
 import { Container, Row, Col } from "react-bootstrap";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { useTranslation } from 'react-i18next';
 
+// Component: renders footer UI and related interactions.
 const Footer = () => {
   const { t } = useTranslation();
 

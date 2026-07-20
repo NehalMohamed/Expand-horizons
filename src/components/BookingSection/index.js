@@ -1,3 +1,4 @@
+// Module overview: BookingSection component and its UI interaction logic.
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Container, Row, Col, Spinner } from 'react-bootstrap';
 import { BiSolidCard } from 'react-icons/bi';
@@ -11,6 +12,7 @@ import NoBookings from '../NoBookings';
 import PopUp from '../Shared/popup/PopUp';
 import { getCompanyCurrencyCode } from '../../utils/companyCurrency';
 
+// Component: renders booking section UI and related interactions.
 const BookingSection = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();

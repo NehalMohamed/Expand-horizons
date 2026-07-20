@@ -1,3 +1,4 @@
+// Module overview: DestinationExcursions component and its UI interaction logic.
 import { useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { BiSolidCard } from "react-icons/bi";
@@ -13,6 +14,7 @@ import LoadingPage from "../Loader/LoadingPage";
 import PopUp from "../Shared/popup/PopUp";
 import { getCompanyCurrencyCode } from "../../utils/companyCurrency";
 
+// Component: renders destination excursions UI and related interactions.
 const DestinationExcursions = () => {
     const { state } = useLocation(); // Get tripData passed from navigation
     const destinationId = state?.DestinationId;

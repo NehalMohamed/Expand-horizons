@@ -1,3 +1,4 @@
+// Module overview: NotificationsTab component and its UI interaction logic.
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
@@ -17,6 +18,7 @@ const CustomToggle = ({ checked, onChange }) => (
   </div>
 );
 
+// Component: renders notification item UI and related interactions.
 const NotificationItem = ({ title, description, checked, onChange }) => {
   const { t } = useTranslation();
 
@@ -34,6 +36,7 @@ const NotificationItem = ({ title, description, checked, onChange }) => {
   );
 };
 
+// Component: renders notifications tab UI and related interactions.
 const NotificationsTab = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -69,6 +72,7 @@ const NotificationsTab = () => {
     }
   }, [Notifications]);
 
+  // Event handler for notification toggle.
   const handleNotificationToggle = (setting) => {
     setNotificationSettings((prev) => ({ ...prev, [setting]: !prev[setting] }));
   };
@@ -78,6 +82,7 @@ const NotificationsTab = () => {
     return () => {};
   }, [dispatch]);
 
+  // Helper for save data.
   const saveData = () => {
     dispatch(SaveClientNotificationSetting(notificationSettings)).then(
       (result) => {

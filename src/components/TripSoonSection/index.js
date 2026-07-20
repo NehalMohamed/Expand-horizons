@@ -1,7 +1,9 @@
+// Module overview: TripSoonSection component and its UI interaction logic.
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import { useTranslation } from "react-i18next";
 
+// Component: renders trip soon section UI and related interactions.
 const TripSoonSection = ({ tripData }) => {
   const { t } = useTranslation();
 

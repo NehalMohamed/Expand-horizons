@@ -1,3 +1,4 @@
+// Redux slice for bookingCancel: state, reducers, and async thunk lifecycle handling.
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   checkAUTH,
@@ -8,6 +9,7 @@ import { createAuthError } from "../../utils/authError";
 import api from "../../api/axios";
 const BOOKING_URL = process.env.REACT_APP_BOOKING_API_URL;
 
+// Async thunk: cancelBooking performs the API request for this slice.
 export const cancelBooking = createAsyncThunk(
   "bookingCancel/cancelBooking",
   async (bookingId, { rejectWithValue }) => {
@@ -30,6 +32,7 @@ export const cancelBooking = createAsyncThunk(
   }
 );
 
+// Slice definition: contains local reducers and async thunk state transitions.
 const bookingCancelSlice = createSlice({
   name: "bookingCancel",
   initialState: {
@@ -38,6 +41,7 @@ const bookingCancelSlice = createSlice({
     success: false,
     canceledBookingId: null,
   },
+    // Synchronous reducers for direct state updates from UI actions.
   reducers: {
     clearCancelState: (state) => {
       state.loading = false;
@@ -50,6 +54,7 @@ const bookingCancelSlice = createSlice({
       state.canceledBookingId = null;
     },
   },
+  // Async lifecycle reducers for pending/fulfilled/rejected thunk states.
   extraReducers: (builder) => {
     builder
       .addCase(cancelBooking.pending, (state) => {

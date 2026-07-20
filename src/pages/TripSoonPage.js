@@ -1,3 +1,4 @@
+// Module overview: TripSoonPage feature logic and route-level wiring.
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,6 +9,7 @@ import LoadingPage from "../components/Loader/LoadingPage";
 import PopUp from "../components/Shared/popup/PopUp";
 import { getCompanyCurrencyCode } from "../utils/companyCurrency";
 
+// Component entry point for TripSoonPage.
 const TripSoonPage = () => {
   const { route } = useParams();
   const { state } = useLocation();
@@ -48,6 +50,7 @@ const TripSoonPage = () => {
     };
   }, [route, currentLang, user.id]);
 
+  // Fetches trip details data and syncs local state.
   const fetchTripDetailsData = () => {
     const params = {
       trip_id: state?.tripId, // You'll need to implement this function

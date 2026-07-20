@@ -1,3 +1,4 @@
+// Module overview: AuthComp component and its UI interaction logic.
 import React, { useState, useEffect } from "react";
 import { Modal, Button, Form, Col, Row, FloatingLabel } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
@@ -8,6 +9,7 @@ import { LoginUser, RegisterUser, clearGoogleAccFlag } from "../../redux/Slices/
 import LoadingPage from "../Loader/LoadingPage";
 import PopUp from "../Shared/popup/PopUp";
 
+// Component: renders auth comp UI and related interactions.
 function AuthComp() {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -30,6 +32,7 @@ function AuthComp() {
 
   const { loading, success, message, isGoogleAcc } = useSelector((state) => state.auth);
 
+  // Event handler for close.
   const handleClose = () => {
     setShow(false);
     setShowWelcomeBack(false);
@@ -51,6 +54,7 @@ function AuthComp() {
     }
   }, [isGoogleAcc, formData.email, dispatch]);
 
+  // Event handler for welcome back close.
   const handleWelcomeBackClose = () => {
     setShowWelcomeBack(false);
     setShow(true);
@@ -106,6 +110,7 @@ function AuthComp() {
     return true;
   };
 
+  // Helper for signin.
   const signin = (event) => {
     event.preventDefault();
     const redirectUrl = localStorage.getItem("redirect_after_login");
@@ -154,6 +159,7 @@ function AuthComp() {
     }
   };
 
+  // Helper for fill form data.
   const fillFormData = (e) => {
     seterrorsLst({});
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;

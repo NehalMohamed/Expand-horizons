@@ -1,3 +1,4 @@
+// Module overview: PopUp component and its UI interaction logic.
 import { Button, Modal } from "react-bootstrap";
 import React, { useEffect } from "react";
 import "./popup.scss";
@@ -19,6 +20,7 @@ const PopUp = ({
 }) => {
   useEffect(() => {
     if (autoClose && show) {
+      // Controls timer lifecycle for this module.
       const timer = setTimeout(() => {
         closeAlert();
       }, autoClose);
@@ -26,6 +28,7 @@ const PopUp = ({
     }
   }, [show, autoClose, closeAlert]);
 
+  // Event handler for confirm.
   const handleConfirm = () => {
     if (onConfirm) {
       onConfirm();
@@ -36,6 +39,7 @@ const PopUp = ({
     }
   };
 
+  // Event handler for cancel.
   const handleCancel = () => {
     if (onCancel) {
       onCancel();

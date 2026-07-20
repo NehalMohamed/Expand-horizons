@@ -1,7 +1,9 @@
+// Module overview: Testimonial component and its UI interaction logic.
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
+// Component: renders testimonial UI and related interactions.
 const Testimonial = () => {
   const { t } = useTranslation();
 

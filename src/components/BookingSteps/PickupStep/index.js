@@ -1,3 +1,4 @@
+// Module overview: PickupStep component and its UI interaction logic.
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaMinus, FaPlus } from 'react-icons/fa';
@@ -12,6 +13,7 @@ import PopUp from '../../Shared/popup/PopUp';
 import LoadingPage from '../../Loader/LoadingPage';
 import { getCompanyCurrencyCode, getCurrencySymbol } from '../../../utils/companyCurrency';
 
+// Component: renders pickup step UI and related interactions.
 const PickupStep = ({ onNext, tripData, availabilityData , childAges }) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
@@ -70,6 +72,7 @@ const PickupStep = ({ onNext, tripData, availabilityData , childAges }) => {
         }
     }, [tripExtras]);
 
+    // Event handler for extra count change.
     const handleExtraCountChange = async (extraId, change) => {
         const extra = tripExtras.find(e => e.facility_id === parseInt(extraId));
     
@@ -160,10 +163,12 @@ const PickupStep = ({ onNext, tripData, availabilityData , childAges }) => {
         }
     };
 
+    // Event handler for pickup change.
     const handlePickupChange = (val) => {
         setPickupLocation(val);
     };
 
+    // Event handler for next.
     const handleNext = async () => {
         try {
             const bookingId = availabilityData?.idOut;

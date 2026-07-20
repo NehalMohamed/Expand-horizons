@@ -1,3 +1,4 @@
+// Redux slice for tours: state, reducers, and async thunk lifecycle handling.
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import api from "../../api/axios";
@@ -15,6 +16,7 @@ const getNonAuthHeaders = () => {
   };
 };
 
+// Async thunk: fetchSliderTrips performs the API request for this slice.
 export const fetchSliderTrips = createAsyncThunk(
   "tours/fetchSlider",
   async (lang, { rejectWithValue }) => {
@@ -37,6 +39,7 @@ export const fetchSliderTrips = createAsyncThunk(
   }
 );
 
+// Async thunk: fetchTopTrips performs the API request for this slice.
 export const fetchTopTrips = createAsyncThunk(
   "tours/fetchTop",
   async (lang, { rejectWithValue }) => {
@@ -59,6 +62,7 @@ export const fetchTopTrips = createAsyncThunk(
   }
 );
 
+// Async thunk: toggleWishlist performs the API request for this slice.
 export const toggleWishlist = createAsyncThunk(
   "tours/toggleWishlist",
   async (tripId, { rejectWithValue }) => {
@@ -71,6 +75,7 @@ export const toggleWishlist = createAsyncThunk(
   }
 );
 
+// Slice definition: contains local reducers and async thunk state transitions.
 const toursSlice = createSlice({
   name: "tours",
   initialState: {
@@ -80,6 +85,7 @@ const toursSlice = createSlice({
     error: null,
   },
   reducers: {},
+  // Async lifecycle reducers for pending/fulfilled/rejected thunk states.
   extraReducers: (builder) => {
     builder
       .addCase(fetchSliderTrips.pending, (state) => {

@@ -1,3 +1,4 @@
+// Module overview: PasswordTab component and its UI interaction logic.
 import React, { useState, useEffect } from "react";
 import { Row, Col, Form, Button, InputGroup } from "react-bootstrap";
 import { FaEye, FaEyeSlash, FaInfo, FaInfoCircle } from "react-icons/fa";
@@ -45,6 +46,7 @@ const PasswordInput = ({
 
 );
 
+// Component: renders password tab UI and related interactions.
 const PasswordTab = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -72,6 +74,7 @@ const PasswordTab = () => {
     confirm: false,
   });
 
+  // Event handler for password input change.
   const handlePasswordInputChange = (field, value) => {
     setPasswordData((prev) => ({ ...prev, [field]: value }));
     if (field === "newPassword") {
@@ -99,10 +102,12 @@ const PasswordTab = () => {
     }
   };
 
+  // Helper for toggle password visibility.
   const togglePasswordVisibility = (field) => {
     setShowPasswords((prev) => ({ ...prev, [field]: !prev[field] }));
   };
 
+  // Validates form before continuing the flow.
   const validateForm = () => {
     const errors = {};
 
@@ -129,6 +134,7 @@ const PasswordTab = () => {
     return Object.keys(errors).length === 0; // Returns true if no errors
   };
 
+  // Validates password before continuing the flow.
   const validatePassword = (password) => {
     const errors = [];
 

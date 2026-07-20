@@ -1,3 +1,4 @@
+// Module overview: companyCurrency feature logic and route-level wiring.
 import axios from "axios";
 import api from "../api/axios";
 
@@ -14,11 +15,13 @@ const currencyState = {
   loaded: false,
 };
 
+// Helper for normalize language.
 const normalizeLanguage = () => {
   const lang = (localStorage.getItem("lang") || "en").toLowerCase();
   return lang.startsWith("de") ? "de" : "en";
 };
 
+// Helper for set global currency state.
 const setGlobalCurrencyState = () => {
   if (typeof window !== "undefined") {
     window.COMPANY_CURRENCY = {
@@ -71,6 +74,7 @@ export const getCompanyCurrencyCode = () => currencyState.currencyCode || DEFAUL
 
 export const getCompanyCurrencyName = () => currencyState.currencyName || DEFAULT_CURRENCY_NAME;
 
+// Returns currency symbol.
 export const getCurrencySymbol = (currencyCode) => {
   const code = (currencyCode || getCompanyCurrencyCode()).toUpperCase();
   if (code === "EUR") return "\u20ac";

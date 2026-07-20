@@ -1,3 +1,4 @@
+// Module overview: tokenUtils feature logic and route-level wiring.
 export const isTokenValid = () => {
   const token = localStorage.getItem('token');
   if (!token) return false;

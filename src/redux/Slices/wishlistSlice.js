@@ -30,6 +30,7 @@ const getClientId = () => {
   return user?.id || null;
 };
 
+// Async thunk: fetchWishlistCount performs the API request for this slice.
 export const fetchWishlistCount = createAsyncThunk(
   "wishlist/fetchWishlistCount",
   async (clientId, { rejectWithValue }) => {
@@ -53,6 +54,7 @@ export const fetchWishlistCount = createAsyncThunk(
   }
 );
 
+// Async thunk: fetchWishlist performs the API request for this slice.
 export const fetchWishlist = createAsyncThunk(
   "wishlist/fetchWishlist",
   async (params, { rejectWithValue }) => {
@@ -84,6 +86,7 @@ export const fetchWishlist = createAsyncThunk(
   }
 );
 
+// Async thunk: addToWishlist performs the API request for this slice.
 export const addToWishlist = createAsyncThunk(
   "wishlist/addToWishlist",
   async (wishlistData, { rejectWithValue, dispatch }) => {
@@ -127,6 +130,7 @@ export const addToWishlist = createAsyncThunk(
   }
 );
 
+// Slice definition: contains local reducers and async thunk state transitions.
 const wishlistSlice = createSlice({
   name: "wishlist",
   initialState: {
@@ -140,6 +144,7 @@ const wishlistSlice = createSlice({
       success: false,
     },
   },
+    // Synchronous reducers for direct state updates from UI actions.
   reducers: {
     resetWishlistOperation: (state) => {
       state.operation.loading = false;
@@ -161,6 +166,7 @@ const wishlistSlice = createSlice({
       state.count = 0;
     },
   },
+  // Async lifecycle reducers for pending/fulfilled/rejected thunk states.
   extraReducers: (builder) => {
     builder
       // Fetch wishlist count

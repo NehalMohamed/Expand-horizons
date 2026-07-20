@@ -1,4 +1,6 @@
+// Module overview: TripHelper feature logic and route-level wiring.
 import { FaStar, FaStarHalf, FaRegStar } from "react-icons/fa6";
+// Component entry point for Rating.
 export const Rating = (rate) => {
   const stars = [];
 

@@ -1,8 +1,10 @@
+// Module overview: BookingInfo component and its UI interaction logic.
 import React from 'react';
 import { IoCalendarOutline, IoCashOutline, IoCheckmarkCircleOutline } from 'react-icons/io5';
 import { Container } from 'react-bootstrap';
 import { useTranslation } from "react-i18next";
 
+// Component: renders booking info UI and related interactions.
 const BookingInfo = ({ tripData }) => {
     const { t } = useTranslation();
 

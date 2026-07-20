@@ -1,3 +1,4 @@
+// Redux slice for contact: state, reducers, and async thunk lifecycle handling.
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import {
@@ -9,6 +10,7 @@ import { createAuthError } from "../../utils/authError";
 import api from "../../api/axios";
 const CONTACT_URL = process.env.REACT_APP_CONTACT_API_URL;
 
+// Async thunk: submitContactForm performs the API request for this slice.
 export const submitContactForm = createAsyncThunk(
   "contact/submitContactForm",
   async (contactData, { rejectWithValue }) => {
@@ -26,6 +28,7 @@ export const submitContactForm = createAsyncThunk(
   }
 );
 
+// Slice definition: contains local reducers and async thunk state transitions.
 const contactSlice = createSlice({
   name: "contact",
   initialState: {
@@ -34,6 +37,7 @@ const contactSlice = createSlice({
     error: null,
     submitted: false,
   },
+    // Synchronous reducers for direct state updates from UI actions.
   reducers: {
     resetContactForm: (state) => {
       state.loading = false;
@@ -45,6 +49,7 @@ const contactSlice = createSlice({
       state.error = null;
     },
   },
+  // Async lifecycle reducers for pending/fulfilled/rejected thunk states.
   extraReducers: (builder) => {
     builder
       // Submit contact form

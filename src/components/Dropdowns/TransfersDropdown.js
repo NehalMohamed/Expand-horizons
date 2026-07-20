@@ -1,3 +1,4 @@
+// Module overview: TransfersDropdown component and its UI interaction logic.
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from "react-router-dom";
@@ -5,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchDestinationTree } from '../../redux/Slices/destinationsSlice';
 import DestinationTreeDropdown from './DestinationTreeDropdown';
 
+// Component: renders transfers dropdown UI and related interactions.
 const TransfersDropdown = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -24,6 +26,7 @@ const TransfersDropdown = () => {
         dispatch(fetchDestinationTree(params));
     }, [dispatch, currentLang]);
 
+    // Event handler for location click.
     const handleLocationClick = (route, id) => {
         navigate(`/transfers/${route.toLowerCase().replace(/\s+/g, '-')}`, {
             state: {
@@ -33,6 +36,7 @@ const TransfersDropdown = () => {
         });
     };
 
+    // Event handler for main click.
     const handleMainClick = () => {
         navigate('/transfers');
     };

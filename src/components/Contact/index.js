@@ -1,3 +1,4 @@
+// Module overview: Contact component and its UI interaction logic.
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -8,6 +9,7 @@ import { submitContactForm, resetContactForm } from '../../redux/Slices/contactS
 import LoadingPage from '../Loader/LoadingPage';
 import PopUp from '../Shared/popup/PopUp';
 
+// Component: renders contact UI and related interactions.
 const Contact = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
@@ -27,6 +29,7 @@ const Contact = () => {
     const [popupMessage, setPopupMessage] = useState('');
     const [popupType, setPopupType] = useState('alert');
 
+    // Event handler for input change.
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({
@@ -35,6 +38,7 @@ const Contact = () => {
         }));
     };
 
+    // Event handler for phone change.
     const handlePhoneChange = (value) => {
         setFormData(prev => ({
             ...prev,
@@ -42,6 +46,7 @@ const Contact = () => {
         }));
     };
 
+    // Event handler for submit.
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(submitContactForm(formData));

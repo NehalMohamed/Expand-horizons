@@ -1,3 +1,4 @@
+// Module overview: BookingModal component and its UI interaction logic.
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { FaRegCalendarCheck } from "react-icons/fa";
@@ -5,11 +6,13 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 
+// Component: renders booking modal UI and related interactions.
 const BookingModal = () => {
   const [show, setShow] = useState(true);
   const { t } = useTranslation();
   const navigate = useNavigate();
 
+  // Event handler for close.
   const handleClose = () => {
     setShow(false);
     navigate("/"); // <-- redirect to home

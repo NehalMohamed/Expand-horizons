@@ -1,7 +1,9 @@
+// Module overview: ContactNavbar component and its UI interaction logic.
 import { Container } from "react-bootstrap"
 import { FaPhone, FaEnvelope, FaFacebookF, FaInstagram, FaRss } from "react-icons/fa"
 import { FaXTwitter } from "react-icons/fa6"
 
+// Component: renders contact navbar UI and related interactions.
 const ContactNavbar = () => {
   return (
     <div className="contact-navbar">

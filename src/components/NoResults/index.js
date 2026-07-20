@@ -1,6 +1,8 @@
+// Module overview: NoResults component and its UI interaction logic.
 import React from "react";
 import { useTranslation } from 'react-i18next';
 import { Container, Button } from "react-bootstrap";
+// Component: renders no results UI and related interactions.
 const NoResults = () => {
   const { t } = useTranslation(); // Hook for multilingual translations
   return (

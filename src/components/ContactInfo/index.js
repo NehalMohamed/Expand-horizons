@@ -1,7 +1,9 @@
+// Module overview: ContactInfo component and its UI interaction logic.
 import React from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
+// Component: renders contact info UI and related interactions.
 const ContactInfo = () => {
   const { t } = useTranslation();
 

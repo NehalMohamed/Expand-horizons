@@ -1,3 +1,4 @@
+// Module overview: DestinationTreeDropdown component and its UI interaction logic.
 import React, { useState, useRef, useEffect } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { FaChevronDown, FaChevronRight } from 'react-icons/fa';
@@ -30,6 +31,7 @@ const DestinationTreeDropdown = ({
     };
   }, []);
 
+  // Event handler for mouse enter.
   const handleMouseEnter = () => {
     isHoveringRef.current = true;
     if (hoverTimeoutRef.current) {
@@ -38,6 +40,7 @@ const DestinationTreeDropdown = ({
     setShow(true);
   };
 
+  // Event handler for mouse leave.
   const handleMouseLeave = () => {
     isHoveringRef.current = false;
     
@@ -54,6 +57,7 @@ const DestinationTreeDropdown = ({
     }, 200); // Delay before closing
   };
 
+  // Event handler for menu enter.
   const handleMenuEnter = () => {
     isHoveringRef.current = true;
     if (hoverTimeoutRef.current) {
@@ -61,6 +65,7 @@ const DestinationTreeDropdown = ({
     }
   };
 
+  // Event handler for menu leave.
   const handleMenuLeave = () => {
     isHoveringRef.current = false;
     
@@ -77,6 +82,7 @@ const DestinationTreeDropdown = ({
     }, 200); // Delay before closing
   };
 
+  // Event handler for item click.
   const handleItemClick = (e, destination) => {
     e.preventDefault();
     e.stopPropagation();
@@ -97,11 +103,13 @@ const DestinationTreeDropdown = ({
     }
   };
 
+  // Event handler for main click.
   const handleMainClick = (e) => {
     e.preventDefault();
     onMainClick();
   };
 
+  // Event handler for item mouse enter.
   const handleItemMouseEnter = (destinationId) => {
     hoveredItemsRef.current.add(destinationId);
     
@@ -119,6 +127,7 @@ const DestinationTreeDropdown = ({
     }, 300);
   };
 
+  // Event handler for item mouse leave.
   const handleItemMouseLeave = (destinationId) => {
     hoveredItemsRef.current.delete(destinationId);
     

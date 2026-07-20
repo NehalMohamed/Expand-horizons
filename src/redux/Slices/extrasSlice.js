@@ -7,9 +7,12 @@ import {
 } from "../../helper/helperFN";
 import { createAuthError } from "../../utils/authError";
 import api from "../../api/axios";
+
+// Base URL for all booking-related endpoints used by this slice.
 const BOOKING_URL = process.env.REACT_APP_BOOKING_API_URL;
 
-// Async thunk to get trip extras
+// Fetches all available extras for a trip. The component passes trip context
+// (trip id/type/date, etc.) and the API returns available extra items.
 export const getTripExtras = createAsyncThunk(
   "extras/getTripExtras",
   async (tripData, { rejectWithValue }) => {
@@ -27,7 +30,8 @@ export const getTripExtras = createAsyncThunk(
   }
 );
 
-// Async thunk to assign extras to booking
+// Assigns a selected extra to the active booking. On success, the request
+// payload (action.meta.arg) is appended to assignedExtras for quick local sync.
 export const assignExtraToBooking = createAsyncThunk(
   "extras/assignExtraToBooking",
   async (extraData, { rejectWithValue }) => {
@@ -44,8 +48,11 @@ export const assignExtraToBooking = createAsyncThunk(
   }
 );
 
+// Slice definition: contains local reducers and async thunk state transitions.
 const extrasSlice = createSlice({
   name: "extras",
+  // Slice state keeps both available extras (from trip) and applied extras
+  // (user selections tied to a booking), plus UI loading/error flags.
   initialState: {
     loading: false,
     error: null,
@@ -53,10 +60,13 @@ const extrasSlice = createSlice({
     assignedExtras: [],
     pickupLocation: null,
   },
+    // Synchronous reducers for direct state updates from UI actions.
   reducers: {
+    // Persists pickup location selected in booking steps.
     setPickupLocation: (state, action) => {
       state.pickupLocation = action.payload;
     },
+    // Resets extras-related state when a booking flow is restarted or closed.
     clearExtrasData: (state) => {
       state.loading = false;
       state.error = null;
@@ -64,13 +74,15 @@ const extrasSlice = createSlice({
       state.assignedExtras = [];
       state.pickupLocation = null;
     },
+    // Clears only the error message while preserving current data.
     clearError: (state) => {
       state.error = null;
     },
   },
+  // Async lifecycle reducers for pending/fulfilled/rejected thunk states.
   extraReducers: (builder) => {
     builder
-      // Get Trip Extras
+      // getTripExtras lifecycle
       .addCase(getTripExtras.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -83,13 +95,15 @@ const extrasSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      // Assign Extra to Booking
+      // assignExtraToBooking lifecycle
       .addCase(assignExtraToBooking.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(assignExtraToBooking.fulfilled, (state, action) => {
         state.loading = false;
+        // Server response includes success boolean; only store local assignment
+        // when backend confirms the operation.
         if (action.payload.success) {
           state.assignedExtras.push(action.meta.arg);
         }

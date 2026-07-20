@@ -1,3 +1,4 @@
+// Redux slice for newsletter: state, reducers, and async thunk lifecycle handling.
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   checkAUTH,
@@ -42,6 +43,7 @@ export const subscribeNewsletter = createAsyncThunk(
   }
 );
 
+// Slice definition: contains local reducers and async thunk state transitions.
 const newsletterSlice = createSlice({
   name: "newsletter",
   initialState: {
@@ -51,6 +53,7 @@ const newsletterSlice = createSlice({
     subscribed: false,
     message: null,
   },
+    // Synchronous reducers for direct state updates from UI actions.
   reducers: {
     resetNewsletter: (state) => {
       state.loading = false;
@@ -63,6 +66,7 @@ const newsletterSlice = createSlice({
       state.error = null;
     },
   },
+  // Async lifecycle reducers for pending/fulfilled/rejected thunk states.
   extraReducers: (builder) => {
     builder
       // Subscribe to newsletter

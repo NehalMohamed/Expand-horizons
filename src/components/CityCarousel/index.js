@@ -1,3 +1,4 @@
+// Module overview: CityCarousel component and its UI interaction logic.
 import { useRef, useState, useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
@@ -7,6 +8,7 @@ import { fetchCarouselTrips } from "../../redux/Slices/tripsSlice";
 import CityCard from "../CityCard";
 import { getCompanyCurrencyCode } from "../../utils/companyCurrency";
 
+// Component: renders city carousel UI and related interactions.
 const CityCarousel = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -28,6 +30,7 @@ const CityCarousel = () => {
     };
     dispatch(fetchCarouselTrips(params));
   }, [dispatch, currentLang]);
+  // Helper for scroll.
   const scroll = (direction) => {
     if (scrollContainerRef.current) {
       const scrollAmount = 300; // Adjust as needed

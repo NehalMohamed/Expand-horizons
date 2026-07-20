@@ -1,9 +1,11 @@
+// Module overview: PaymentStep component and its UI interaction logic.
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Form } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 import { FaPaypal } from 'react-icons/fa';
 
+// Component: renders payment step UI and related interactions.
 const PaymentStep = ({ onNext, paymentData, setPaymentData }) => {
   const navigate = useNavigate(); 
   const { t } = useTranslation();
@@ -15,15 +17,18 @@ const PaymentStep = ({ onNext, paymentData, setPaymentData }) => {
     beneficiaryName: ''
   });
 
+  // Event handler for payment method change.
   const handlePaymentMethodChange = (method) => {
     setPaymentMethod(method);
     setPaymentData(prev => ({ ...prev, method }));
   };
 
+  // Event handler for card detail change.
   const handleCardDetailChange = (field, value) => {
     setCardDetails(prev => ({ ...prev, [field]: value }));
   };
 
+  // Event handler for next.
   const handleNext = () => {
     setPaymentData(prev => ({
       ...prev,

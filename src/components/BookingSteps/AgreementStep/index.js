@@ -1,17 +1,21 @@
+// Module overview: AgreementStep component and its UI interaction logic.
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Form, Button } from 'react-bootstrap';
 import DivingAgreementEN from './DivingAgreementEN';
 import DivingAgreementDE from './DivingAgreementDE';
 
+// Component: renders agreement step UI and related interactions.
 const AgreementStep = ({ onNext, tripData }) => {
   const { t, i18n } = useTranslation();
   const [agreed, setAgreed] = useState(false);
 
+  // Event handler for agreement change.
   const handleAgreementChange = (e) => {
     setAgreed(e.target.checked);
   };
 
+  // Event handler for submit.
   const handleSubmit = (e) => {
     e.preventDefault();
     if (agreed) {

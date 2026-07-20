@@ -1,3 +1,4 @@
+// Module overview: showAlert feature logic and route-level wiring.
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import PopupMsg from '../components/Shared/PopupMsg';
@@ -8,6 +9,7 @@ let root = null;
 let isMounted = false;
 let authModalFunction = null;
 
+// Helper for set auth modal function.
 export const setAuthModalFunction = (func) => {
   authModalFunction = func;
 };
@@ -35,9 +37,11 @@ export const showAuthPopup = (message, callback, scenario = 'expired') => {
   currentCallback = callback;
   isMounted = true;
 
+  // Component entry point for PopupWrapper.
   const PopupWrapper = () => {
     const [show, setShow] = useState(true);
 
+    // Event handler for confirm.
     const handleConfirm = () => {
       if (!isMounted) return; // Prevent updates after unmount
       
@@ -83,6 +87,7 @@ export const showAuthPopup = (message, callback, scenario = 'expired') => {
   root.render(<PopupWrapper />);
 };
 
+// Helper for cleanup popup.
 const cleanupPopup = () => {
   if (isMounted) {
     isMounted = false;

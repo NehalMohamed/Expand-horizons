@@ -1,3 +1,4 @@
+// Module overview: axiosInterceptor feature logic and route-level wiring.
 import axios from "axios";
 import { store } from "../redux/store/store";
 import { logout } from "../redux/Slices/AuthSlice";
@@ -166,6 +167,7 @@ apiInstances.forEach((instance) => {
 
 export const isRefreshingToken = () => isRefreshing;
 
+// Helper for manual token refresh.
 export const manualTokenRefresh = async () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const refreshToken = user?.refreshToken;

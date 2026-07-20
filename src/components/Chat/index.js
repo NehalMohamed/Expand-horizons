@@ -1,6 +1,8 @@
+// Module overview: Chat component and its UI interaction logic.
 import { FaWhatsapp } from "react-icons/fa";
 import './chat.scss';
 
+// Component: renders chat UI and related interactions.
 const Chat = () => {
     return (
         // Anchor tag linking to WhatsApp chat with a specific phone number

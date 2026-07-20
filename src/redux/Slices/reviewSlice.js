@@ -1,3 +1,4 @@
+// Redux slice for review: state, reducers, and async thunk lifecycle handling.
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import {
@@ -91,6 +92,7 @@ export const submitReview = createAsyncThunk(
   }
 );
 
+// Slice definition: contains local reducers and async thunk state transitions.
 const reviewSlice = createSlice({
   name: "reviews",
   initialState: {
@@ -104,6 +106,7 @@ const reviewSlice = createSlice({
       isDuplicate: false,
     },
   },
+    // Synchronous reducers for direct state updates from UI actions.
   reducers: {
     resetReviewSubmission: (state) => {
       state.submission.loading = false;
@@ -117,6 +120,7 @@ const reviewSlice = createSlice({
       state.error = null;
     },
   },
+  // Async lifecycle reducers for pending/fulfilled/rejected thunk states.
   extraReducers: (builder) => {
     builder
       // Fetch reviews

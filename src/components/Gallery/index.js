@@ -1,3 +1,4 @@
+// Module overview: Gallery component and its UI interaction logic.
 import React, { useState, useEffect } from 'react';
 import { IoHeart, IoHeartOutline, IoShareSocial } from 'react-icons/io5';
 import { CiExport } from "react-icons/ci";
@@ -10,6 +11,7 @@ import { addToWishlist, resetWishlistOperation } from '../../redux/Slices/wishli
 import LoadingPage from "../Loader/LoadingPage";
 import PopUp from "../Shared/popup/PopUp";
 
+// Component: renders gallery UI and related interactions.
 const Gallery = ({ tripData , refreshTripDetails }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
@@ -58,11 +60,13 @@ const Gallery = ({ tripData , refreshTripDetails }) => {
       };
     }, [dispatch]);
 
+  // Helper for open lightbox.
   const openLightbox = (index) => {
     setPhotoIndex(index);
     setIsOpen(true);
   };
   
+  // Event handler for wishlist toggle.
   const handleWishlistToggle = (e) => {
       e.preventDefault();
       e.stopPropagation();
