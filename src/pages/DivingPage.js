@@ -13,7 +13,7 @@ const DivingPage = () => {
   return (
    <>
       <SliderSection />
-      <ToursSection tripType={3} />
+      <ToursSection tripCategory={3} />
    </>
   );
 };

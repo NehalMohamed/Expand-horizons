@@ -18,7 +18,8 @@ import { getCompanyCurrencyCode } from "../../utils/companyCurrency";
 const DestinationExcursions = () => {
     const { state } = useLocation(); // Get tripData passed from navigation
     const destinationId = state?.DestinationId;
-    const tripType = state?.tripType || 1;
+    const tripCategory = state?.tripCategory || 1;
+    const tripType = state?.tripType || 0;
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const currentLang = localStorage.getItem("lang") || "en";
@@ -37,10 +38,11 @@ const DestinationExcursions = () => {
             destination_id: destinationId,
             currency_code: getCompanyCurrencyCode(),
             client_id: user?.id || "",
+            trip_category: tripCategory,
             trip_type: tripType
         };
         dispatch(fetchDestinationTrips(params));
-    }, [dispatch, currentLang, destinationId, tripType]);
+    }, [dispatch, currentLang, destinationId, tripCategory, tripType]);
 
     const { destinationTrips: trips, loading, error } = useSelector((state) => state.trips);
 

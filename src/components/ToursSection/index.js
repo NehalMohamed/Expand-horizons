@@ -14,7 +14,7 @@ import { getCompanyCurrencyCode } from "../../utils/companyCurrency";
 // Component: renders tours section UI and related interactions.
 const ToursSection = (props) => {
   const dispatch = useDispatch();
-  const tripType = props.tripType || 0;
+  const tripCategory = props.tripCategory || 0;
   const { toursSectionTrips: trips, loading, error } = useSelector((state) => state.trips);
   const { operation } = useSelector((state) => state.wishlist);
   const currentLang = localStorage.getItem("lang") || "en";
@@ -36,10 +36,11 @@ const ToursSection = (props) => {
       show_in_top: true,
       currency_code: getCompanyCurrencyCode(),
       client_id: user?.id || "",
-      trip_type: tripType
+      trip_category: tripCategory,
+      trip_type: 0
     };
     dispatch(fetchToursSectionTrips(params));
-  }, [dispatch, currentLang, refreshTrigger ,tripType]);
+  }, [dispatch, currentLang, refreshTrigger, tripCategory]);
 
   useEffect(() => {
     if (operation.success) {

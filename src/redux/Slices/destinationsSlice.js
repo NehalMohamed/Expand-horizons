@@ -68,23 +68,21 @@ export const fetchDestinationTree = createAsyncThunk(
   async (params, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        BASE_URL + "/GetDestination_Tree",
+        BASE_URL + "/GetDestinationsWithTypes",
+        null,
         {
-          lang_code: params.lang_code,
-          currency_code: getCompanyCurrencyCode(),
-          country_code: "",
-          trip_type: params.trip_type,
-        },
-        getNonAuthHeaders()
+          ...getNonAuthHeaders(),
+          params: { lang: params.lang_code, categoryId: params.trip_category },
+        }
       );
       return {
         data: response.data,
-        trip_type: params.trip_type,
+        trip_category: params.trip_category,
       };
     } catch (error) {
       return rejectWithValue({
         error: error.response.data,
-        trip_type: params.trip_type,
+        trip_category: params.trip_category,
       });
     }
   }
@@ -143,19 +141,19 @@ const destinationsSlice = createSlice({
         state.error = action.payload;
       })
       .addCase(fetchDestinationTree.pending, (state, action) => {
-        const tripType = action.meta.arg.trip_type;
-        state.treeLoading[tripType] = true;
-        state.treeError[tripType] = null;
+        const tripCategory = action.meta.arg.trip_category;
+        state.treeLoading[tripCategory] = true;
+        state.treeError[tripCategory] = null;
       })
       .addCase(fetchDestinationTree.fulfilled, (state, action) => {
-        const tripType = action.payload?.trip_type;
-        state.treeLoading[tripType] = false;
-        state.treeItems[tripType] = action.payload?.data;
+        const tripCategory = action.payload?.trip_category;
+        state.treeLoading[tripCategory] = false;
+        state.treeItems[tripCategory] = action.payload?.data;
       })
       .addCase(fetchDestinationTree.rejected, (state, action) => {
-        const tripType = action.payload?.trip_type;
-        state.treeLoading[tripType] = false;
-        state.treeError[tripType] = action.payload?.error;
+        const tripCategory = action.payload?.trip_category;
+        state.treeLoading[tripCategory] = false;
+        state.treeError[tripCategory] = action.payload?.error;
       });
   },
 });

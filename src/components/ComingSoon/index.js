@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from "react-router-dom";
 import { Container, Button } from "react-bootstrap";
 // Component: renders coming soon UI and related interactions.
-const ComingSoon = () => {
+const ComingSoon = ({ image = "/images/comingSoon.png" }) => {
   const navigate = useNavigate(); // React Router hook to navigate between pages
   const { t } = useTranslation(); // Hook for multilingual translations
   return (
@@ -12,7 +12,7 @@ const ComingSoon = () => {
       <Container className="pageContainer">
         <div className="contentWrapper">
           <img 
-          src="/images/comingSoon.png" 
+          src={image} 
           alt="coming soon Illustration" 
           className="illustration"
           loading="lazy" 

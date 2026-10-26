@@ -12,29 +12,33 @@ const ExcursionsDropdown = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const tripType = 1; 
+    const tripCategory = 1;
     const { treeItems, treeLoading } = useSelector((state) => state.destinations);
-    const destinations = treeItems[tripType] || [];
-    const loading = treeLoading[tripType] || false;
+    const destinations = treeItems[tripCategory] || [];
+    const loading = treeLoading[tripCategory] || false;
     const currentLang = localStorage.getItem("lang") || "en";
 
 
     useEffect(() => {
         const params = {
             lang_code: currentLang,
-            trip_type: tripType
+            trip_category: tripCategory
         }
         dispatch(fetchDestinationTree(params));
     }, [dispatch, currentLang]);
 
     // Event handler for location click.
-    const handleLocationClick = (route, id) => {
-        navigate(`/excursions/${route.toLowerCase().replace(/\s+/g, '-')}`, {
-            state: {
-                DestinationId: id,
-                tripType: tripType
-            }
-        });
+    const handleLocationClick = (route, id, tripType) => {
+        if (route) {
+            navigate(`/excursions/${route.toLowerCase().replace(/\s+/g, '-')}`, {
+                state: {
+                    DestinationId: id,
+                    tripType,
+                    tripCategory
+                }
+            });
+        }
+        
     };
 
     // Event handler for main click.

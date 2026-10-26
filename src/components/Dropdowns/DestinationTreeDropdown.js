@@ -91,7 +91,11 @@ const DestinationTreeDropdown = ({
     const isLeaf = destination.leaf || !hasChildren;
     
     if (isLeaf) {
-      onLocationClick(destination.route, destination.destination_id || destination.id);
+      onLocationClick(
+        destination.route,
+        destination.parentDestinationId || destination.destination_id || destination.id,
+        destination.tripType
+      );
       setShow(false);
       setOpenSubmenus({});
       hoveredItemsRef.current.clear();
@@ -144,6 +148,20 @@ const DestinationTreeDropdown = ({
       }
     }, 500);
   };
+
+  // Each destination's tripTypes become its children in the tree.
+  const treeDestinations = (destinations || []).map((dest) => {
+    const children = (dest.tripTypes || []).map((type) => ({
+      id: `${dest.destination_id}-${type.id}`,
+      destination_id: `${dest.destination_id}-${type.id}`,
+      parentDestinationId: dest.destination_id,
+      tripType: type.id,
+      dest_name: type.type_name,
+      route: dest.route,
+      leaf: true,
+    }));
+    return { ...dest, route: dest.route, children, leaf: children.length === 0 };
+  });
 
   const renderDestinationItem = (destination, level = 0) => {
     const hasChildren = destination.children && destination.children.length > 0;
@@ -211,8 +229,8 @@ const DestinationTreeDropdown = ({
         >
           {loading ? (
             <Dropdown.Item disabled>Loading...</Dropdown.Item>
-          ) : destinations && destinations.length > 0 ? (
-            destinations.map(destination => renderDestinationItem(destination))
+          ) : treeDestinations.length > 0 ? (
+            treeDestinations.map(destination => renderDestinationItem(destination))
           ) : (
             <Dropdown.Item disabled>No destinations available</Dropdown.Item>
           )}

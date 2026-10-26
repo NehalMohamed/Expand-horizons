@@ -22,8 +22,8 @@ const HeroSlider = () => {
       lang_code: currentLang,
       show_in_top: false,
       currency_code: getCompanyCurrencyCode(),
-      trip_type: 1
-    };
+      trip_category: 1,
+      trip_type: 0    };
     dispatch(fetchSliderTrips(params));
   }, [dispatch, currentLang]);
 

@@ -12,33 +12,36 @@ const TransfersDropdown = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const tripType = 2; 
+    const tripCategory = 2;
     const { treeItems, treeLoading } = useSelector((state) => state.destinations);
-    const destinations = treeItems[tripType] || [];
-    const loading = treeLoading[tripType] || false;
+    const destinations = treeItems[tripCategory] || [];
+    const loading = treeLoading[tripCategory] || false;
     const currentLang = localStorage.getItem("lang") || "en";
 
     useEffect(() => {
         const params = {
             lang_code: currentLang,
-            trip_type: tripType
+            trip_category: tripCategory
         }
         dispatch(fetchDestinationTree(params));
     }, [dispatch, currentLang]);
 
     // Event handler for location click.
-    const handleLocationClick = (route, id) => {
-        navigate(`/transfers/${route.toLowerCase().replace(/\s+/g, '-')}`, {
-            state: {
-                DestinationId: id,
-                tripType: tripType
-            }
-        });
+    const handleLocationClick = (route, id, tripType) => {
+        // navigate(`/transfers/${route.toLowerCase().replace(/\s+/g, '-')}`, {
+        //     state: {
+        //         DestinationId: id,
+        //         tripType,
+        //         tripCategory
+        //     }
+        // });
+        navigate('/transfers/coming-soon');
     };
 
     // Event handler for main click.
     const handleMainClick = () => {
-        navigate('/transfers');
+        // navigate('/transfers');
+        navigate('/transfers/coming-soon');
     };
 
     return (

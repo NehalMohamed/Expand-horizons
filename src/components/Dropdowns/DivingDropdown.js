@@ -12,33 +12,35 @@ const DivingDropdown = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const tripType = 3;
+    const tripCategory = 3;
     const { treeItems, treeLoading } = useSelector((state) => state.destinations);
-    const destinations = treeItems[tripType] || [];
-    const loading = treeLoading[tripType] || false;
+    const destinations = treeItems[tripCategory] || [];
+    const loading = treeLoading[tripCategory] || false;
     const currentLang = localStorage.getItem("lang") || "en";
 
     useEffect(() => {
         const params = {
             lang_code: currentLang,
-            trip_type: tripType
+            trip_category: tripCategory
         }
         dispatch(fetchDestinationTree(params));
     }, [dispatch, currentLang]);
 
     // Event handler for location click.
-    const handleLocationClick = (route, id) => {
-        navigate(`/diving/${route.toLowerCase().replace(/\s+/g, '-')}`, { 
-            state: { 
-                DestinationId: id,
-                tripType: tripType
-            } 
-        });
+    const handleLocationClick = () => {
+        navigate('/diving/coming-soon');
+        //  navigate(`/diving/${route.toLowerCase().replace(/\s+/g, '-')}`, { 
+        //     state: { 
+        //         DestinationId: id,
+        //         tripType: tripType
+        //     } 
+        // });
     };
 
     // Event handler for main click.
     const handleMainClick = () => {
-        navigate('/diving');
+        navigate('/diving/coming-soon');
+        //  navigate('/diving');
     };
 
     return (

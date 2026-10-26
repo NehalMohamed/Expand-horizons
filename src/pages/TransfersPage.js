@@ -13,7 +13,7 @@ const TransfersPage = () => {
   return (
    <>
       <SliderSection />
-      <ToursSection tripType={2} />
+      <ToursSection tripCategory={2} />
    </>
   );
 };

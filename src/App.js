@@ -61,7 +61,15 @@ function App() {
                 path="/excursions/:location"
                 element={<DestinationExcursionsPage />}
               />
+              <Route
+                path="/excursions/coming-soon"
+                element={<ComingSoon image="/images/coming.png" />}
+              />
               <Route path="/diving" element={<DivingPage />} />
+              <Route
+                path="/diving/coming-soon"
+                element={<ComingSoon image="/images/coming.png" />}
+              />
               <Route
                 path="/diving/:location"
                 element={<DestinationExcursionsPage />}
@@ -70,6 +78,10 @@ function App() {
               <Route
                 path="/transfers/:location"
                 element={<DestinationExcursionsPage />}
+              />
+               <Route
+                path="/transfers/coming-soon"
+                element={<ComingSoon image="/images/coming.png" />}
               />
               <Route path="/trip/:tripName" element={<TripDetailsPage />} />
               <Route path="/trip/ComingSoon" element={<TripSoonPage />} />
