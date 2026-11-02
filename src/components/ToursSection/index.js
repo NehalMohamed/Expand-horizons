@@ -4,7 +4,7 @@ import { Container, Row, Col, Spinner } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { BiSolidCard } from "react-icons/bi";
 import { useTranslation } from "react-i18next";
-import { fetchToursSectionTrips } from "../../redux/Slices/tripsSlice";
+import { fetchToursSectionTrips, fetchTopTrips } from "../../redux/Slices/tripsSlice";
 import { resetWishlistOperation } from "../../redux/Slices/wishlistSlice";
 import LoadingPage from "../Loader/LoadingPage";
 import PopUp from "../Shared/popup/PopUp";
@@ -30,6 +30,8 @@ const ToursSection = (props) => {
   const [popupType, setPopupType] = useState('alert');
   const { t } = useTranslation();
 
+  const filters = props.filters;
+
   useEffect(() => {
     const params = {
       lang_code: currentLang,
@@ -37,10 +39,14 @@ const ToursSection = (props) => {
       currency_code: getCompanyCurrencyCode(),
       client_id: user?.id || "",
       trip_category: tripCategory,
-      trip_type: 0
+      trip_type: 0,
+      min_price: Number(filters?.minPrice) || 0,
+      max_price: Number(filters?.maxPrice) || 0,
+      trip_types: filters?.types || [],
+      destination_lst: filters?.destinations || [],
     };
-    dispatch(fetchToursSectionTrips(params));
-  }, [dispatch, currentLang, refreshTrigger, tripCategory]);
+    dispatch(props.useTopTrips ? fetchTopTrips(params) : fetchToursSectionTrips(params));
+  }, [dispatch, currentLang, refreshTrigger, tripCategory, filters, props.useTopTrips]);
 
   useEffect(() => {
     if (operation.success) {
@@ -64,11 +70,15 @@ const ToursSection = (props) => {
     }
   }, [operation.error, dispatch]);
 
-  if (loading) {
+  const { filtersSlot, showFilters } = props;
+  const isEmpty = !loading && trips.length === 0;
+
+  // Without a filters slot, keep the original full-page loading and empty states.
+  if (!filtersSlot && loading) {
     return <LoadingPage />;
   }
 
-  if (trips.length === 0&& !loading) {
+  if (!filtersSlot && isEmpty) {
     return (
       <section className="tours-section">
         <Container>
@@ -85,20 +95,36 @@ const ToursSection = (props) => {
     <>
       <section className="tours-section" id="tours">
         <Container>
-          <div className="section-header">
-            <h2 className="section-title">{t('tours.top_offers')}</h2>
-            <div className="section-divider"></div>
-          </div>
+          {(!isEmpty || showFilters) && (
+            <div className="section-header">
+              <h2 className="section-title">{t('tours.top_offers')}</h2>
+              <div className="section-divider"></div>
+            </div>
+          )}
 
-          <div className="tours-grid">
-            <Row>
-              {trips.map((trip) => (
-                <Col key={trip.trip_id} lg={4} md={6} className="d-flex">
-                  <TourCard trip={trip} />
-                </Col>
-              ))}
-            </Row>
-          </div>
+          {/* Stays mounted during loading so the filter state is kept */}
+          {filtersSlot}
+
+          {loading && <LoadingPage />}
+
+          {isEmpty && (
+            <div className="tours-empty">
+              <BiSolidCard className="empty-icon" />
+              <h3 className="empty-title">{t('tours.empty_title')}</h3>
+            </div>
+          )}
+
+          {!loading && !isEmpty && (
+            <div className="tours-grid">
+              <Row>
+                {trips.map((trip) => (
+                  <Col key={trip.trip_id} lg={4} md={6} className="d-flex">
+                    <TourCard trip={trip} />
+                  </Col>
+                ))}
+              </Row>
+            </div>
+          )}
         </Container>
       </section>
 

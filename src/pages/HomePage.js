@@ -13,7 +13,7 @@ const HomePage = () => {
   return (
     <>
       <SliderSection />
-      <ToursSection />
+      <ToursSection useTopTrips />
     </>
   )
 }

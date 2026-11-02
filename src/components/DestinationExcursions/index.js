@@ -15,7 +15,7 @@ import PopUp from "../Shared/popup/PopUp";
 import { getCompanyCurrencyCode } from "../../utils/companyCurrency";
 
 // Component: renders destination excursions UI and related interactions.
-const DestinationExcursions = () => {
+const DestinationExcursions = ({ filters }) => {
     const { state } = useLocation(); // Get tripData passed from navigation
     const destinationId = state?.DestinationId;
     const tripCategory = state?.tripCategory || 1;
@@ -39,10 +39,14 @@ const DestinationExcursions = () => {
             currency_code: getCompanyCurrencyCode(),
             client_id: user?.id || "",
             trip_category: tripCategory,
-            trip_type: tripType
+            trip_type: tripType,
+            min_price: Number(filters?.minPrice) || 0,
+            max_price: Number(filters?.maxPrice) || 0,
+            trip_types: filters?.types || [],
+            destination_lst: filters?.destinations || [],
         };
         dispatch(fetchDestinationTrips(params));
-    }, [dispatch, currentLang, destinationId, tripCategory, tripType]);
+    }, [dispatch, currentLang, destinationId, tripCategory, tripType, filters]);
 
     const { destinationTrips: trips, loading, error } = useSelector((state) => state.trips);
 

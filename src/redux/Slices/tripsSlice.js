@@ -79,6 +79,26 @@ export const fetchToursSectionTrips = createAsyncThunk(
   }
 );
 
+export const fetchTopTrips = createAsyncThunk(
+  "trips/fetchTopTrips",
+  async (params, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post(
+        `${BASE_URL}/GetTopTrips`,
+        {
+          lang_code: params.lang_code,
+          currency_code: params.currency_code,
+          client_id: params.client_id,
+        },
+        getNonAuthHeaders()
+      );
+      return data;
+    } catch (e) {
+      return rejectWithValue(e?.message || "Fetch top trips failed");
+    }
+  }
+);
+
 // Async thunk: fetchDestinationTrips performs the API request for this slice.
 export const fetchDestinationTrips = createAsyncThunk(
   "trips/fetchDestinationTrips",
@@ -178,6 +198,20 @@ const tripsSlice = createSlice({
         state.toursSectionTrips = action.payload;
       })
       .addCase(fetchToursSectionTrips.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+
+      // Top Trips (shares toursSectionTrips state)
+      .addCase(fetchTopTrips.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchTopTrips.fulfilled, (state, action) => {
+        state.loading = false;
+        state.toursSectionTrips = action.payload;
+      })
+      .addCase(fetchTopTrips.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })

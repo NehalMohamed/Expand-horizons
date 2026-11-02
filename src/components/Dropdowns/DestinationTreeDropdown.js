@@ -100,10 +100,10 @@ const DestinationTreeDropdown = ({
       setOpenSubmenus({});
       hoveredItemsRef.current.clear();
     } else {
-      setOpenSubmenus(prev => ({
-        ...prev,
-        [destination.destination_id || destination.id]: !prev[destination.destination_id || destination.id]
-      }));
+      setOpenSubmenus(prev => {
+        const id = destination.destination_id || destination.id;
+        return { [id]: !prev[id] };
+      });
     }
   };
 
@@ -123,10 +123,7 @@ const DestinationTreeDropdown = ({
     
     submenuTimeoutRef.current = setTimeout(() => {
       if (hoveredItemsRef.current.has(destinationId)) {
-        setOpenSubmenus(prev => ({
-          ...prev,
-          [destinationId]: true
-        }));
+        setOpenSubmenus({ [destinationId]: true });
       }
     }, 300);
   };
