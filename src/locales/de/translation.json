@@ -45,7 +45,7 @@
     "LoadMore": "Mehr laden",
     "ViewAllTours": "Alle Touren anzeigen"
   },
-  "destinations":{
+  "destinations": {
     "explore": "Entdecken",
     "loading": "Ziele werden geladen...",
     "previousSlide": "Vorherige Folie",
@@ -495,5 +495,10 @@
       "notifications": "Benachrichtigungen",
       "password": "Passwort"
     }
+  },
+  "Transfer": {
+    "bookTransfer": "Book Transfer",
+    "TransferManagement": "Transfer Management",
+    "TransferSubTitle": "Everything You Need for a Smooth Transfer Experience."
   }
 }

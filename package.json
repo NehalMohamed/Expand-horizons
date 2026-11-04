@@ -20,6 +20,7 @@
     "install": "^0.13.0",
     "jwt-decode": "^4.0.0",
     "leaflet": "^1.9.4",
+    "leaflet-geosearch": "^5.2.0",
     "react": "^19.1.0",
     "react-bootstrap": "^2.10.10",
     "react-confirm-alert": "^3.0.6",
@@ -29,6 +30,7 @@
     "react-icons": "^5.5.0",
     "react-image-lightbox": "^5.1.4",
     "react-leaflet": "^5.0.0",
+    "react-multi-form": "^1.0.5",
     "react-otp-input": "^3.1.1",
     "react-phone-number-input": "^3.4.12",
     "react-player": "^3.3.3",
@@ -38,7 +40,7 @@
     "react-scripts": "5.0.1",
     "react-toastify": "^11.0.5",
     "sass": "^1.89.2",
-    "sweetalert2": "^11.26.3",
+    "sweetalert2": "^11.26.25",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

@@ -20,7 +20,6 @@ import "react-phone-number-input/style.css";
 import "./styles/main.scss";
 import "./leafletIconsFix";
 
-
 // Lazy load all page components
 const Home = lazy(() => import("./pages/HomePage"));
 const Wishlist = lazy(() => import("./pages/WishlistPage"));
@@ -28,10 +27,13 @@ const AboutPage = lazy(() => import("./pages/AboutPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 const Excursions = lazy(() => import("./pages/ExcursionsPage"));
 const DivingPage = lazy(() => import("./pages/DivingPage"));
-const TransfersPage = lazy(() => import("./pages/TransfersPage"));
+const TransfersPage = lazy(() => import("./pages/Transfer/TransfersPage"));
+const TransferBooking = lazy(() => import("./pages/Transfer/TransferBooking"));
 const BookingPage = lazy(() => import("./pages/BookingPage"));
 const BookingsListPage = lazy(() => import("./pages/BookingsListPage"));
-const DestinationExcursionsPage = lazy(() => import("./pages/DestinationExcursionsPage"));
+const DestinationExcursionsPage = lazy(
+  () => import("./pages/DestinationExcursionsPage"),
+);
 const TripDetailsPage = lazy(() => import("./pages/TripDetailsPage"));
 const TripSoonPage = lazy(() => import("./pages/TripSoonPage"));
 const ProfilePage = lazy(() => import("./pages/ProfilePage"));
@@ -79,7 +81,11 @@ function App() {
                 path="/transfers/:location"
                 element={<DestinationExcursionsPage />}
               />
-               <Route
+              <Route
+                path="/transfers/TransferBooking"
+                element={<TransferBooking />}
+              />
+              <Route
                 path="/transfers/coming-soon"
                 element={<ComingSoon image="/images/coming.png" />}
               />
@@ -94,7 +100,7 @@ function App() {
 
             {/* Routes without navbar and footer */}
             <Route element={<MinimalLayout />}>
-             <Route path="/signUp" element={<AuthComp />} />
+              <Route path="/signUp" element={<AuthComp />} />
             </Route>
           </Routes>
         </Suspense>

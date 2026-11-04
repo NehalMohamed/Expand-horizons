@@ -20,6 +20,7 @@ import profileReducer from "../Slices/profileSlice";
 import contactReducer from "../Slices/contactSlice";
 import NewsletterReducer from "../Slices/newsletterSlice";
 import tripFiltersReducer from "../Slices/tripFiltersSlice";
+import transferCategoriesReducer from "../Slices/transferCategoriesSlice";
 export const store = configureStore({
   reducer: {
     tours: toursReducer,
@@ -42,6 +43,7 @@ export const store = configureStore({
     contact: contactReducer,
     newsletter: NewsletterReducer,
     tripFilters: tripFiltersReducer,
+    transferCategories: transferCategoriesReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(authMiddleware),

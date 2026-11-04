@@ -45,17 +45,17 @@
     "LoadMore": "Load More",
     "ViewAllTours": "View All Tours"
   },
-  "destinations":{
-     "explore": "Explore",
+  "destinations": {
+    "explore": "Explore",
     "loading": "Loading destinations...",
     "previousSlide": "Previous slide",
     "nextSlide": "Next slide",
     "goToSlide": "Go to slide"
   },
   "wishlist": {
-    "emptyWishlist":"Your wishlist is empty",
-    "saveWishList":"Save activities to your wishlist by clicking on the heart icon.",
-    "BackBtn":"Back To Home",
+    "emptyWishlist": "Your wishlist is empty",
+    "saveWishList": "Save activities to your wishlist by clicking on the heart icon.",
+    "BackBtn": "Back To Home",
     "title": "Your wishlist",
     "saved": "Saved",
     "remove": "Remove from wishlist",
@@ -319,7 +319,7 @@
     "myBookings": "Your Bookings",
     "noBookings": "No bookings in your cart",
     "noBookingsText": "Start exploring our trips and make your first reservation!",
-    "BackBtn":"Back To Home",
+    "BackBtn": "Back To Home",
     "fetchError": "Failed to load your bookings. Please try again later.",
     "dateToBeConfirmed": "Date to be confirmed",
     "timeToBeConfirmed": "Time to be confirmed",
@@ -410,7 +410,7 @@
       "redeem": "Redeem",
       "placeholder": "Enter code"
     },
-    "cancel":{
+    "cancel": {
       "cancelConfirmation1": "You will receive e-mail with cancellation fees",
       "cancelConfirmation2": "or contact booking@expand-horizons.de",
       "cancelConfirmation3": "Are you sure to cancel?",
@@ -495,5 +495,34 @@
       "notifications": "Notifications",
       "password": "Password"
     }
+  },
+  "Transfer": {
+    "bookTransfer": "Book Transfer",
+    "TransferManagement": "Transfer Management",
+    "TransferSubTitle": "Everything You Need for a Smooth Transfer Experience.",
+    "Choose_your_vehicle": "Choose Your Vehicle",
+    "SaveBooking": "Save Booking",
+    "Next": "Next",
+    "Previous": "Previous"
+  },
+  "bookingMap": {
+    "gettingLocation": "Getting your current location...",
+    "pickupTitle": "Pickup Location",
+    "pickupLabel": "Pickup Location",
+    "pickupPlaceholder": "Search or change pickup location",
+    "dropTitle": "Drop Location",
+    "dropLabel": "Drop Location",
+    "dropPlaceholder": "Enter your destination",
+    "selectedAddress": "Selected:",
+    "bookNow": "Book Now",
+    "Distance": "Distance",
+    "Time": "Time",
+    "Price": "Price",
+    "BookingDetails": "Booking Details",
+    "Pickup": "Pickup",
+    "Drop-off": "Drop-off",
+    "Duration": "Duration",
+    "Total": "Total",
+    "TwoWayTrip": "Two Way Trip"
   }
 }
