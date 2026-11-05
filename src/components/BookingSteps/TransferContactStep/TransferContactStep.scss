@@ -1,0 +1,247 @@
+.transfer-summary-card {
+  width: 100%;
+  background: #fff;
+  border-radius: 24px;
+  padding: 24px;
+  margin-bottom: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f1f1f1;
+  text-align: left;
+
+  .summary-header {
+    margin-bottom: 24px;
+
+    h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #111;
+      margin: 0;
+    }
+  }
+
+  .location-section {
+    margin-bottom: 25px;
+
+    .location-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+
+      &:not(:last-child) {
+        margin-bottom: 22px;
+      }
+
+      .marker {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        margin-top: 5px;
+        flex-shrink: 0;
+      }
+
+      &.pickup .marker {
+        background: #2a9d8f;
+      }
+
+      &.drop .marker {
+        background: #e63946;
+      }
+
+      .label {
+        display: block;
+        font-size: 12px;
+        color: #888;
+        margin-bottom: 4px;
+      }
+
+      p {
+        margin: 0;
+        font-size: 13px;
+        line-height: 1.5;
+        color: #222;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .booking-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+
+    .stat-box {
+      background: #f8f9fa;
+      border-radius: 18px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      span {
+        font-size: 12px;
+        color: #888;
+      }
+
+      strong {
+        font-size: 15px;
+        color: #111;
+      }
+
+      &.price {
+        background: #111;
+
+        span,
+        strong {
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+.transfer-contact {
+  background: transparent;
+  padding: 30px 70px;
+
+  .transfer-contact-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .transfer-required-notice {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+    text-align: right;
+  }
+
+  .transfer-field {
+    margin-bottom: 1.25rem;
+
+    .transfer-input {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1rem;
+      background: #fff;
+      height: 50px;
+      box-sizing: border-box;
+
+      &.transfer-notes {
+        height: 100px;
+      }
+
+      &:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+      }
+
+      &.is-invalid {
+        border-color: #dc3545;
+      }
+    }
+
+    .transfer-phone {
+      display: flex;
+      width: 100%;
+
+      .PhoneInputCountry {
+        border: 2px solid #e0e0e0;
+        border-right: none;
+        border-radius: 8px 0 0 8px;
+        background: #fff;
+        padding: 0 0.5rem;
+        height: 50px;
+        box-sizing: border-box;
+      }
+
+      .PhoneInputInput {
+        flex: 1;
+        padding: 1rem;
+        border: 2px solid #e0e0e0;
+        border-left: none;
+        border-radius: 0 8px 8px 0;
+        font-size: 1rem;
+        height: 50px;
+        box-sizing: border-box;
+        outline: none;
+      }
+
+      &.is-invalid {
+        .PhoneInputCountry,
+        .PhoneInputInput {
+          border-color: #dc3545;
+        }
+      }
+    }
+
+    .transfer-date-btn {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 50px;
+      padding: 0 1rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      background: #fff;
+      color: #222;
+    }
+
+    .react-datepicker-wrapper {
+      display: block;
+    }
+
+    .error-message {
+      color: #dc3545;
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+    }
+  }
+
+  .transfer-disclaimer {
+    color: #666;
+    font-size: 0.875rem;
+    margin: 2rem 0;
+    text-align: center;
+  }
+
+  .transfer-confirm-btn {
+    width: 100%;
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+}
+
+.transfer-datepicker-popper {
+  z-index: 9999 !important;
+}
+
+@media (max-width: 768px) {
+  .transfer-contact {
+    padding: 20px 12px;
+  }
+
+  .transfer-summary-card {
+    padding: 18px;
+    border-radius: 18px;
+
+    .summary-header h3 {
+      font-size: 18px;
+    }
+  }
+}

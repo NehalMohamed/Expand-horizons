@@ -83,7 +83,7 @@ const BookingMapPage = ({ goToNextStep }) => {
     // navigate("/checkout", {
     //   state: bookingData,
     // });
-    goToNextStep();
+    goToNextStep(bookingData);
   };
 
   // Receives selected dropoff coordinates/address from search input.

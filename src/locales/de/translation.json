@@ -499,6 +499,17 @@
   "Transfer": {
     "bookTransfer": "Book Transfer",
     "TransferManagement": "Transfer Management",
-    "TransferSubTitle": "Everything You Need for a Smooth Transfer Experience."
+    "TransferSubTitle": "Everything You Need for a Smooth Transfer Experience.",
+    "totalPax": "Gesamtzahl der Personen*",
+    "returnDateBeforePickup": "Rückfahrtdatum/-zeit muss nach dem Abholdatum/der Abholzeit liegen",
+    "genericError": "Fehler, bitte kontaktieren Sie den Administrator"
+  },
+  "bookingMap": {
+    "Distance": "Entfernung",
+    "BookingDetails": "Buchungsdetails",
+    "Pickup": "Abholung",
+    "Drop-off": "Ziel",
+    "Duration": "Dauer",
+    "Total": "Gesamt"
   }
 }

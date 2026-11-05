@@ -5,10 +5,12 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import CarCategoriesPage from "../../components/CarCategories/CarCategories";
 import BookingMapPage from "./MapPage/BookingMapPage";
+import TransferContactStep from "../../components/BookingSteps/TransferContactStep";
 
 function TransferBooking() {
   const [active, setActive] = useState(1);
   const [formLength, setFormLength] = useState(3);
+  const [mapData, setMapData] = useState(null);
   const { t } = useTranslation();
   const navigate = useNavigate();
   const SaveBooking = () => {};
@@ -21,10 +23,15 @@ function TransferBooking() {
             <CarCategoriesPage goToNextStep={() => setActive(active + 1)} />
           </Step>
           <Step>
-            <BookingMapPage goToNextStep={() => setActive(active + 1)} />
+            <BookingMapPage
+              goToNextStep={(data) => {
+                setMapData(data);
+                setActive(active + 1);
+              }}
+            />
           </Step>
           <Step>
-            <div>Form</div>
+            <TransferContactStep MapData={mapData} />
           </Step>
         </MultiStepForm>
         {/* <div className="steps_btns">

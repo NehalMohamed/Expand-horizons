@@ -503,7 +503,10 @@
     "Choose_your_vehicle": "Choose Your Vehicle",
     "SaveBooking": "Save Booking",
     "Next": "Next",
-    "Previous": "Previous"
+    "Previous": "Previous",
+    "totalPax": "Total Pax*",
+    "returnDateBeforePickup": "Return date/time must be after pickup date/time",
+    "genericError": "Error, please contact admin"
   },
   "bookingMap": {
     "gettingLocation": "Getting your current location...",
