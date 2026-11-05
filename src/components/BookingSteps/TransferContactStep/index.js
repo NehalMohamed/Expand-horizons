@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import DatePicker from "react-datepicker";
 import { FaCalendarAlt, FaChevronDown } from "react-icons/fa";
 import { checkAvailability } from "../../../redux/Slices/bookingSlice";
-import { confirmBooking } from "../../../redux/Slices/confirmSlice";
+import { confirmTransferBooking } from "../../../redux/Slices/confirmSlice";
 import BookingModal from "../../Shared/BookingModal";
 import PopUp from "../../Shared/popup/PopUp";
 import LoadingPage from "../../Loader/LoadingPage";
@@ -189,7 +189,7 @@ const TransferContactStep = ({ MapData }) => {
 
       if (availability?.success) {
         const result = await dispatch(
-          confirmBooking({
+          confirmTransferBooking({
             booking_id: availability.idOut,
             client_id: clientId,
             lang_code: currentLang,

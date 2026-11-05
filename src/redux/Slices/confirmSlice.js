@@ -28,6 +28,23 @@ export const confirmBooking = createAsyncThunk(
   }
 );
 
+// Transfer bookings are confirmed through the POS endpoint.
+export const confirmTransferBooking = createAsyncThunk(
+  "confirm/confirmTransferBooking",
+  async (confirmData, { rejectWithValue }) => {
+    try {
+      const response = await api.post(
+        `${BOOKING_URL}/ConfirmBookingPos`,
+        confirmData
+      );
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
 // Slice definition: contains local reducers and async thunk state transitions.
 const confirmSlice = createSlice({
   name: "confirm",
@@ -64,6 +81,22 @@ const confirmSlice = createSlice({
         state.confirmed = action.payload === true;
       })
       .addCase(confirmBooking.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+        state.success = false;
+        state.confirmed = false;
+      })
+      .addCase(confirmTransferBooking.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+        state.success = false;
+      })
+      .addCase(confirmTransferBooking.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.confirmed = action.payload === true;
+      })
+      .addCase(confirmTransferBooking.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
         state.success = false;
