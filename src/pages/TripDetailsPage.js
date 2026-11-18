@@ -106,8 +106,8 @@ const TripDetailsPage = () => {
       <BookingInfo tripData={tripData} />
       <BookingSelection tripData={tripData} />
       <FlightItinerary tripData={tripData} />
-      <Reviews tripData={tripData} refreshTripDetails={refreshTripDetails} />
       <TourDetails tripData={tripData} />
+      <Reviews tripData={tripData} refreshTripDetails={refreshTripDetails} />
       <CityCarousel />
 
       {/* Show loading page during wishlist operation */}

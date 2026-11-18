@@ -229,6 +229,7 @@
     "goToLogin": "Go to Login"
   },
   "tripDetails": {
+    "noImagesAvailable": "No images available",
     "reviews": "reviews",
     "allReviews": "All Reviews",
     "pleaseLoginToReview": "Please log in to submit a review",

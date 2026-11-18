@@ -229,6 +229,7 @@
     "goToLogin": "Zur Anmeldung"
   },
   "tripDetails": {
+    "noImagesAvailable": "Keine Bilder verfügbar",
     "reviews": "Bewertungen",
     "allReviews": "Alle Bewertungen",
     "pleaseLoginToReview": "Bitte loggen Sie sich ein, um eine Bewertung abzugeben",
