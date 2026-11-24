@@ -27,7 +27,7 @@ const OrderSummary = ({ availabilityData }) => {
     const { t } = useTranslation();
 
     const dispatch = useDispatch();
-    const currentLang = localStorage.getItem("lang") || "en";
+    const currentLang = useSelector((state) => state.language.currentLang) || "en";
     const { summaryData, loading, error, shouldRefresh } = useSelector((state) => state.bookingSummary);
     const companyCurrencySymbol = getCurrencySymbol(summaryData?.currency_code || getCompanyCurrencyCode());
 

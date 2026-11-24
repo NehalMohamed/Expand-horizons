@@ -21,7 +21,7 @@ const BookingSection = () => {
   const { items: allBookings, loading, error } = useSelector((state) => state.bookingList);
   const { loading: cancelLoading, success: cancelSuccess, error: cancelError } = useSelector((state) => state.bookingCancel);
     
-  const currentLang = localStorage.getItem("lang") || "en";
+  const currentLang = useSelector((state) => state.language.currentLang) || "en";
 
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');

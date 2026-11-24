@@ -22,7 +22,7 @@ const DestinationExcursions = ({ filters }) => {
     const tripType = state?.tripType || 0;
     const { t } = useTranslation();
     const dispatch = useDispatch();
-    const currentLang = localStorage.getItem("lang") || "en";
+    const currentLang = useSelector((state) => state.language.currentLang) || "en";
     const { user: stateUser } = useSelector((state) => state.auth); // Get user from auth state
     const [showPopup, setShowPopup] = useState(false);
     const [popupMessage, setPopupMessage] = useState('');
@@ -42,8 +42,8 @@ const DestinationExcursions = ({ filters }) => {
             trip_type: tripType,
             min_price: Number(filters?.minPrice) || 0,
             max_price: Number(filters?.maxPrice) || 0,
-            trip_types: filters?.types || [],
-            destination_lst: filters?.destinations || [],
+            trip_types: filters?.types?.length ? filters.types : (tripType ? [tripType] : []),
+            destination_lst: filters?.destinations?.length ? filters.destinations : (destinationId ? [destinationId] : []),
         };
         dispatch(fetchDestinationTrips(params));
     }, [dispatch, currentLang, destinationId, tripCategory, tripType, filters]);

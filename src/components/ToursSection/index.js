@@ -17,7 +17,7 @@ const ToursSection = (props) => {
   const tripCategory = props.tripCategory || 0;
   const { toursSectionTrips: trips, loading, error } = useSelector((state) => state.trips);
   const { operation } = useSelector((state) => state.wishlist);
-  const currentLang = localStorage.getItem("lang") || "en";
+  const currentLang = useSelector((state) => state.language.currentLang) || "en";
   const { user: stateUser } = useSelector((state) => state.auth); // Get user from auth state
   
   // Get user from localStorage as fallback

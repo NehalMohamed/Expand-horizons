@@ -105,7 +105,7 @@ function TransfersPage() {
             preload="auto"
             className="video-element"
           >
-            <source src="/IntrooLogo.mp4" type="video/mp4" />
+            <source src="/transfers.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
           <Button className="secondryBtn bk_btn" onClick={goToTransferBooking}>

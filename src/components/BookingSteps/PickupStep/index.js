@@ -22,7 +22,7 @@ const PickupStep = ({ onNext, tripData, availabilityData , childAges }) => {
     const { loading: bookingLoading, error: bookingError } = useSelector((state) => state.booking);
     const { loading: calculationLoading, error: calculationError, success: calculationSuccess } = useSelector((state) => state.priceCalculation);
 
-    const currentLang = localStorage.getItem("lang") || "en";
+    const currentLang = useSelector((state) => state.language.currentLang) || "en";
     const { summaryData } = useSelector((state) => state.bookingSummary);
 
     const [showPopup, setShowPopup] = useState(false);

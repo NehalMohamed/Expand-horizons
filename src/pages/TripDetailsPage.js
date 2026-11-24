@@ -30,7 +30,7 @@ const TripDetailsPage = () => {
     (state) => state.tripDetails
   );
 
-    const currentLang = localStorage.getItem("lang") || "en";
+    const currentLang = useSelector((state) => state.language.currentLang) || "en";
 
   const [user, setUser] = useState({});
   const [tripState, setTripState] = useState(null);

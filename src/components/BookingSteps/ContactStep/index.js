@@ -20,7 +20,7 @@ const ContactStep = ({ onNext, tripData, availabilityData, childAges}) => {
     const user = JSON.parse(localStorage.getItem("user"));
 
     const { profileData, loading: profileLoading } = useSelector((state) => state.profile);
-    const currentLang = localStorage.getItem("lang") || "en";
+    const currentLang = useSelector((state) => state.language.currentLang) || "en";
     const { summaryData } = useSelector((state) => state.bookingSummary);
     const { loading: bookingLoading, error: bookingError } = useSelector((state) => state.booking);
     const { loading: extrasLoading, error: extrasError } = useSelector((state) => state.extras);

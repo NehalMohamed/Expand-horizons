@@ -16,7 +16,7 @@ const ExcursionsDropdown = () => {
     const { treeItems, treeLoading } = useSelector((state) => state.destinations);
     const destinations = treeItems[tripCategory] || [];
     const loading = treeLoading[tripCategory] || false;
-    const currentLang = localStorage.getItem("lang") || "en";
+    const currentLang = useSelector((state) => state.language.currentLang) || "en";
 
 
     useEffect(() => {

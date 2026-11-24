@@ -51,7 +51,7 @@ const ExcursionFilters = ({ onChange }) => {
   const { types: apiTypes, destinations: apiDestinations } = useSelector(
     (state) => state.tripFilters
   );
-  const currentLang = localStorage.getItem("lang") || "en";
+  const currentLang = useSelector((state) => state.language.currentLang) || "en";
 
   const typeOptions = useMemo(
     () => (apiTypes || []).map((t) => ({ id: t.id, name: t.type_name })),

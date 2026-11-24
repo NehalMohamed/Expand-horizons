@@ -51,7 +51,7 @@ const TransferContactStep = ({ MapData }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("user"));
-  const currentLang = localStorage.getItem("lang") || "en";
+  const currentLang = useSelector((state) => state.language.currentLang) || "en";
 
   const { loading: bookingLoading } = useSelector((state) => state.booking);
   const { loading: confirmLoading, error: confirmError } = useSelector(
