@@ -709,6 +709,11 @@
         backdrop-filter: blur(10px);
         background-color: rgba(255, 255, 255, 0.95);
 
+        &.language-menu {
+          min-width: 0;
+          width: 90px;
+        }
+
         @include media-breakpoint-down(md) {
           position: absolute !important;
           left: 50% !important;

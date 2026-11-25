@@ -1,0 +1,534 @@
+{
+  "general": {
+    "more": "Ещё",
+    "yes": "Да",
+    "no": "Нет",
+    "cancel": "Отмена",
+    "top_offers": "Лучшие предложения",
+    "show_more": "Показать больше",
+    "show_less": "Показать меньше",
+    "from": "От",
+    "to": "До",
+    "perGroupUpTo": "за группу до",
+    "perPerson": "на человека",
+    "loading": "Загрузка...",
+    "loadingMore": "Загрузка..."
+  },
+  "language": {
+    "language": "Язык",
+    "english": "Английский",
+    "german": "Немецкий",
+    "russian": "Русский",
+    "french": "Французский"
+  },
+  "main_navbar": {
+    "travel": "Путешествия",
+    "home": "Главная",
+    "egypt_excursions": "Экскурсии",
+    "transfer_services": "Трансферы",
+    "egypt_diving": "Дайвинг",
+    "about_us": "О нас",
+    "contact": "Свяжитесь с нами",
+    "search": "Поиск",
+    "search_placeholder": "Поиск...",
+    "wishlist": "Избранное",
+    "shopping_basket": "Корзина",
+    "profile": "Профиль",
+    "login_signup": "Войти или зарегистрироваться",
+    "my_profile": "Мой профиль",
+    "logout": "Выйти",
+    "Welcome": "Добро пожаловать"
+  },
+  "tours": {
+    "loading": "Загрузка туров...",
+    "empty_title": "Нет доступных туров",
+    "empty_text": "Пожалуйста, загляните позже, чтобы увидеть новые предложения.",
+    "top_offers": "Лучшие предложения",
+    "LoadMore": "Загрузить ещё",
+    "ViewAllTours": "Смотреть все туры"
+  },
+  "destinations": {
+    "explore": "Исследовать",
+    "loading": "Загрузка направлений...",
+    "previousSlide": "Предыдущий слайд",
+    "nextSlide": "Следующий слайд",
+    "goToSlide": "Перейти к слайду"
+  },
+  "wishlist": {
+    "emptyWishlist": "Ваш список избранного пуст",
+    "saveWishList": "Сохраняйте мероприятия в избранное, нажав на значок сердца.",
+    "BackBtn": "На главную",
+    "title": "Ваше избранное",
+    "saved": "Сохранено",
+    "remove": "Удалить из избранного",
+    "topDestinations": "Направления для посещения",
+    "topDestinationsDescription": "Почувствуйте азарт открытия скрытых жемчужин и знаменитых достопримечательностей в лучших туристических направлениях мира - вас ждёт жажда странствий!"
+  },
+  "footer": {
+    "travel": "Путешествия",
+    "footer_description": "Туристическая компания по транспорту и поездкам в Египет, отличающаяся надёжностью, безопасностью и пунктуальностью.",
+    "home": "Главная",
+    "about_us": "О нас",
+    "contact": "Свяжитесь с нами",
+    "company": "Компания",
+    "privacy": "Конфиденциальность",
+    "support": "Поддержка",
+    "help_center": "Центр помощи",
+    "our_news": "Наши новости",
+    "discover_egypt": "Откройте Египет по-новому"
+  },
+  "NotFound": {
+    "title": "Что-то пошло не так!",
+    "backBtn": "НАЗАД"
+  },
+  "ComingSoon": {
+    "title": "Скоро!",
+    "backBtn": "НАЗАД"
+  },
+  "NoResults": {
+    "title": "Упс!... ничего не найдено",
+    "subTitle": "Пожалуйста, попробуйте другой запрос"
+  },
+  "Login": {
+    "LoginTitle": "Войти",
+    "SignUpTitle": "Регистрация",
+    "LoginSubTitle": "Оформляйте заказы проще и получайте доступ к билетам на любом устройстве с помощью аккаунта <strong>Expand Horizons </strong>.",
+    "LoginCheckBoxTitle": "Присылайте мне скидки и другие предложения по электронной почте.<br/>Отказаться можно в любое время в настройках",
+    "LoginCheckBoxSubTitle": "Отказаться можно в любое время в настройках",
+    "firstname": "Имя",
+    "lastname": "Фамилия",
+    "confirmPassword": "Подтвердите пароль",
+    "ConfirmPasswordError": "Пароли не совпадают.",
+    "EmailError": "Пожалуйста, введите действительный адрес электронной почты.",
+    "PasswordError": "Пароль должен содержать не менее 6 символов.",
+    "email": "Адрес электронной почты",
+    "signIn": "Войти",
+    "password": "Пароль",
+    "LoginWithGoogle": "Войти через Google",
+    "RegisterWithGoogle": "Зарегистрироваться через Google",
+    "DontHaveAccount": "Нет аккаунта?",
+    "CreateAccount": "Создать аккаунт",
+    "PrivacyText": "Входя в систему или создавая аккаунт, вы принимаете наши Условия и Политику конфиденциальности.",
+    "Or": "Или продолжить с",
+    "HaveAccount": "Уже есть аккаунт?",
+    "CodeVerifyTitle": "Введите код, отправленный на",
+    "CodeVerifyTitle2": "для подтверждения вашей почты",
+    "SendCode": "Отправить код",
+    "fillField": "Пожалуйста, заполните это поле",
+    "spamAlert": {
+      "title": "Не можете найти наше письмо?",
+      "check": "Проверьте папку",
+      "spam": "спам",
+      "or": "или",
+      "junk": "нежелательная почта",
+      "folder": "",
+      "addToContacts": "Добавьте наш адрес электронной почты в контакты / белый список",
+      "waitAndRefresh": "Подождите несколько минут и обновите папку «Входящие»"
+    },
+    "WelcomeBack": "С возвращением!",
+    "PleaseLoginWithGoogle": "Пожалуйста, продолжите через Google, чтобы войти в",
+    "UseDifferentAccount": "Использовать другой аккаунт",
+    "GoogleLoginPrompt": "Пожалуйста, продолжите через Google, чтобы войти в <strong>{{email}}</strong>"
+  },
+  "testimonial": {
+    "title": "Мы рады слышать вас",
+    "subtitle": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit laborum.",
+    "content1": "Nunc cursus in tellus quis luctus. Pellentesque sapien lacus, facilisis non purus quis, placerat gravida lorem. Sed feugiat tortor eu enim dapibus dictum. Praesent non dolor efficitur, lacinia dui volutpat, elementum lacus. Praesent sit amet risus semper, iaculis enim in, bibendum nibh.",
+    "content2": "Maecenas quis venenatis ipsum, id hendrerit ligula. Donec a sem ut erat molestie feugiat ac ut elit. Proin consectetur nulla et ex molestie, quis semper nibh dignissim. Aliquam euismod lacus et sem tincidunt, at porta quam molestie. Sed blandit nibh leo, vel congue odio aliquam non. Etiam scelerisque a odio sed euismod. Proin eget elementum ipsum. Nam et viverra tortor. Mauris tempor nibh odio, id blandit arcu blandit et. Nunc vel dolor porttitor, cursus tortor id, accumsan felis.",
+    "content3": "Aenean ornare metus purus, porta pretium felis pretium sed. Proin placerat tortor a mauris volutpat lacinia. Etiam condimentum vehicula vehicula."
+  },
+  "newsletter": {
+    "label": "Наша рассылка",
+    "title": "Оставайтесь на связи",
+    "description": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum.",
+    "namePlaceholder": "Имя",
+    "emailPlaceholder": "Адрес электронной почты",
+    "subscribeButton": "ПОДПИСАТЬСЯ",
+    "successMessage": "Спасибо за подписку на нашу рассылку!",
+    "subscribing": "Подписка...",
+    "errorMessage": "Не удалось подписаться. Пожалуйста, попробуйте снова."
+  },
+  "contactInfo": {
+    "visitUs": "ПОСЕТИТЕ НАС",
+    "callUs": "Позвоните нам",
+    "emailUs": "НАПИШИТЕ НАМ",
+    "address1": "1290 Stiven Street",
+    "address2": "Raleigh, New York City",
+    "phone1": "+22 123 587 4444",
+    "phone2": "+22 456 234 1111",
+    "email1": "mailus@gmail.com",
+    "email2": "getsupport@divi.com"
+  },
+  "features": {
+    "punctual": {
+      "title": "Пунктуальность",
+      "feature1": "Пунктуальны. Всегда",
+      "feature2": "Надёжно и всегда вовремя",
+      "feature3": "Мы приезжаем точно в срок"
+    },
+    "safe": {
+      "title": "Безопасность",
+      "feature1": "Безопасность гарантирована.",
+      "feature2": "Надёжная безопасность для ваших нужд",
+      "feature3": "Защита и безопасность в"
+    },
+    "trustworthy": {
+      "title": "Надёжность",
+      "feature1": "Ваш партнёр, которому можно доверять",
+      "feature2": "Надёжное сотрудничество, основанное на доверии",
+      "feature3": "Мы строим работу на доверии"
+    },
+    "highQuality": {
+      "title": "Высокое качество",
+      "feature1": "Первоклассное качество",
+      "feature2": "Отличное качество, которое убеждает",
+      "feature3": "Высококачественные решения"
+    }
+  },
+  "about": {
+    "title": "Туристическая компания по транспорту и поездкам в Египет, отличающаяся надёжностью, безопасностью и пунктуальностью. Вместе мы открываем Египет по-новому"
+  },
+  "contact": {
+    "title": "Свяжитесь с нами",
+    "description": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit laborum.",
+    "subText": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisl ut aliquip. Nemo enim ipsam voluptatem quia voluptas",
+    "namePlaceholder": "Имя",
+    "emailPlaceholder": "Адрес электронной почты",
+    "phonePlaceholder": "Телефон",
+    "messagePlaceholder": "Сообщение",
+    "sendButton": "Отправить сообщение",
+    "HaveAccount": "Уже есть аккаунт?",
+    "CodeVerifyTitle": "Введите код, отправленный на",
+    "CodeVerifyTitle2": "для подтверждения вашей почты",
+    "SendCode": "Отправить код",
+    "subjectPlaceholder": "Тема",
+    "sending": "Отправка...",
+    "successMessage": "Ваше сообщение успешно отправлено!",
+    "errorMessage": "Не удалось отправить сообщение. Пожалуйста, попробуйте снова.",
+    "fillField": "Пожалуйста, заполните это поле",
+    "spamAlert": {
+      "title": "Не можете найти наше письмо?",
+      "check": "Проверьте папку",
+      "spam": "спам",
+      "or": "или",
+      "junk": "нежелательная почта",
+      "folder": "",
+      "addToContacts": "Добавьте наш адрес электронной почты в контакты / белый список",
+      "waitAndRefresh": "Подождите несколько минут и обновите папку «Входящие»"
+    }
+  },
+  "PopUp": {
+    "Header": "Уведомление",
+    "Close": "Закрыть"
+  },
+  "auth": {
+    "sessionExpired": "Ваш сеанс истёк. Пожалуйста, войдите снова.",
+    "loginRequired": "Пожалуйста, сначала войдите в систему.",
+    "loginNow": "Войти сейчас",
+    "ok": "OK",
+    "loginRequiredTitle": "Требуется вход",
+    "loginRequiredMessage": "Для продолжения необходимо войти в систему.",
+    "goToLogin": "Перейти ко входу"
+  },
+  "tripDetails": {
+    "noImagesAvailable": "Изображения недоступны",
+    "reviews": "отзывов",
+    "allReviews": "Все отзывы",
+    "pleaseLoginToReview": "Пожалуйста, войдите, чтобы оставить отзыв",
+    "reviewSubmittedSuccess": "Спасибо за ваш отзыв!",
+    "reviewSubmissionError": "Ошибка при отправке отзыва. Пожалуйста, попробуйте снова.",
+    "reviewsLoadError": "Ошибка загрузки отзывов",
+    "submitting": "Отправка...",
+    "noReviewsYet": "Пока нет отзывов. Будьте первым!",
+    "pleaseSelectRating": "Пожалуйста, выберите оценку",
+    "pleaseWriteReview": "Пожалуйста, напишите отзыв",
+    "addToWishlist": "Добавить в избранное",
+    "removeFromWishlist": "Удалить из избранного",
+    "addedToWishlist": "Добавлено в избранное",
+    "share": "Поделиться",
+    "aboutTrip": "Об этой поездке",
+    "bookNowPayLater": "Забронируйте сейчас, оплатите позже: оставайтесь гибкими - бронируйте сейчас, платите позже.",
+    "duration": "Продолжительность",
+    "paymentMethods": "Оплата на месте наличными в евро, долларах США, швейцарских франках или египетских фунтах, либо через PayPal",
+    "paymentNote": "Оплата производится при посадке.",
+    "linkCopied": "Ссылка скопирована в буфер обмена!",
+    "itinerary": "Маршрут",
+    "reviewsFromTravelers": "Избранные отзывы других путешественников",
+    "addReviews": "Добавить отзыв",
+    "seeMoreReviews": "Смотреть больше отзывов",
+    "rateTour": "Оцените тур",
+    "writeReview": "Напишите свой отзыв",
+    "add": "Добавить",
+    "cancel": "Отмена",
+    "highlights": "Основные моменты",
+    "included": "Включено",
+    "notIncluded": "Не включено",
+    "dontForget": "Пожалуйста, не забудьте",
+    "additionalInfo": "Дополнительная информация",
+    "priceFrom": "Цена",
+    "bookNow": "Забронировать",
+    "notRated": "Пока без оценки",
+    "stars": "Звезда"
+  },
+  "booking": {
+    "returnDate": {
+      "title": "Выберите дату и время возвращения",
+      "note": "Пожалуйста, выберите желаемую дату и время возвращения"
+    },
+    "returnDateTimeRequired": "Пожалуйста, выберите дату и время возвращения для трансфера в обе стороны",
+    "returnDateAfterDeparture": "Дата возвращения должна быть позже даты отправления",
+    "date": {
+      "selectReturnDateTime": "Выберите дату и время возвращения",
+      "selectDateTime": "Выберите дату и время",
+      "time": "Время"
+    },
+    "dateTimeRequired": "Пожалуйста, выберите дату и время",
+    "invalidDateTime": "Пожалуйста, выберите дату не ранее чем через {{releaseDays}} дн. от сегодняшнего дня",
+    "availabilityError": "Не удалось проверить доступность. Пожалуйста, попробуйте снова.",
+    "availabilitySuccess": "Доступность успешно проверена!",
+    "checkingAvailability": "Проверка доступности...",
+    "title": "Выберите участников и дату",
+    "checkAvailability": "Проверить доступность",
+    "maxCapacityExceeded": "Пожалуйста, выберите не более {{maxCapacity}} участников для этого мероприятия.",
+    "invalidChildAges": "Пожалуйста, укажите корректный возраст всех детей (0-{{maxAge}} лет)",
+    "continue": "Продолжить",
+    "allTaxesIncluded": "Все налоги и сборы включены",
+    "twoWayTransfer": "Трансфер в обе стороны",
+    "included": "Включено",
+    "participants": {
+      "adult": "Взрослый",
+      "child": "Ребёнок",
+      "adultSingle": "Взрослый x 1",
+      "adults": "Взрослые x {{count}}",
+      "children": "Дети x {{count}}",
+      "mixed": "Взрослые x {{adults}}, Дети x {{children}}",
+      "ageRangeAdults": "Возраст 12-99",
+      "enterChildAges": "Укажите возраст детей",
+      "childAge": "Возраст ребёнка {{number}}",
+      "invalidAge": "Возраст должен быть от 0 до {{maxAge}}",
+      "ageRangeChildren": "0-{{maxAge}} лет"
+    },
+    "language": {
+      "english": "Английский",
+      "spanish": "Испанский",
+      "french": "Французский",
+      "german": "Немецкий",
+      "italian": "Итальянский"
+    }
+  },
+  "bookings": {
+    "tripDate": "Дата поездки",
+    "returnDate": "Дата возвращения",
+    "myBookings": "Ваши бронирования",
+    "noBookings": "В вашей корзине нет бронирований",
+    "noBookingsText": "Начните изучать наши поездки и сделайте своё первое бронирование!",
+    "BackBtn": "На главную",
+    "fetchError": "Не удалось загрузить ваши бронирования. Пожалуйста, попробуйте позже.",
+    "dateToBeConfirmed": "Дата будет подтверждена",
+    "timeToBeConfirmed": "Время будет подтверждено",
+    "bookingCode": "Код бронирования",
+    "priceToBeConfirmed": "Цена будет подтверждена",
+    "totalBookings": "Всего бронирований",
+    "allBookingsLoaded": "Все бронирования загружены",
+    "adults": "взрослых",
+    "children": "детей",
+    "infants": "младенцев",
+    "resevePay": "Забронировать сейчас и оплатить позже",
+    "steps": {
+      "pickup": "Посадка",
+      "contact": "Контакты",
+      "agreement": "Соглашение",
+      "payment": "Оплата",
+      "confirm": "Подтверждение"
+    },
+    "pickup": {
+      "addPickUp": "Знаете ли вы, где вас нужно забрать?",
+      "canAddNow": "Да, я могу указать это сейчас",
+      "dontKnow": "Пока не знаю",
+      "addExtras": "Хотите добавить дополнительные услуги?",
+      "adultsOnly": "только для взрослых",
+      "continue": "Продолжить",
+      "nextBtn": "Далее: Личные данные",
+      "nextBtnAgree": "Далее: Соглашение",
+      "selectLocation": "Выберите место посадки на карте",
+      "searchPlaceholder": "Поиск отеля, адреса и т. д.",
+      "confirmLocation": "Подтвердить место",
+      "locationInstructions": "Пожалуйста, введите название или адрес места либо нажмите на точку в выделенной области, чтобы выбрать место."
+    },
+    "agreement": {
+      "title": "Соглашение о дайвинге",
+      "confirm": "Я прочитал(а) и принимаю условия соглашения о дайвинге",
+      "continueButton": "Перейти к контактным данным"
+    },
+    "contact": {
+      "title": "Введите ваши личные данные",
+      "requiredFields": "Обязательные поля*",
+      "fullNamePlaceholder": "Полное имя*",
+      "emailPlaceholder": "Эл. почта*",
+      "phonePlaceholder": "Номер мобильного телефона*",
+      "nationalityPlaceholder": "Гражданство*",
+      "notesLabel": "Дополнительные заметки",
+      "notesPlaceholder": "Любые особые пожелания или дополнительная информация...",
+      "confirmButton": "Подтвердить бронирование",
+      "disclaimer": "Мы свяжемся с вами по важным обновлениям или изменениям в вашем бронировании",
+      "nextButton": "Далее: Перейти к оплате",
+      "bookingConfirmed": "Бронирование успешно подтверждено!",
+      "bookingConfirmationFailed": "Не удалось подтвердить бронирование",
+      "processing": "Обработка...",
+      "saveError": "Не удалось сохранить контактную информацию",
+      "errors": {
+        "required": "Это поле обязательно",
+        "invalidEmail": "Неверный формат электронной почты"
+      }
+    },
+    "payment": {
+      "title": "Выберите способ оплаты",
+      "countryOfBank": "Страна банка",
+      "iban": "IBAN",
+      "swift": "SWIFT/BIC",
+      "beneficiaryName": "Имя получателя",
+      "selectBeneficiary": "Выберите получателя",
+      "disclaimer": "Вы получите письмо с подтверждением оплаты",
+      "checkoutWith": "Оплатить через",
+      "payNow": "Оплатить сейчас",
+      "countries": {
+        "egypt": "Египет",
+        "unitedStates": "Соединённые Штаты",
+        "unitedKingdom": "Великобритания",
+        "germany": "Германия",
+        "france": "Франция"
+      }
+    },
+    "confirmation": {
+      "title": "Ваше бронирование поездки подтверждено",
+      "subtitle": "Пожалуйста, проверьте свою электронную почту для получения подробностей",
+      "bookAnother": "Забронировать другую поездку"
+    },
+    "orderSummary": {
+      "title": "Сводка заказа",
+      "total": "Итого"
+    },
+    "giftCode": {
+      "enterCode": "Введите промокод или подарочный код",
+      "redeem": "Применить",
+      "placeholder": "Введите код"
+    },
+    "cancel": {
+      "cancelConfirmation1": "Вы получите письмо с информацией о штрафах за отмену",
+      "cancelConfirmation2": "или свяжитесь с booking@expand-horizons.de",
+      "cancelConfirmation3": "Вы уверены, что хотите отменить?",
+      "cancelSuccess": "Бронирование успешно отменено",
+      "cancelError": "Не удалось отменить бронирование"
+    }
+  },
+  "profile": {
+    "profile": {
+      "title": "Данные профиля",
+      "firstName": "Имя",
+      "lastName": "Фамилия",
+      "contactDetails": "Контактные данные",
+      "email": "Эл. почта",
+      "phone": "+20 100 0000 0000",
+      "address": "Адрес",
+      "nationality": "Гражданство",
+      "gender": "Пол",
+      "genderOptions": {
+        "male": "Мужской",
+        "female": "Женский",
+        "other": "Другой"
+      },
+      "dateOfBirth": "Дата рождения",
+      "day": "День",
+      "month": "Месяц",
+      "year": "Год",
+      "save": "Сохранить",
+      "update": "Обновить"
+    },
+    "notifications": {
+      "title": "Уведомления",
+      "email": "Эл. почта",
+      "save": "Сохранить",
+      "update": "Обновить",
+      "disclaimer": "Включая рекомендации, советы по путешествиям и другие предложения, вы соглашаетесь получать рекламные сообщения. Вы можете отписаться в любое время. Подробнее об использовании ваших данных см. в нашем Заявлении о конфиденциальности.",
+      "types": {
+        "reviews": {
+          "title": "Отзывы",
+          "description": "Получайте напоминания написать отзыв о мероприятиях, в которых вы недавно участвовали."
+        },
+        "recommendations": {
+          "title": "Рекомендации",
+          "description": "Получайте рекомендации на основе просмотренных вами мероприятий и направлений."
+        },
+        "deals": {
+          "title": "Предложения и награды",
+          "description": "Эксклюзивные туристические предложения, последние акции и специальные награды."
+        },
+        "inspiration": {
+          "title": "Советы и вдохновение для путешествий",
+          "description": "Получайте рассылку о поездках и другие практичные идеи, чтобы извлечь максимум из ваших направлений."
+        },
+        "guides": {
+          "title": "Путеводители",
+          "description": "Советы местных жителей, экспертов и других путешественников - чтобы вы извлекли максимум из ваших направлений."
+        }
+      }
+    },
+    "password": {
+      "title": "Сброс пароля",
+      "description": "Введите адрес электронной почты, связанный с вашим аккаунтом, и мы отправим вам ссылку для сброса пароля.",
+      "oldPassword": "Старый пароль",
+      "newPassword": "Новый пароль",
+      "confirmPassword": "Подтвердите новый пароль",
+      "resetPassword": "Сбросить сейчас",
+      "passwordRules": "Пароль должен содержать хотя бы один не буквенно-цифровой символ. Пароль должен содержать хотя бы одну заглавную букву ('A'-'Z').",
+      "errors": {
+        "oldPasswordRequired": "Необходимо ввести старый пароль",
+        "newPasswordRequired": "Необходимо ввести новый пароль",
+        "passwordLength": "Пароль должен содержать не менее 8 символов",
+        "confirmPasswordRequired": "Пожалуйста, подтвердите новый пароль",
+        "passwordsDontMatch": "Пароли не совпадают",
+        "userIdNotFound": "Идентификатор пользователя не найден. Пожалуйста, войдите снова.",
+        "PasswordIsRequired": "Необходимо ввести пароль",
+        "passwordUpper": "Пароль должен содержать хотя бы одну заглавную букву",
+        "passwordSpecial": "Пароль должен содержать хотя бы один специальный символ"
+      }
+    },
+    "nav": {
+      "profile": "Профиль",
+      "notifications": "Уведомления",
+      "password": "Пароль"
+    }
+  },
+  "Transfer": {
+    "bookTransfer": "Забронировать трансфер",
+    "TransferManagement": "Управление трансферами",
+    "TransferSubTitle": "Всё необходимое для комфортного трансфера.",
+    "Choose_your_vehicle": "Выберите транспорт",
+    "SaveBooking": "Сохранить бронирование",
+    "Next": "Далее",
+    "Previous": "Назад",
+    "totalPax": "Всего пассажиров*",
+    "returnDateBeforePickup": "Дата/время возвращения должны быть позже даты/времени посадки",
+    "genericError": "Ошибка, пожалуйста, свяжитесь с администратором"
+  },
+  "bookingMap": {
+    "gettingLocation": "Определение вашего местоположения...",
+    "pickupTitle": "Место посадки",
+    "pickupLabel": "Место посадки",
+    "pickupPlaceholder": "Найдите или измените место посадки",
+    "dropTitle": "Место высадки",
+    "dropLabel": "Место высадки",
+    "dropPlaceholder": "Введите пункт назначения",
+    "selectedAddress": "Выбрано:",
+    "bookNow": "Забронировать",
+    "Distance": "Расстояние",
+    "Time": "Время",
+    "Price": "Цена",
+    "BookingDetails": "Детали бронирования",
+    "Pickup": "Посадка",
+    "Drop-off": "Высадка",
+    "Duration": "Продолжительность",
+    "Total": "Итого",
+    "TwoWayTrip": "Поездка в обе стороны"
+  }
+}

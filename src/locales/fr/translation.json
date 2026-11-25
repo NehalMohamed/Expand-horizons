@@ -1,0 +1,534 @@
+{
+  "general": {
+    "more": "Plus",
+    "yes": "Oui",
+    "no": "Non",
+    "cancel": "Annuler",
+    "top_offers": "Meilleures offres",
+    "show_more": "Afficher plus",
+    "show_less": "Afficher moins",
+    "from": "À partir de",
+    "to": "Jusqu'à",
+    "perGroupUpTo": "par groupe jusqu'à",
+    "perPerson": "par personne",
+    "loading": "Chargement...",
+    "loadingMore": "Chargement de plus..."
+  },
+  "language": {
+    "language": "Langue",
+    "english": "Anglais",
+    "german": "Allemand",
+    "russian": "Russe",
+    "french": "Français"
+  },
+  "main_navbar": {
+    "travel": "Voyage",
+    "home": "Accueil",
+    "egypt_excursions": "Excursions",
+    "transfer_services": "Transferts",
+    "egypt_diving": "Plongée",
+    "about_us": "À propos",
+    "contact": "Contactez-nous",
+    "search": "Rechercher",
+    "search_placeholder": "Rechercher...",
+    "wishlist": "Liste de souhaits",
+    "shopping_basket": "Panier",
+    "profile": "Profil",
+    "login_signup": "Se connecter ou s'inscrire",
+    "my_profile": "Mon profil",
+    "logout": "Déconnexion",
+    "Welcome": "Bienvenue"
+  },
+  "tours": {
+    "loading": "Chargement des circuits...",
+    "empty_title": "Aucun circuit disponible",
+    "empty_text": "Veuillez revenir plus tard pour découvrir de nouvelles offres.",
+    "top_offers": "Meilleures offres",
+    "LoadMore": "Charger plus",
+    "ViewAllTours": "Voir tous les circuits"
+  },
+  "destinations": {
+    "explore": "Explorer",
+    "loading": "Chargement des destinations...",
+    "previousSlide": "Diapositive précédente",
+    "nextSlide": "Diapositive suivante",
+    "goToSlide": "Aller à la diapositive"
+  },
+  "wishlist": {
+    "emptyWishlist": "Votre liste de souhaits est vide",
+    "saveWishList": "Enregistrez des activités dans votre liste de souhaits en cliquant sur l'icône en forme de cœur.",
+    "BackBtn": "Retour à l'accueil",
+    "title": "Votre liste de souhaits",
+    "saved": "Enregistré",
+    "remove": "Retirer de la liste de souhaits",
+    "topDestinations": "Destinations à visiter",
+    "topDestinationsDescription": "Vivez le plaisir de découvrir des trésors cachés et des sites célèbres dans les meilleures destinations du monde - votre envie de voyager vous attend !"
+  },
+  "footer": {
+    "travel": "Voyage",
+    "footer_description": "Une agence de voyage pour le transport et les voyages en Égypte, reconnue pour sa fiabilité, sa sécurité et sa ponctualité.",
+    "home": "Accueil",
+    "about_us": "À propos",
+    "contact": "Contactez-nous",
+    "company": "Entreprise",
+    "privacy": "Confidentialité",
+    "support": "Assistance",
+    "help_center": "Centre d'aide",
+    "our_news": "Nos actualités",
+    "discover_egypt": "Découvrez l'Égypte avec un regard neuf"
+  },
+  "NotFound": {
+    "title": "Quelque chose s'est mal passé !",
+    "backBtn": "RETOUR"
+  },
+  "ComingSoon": {
+    "title": "Bientôt disponible !",
+    "backBtn": "RETOUR"
+  },
+  "NoResults": {
+    "title": "Oups !... aucun résultat trouvé",
+    "subTitle": "Veuillez essayer une autre recherche"
+  },
+  "Login": {
+    "LoginTitle": "Se connecter",
+    "SignUpTitle": "S'inscrire",
+    "LoginSubTitle": "Réservez plus facilement et accédez à vos billets sur n'importe quel appareil avec votre compte <strong>Expand Horizons </strong>.",
+    "LoginCheckBoxTitle": "Envoyez-moi des réductions et d'autres offres par e-mail.<br/>Désinscription possible à tout moment dans vos paramètres",
+    "LoginCheckBoxSubTitle": "Désinscription possible à tout moment dans vos paramètres",
+    "firstname": "Prénom",
+    "lastname": "Nom",
+    "confirmPassword": "Confirmer le mot de passe",
+    "ConfirmPasswordError": "Les mots de passe ne correspondent pas.",
+    "EmailError": "Veuillez saisir une adresse e-mail valide.",
+    "PasswordError": "Le mot de passe doit contenir au moins 6 caractères.",
+    "email": "Adresse e-mail",
+    "signIn": "Se connecter",
+    "password": "Mot de passe",
+    "LoginWithGoogle": "Se connecter avec Google",
+    "RegisterWithGoogle": "S'inscrire avec Google",
+    "DontHaveAccount": "Vous n'avez pas de compte ?",
+    "CreateAccount": "Créer un compte",
+    "PrivacyText": "En vous connectant ou en créant un compte, vous acceptez nos Conditions générales et notre Politique de confidentialité.",
+    "Or": "Ou continuer avec",
+    "HaveAccount": "Vous avez déjà un compte ?",
+    "CodeVerifyTitle": "Saisissez le code envoyé à",
+    "CodeVerifyTitle2": "pour vérifier votre e-mail",
+    "SendCode": "Envoyer le code",
+    "fillField": "Veuillez remplir ce champ",
+    "spamAlert": {
+      "title": "Vous ne trouvez pas notre e-mail ?",
+      "check": "Vérifiez votre dossier",
+      "spam": "spam",
+      "or": "ou",
+      "junk": "courrier indésirable",
+      "folder": "",
+      "addToContacts": "Ajoutez notre adresse e-mail à vos contacts / liste blanche",
+      "waitAndRefresh": "Patientez quelques minutes et actualisez votre boîte de réception"
+    },
+    "WelcomeBack": "Bon retour !",
+    "PleaseLoginWithGoogle": "Veuillez continuer avec Google pour vous connecter à",
+    "UseDifferentAccount": "Utiliser un autre compte",
+    "GoogleLoginPrompt": "Veuillez continuer avec Google pour vous connecter à <strong>{{email}}</strong>"
+  },
+  "testimonial": {
+    "title": "Nous aimons avoir de vos nouvelles",
+    "subtitle": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit laborum.",
+    "content1": "Nunc cursus in tellus quis luctus. Pellentesque sapien lacus, facilisis non purus quis, placerat gravida lorem. Sed feugiat tortor eu enim dapibus dictum. Praesent non dolor efficitur, lacinia dui volutpat, elementum lacus. Praesent sit amet risus semper, iaculis enim in, bibendum nibh.",
+    "content2": "Maecenas quis venenatis ipsum, id hendrerit ligula. Donec a sem ut erat molestie feugiat ac ut elit. Proin consectetur nulla et ex molestie, quis semper nibh dignissim. Aliquam euismod lacus et sem tincidunt, at porta quam molestie. Sed blandit nibh leo, vel congue odio aliquam non. Etiam scelerisque a odio sed euismod. Proin eget elementum ipsum. Nam et viverra tortor. Mauris tempor nibh odio, id blandit arcu blandit et. Nunc vel dolor porttitor, cursus tortor id, accumsan felis.",
+    "content3": "Aenean ornare metus purus, porta pretium felis pretium sed. Proin placerat tortor a mauris volutpat lacinia. Etiam condimentum vehicula vehicula."
+  },
+  "newsletter": {
+    "label": "Notre newsletter",
+    "title": "Restons en contact",
+    "description": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum.",
+    "namePlaceholder": "Nom",
+    "emailPlaceholder": "Adresse e-mail",
+    "subscribeButton": "S'ABONNER",
+    "successMessage": "Merci de vous être abonné à notre newsletter !",
+    "subscribing": "Abonnement en cours...",
+    "errorMessage": "Échec de l'abonnement. Veuillez réessayer."
+  },
+  "contactInfo": {
+    "visitUs": "VENEZ NOUS VOIR",
+    "callUs": "Appelez-nous",
+    "emailUs": "ÉCRIVEZ-NOUS",
+    "address1": "1290 Stiven Street",
+    "address2": "Raleigh, New York City",
+    "phone1": "+22 123 587 4444",
+    "phone2": "+22 456 234 1111",
+    "email1": "mailus@gmail.com",
+    "email2": "getsupport@divi.com"
+  },
+  "features": {
+    "punctual": {
+      "title": "Ponctuel",
+      "feature1": "Ponctuel. Toujours",
+      "feature2": "Fiable et toujours à l'heure",
+      "feature3": "Nous livrons exactement quand"
+    },
+    "safe": {
+      "title": "Sûr",
+      "feature1": "Sécurité garantie.",
+      "feature2": "Une sécurité fiable pour vos besoins",
+      "feature3": "Protection et sécurité en"
+    },
+    "trustworthy": {
+      "title": "Digne de confiance",
+      "feature1": "Votre partenaire de confiance",
+      "feature2": "Une coopération fiable et basée sur la confiance",
+      "feature3": "Nous construisons sur la confiance"
+    },
+    "highQuality": {
+      "title": "Haute qualité",
+      "feature1": "Qualité de premier ordre",
+      "feature2": "Une excellente qualité qui convainc",
+      "feature3": "Des solutions de haute qualité"
+    }
+  },
+  "about": {
+    "title": "Une agence de voyage pour le transport et les voyages en Égypte, reconnue pour sa fiabilité, sa sécurité et sa ponctualité. Ensemble, nous découvrons l'Égypte avec un regard neuf"
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "description": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit laborum.",
+    "subText": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisl ut aliquip. Nemo enim ipsam voluptatem quia voluptas",
+    "namePlaceholder": "Nom",
+    "emailPlaceholder": "Adresse e-mail",
+    "phonePlaceholder": "Téléphone",
+    "messagePlaceholder": "Message",
+    "sendButton": "Envoyer le message",
+    "HaveAccount": "Vous avez déjà un compte ?",
+    "CodeVerifyTitle": "Saisissez le code envoyé à",
+    "CodeVerifyTitle2": "pour vérifier votre e-mail",
+    "SendCode": "Envoyer le code",
+    "subjectPlaceholder": "Objet",
+    "sending": "Envoi en cours...",
+    "successMessage": "Votre message a été envoyé avec succès !",
+    "errorMessage": "Échec de l'envoi du message. Veuillez réessayer.",
+    "fillField": "Veuillez remplir ce champ",
+    "spamAlert": {
+      "title": "Vous ne trouvez pas notre e-mail ?",
+      "check": "Vérifiez votre dossier",
+      "spam": "spam",
+      "or": "ou",
+      "junk": "courrier indésirable",
+      "folder": "",
+      "addToContacts": "Ajoutez notre adresse e-mail à vos contacts / liste blanche",
+      "waitAndRefresh": "Patientez quelques minutes et actualisez votre boîte de réception"
+    }
+  },
+  "PopUp": {
+    "Header": "Notification",
+    "Close": "Fermer"
+  },
+  "auth": {
+    "sessionExpired": "Votre session a expiré. Veuillez vous reconnecter.",
+    "loginRequired": "Veuillez d'abord vous connecter.",
+    "loginNow": "Se connecter maintenant",
+    "ok": "OK",
+    "loginRequiredTitle": "Connexion requise",
+    "loginRequiredMessage": "Vous devez vous connecter pour continuer.",
+    "goToLogin": "Aller à la connexion"
+  },
+  "tripDetails": {
+    "noImagesAvailable": "Aucune image disponible",
+    "reviews": "avis",
+    "allReviews": "Tous les avis",
+    "pleaseLoginToReview": "Veuillez vous connecter pour publier un avis",
+    "reviewSubmittedSuccess": "Merci pour votre avis !",
+    "reviewSubmissionError": "Erreur lors de l'envoi de l'avis. Veuillez réessayer.",
+    "reviewsLoadError": "Erreur lors du chargement des avis",
+    "submitting": "Envoi en cours...",
+    "noReviewsYet": "Aucun avis pour le moment. Soyez le premier à donner votre avis !",
+    "pleaseSelectRating": "Veuillez sélectionner une note",
+    "pleaseWriteReview": "Veuillez écrire un avis",
+    "addToWishlist": "Ajouter à la liste de souhaits",
+    "removeFromWishlist": "Retirer de la liste de souhaits",
+    "addedToWishlist": "Ajouté à la liste de souhaits",
+    "share": "Partager",
+    "aboutTrip": "À propos de ce voyage",
+    "bookNowPayLater": "Réservez maintenant, payez plus tard : restez flexible - réservez maintenant et payez plus tard.",
+    "duration": "Durée",
+    "paymentMethods": "Paiement sur place en espèces en euros, dollars américains, francs suisses ou livres égyptiennes, ou par PayPal",
+    "paymentNote": "Le paiement s'effectue lors de la prise en charge.",
+    "linkCopied": "Lien copié dans le presse-papiers !",
+    "itinerary": "Itinéraire",
+    "reviewsFromTravelers": "Avis mis en avant d'autres voyageurs",
+    "addReviews": "Ajouter un avis",
+    "seeMoreReviews": "Voir plus d'avis",
+    "rateTour": "Noter le circuit",
+    "writeReview": "Écrivez votre avis",
+    "add": "Ajouter",
+    "cancel": "Annuler",
+    "highlights": "Points forts",
+    "included": "Inclus",
+    "notIncluded": "Non inclus",
+    "dontForget": "N'oubliez pas",
+    "additionalInfo": "Informations complémentaires",
+    "priceFrom": "Prix",
+    "bookNow": "Réserver",
+    "notRated": "Pas encore noté",
+    "stars": "Étoile"
+  },
+  "booking": {
+    "returnDate": {
+      "title": "Sélectionnez la date et l'heure de retour",
+      "note": "Veuillez sélectionner la date et l'heure de retour souhaitées"
+    },
+    "returnDateTimeRequired": "Veuillez sélectionner la date et l'heure de retour pour un transfert aller-retour",
+    "returnDateAfterDeparture": "La date de retour doit être postérieure à la date de départ",
+    "date": {
+      "selectReturnDateTime": "Sélectionnez la date et l'heure de retour",
+      "selectDateTime": "Sélectionnez la date et l'heure",
+      "time": "Heure"
+    },
+    "dateTimeRequired": "Veuillez sélectionner la date et l'heure",
+    "invalidDateTime": "Veuillez sélectionner une date au moins {{releaseDays}} jours à partir d'aujourd'hui",
+    "availabilityError": "Échec de la vérification de la disponibilité. Veuillez réessayer.",
+    "availabilitySuccess": "Disponibilité vérifiée avec succès !",
+    "checkingAvailability": "Vérification de la disponibilité...",
+    "title": "Sélectionnez les participants et la date",
+    "checkAvailability": "Vérifier la disponibilité",
+    "maxCapacityExceeded": "Veuillez sélectionner {{maxCapacity}} participants ou moins pour cette activité.",
+    "invalidChildAges": "Veuillez saisir des âges valides pour tous les enfants (0-{{maxAge}} ans)",
+    "continue": "Continuer",
+    "allTaxesIncluded": "Toutes taxes et frais inclus",
+    "twoWayTransfer": "Transfert aller-retour",
+    "included": "Inclus",
+    "participants": {
+      "adult": "Adulte",
+      "child": "Enfant",
+      "adultSingle": "Adulte x 1",
+      "adults": "Adultes x {{count}}",
+      "children": "Enfants x {{count}}",
+      "mixed": "Adultes x {{adults}}, Enfants x {{children}}",
+      "ageRangeAdults": "Âge 12-99",
+      "enterChildAges": "Saisissez l'âge des enfants",
+      "childAge": "Âge de l'enfant {{number}}",
+      "invalidAge": "L'âge doit être compris entre 0 et {{maxAge}}",
+      "ageRangeChildren": "0-{{maxAge}} ans"
+    },
+    "language": {
+      "english": "Anglais",
+      "spanish": "Espagnol",
+      "french": "Français",
+      "german": "Allemand",
+      "italian": "Italien"
+    }
+  },
+  "bookings": {
+    "tripDate": "Date du voyage",
+    "returnDate": "Date de retour",
+    "myBookings": "Vos réservations",
+    "noBookings": "Aucune réservation dans votre panier",
+    "noBookingsText": "Commencez à explorer nos voyages et faites votre première réservation !",
+    "BackBtn": "Retour à l'accueil",
+    "fetchError": "Échec du chargement de vos réservations. Veuillez réessayer plus tard.",
+    "dateToBeConfirmed": "Date à confirmer",
+    "timeToBeConfirmed": "Heure à confirmer",
+    "bookingCode": "Code de réservation",
+    "priceToBeConfirmed": "Prix à confirmer",
+    "totalBookings": "Total des réservations",
+    "allBookingsLoaded": "Toutes les réservations sont chargées",
+    "adults": "adultes",
+    "children": "enfants",
+    "infants": "bébés",
+    "resevePay": "Réserver maintenant et payer plus tard",
+    "steps": {
+      "pickup": "Prise en charge",
+      "contact": "Contact",
+      "agreement": "Accord",
+      "payment": "Paiement",
+      "confirm": "Confirmation"
+    },
+    "pickup": {
+      "addPickUp": "Savez-vous où vous souhaitez être pris en charge ?",
+      "canAddNow": "Oui, je peux l'ajouter maintenant",
+      "dontKnow": "Je ne sais pas encore",
+      "addExtras": "Souhaitez-vous ajouter des extras ?",
+      "adultsOnly": "adultes uniquement",
+      "continue": "Continuer",
+      "nextBtn": "Suivant : Informations personnelles",
+      "nextBtnAgree": "Suivant : Accord",
+      "selectLocation": "Sélectionnez le lieu de prise en charge sur la carte",
+      "searchPlaceholder": "Rechercher un hôtel, une adresse, etc.",
+      "confirmLocation": "Confirmer le lieu",
+      "locationInstructions": "Veuillez saisir le nom ou l'adresse du lieu, ou cliquer sur un point de la zone en surbrillance pour sélectionner un lieu."
+    },
+    "agreement": {
+      "title": "Accord de plongée",
+      "confirm": "J'ai lu et j'accepte les termes de l'accord de plongée",
+      "continueButton": "Continuer vers les coordonnées"
+    },
+    "contact": {
+      "title": "Saisissez vos informations personnelles",
+      "requiredFields": "Champs obligatoires*",
+      "fullNamePlaceholder": "Nom complet*",
+      "emailPlaceholder": "E-mail*",
+      "phonePlaceholder": "Numéro de téléphone mobile*",
+      "nationalityPlaceholder": "Nationalité*",
+      "notesLabel": "Notes supplémentaires",
+      "notesPlaceholder": "Toute demande spéciale ou information supplémentaire...",
+      "confirmButton": "Confirmer la réservation",
+      "disclaimer": "Nous vous contacterons pour les mises à jour importantes ou les modifications de votre réservation",
+      "nextButton": "Suivant : Aller au paiement",
+      "bookingConfirmed": "Réservation confirmée avec succès !",
+      "bookingConfirmationFailed": "Échec de la confirmation de la réservation",
+      "processing": "Traitement en cours...",
+      "saveError": "Échec de l'enregistrement des informations de contact",
+      "errors": {
+        "required": "Ce champ est obligatoire",
+        "invalidEmail": "Format d'e-mail invalide"
+      }
+    },
+    "payment": {
+      "title": "Choisissez votre mode de paiement",
+      "countryOfBank": "Pays de la banque",
+      "iban": "IBAN",
+      "swift": "SWIFT/BIC",
+      "beneficiaryName": "Nom du bénéficiaire",
+      "selectBeneficiary": "Sélectionnez le bénéficiaire",
+      "disclaimer": "Vous recevrez un e-mail de confirmation pour le paiement",
+      "checkoutWith": "Payer avec",
+      "payNow": "Payer maintenant",
+      "countries": {
+        "egypt": "Égypte",
+        "unitedStates": "États-Unis",
+        "unitedKingdom": "Royaume-Uni",
+        "germany": "Allemagne",
+        "france": "France"
+      }
+    },
+    "confirmation": {
+      "title": "Votre réservation pour le voyage a été confirmée",
+      "subtitle": "Veuillez consulter votre e-mail pour plus de détails",
+      "bookAnother": "Réserver un autre voyage"
+    },
+    "orderSummary": {
+      "title": "Récapitulatif de la commande",
+      "total": "Total"
+    },
+    "giftCode": {
+      "enterCode": "Saisissez un code promo ou cadeau",
+      "redeem": "Utiliser",
+      "placeholder": "Saisissez le code"
+    },
+    "cancel": {
+      "cancelConfirmation1": "Vous recevrez un e-mail avec les frais d'annulation",
+      "cancelConfirmation2": "ou contactez booking@expand-horizons.de",
+      "cancelConfirmation3": "Êtes-vous sûr de vouloir annuler ?",
+      "cancelSuccess": "Réservation annulée avec succès",
+      "cancelError": "Échec de l'annulation de la réservation"
+    }
+  },
+  "profile": {
+    "profile": {
+      "title": "Détails du profil",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "contactDetails": "Coordonnées",
+      "email": "E-mail",
+      "phone": "+20 100 0000 0000",
+      "address": "Adresse",
+      "nationality": "Nationalité",
+      "gender": "Sexe",
+      "genderOptions": {
+        "male": "Homme",
+        "female": "Femme",
+        "other": "Autre"
+      },
+      "dateOfBirth": "Date de naissance",
+      "day": "Jour",
+      "month": "Mois",
+      "year": "Année",
+      "save": "Enregistrer",
+      "update": "Mettre à jour"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "email": "E-mail",
+      "save": "Enregistrer",
+      "update": "Mettre à jour",
+      "disclaimer": "En activant les recommandations, conseils de voyage et autres offres, vous acceptez de recevoir des messages promotionnels. Vous pouvez vous désabonner à tout moment. Pour plus d'informations sur l'utilisation de vos données, consultez notre Déclaration de confidentialité.",
+      "types": {
+        "reviews": {
+          "title": "Avis",
+          "description": "Recevez des rappels pour rédiger un avis sur les activités que vous avez faites récemment."
+        },
+        "recommendations": {
+          "title": "Recommandations",
+          "description": "Recevez des recommandations inspirées des activités et destinations que vous avez consultées."
+        },
+        "deals": {
+          "title": "Offres et récompenses",
+          "description": "Offres de voyage exclusives, dernières promotions et récompenses spéciales."
+        },
+        "inspiration": {
+          "title": "Conseils et inspiration de voyage",
+          "description": "Recevez la newsletter des voyages et d'autres idées pratiques pour profiter au maximum de vos destinations."
+        },
+        "guides": {
+          "title": "Guides de voyage",
+          "description": "Conseils de locaux, d'experts et d'autres voyageurs - pour profiter au maximum de vos destinations."
+        }
+      }
+    },
+    "password": {
+      "title": "Réinitialiser le mot de passe",
+      "description": "Saisissez l'adresse e-mail associée à votre compte et nous vous enverrons un lien pour réinitialiser votre mot de passe.",
+      "oldPassword": "Ancien mot de passe",
+      "newPassword": "Nouveau mot de passe",
+      "confirmPassword": "Confirmer le nouveau mot de passe",
+      "resetPassword": "Réinitialiser maintenant",
+      "passwordRules": "Les mots de passe doivent contenir au moins un caractère non alphanumérique. Les mots de passe doivent contenir au moins une majuscule ('A'-'Z').",
+      "errors": {
+        "oldPasswordRequired": "L'ancien mot de passe est obligatoire",
+        "newPasswordRequired": "Le nouveau mot de passe est obligatoire",
+        "passwordLength": "Le mot de passe doit contenir au moins 8 caractères",
+        "confirmPasswordRequired": "Veuillez confirmer votre nouveau mot de passe",
+        "passwordsDontMatch": "Les mots de passe ne correspondent pas",
+        "userIdNotFound": "Identifiant utilisateur introuvable. Veuillez vous reconnecter.",
+        "PasswordIsRequired": "Le mot de passe est obligatoire",
+        "passwordUpper": "Le mot de passe doit contenir au moins une lettre majuscule",
+        "passwordSpecial": "Le mot de passe doit contenir au moins un caractère spécial"
+      }
+    },
+    "nav": {
+      "profile": "Profil",
+      "notifications": "Notifications",
+      "password": "Mot de passe"
+    }
+  },
+  "Transfer": {
+    "bookTransfer": "Réserver un transfert",
+    "TransferManagement": "Gestion des transferts",
+    "TransferSubTitle": "Tout ce dont vous avez besoin pour un transfert sans souci.",
+    "Choose_your_vehicle": "Choisissez votre véhicule",
+    "SaveBooking": "Enregistrer la réservation",
+    "Next": "Suivant",
+    "Previous": "Précédent",
+    "totalPax": "Total des passagers*",
+    "returnDateBeforePickup": "La date/heure de retour doit être postérieure à la date/heure de prise en charge",
+    "genericError": "Erreur, veuillez contacter l'administrateur"
+  },
+  "bookingMap": {
+    "gettingLocation": "Récupération de votre position actuelle...",
+    "pickupTitle": "Lieu de prise en charge",
+    "pickupLabel": "Lieu de prise en charge",
+    "pickupPlaceholder": "Recherchez ou modifiez le lieu de prise en charge",
+    "dropTitle": "Lieu de dépose",
+    "dropLabel": "Lieu de dépose",
+    "dropPlaceholder": "Saisissez votre destination",
+    "selectedAddress": "Sélectionné :",
+    "bookNow": "Réserver maintenant",
+    "Distance": "Distance",
+    "Time": "Durée",
+    "Price": "Prix",
+    "BookingDetails": "Détails de la réservation",
+    "Pickup": "Prise en charge",
+    "Drop-off": "Dépose",
+    "Duration": "Durée",
+    "Total": "Total",
+    "TwoWayTrip": "Aller-retour"
+  }
+}

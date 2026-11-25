@@ -17,7 +17,9 @@
   "language": {
     "language": "Language",
     "english": "English",
-    "german": "German"
+    "german": "German",
+    "russian": "Russian",
+    "french": "French"
   },
   "main_navbar": {
     "travel": "Travel",
